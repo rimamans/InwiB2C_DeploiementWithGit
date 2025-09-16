@@ -22,7 +22,7 @@ trigger InwiB2C_AnnulationOLDBC on InwiB2C_Annulation_du_Old_BC__e (after insert
                  Params.put('ipOptions',ipOptions);
 
                  
-                 //Appler une classe générique pour exécuter la VIP en asynchrone en lui passant les paramétres (Nom/input/options) 
+                 //Appler une classe génériquerrrrrrrrrr pour exécuter la VIP en asynchrone en lui passant les paramétres (Nom/input/options) 
                  inwiB2c_executeVIPAsynch.inwiB2c_executeVIPAsynch((String)JSON.serialize(Params));
 
         }  
