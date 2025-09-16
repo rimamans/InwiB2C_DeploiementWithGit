@@ -1,0 +1,15 @@
+<template >
+    
+    <!--<button type="button"  title="Suivant" onclick={gotonextStep} style="float:right" class="vlocity-btn slds-button slds-button_brand slds-size_2-of-12 slds-p-horizontal_none slds-text-align_center"  slot="actions">Suivant</button>-->
+    <div if:false={resiliation} class="slds-grid slds-wrap slds-grid_align-end omniscript-button-position">
+
+        <lightning-button style="margin:6px;" variant="brand-outline" label="Précédent" title="Précédent" onclick={gotopreviousStep}
+        class=""></lightning-button>
+    
+       
+            <lightning-button  variant="brand" label="Suivant" title="Suivant" onclick={gotonextStep} style="float:right; margin:6px;" class="">
+            </lightning-button>
+     
+
+    </div>
+</template>

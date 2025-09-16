@@ -1,0 +1,8 @@
+.wraperClass{
+    border: 1px solid #5A245A;
+}
+.inside-table{
+    padding: 5px 5px 5px 30px;
+    border: 0px solid #000;
+    margin: 5px 5px 5px 30px;
+}

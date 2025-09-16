@@ -1,0 +1,95 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 11-24-2022
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+    <template if:false={loading}>
+    
+      <template if:true={haserror}>
+        <div style="color: red">{errormessage}</div>
+    
+    </template>
+    <div class="tableCss" style="height: 300px;">
+        <lightning-datatable
+                key-field="index"
+                data={records}
+                columns={columns}
+                max-row-selection="1"
+                onrowselection={getSelectedName}
+                
+                selected-rows={preSelectedRows}
+               
+                >
+        </lightning-datatable>
+    </div> 
+    
+    <div style="position: relative;padding:20px;">
+      <!-- CHB 08/05/2024 ano B-15948<lightning-button  label="Précedent" onclick={gotopreviousStep}  class="slds-float_right" 
+      style=" position: absolute;  right: 90px; "></lightning-button>-->
+      <lightning-button label="Suivant" variant="brand" onclick={next} class="slds-float_right"    style=" position: absolute; right: 10px; "></lightning-button>
+  </div>
+  </template>
+
+
+
+</template>
+
+<!-- <template>
+   
+  
+  <div class="wraperClass">
+      <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered"
+          style="table-layout:fixed;">
+          <thead>
+              <tr class="slds-line-height_reset">
+                  <th class="" scope="col">
+                      <div class="slds-truncate" title="radios"></div>
+                  </th>
+                  <th class="" scope="col">
+                      <div class="slds-truncate" title="numcompte">numéro compte</div>
+                  </th>
+                  <th class="" scope="col">
+                      <div class="slds-truncate" title="statut">Statut</div>
+                  </th>
+                  
+                  <th class="" scope="col">
+                      <div class="slds-truncate" title="modpaiemente">Mode de paiement</div>
+                  </th>
+                 
+                  <th class="" scope="col">
+                      <div class="slds-truncate" title="cycle">cycle de facturation</div>
+                  </th>
+              </tr>
+          </thead>
+          <tbody>
+            <template for:each={__data} for:item="item">
+                <tr key={item.index} style="border-style: solid; border-color: #92107F; padding: 1px; border-radius: 1px;">
+                
+                    <td><input type="radio" name="choix" 
+                        onchange={handleSelectedAccounts} id={item.Id} data-idline={item.Id}
+                       />
+                        </td>
+                    <td >
+                        {item.numéro.compte}
+                    </td>
+                    <td >
+                        {item.Statut}
+                    </td>
+                    <td  >
+                        {item.Mode.de.paiement}
+                    </td>
+                    <td  >
+                        {item.cycle.de.facturation}
+                    </td>
+                </tr>
+            </template>
+        </tbody>
+      </table>
+  </div>
+
+
+
+</template> -->

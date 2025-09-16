@@ -1,0 +1,14 @@
+<!-- characterLimitComponent.html -->
+<template>
+    <!-- <div class="slds-p-around_medium"> -->
+        <lightning-textarea
+           required="true"
+            label ="Descriptif"
+            value={textareaValue}
+            onchange={handleTextareaChange}>
+        </lightning-textarea>
+        <template if:true={isError}>
+            <p class="slds-text-color_error">Le champ description doit avoir au maximum 4000 carractères</p>
+        </template>
+    <!-- </div> -->
+</template>

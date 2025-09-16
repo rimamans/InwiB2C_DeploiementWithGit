@@ -1,0 +1,69 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 05-04-2023
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+
+    <template if:false={loadindData}>
+        <lightning-card variant="Narrow" title="Liste des promotions" icon-name="standard:list">
+            <template if:false={saving}>
+                <lightning-button label="Précedent" style="margin-right:4px;" onclick={handleBack} slot="actions">
+                </lightning-button>
+            </template>
+            <template if:false={saving}>
+                <lightning-button label="Suivant" variant="brand"  disabled={saving} onclick={SaveAndNext} slot="actions">
+                </lightning-button>
+            </template>
+            <template if:true={saving}>
+                <lightning-button label="Enregistrement en cours" disabled={saving} slot="actions">
+                </lightning-button>
+            </template>
+
+
+            <div class="wraperClass ">
+                <table class="sty-table-case slds-table slds-table_bordered slds-table_fixed-layout">
+                    <thead>
+                        <tr class="">
+                            <th class="" scope="col">
+                                Sélectionnée
+                            </th>
+                            <th style="word-wrap: break-word;">
+                                Libelle
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template for:each={__data} for:item="item">
+                            <tr key={item.promotionId}>
+                                <td class="slds-cell-wrap">
+                                    <input type="checkbox" name={item.promotionId} disabled={item.disabled}
+                                        onclick={selectItem} checked={item.checked} />
+                                </td>
+                                <td class="slds-cell-wrap">
+                                    {item.promotionLabel}
+                                </td>
+                            </tr>
+                        </template>
+
+                    </tbody>
+                </table>
+            </div>
+            <template if:true={noData}>
+                <div style="text-align: center; font-weight: bold; margin-top: 20px;">
+                    <p style="color: red;">Aucune promotion disponible pour cette offre...</p>
+                </div>
+            </template>
+
+        </lightning-card>
+
+    </template>
+    <template if:true={loadindData}>
+        <div style="text-align: center; font-weight: bold;">
+            <p>Chargement en cours...</p>
+        </div>
+    </template>
+
+</template>

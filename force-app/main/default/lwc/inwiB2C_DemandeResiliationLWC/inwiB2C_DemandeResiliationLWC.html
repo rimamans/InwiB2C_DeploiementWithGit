@@ -1,0 +1,122 @@
+<template>
+    <div class="slds-p-bottom--small">
+        <div class="slds-m-bottom_xx-large " style="overflow-x:auto;">
+            <template if:true={allrequests} > 
+                <div class="wraperClass ">
+
+                    <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered">
+                        <thead>
+                            <tr class="entete">
+                            <th class="entete" scope="col">
+                              <div class="slds-truncate" title="NumLigne">N° de la ligne</div>
+                            </th>
+                            <th class="entete" scope="col">
+                              <div class="slds-truncate" title="StatutLigne">Statut de la ligne</div>
+                            </th>
+                            <th class="entete" scope="col">
+                              <div class="slds-truncate" title="ForfaitLigne">Forfait de la ligne</div>
+                            </th>
+                            <th class="entete" scope="col">
+                              <div class="slds-truncate" title="NDemande">N° de la demande</div>
+                            </th>
+                            <th class="entete" scope="col">
+                              <div class="slds-truncate" title="DateDemande">Date de la demande</div>
+                            </th>
+                            <th class="entete" scope="col">
+                              <div class="slds-truncate" title="StatusDemande">Statut de la demande</div>
+                            </th>
+                            <th class="entete" scope="col">
+                              <div class="slds-truncate" title="StatusRetention">Statut Rétention</div>
+                            </th>
+                            <th class="entete" scope="col">
+                              <div class="slds-truncate" title="Canal">Canal de la demande</div>
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        <template for:each={allrequests} for:item="request" >
+                            <tr key ={request.Id} >
+                                <td>{request.mdn}</td>
+                                <td>ACTIVE</td>
+                                <td>{request.offre}</td>
+                                <td>{request.name}</td>
+                                <td>{request.date}</td>
+                                <td>{request.StatutResil}</td>
+                                <td>{request.StatutRetention}</td>
+                                <td>{request.canal}</td>
+                            </tr>
+                        </template>
+ 
+                      
+                        </tbody>
+                      </table>
+
+                </div>
+            </template>
+       </div>          
+    </div>  
+    <!--******************************************Affichage de bouton creation********************** -->
+     <!-- Affichage Options Type et Motif -->
+     <div if:true={isftthadsl} class="slds-p-right_small slds-m-bottom_xx-small slds-show_inline-block slds-size_12-of-12 slds-medium-size_6-of-12">
+      <lightning-record-edit-form object-api-name="InwiB2C_Demande_de_resiliation__c">
+        <lightning-messages></lightning-messages>
+        <lightning-input-field class="slds-size_1-of-2" field-name="Type__c" onchange={handleTypeChange} required="true" style="width:400px;"> </lightning-input-field>
+        <lightning-input-field if:true={eligibiliteCasSpecial} class="slds-size_1-of-2" field-name="Motif__c" onchange={handleMotifChange} required="true" style="width:400px;"> </lightning-input-field>
+      </lightning-record-edit-form>
+    </div>
+  <!---->
+    <template  if:true={displayCreateButton}>
+    
+        <div class="slds-grid slds-wrap slds-grid_vertical-stretch">
+        <lightning-button variant="brand" label="Créer la demande" title="Create" onclick={createnewrequest}
+            class="">
+        </lightning-button>
+        </div>
+        
+    </template>
+    <br />
+    <br />
+    <br />
+    <template if:true={labelstepcancel}>
+        <lightning-button variant="brand" label="Annuler la demande" title="CancelRequest" onclick={gotocancelStep}
+            style="float:left; margin:6px;" class="">
+        </lightning-button>
+    </template>
+    <div class="slds-grid slds-wrap slds-grid_align-end omniscript-button-position">
+
+
+        <lightning-button style="margin:6px;" variant="brand" label="Précédent" title="Précédent"
+            onclick={gotonextStep} class=""></lightning-button>
+            
+        <template if:true={showbuttonsuivant}>
+            <lightning-button style="margin:6px;" variant="brand" label="Suivant" title="Suivant"
+            onclick={gotoresilStep} class=""></lightning-button>
+        </template>
+        <template if:true={showButtonTerminer}>
+            <lightning-button variant="brand" label="Terminer" title="Terminer" onclick={gotonextStep}
+                style="float:right; margin:6px;" class="">
+            </lightning-button>
+        </template>
+
+        <template if:true={labelstepresil}>
+            <lightning-button variant="brand" label="Procéder à la résiliation" title="Resiliate"
+                onclick={gotoresilStep} style="float:right; margin:6px;" class="">
+            </lightning-button>
+
+        </template>
+<!--CHB 01/07/2024 ANO B-17590 begin-->
+      <!-- <template if:true={labelsteprestitution}>
+             <lightning-button variant="brand" label="Restitution Matériel" title="Restitution" onclick={gotorestitutionStep}
+            style="float:right; margin:6px;" class="">
+        </lightning-button>
+        </template> -->
+<!--CHB 01/07/2024 ANO B-17590 end-->
+      
+        <template if:true={labelstepretention}>
+            <lightning-button variant="brand" label="Rétention" title="Retention" onclick={gotoretentionStep}
+                style="float:right; margin:6px;" class="">
+            </lightning-button>
+        </template>
+
+</div>
+</template>

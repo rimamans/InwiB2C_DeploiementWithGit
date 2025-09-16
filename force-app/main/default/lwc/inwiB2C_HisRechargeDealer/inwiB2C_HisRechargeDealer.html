@@ -1,0 +1,59 @@
+<template >
+    <div class="via-slds riders-list-canvas container-table-canvas" if:true={records}>
+        <div class="slds-card slds-p-around--small np-card">
+
+            
+
+           <div class="slds-p-bottom--small">
+                <div class="slds-m-bottom_xx-large overflowVisible ">
+                    <div >      
+                        <div class="wraperClass ">
+
+                           
+
+                            <lightning-combobox placeholder="Choisir une option" onchange={updateSearch}
+                            label="Filtre par prix" 
+                             options={pickListvalues} 
+                             data-dataname="pickListvalues"
+                            >
+                        </lightning-combobox>
+                     <!--
+                        <lightning-combobox placeholder="Choisir une option" onchange={updateSearch2}
+                            label="Filtre par Type" 
+                             options={pickListvalues2} 
+                             data-dataname="pickListvalues2"
+                            >
+                     </lightning-combobox>
+
+                         -->                 
+                        <template if:false={isPropertiesEmpty}>
+
+                            <!--class="tab-style slds-table slds-table_bordered slds-table_col-bordered" -->
+                        
+                            <lightning-datatable
+                            class="tab-style slds-table slds-table_bordered slds-table_col-bordered" 
+
+                                key-field="M_LINE_ID"
+                                columns={columns}
+                                data={records} 
+                                
+                                hide-checkbox-column= true>
+                            </lightning-datatable>
+                        
+                    </template>
+                    </div>
+                    <template if:true={isPropertiesEmpty}>
+
+                       
+                    </template>
+
+                    </div>
+            </div>
+                
+            </div>
+        </div>
+
+    </div>
+
+
+</template>

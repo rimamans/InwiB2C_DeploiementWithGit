@@ -1,0 +1,55 @@
+<apex:page standardController="Account" lightningStylesheets="true">
+    <apex:form >
+        <apex:pageBlock title="Détails du compte">
+            
+            <!-- Informations Générales -->
+            <apex:pageBlockSection title="Informations générales" columns="2">
+                <apex:outputField value="{!Account.vlocity_cmt__Status__c}" label="Statut" />
+                
+                <apex:outputField value="{!Account.RecordType.DeveloperName}" label="Type" /> 
+                <apex:outputField value="{!Account.inwiB2C_Typehandler__c}" label="Type" />
+                <apex:outputField value="{!Account.InwiB2C_Segment_Dealer__c}" label="Segment Marché" />
+               
+            </apex:pageBlockSection>
+
+            <!-- Détails du Contact Principal -->
+            <apex:pageBlockSection title="Détails du Contact Principal" columns="2">
+                <apex:outputField value="{!Account.vlocity_cmt__PersonContactId__r.LastName}" label="Nom" />
+                <apex:outputField value="{!Account.vlocity_cmt__PersonContactId__r.FirstName}" label="Prénom" />
+                <apex:outputField value="{!Account.vlocity_cmt__PersonContactId__r.InwiB2C_CIN__c}" label="CIN" />
+                <apex:outputField value="{!Account.vlocity_cmt__PersonContactId__r.InwiB2C_Type_CIN__c}" label="Type de CIN" />
+                <apex:outputField value="{!Account.InwiB2C_Code_Dealer__c}" label="Code" />
+                <apex:outputField value="{!Account.InwiB2C_Flag_Rural_Urbain__c}" label="Flag Rural ou Urbain" />
+                <apex:outputField value="{!Account.InwiB2C_Canal__c}" label="Canal (RTM / Classique)" />
+                <apex:outputField value="{!Account.InwiB2C_Vendeur__c}" label="Vendeur" />
+               <!-- <apex:outputField value="{!Account.Parent.Name}" label="Distributeur rattaché au détaillant" /> -->
+               <apex:outputField value="{!Account.InwiB2C_Distributeur__c}" label="Distributeur rattaché au détaillant" />
+            </apex:pageBlockSection>
+
+            <!-- Coordonnées Partenaire -->
+            <apex:pageBlockSection title="Coordonnées Partenaire" columns="2">
+                
+                <apex:outputField value="{!Account.vlocity_cmt__PersonContactId__r.InwiB2C_Num_ro_de_contact__c}" label="Numéro de Contact 1" />
+                <apex:outputField value="{!Account.inwib2c_PartenaireNumContact2__c}" label="Numéro de Contact 2" />
+                <apex:outputField value="{!Account.inwib2c_AdresseMail__c}" label="Adresse Email" />
+            </apex:pageBlockSection>
+
+            <!-- Détails d'Adresse -->
+            <apex:pageBlockSection title="Adresse" columns="2">
+                <apex:outputField value="{!Account.InwiB2C_Address__r.InwiB2C_Adresse__c}" label="Adresse" />
+                <apex:outputField value="{!Account.InwiB2C_Address__r.InwiB2C_Pays__r.Name}" label="Pays" />
+                <apex:outputField value="{!Account.inwib2c_Region__c}" label="Région" />
+                <apex:outputField value="{!Account.InwiB2C_Address__r.InwiB2C_Sous_Region__c}" label="Sous Région" />
+                <apex:outputField value="{!Account.InwiB2C_Address__r.inwib2c_Ville_Douar__c}" label="Ville/Douar" />
+                <apex:outputField value="{!Account.InwiB2C_Address__r.InwiB2C_Precision_Quartier__c}" label="Précision Quartier" />
+           
+            </apex:pageBlockSection>
+
+            <!-- Géolocalisation -->
+            <apex:pageBlockSection title="Géolocalisation" columns="2">
+                <apex:outputText value="{!Account.inwib2c_Geolocalisation__Latitude__s}" label="Latitude" />
+                <apex:outputText value="{!Account.inwib2c_Geolocalisation__Longitude__s}" label="Longitude" />
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

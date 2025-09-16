@@ -1,0 +1,30 @@
+.slds-notify
+{
+    background-color:#FF0000;	 
+    text-align: center;
+    font-style: bold;
+
+    
+  }
+
+
+  .slds-notify_alert
+{
+    background-color: #FF0000;
+    text-align: center;
+    font-style: bold;
+
+	 
+
+  }
+
+
+
+  .slds-alert_warning
+{
+    background-color: #FF0000;	
+    text-align: center;
+    font-style: bold;
+
+
+  }

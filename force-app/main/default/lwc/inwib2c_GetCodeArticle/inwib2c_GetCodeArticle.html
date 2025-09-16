@@ -1,0 +1,25 @@
+<template>
+    <div class="slds-grid slds-wrap">
+        <div class="slds-col slds-size_12-of-12 slds-m-bottom--medium">
+
+            <lightning-Input type="search" placeholder="Saisir un code article"  label="Code Article" value={article}  class="codeArticle" onchange={handleChange} >  </lightning-input>
+                <template if:true={show}>
+                <div class="slds-col slds-size_12-of-12 slds-m-bottom--medium slds-box"> 
+                  <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+                      <template for:each={Array} for:item="item">
+                        <li key={item.ID} class="slds-listbox__item">
+
+                          <a >  <p data-idart={item.ID}
+                            data-codearticle={item.CodeArticle}  data-offre={item.offre} onclick={handleSelect2} >{item.CodeArticle}</p> </a>
+                             
+                         
+                            </li>
+                            
+                        </template>
+                    </ul>
+
+               </div>
+              </template>
+    </div>
+    </div>
+</template>

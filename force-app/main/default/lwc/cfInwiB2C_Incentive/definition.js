@@ -1,0 +1,3 @@
+let definition = 
+                {"GlobalKey__c":"InwiB2C_Incentive/RMA/1/1621879429065","dataSource":{"type":null,"value":{}},"enableLwc":true,"filter":{},"states":[{"conditions":{"group":[{"field":"$scope.data.status","operator":"===","type":"system","value":"'active'"}]},"customLwc":true,"customLwcAttributes":[{"name":"records","val":"$scope.records"}],"customLwcRepeat":false,"definedActions":{"actions":[]},"fields":[],"isSmartAction":false,"lwc":{"DeveloperName":"inwiB2C_incentive_sub","Id":"0Rb250000009vcWCAQ","MasterLabel":"Inwi Incentive","name":"inwiB2C_incentive_sub"},"name":"Active","smartAction":{}}],"title":"Incentive"}; 
+            export default definition

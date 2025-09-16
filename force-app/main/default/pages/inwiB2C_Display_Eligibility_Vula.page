@@ -1,0 +1,13 @@
+<apex:page >
+    
+    <apex:form >
+        <button type="button" onclick="redirectToOmniScript();">Acquisition FTTH Vula</button>
+    </apex:form>
+    <script>
+        function redirectToOmniScript() {
+            // Remplacez l'URL ci-dessous par l'URL réelle de votre OmniScript
+            const omniScriptUrl = '/lightning/cmp/vlocity_cmt__vlocityLWCOmniWrapper?c__target=c%3Ainwib2cInwiB2C_AcquisitionFTTHVulaFrench';
+            window.location.href = omniScriptUrl;
+        }
+    </script>
+</apex:page>

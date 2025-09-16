@@ -1,0 +1,193 @@
+<template>
+  
+
+  <h3 class="slds-p-bottom--small slds-text-heading--small slds-truncate " >
+                 
+      <div class="slds-grid slds-wrap">
+      
+          <template if:true={isAllContactTableDisplay}  >
+
+              <div class="wraperClass ">
+                  <table class="sty-table-case slds-table slds-table_bordered slds-table_fixed-layout">
+                      <thead>
+                        <tr class="">
+                         
+                          <th class="" scope="col">
+                            <div class="slds-truncate" title="Nom">Nom</div>
+                          </th>
+                          <th class="" scope="col">
+                            <div class="slds-truncate" title="Prénom">Prénom</div>
+                          </th>
+                          <th class="" scope="col">
+                            <div class="slds-truncate" title="CIN">CIN</div>
+                          </th>
+
+                          <th class="" scope="col">
+                              <div class="slds-truncate" title="Email">Contact Num</div>
+                            </th>    
+                            <th class="" scope="col">
+                              <div class="slds-truncate" title="Type">Segment marché</div>
+                            </th>                                         
+                          <th class="" scope="col">
+                              <div class="slds-truncate" title="Type">Type</div>
+                            </th>
+                          <th class="" scope="col">
+                              <div class="slds-truncate" title="Action">Action</div>
+                            </th>  
+                        </tr>
+                      </thead>
+                      <tbody>
+                      <template for:each={allcontact} for:item="ligne" >
+                          <tr key ={ligne.IdCase} >
+                              <td class="slds-cell-wrap" > <div class="slds-line-clamp">{ligne.LastName}</div> </td>
+                              <td class="slds-cell-wrap" > <div class="slds-line-clamp">{ligne.FirstName}</div> </td>
+                              <td class="slds-cell-wrap" > <div class="slds-line-clamp">{ligne.Cin}</div> </td>
+                              <td class="slds-cell-wrap" > <div class="slds-line-clamp">{ligne.NumContact}</div> </td>
+                              
+                              <td class="slds-cell-wrap" > <div class="slds-line-clamp">{ligne.SegmentMarch}</div> </td>
+                              <td class="slds-cell-wrap" > <div class="slds-line-clamp">{ligne.Type}</div> </td>
+                              <td class="slds-cell-wrap" ><div class="slds-line-clamp"><lightning-button label="Vue 360°"  onclick={handleAccountSelection} 
+                                   id={ligne.AccountId} name={ligne} ></lightning-button></div>
+                              </td>
+                              <td class="slds-cell-wrap" ><div class="slds-line-clamp"><lightning-button label="Souscriptions"  onclick={handleSubSelection} 
+                                id={ligne.AccountId} name={ligne} ></lightning-button></div>
+                           </td>
+                          </tr>
+                      </template>
+                    
+                      </tbody>
+                    </table>
+
+              </div>
+
+
+          </template>
+
+
+          <template if:true={allcontactsub}  >
+
+              <div class="wraperClass ">
+                  <table class="sty-table-case slds-table slds-table_bordered slds-table_fixed-layout">
+                      <thead>
+                        <tr class="">
+
+                          
+                          <th class="" scope="col">
+                            <div class="slds-truncate" title="Nom">Nom</div>
+                          </th>
+                          <th class="" scope="col">
+                            <div class="slds-truncate" title="Prénom">Prénom</div>
+                          </th>
+                          <th class="" scope="col">
+                            <div class="slds-truncate" title="CIN">CIN</div>
+                          </th>
+                          <th class="" scope="col">
+                            <div class="slds-truncate" title="CIN">MDN</div>
+                          </th>
+                          <th class="" scope="col">
+                              <div class="slds-truncate" title="Email">Contact Num</div>
+                            </th>
+                          
+                          <th class="" scope="col">
+                            <div class="slds-truncate" title="Type">Type</div>
+                          </th>
+     
+                          <th class="" scope="col">
+                              <div class="slds-truncate" title="Action">Action</div>
+                            </th>  
+                        </tr>
+                      </thead>
+                      <tbody>
+                      <template for:each={allcontactsub} for:item="ligneSub" >
+                          <tr key ={ligneSub.IdCase} >
+                              <td class="slds-cell-wrap" > <div class="slds-line-clamp">{ligneSub.LastName}</div> </td>
+                              <td class="slds-cell-wrap" > <div class="slds-line-clamp">{ligneSub.FirstName}</div> </td>
+                              <td class="slds-cell-wrap" > <div class="slds-line-clamp">{ligneSub.Cin}</div> </td>
+                              <td class="slds-cell-wrap" > <div class="slds-line-clamp">{ligneSub.NumLigne}</div> </td>
+
+                              <td class="slds-cell-wrap" > <div class="slds-line-clamp">{ligneSub.NumContact}</div> </td>
+                              <td class="slds-cell-wrap" > <div class="slds-line-clamp">{ligneSub.Type}</div> </td>
+                              <td class="slds-cell-wrap" ><div class="slds-line-clamp"><lightning-button label="Selectionner"  onclick={handleAccountSelection} 
+                                   id={ligneSub.AccountId} name={ligneSub} ></lightning-button></div>
+                              </td>
+                          </tr>
+                      </template>
+                    
+                      </tbody>
+                    </table>
+
+              </div>
+
+
+          </template>
+
+
+          <template if:true={isLeadAuthorized}  >
+              <template if:true={allcontactlead}  >
+                
+                
+                <div class="wraperClass ">
+                    <table class="sty-table-case slds-table slds-table_bordered slds-table_fixed-layout">
+                        <thead>
+                          <tr class="">
+
+                            
+                            <th class="" scope="col">
+                              <div class="slds-truncate" title="Nom">Nom</div>
+                            </th>
+                            <th class="" scope="col">
+                              <div class="slds-truncate" title="Prénom">Prénom</div>
+                            </th>
+                            <th class="" scope="col">
+                                <div class="slds-truncate" title="Email">Email</div>
+                              </th>
+                            <th class="" scope="col">
+                              <div class="slds-truncate" title="Phone">Téléphone</div>
+                            </th>
+                            <th class="" scope="col">
+                              <div class="slds-truncate" title="Type">Type</div>
+                            </th>
+      
+                            <th class="" scope="col">
+                                <div class="slds-truncate" title="Action">Action</div>
+                              </th>  
+                          </tr>
+                        </thead>
+                        <tbody>
+                        <template for:each={allcontactlead} for:item="ligneSub" >
+                            <tr key ={ligneSub.IdCase} >
+                                <td class="slds-cell-wrap" > <div class="slds-line-clamp">{ligneSub.LastName}</div> </td>
+                                <td class="slds-cell-wrap" > <div class="slds-line-clamp">{ligneSub.FirstName}</div> </td>
+                                <td class="slds-cell-wrap" > <div class="slds-line-clamp">{ligneSub.Email}</div> </td>
+                                <td class="slds-cell-wrap" > <div class="slds-line-clamp">{ligneSub.NumContact}</div> </td>
+                                <td class="slds-cell-wrap" > <div class="slds-line-clamp">{ligneSub.Type}</div> </td>
+                                <td class="slds-cell-wrap" ><div class="slds-line-clamp"><lightning-button label="Selectionner"  onclick={handleLeadSelection} 
+                                    id={ligneSub.IdLead} name={ligneSub} ></lightning-button></div>
+                                </td>
+                            </tr>
+                        </template>
+                      
+                        </tbody>
+                      </table>
+
+                </div>
+
+              </template>
+            
+          </template>
+          
+      <template if:false={isAllContactTableDisplay}  >
+        <template if:false={allcontactsub}  >
+          <template if:false={allcontactlead}  >          
+                <div  class="nocard-case slds-col slds-size--1-of-1 slds-text-align_center ">
+                    Aucun résultat trouvé.
+                </div>
+            </template>
+        </template>
+      
+      </template>
+
+      </div>
+  </h3>
+
+</template>

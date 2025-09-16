@@ -1,0 +1,9 @@
+.user-item:nth-child(even) {
+    background-color: rgb(227, 227, 227);
+}
+
+.user-item{
+    padding: 5px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}

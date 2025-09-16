@@ -1,0 +1,184 @@
+@isTest
+public class inwiB2C_AnnulDemDegSusp5joursBatchTest {
+
+    @testSetup
+    static void setupData() {
+        // Insert holiday records
+        InwiB2C_Holidays__c holiday = new InwiB2C_Holidays__c(
+            inwib2c_date__c = Date.today().addDays(1)
+        );
+        insert holiday;
+        
+        //create an account
+            Account testAccount = new Account();
+            testAccount.Name='Test Account';
+            insert testAccount;     
+        
+            Product2 prod = new Product2(Name = 'Laptop X200', 
+                                         Family = 'Hardware',
+                                         ProductCode='INWIB2C_OFFERING_SIM',vlocity_cmt__Type__c= 'Postpaye');
+            insert prod;     
+            Id pricebookId = Test.getStandardPricebookId();
+            PricebookEntry standardPrice = new PricebookEntry(
+                Pricebook2Id = pricebookId, Product2Id = prod.Id,
+                UnitPrice = 10000, IsActive = true);
+            insert standardPrice;
+            Pricebook2 customPB = new Pricebook2(Name='Custom Pricebook', isActive=true);
+            insert customPB; 
+            PricebookEntry customPrice = new PricebookEntry(
+                Pricebook2Id = customPB.Id, Product2Id = prod.Id,
+                UnitPrice = 12000, IsActive = true);
+            insert customPrice;
+        
+        
+            order neworder = new Order (
+                Pricebook2Id = customPB.Id,
+                inwiB2C_Statut__c ='inwiB2C_EnCours',
+                EffectiveDate = Date.today().addDays(-1), 
+                inwib2c_TypeDeLaCommande__c = 'inwiB2C_Acquisition', 
+                Status = 'Draft', 
+                AccountId =testAccount.Id,
+                InwiB2C_Type_Offer__c = 'ADSL'
+            );
+            insert neworder;
+        
+        String JsonAttr = '{"INWIB2C_ACAT_MOBILE":[{"$$AttributeDefinitionStart$$":null,"objectid__c":"01t3M000000xuJtQAI","attributeid__c":"a0X3M000000OaNUUA0","attributecategoryid__c":"a0W3M000002oGhPUAU","categorycode__c":"INWIB2C_ACAT_MOBILE","categoryname__c":"Mobile","attributeuniquecode__c":"INWIB2C_ATT_DC_TypHandset","attributeconfigurable__c":true,"attributedisplaysequence__c":"1","attributefilterable__c":false,"attributecloneable__c":true,"isactive__c":true,"attributedisplayname__c":"Type Handset","displaysequence__c":"10","categorydisplaysequence__c":10,"customconfiguitemplate__c":null,"formatmask__c":null,"hasrule__c":false,"isconfigurable__c":true,"ishidden__c":true,"valueinnumber__c":null,"objecttype__c":"vlocity_cmt__ObjectClass__c","querycode__c":null,"isreadonly__c":false,"isnottranslatable__c":false,"isquerydriven__c":false,"querylabel__c":null,"id":"a0U3M000001EaTQUA0","isrequired__c":false,"rulemessage__c":null,"uidisplaytype__c":"Dropdown","value__c":"SIM","valuedatatype__c":"Picklist","valuedescription__c":null,"attributegrouptype__c":null,"attributeRunTimeInfo":{"dataType":"Picklist","uiDisplayType":"Dropdown","default":[{"value":"SIM","sequence":10,"id":"1a7101d9-b3e5-f5d0-686a-9b0cb29f6d5f","displayText":"SIM"}],"values":[{"value":"SIM","sequence":10,"id":"1a7101d9-b3e5-f5d0-686a-9b0cb29f6d5f","displayText":"SIM"},{"value":"TERM","sequence":20,"id":"b1e73d9a-7aba-cd66-f5b8-bedaa7b3da92","displayText":"TERM"}],"selectedItem":{"value":"SIM","sequence":10,"id":"1a7101d9-b3e5-f5d0-686a-9b0cb29f6d5f","displayText":"SIM"}},"$$AttributeDefinitionEnd$$":null},{"$$AttributeDefinitionStart$$":null,"objectid__c":"01t3M000000xuJtQAI","attributeid__c":"a0X3M000000OYtrUAG","attributecategoryid__c":"a0W3M000002oGhPUAU","categorycode__c":"INWIB2C_ACAT_MOBILE","categoryname__c":"Mobile","attributeuniquecode__c":"INWIB2C_ATT_CUSTRISKPLAF","attributeconfigurable__c":true,"attributedisplaysequence__c":"1","attributefilterable__c":false,"attributecloneable__c":true,"isactive__c":true,"attributedisplayname__c":"Plafond Risque Personnalisé","displaysequence__c":"10","categorydisplaysequence__c":10,"customconfiguitemplate__c":null,"formatmask__c":null,"hasrule__c":false,"isconfigurable__c":true,"ishidden__c":true,"valueinnumber__c":-999,"objecttype__c":"vlocity_cmt__ObjectClass__c","querycode__c":null,"isreadonly__c":false,"isnottranslatable__c":false,"isquerydriven__c":false,"querylabel__c":null,"id":"a0U3M000001AnFzUAK","isrequired__c":false,"rulemessage__c":null,"uidisplaytype__c":"Single Value","value__c":"-999","valuedatatype__c":"Number","valuedescription__c":null,"attributegrouptype__c":null,"attributeRunTimeInfo":{"dataType":"Number","uiDisplayType":"Single Value","default":"-999","value":"-999"},"$$AttributeDefinitionEnd$$":null},{"$$AttributeDefinitionStart$$":null,"objectid__c":"a2f3M0000009wpdQAA","attributeid__c":"a0X3M000000OYupUAG","attributecategoryid__c":"a0W3M000002oGhPUAU","categorycode__c":"INWIB2C_ACAT_MOBILE","categoryname__c":"Mobile","attributeuniquecode__c":"INWIB2C_ATT_DC_ElligibleAuTypeLigne","attributeconfigurable__c":true,"attributedisplaysequence__c":"1","attributefilterable__c":false,"attributecloneable__c":true,"isactive__c":true,"attributedisplayname__c":"Elligible au type de ligne","displaysequence__c":"10","categorydisplaysequence__c":10,"customconfiguitemplate__c":null,"formatmask__c":null,"hasrule__c":false,"isconfigurable__c":true,"ishidden__c":true,"valueinnumber__c":null,"objecttype__c":"vlocity_cmt__ObjectClass__c","querycode__c":null,"isreadonly__c":false,"isnottranslatable__c":false,"isquerydriven__c":false,"querylabel__c":null,"id":"a0U3M000001B4AsUAK","isrequired__c":false,"rulemessage__c":null,"uidisplaytype__c":null,"value__c":null,"valuedatatype__c":"Checkbox","valuedescription__c":null,"attributegrouptype__c":null,"attributeRunTimeInfo":{"dataType":"Checkbox","default":false,"value":false},"$$AttributeDefinitionEnd$$":null},{"$$AttributeDefinitionStart$$":null,"objectid__c":"a2f3M0000009wpdQAA","attributeid__c":"a0X3M000000OYuuUAG","attributecategoryid__c":"a0W3M000002oGhPUAU","categorycode__c":"INWIB2C_ACAT_MOBILE","categoryname__c":"Mobile","attributeuniquecode__c":"INWIB2C_ATT_DC_NUMERO_ADHERANT","attributeconfigurable__c":true,"attributedisplaysequence__c":"1","attributefilterable__c":false,"attributecloneable__c":true,"isactive__c":true,"attributedisplayname__c":"Numéro adhérant","displaysequence__c":"10","categorydisplaysequence__c":10,"customconfiguitemplate__c":null,"formatmask__c":null,"hasrule__c":false,"isconfigurable__c":true,"ishidden__c":true,"valueinnumber__c":null,"objecttype__c":"vlocity_cmt__ObjectClass__c","querycode__c":null,"isreadonly__c":false,"isnottranslatable__c":false,"isquerydriven__c":false,"querylabel__c":null,"id":"a0U3M000001B4AxUAK","isrequired__c":false,"rulemessage__c":null,"uidisplaytype__c":"Single Value","value__c":null,"valuedatatype__c":"Number","valuedescription__c":null,"attributegrouptype__c":null,"attributeRunTimeInfo":{"dataType":"Number","uiDisplayType":"Single Value","value":null},"$$AttributeDefinitionEnd$$":null},{"$$AttributeDefinitionStart$$":null,"objectid__c":"01t3M000000xuJtQAI","attributeid__c":"a0X3M000000NxklUAC","attributecategoryid__c":"a0W3M000002oGhPUAU","categorycode__c":"INWIB2C_ACAT_MOBILE","categoryname__c":"Mobile","attributeuniquecode__c":"INWIB2C_ATT_RT_APPELS_ENRTANT","attributeconfigurable__c":true,"attributedisplaysequence__c":"10","attributefilterable__c":true,"attributecloneable__c":true,"isactive__c":true,"attributedisplayname__c":"Appels Entrant","displaysequence__c":"10","categorydisplaysequence__c":10,"customconfiguitemplate__c":null,"formatmask__c":null,"hasrule__c":false,"isconfigurable__c":true,"ishidden__c":true,"valueinnumber__c":null,"objecttype__c":"Product2","querycode__c":null,"isreadonly__c":false,"isnottranslatable__c":false,"isquerydriven__c":false,"querylabel__c":null,"id":"a0U3M0000013InDUAU","isrequired__c":false,"rulemessage__c":null,"uidisplaytype__c":"Dropdown","value__c":"Autorisé","valuedatatype__c":"Picklist","valuedescription__c":null,"attributegrouptype__c":null,"attributeRunTimeInfo":{"dataType":"Picklist","uiDisplayType":"Dropdown","default":[{"value":"Autorisé","sequence":20,"id":"9c750118-8e12-899a-dda1-913db1492230","displayText":"Autorisé"}],"values":[{"value":"Bloqué","sequence":10,"id":"43e2e36a-e5a4-2d69-b957-f5b1d06675ea","displayText":"Bloqué"},{"value":"Autorisé","sequence":20,"id":"9c750118-8e12-899a-dda1-913db1492230","displayText":"Autorisé"}],"selectedItem":{"value":"Autorisé","sequence":20,"id":"9c750118-8e12-899a-dda1-913db1492230","displayText":"Autorisé"}},"$$AttributeDefinitionEnd$$":null},{"$$AttributeDefinitionStart$$":null,"objectid__c":"01t3M000000xuJtQAI","attributeid__c":"a0X3M000000NxkmUAC","attributecategoryid__c":"a0W3M000002oGhPUAU","categorycode__c":"INWIB2C_ACAT_MOBILE","categoryname__c":"Mobile","attributeuniquecode__c":"INWIB2C_ATT_RT_APPELS_SORTANT","attributeconfigurable__c":true,"attributedisplaysequence__c":"15","attributefilterable__c":true,"attributecloneable__c":true,"isactive__c":true,"attributedisplayname__c":"Appels Sortant","displaysequence__c":"10","categorydisplaysequence__c":10,"customconfiguitemplate__c":null,"formatmask__c":null,"hasrule__c":false,"isconfigurable__c":true,"ishidden__c":true,"valueinnumber__c":null,"objecttype__c":"Product2","querycode__c":null,"isreadonly__c":false,"isnottranslatable__c":false,"isquerydriven__c":false,"querylabel__c":null,"id":"a0U3M0000013InEUAU","isrequired__c":false,"rulemessage__c":null,"uidisplaytype__c":"Dropdown","value__c":"Autorisé","valuedatatype__c":"Picklist","valuedescription__c":null,"attributegrouptype__c":null,"attributeRunTimeInfo":{"dataType":"Picklist","uiDisplayType":"Dropdown","default":[{"value":"Autorisé","sequence":10,"id":"da3453d9-e137-b5df-235d-160aa0822ad9","displayText":"Autorisé"}],"values":[{"value":"Autorisé","sequence":10,"id":"da3453d9-e137-b5df-235d-160aa0822ad9","displayText":"Autorisé"},{"value":"Bloqué","sequence":20,"id":"d3de20ec-60cd-5534-35e7-2acbfa148988","displayText":"Bloqué"},{"value":"International Bloqué","sequence":30,"id":"835f14db-82c1-34fe-9f08-172e00f7cb9b","displayText":"International Bloqué"}],"selectedItem":{"value":"Autorisé","sequence":10,"id":"da3453d9-e137-b5df-235d-160aa0822ad9","displayText":"Autorisé"}},"$$AttributeDefinitionEnd$$":null},{"$$AttributeDefinitionStart$$":null,"objectid__c":"01t3M000000xuJtQAI","attributeid__c":"a0X3M000000NxkvUAC","attributecategoryid__c":"a0W3M000002oGhPUAU","categorycode__c":"INWIB2C_ACAT_MOBILE","categoryname__c":"Mobile","attributeuniquecode__c":"INWIB2C_ATT_RT_ENGAGEMENT","attributeconfigurable__c":true,"attributedisplaysequence__c":"1","attributefilterable__c":false,"attributecloneable__c":true,"isactive__c":true,"attributedisplayname__c":"Engagement","displaysequence__c":"null","categorydisplaysequence__c":10,"customconfiguitemplate__c":null,"formatmask__c":null,"hasrule__c":false,"isconfigurable__c":true,"ishidden__c":true,"valueinnumber__c":0,"objecttype__c":"Product2","querycode__c":null,"isreadonly__c":false,"isnottranslatable__c":false,"isquerydriven__c":false,"querylabel__c":null,"id":"a0U3M0000013In7UAE","isrequired__c":false,"rulemessage__c":null,"uidisplaytype__c":"Dropdown","value__c":"0","valuedatatype__c":"Picklist","valuedescription__c":null,"attributegrouptype__c":null,"attributeRunTimeInfo":{"dataType":"Picklist","uiDisplayType":"Dropdown","default":[{"value":"0","sequence":10,"id":"102adc19-1a03-524e-4b70-c98179eea478","displayText":"Sans engagement"}],"values":[{"value":"0","sequence":10,"id":"102adc19-1a03-524e-4b70-c98179eea478","displayText":"Sans engagement"},{"value":"12","sequence":20,"id":"43d82073-ac9e-d6e4-fd43-252ccd7619c5","displayText":"12 Mois"},{"value":"24","sequence":30,"id":"1874b54d-5b3d-6205-5fec-c5ac54e2c251","displayText":"24 Mois"}],"selectedItem":{"value":"0","sequence":10,"id":"102adc19-1a03-524e-4b70-c98179eea478","displayText":"Sans engagement"}},"$$AttributeDefinitionEnd$$":null},{"$$AttributeDefinitionStart$$":null,"objectid__c":"01t3M000000xuJtQAI","attributeid__c":"a0X3M000000NxkyUAC","attributecategoryid__c":"a0W3M000002oGhPUAU","categorycode__c":"INWIB2C_ACAT_MOBILE","categoryname__c":"Mobile","attributeuniquecode__c":"INWIB2C_ATT_RT_GAMME_OFFRE","attributeconfigurable__c":true,"attributedisplaysequence__c":"1","attributefilterable__c":false,"attributecloneable__c":true,"isactive__c":true,"attributedisplayname__c":"Gamme offre","displaysequence__c":"null","categorydisplaysequence__c":10,"customconfiguitemplate__c":null,"formatmask__c":null,"hasrule__c":false,"isconfigurable__c":true,"ishidden__c":true,"valueinnumber__c":null,"objecttype__c":"Product2","querycode__c":null,"isreadonly__c":false,"isnottranslatable__c":false,"isquerydriven__c":false,"querylabel__c":null,"id":"a0U3M0000013In8UAE","isrequired__c":false,"rulemessage__c":null,"uidisplaytype__c":"Dropdown","value__c":"GALAXY","valuedatatype__c":"Picklist","valuedescription__c":null,"attributegrouptype__c":null,"attributeRunTimeInfo":{"dataType":"Picklist","uiDisplayType":"Dropdown","default":[{"value":"GALAXY","sequence":30,"id":"8e3bbf72-9f98-7c03-3b3c-0eb48a0ccada","displayText":"Galaxy"}],"values":[{"value":"AMY","sequence":10,"id":"538aeaef-176d-2f05-c1aa-7a46eeb6fe46","displayText":"forfait Famille"},{"value":"BATMAN","sequence":20,"id":"da7bdac4-13d9-edd9-c1b3-89cd3a3c7221","displayText":"Batman"},{"value":"GALAXY","sequence":30,"id":"8e3bbf72-9f98-7c03-3b3c-0eb48a0ccada","displayText":"Galaxy"},{"value":"SW2","sequence":40,"id":"5ea7bea2-ea69-1f03-9458-4bbfd69eef24","displayText":"Star wars"},{"value":"PIZZA","sequence":50,"id":"d9f33766-032b-9ad5-3fd5-7d9444a61ce4","displayText":"Pizza"}],"selectedItem":{"value":"GALAXY","sequence":30,"id":"8e3bbf72-9f98-7c03-3b3c-0eb48a0ccada","displayText":"Galaxy"}},"$$AttributeDefinitionEnd$$":null},{"$$AttributeDefinitionStart$$":null,"objectid__c":"01t3M000000xuJtQAI","attributeid__c":"a0X3M000000NxlAUAS","attributecategoryid__c":"a0W3M000002oGhPUAU","categorycode__c":"INWIB2C_ACAT_MOBILE","categoryname__c":"Mobile","attributeuniquecode__c":"INWIB2C_ATT_RT_NOMBRE_RECURENCE","attributeconfigurable__c":true,"attributedisplaysequence__c":"1","attributefilterable__c":false,"attributecloneable__c":true,"isactive__c":true,"attributedisplayname__c":"Nombre de récurrences pour remise","displaysequence__c":"null","categorydisplaysequence__c":10,"customconfiguitemplate__c":null,"formatmask__c":null,"hasrule__c":false,"isconfigurable__c":false,"ishidden__c":true,"valueinnumber__c":null,"objecttype__c":"Product2","querycode__c":null,"isreadonly__c":false,"isnottranslatable__c":false,"isquerydriven__c":false,"querylabel__c":null,"id":"a0U3M0000013In9UAE","isrequired__c":false,"rulemessage__c":null,"uidisplaytype__c":"Single Value","value__c":null,"valuedatatype__c":"Number","valuedescription__c":null,"attributegrouptype__c":null,"attributeRunTimeInfo":{"dataType":"Number","uiDisplayType":"Single Value","value":null},"$$AttributeDefinitionEnd$$":null},{"$$AttributeDefinitionStart$$":null,"objectid__c":"01t3M000000xuJtQAI","attributeid__c":"a0X3M000000NxlJUAS","attributecategoryid__c":"a0W3M000002oGhPUAU","categorycode__c":"INWIB2C_ACAT_MOBILE","categoryname__c":"Mobile","attributeuniquecode__c":"INWIB2C_ATT_RT_PROFIL","attributeconfigurable__c":true,"attributedisplaysequence__c":"75","attributefilterable__c":true,"attributecloneable__c":true,"isactive__c":true,"attributedisplayname__c":"Promotion à acquisition","displaysequence__c":"10","categorydisplaysequence__c":10,"customconfiguitemplate__c":null,"formatmask__c":null,"hasrule__c":false,"isconfigurable__c":true,"ishidden__c":true,"valueinnumber__c":86907,"objecttype__c":"vlocity_cmt__ObjectClass__c","querycode__c":null,"isreadonly__c":false,"isnottranslatable__c":false,"isquerydriven__c":false,"querylabel__c":null,"id":"a0U3M0000013InFUAU","isrequired__c":false,"rulemessage__c":null,"uidisplaytype__c":"Dropdown","value__c":"86907","valuedatatype__c":"Picklist","valuedescription__c":null,"attributegrouptype__c":null,"attributeRunTimeInfo":{"dataType":"Picklist","uiDisplayType":"Dropdown","default":[{"value":"86907","sequence":30,"id":"a9497403-58b5-e252-54ad-5cc902e7afcb","displayText":"Forfait 49dhs Internet"}],"values":[{"id":"a9497403-58b5-e252-54ad-5cc902e7afcb","displayText":"Forfait 49dhs Internet","value":"86907","sequence":30},{"id":"c5f27a11-ed93-8538-8f5a-c834785e9f1e","displayText":"Forfait 499dhs  tout inclus","value":"86915","sequence":130}],"selectedItem":{"value":"86907","sequence":30,"id":"a9497403-58b5-e252-54ad-5cc902e7afcb","displayText":"Forfait 49dhs Internet"}},"$$AttributeDefinitionEnd$$":null},{"$$AttributeDefinitionStart$$":null,"objectid__c":"01t3M000000xuJtQAI","attributeid__c":"a0X3M000000NxlQUAS","attributecategoryid__c":"a0W3M000002oGhPUAU","categorycode__c":"INWIB2C_ACAT_MOBILE","categoryname__c":"Mobile","attributeuniquecode__c":"INWIB2C_ATT_RT_REMISE_DIRHAM","attributeconfigurable__c":true,"attributedisplaysequence__c":"1","attributefilterable__c":false,"attributecloneable__c":true,"isactive__c":true,"attributedisplayname__c":"Remise en Dh sur abonnement","displaysequence__c":"null","categorydisplaysequence__c":10,"customconfiguitemplate__c":null,"formatmask__c":null,"hasrule__c":false,"isconfigurable__c":false,"ishidden__c":true,"valueinnumber__c":null,"objecttype__c":"Product2","querycode__c":null,"isreadonly__c":false,"isnottranslatable__c":false,"isquerydriven__c":false,"querylabel__c":null,"id":"a0U3M0000013InAUAU","isrequired__c":false,"rulemessage__c":null,"uidisplaytype__c":"Single Value","value__c":null,"valuedatatype__c":"Number","valuedescription__c":null,"attributegrouptype__c":null,"attributeRunTimeInfo":{"dataType":"Number","uiDisplayType":"Single Value","value":null},"$$AttributeDefinitionEnd$$":null},{"$$AttributeDefinitionStart$$":null,"objectid__c":"01t3M000000xuJtQAI","attributeid__c":"a0X3M000000NxlYUAS","attributecategoryid__c":"a0W3M000002oGhPUAU","categorycode__c":"INWIB2C_ACAT_MOBILE","categoryname__c":"Mobile","attributeuniquecode__c":"INWIB2C_ATT_RT_REMISE_POURCENT","attributeconfigurable__c":true,"attributedisplaysequence__c":"1","attributefilterable__c":false,"attributecloneable__c":true,"isactive__c":true,"attributedisplayname__c":"Remise en % sur abonnement","displaysequence__c":"null","categorydisplaysequence__c":10,"customconfiguitemplate__c":null,"formatmask__c":null,"hasrule__c":false,"isconfigurable__c":false,"ishidden__c":true,"valueinnumber__c":null,"objecttype__c":"Product2","querycode__c":null,"isreadonly__c":false,"isnottranslatable__c":false,"isquerydriven__c":false,"querylabel__c":null,"id":"a0U3M0000013InBUAU","isrequired__c":false,"rulemessage__c":null,"uidisplaytype__c":"Single Value","value__c":null,"valuedatatype__c":"Number","valuedescription__c":null,"attributegrouptype__c":null,"attributeRunTimeInfo":{"dataType":"Number","uiDisplayType":"Single Value","value":null},"$$AttributeDefinitionEnd$$":null},{"$$AttributeDefinitionStart$$":null,"objectid__c":"01t3M000000xuJtQAI","attributeid__c":"a0X3M000000NxllUAC","attributecategoryid__c":"a0W3M000002oGhPUAU","categorycode__c":"INWIB2C_ACAT_MOBILE","categoryname__c":"Mobile","attributeuniquecode__c":"INWIB2C_ATT_RT_TYPE_LIGNE","attributeconfigurable__c":true,"attributedisplaysequence__c":"1","attributefilterable__c":false,"attributecloneable__c":true,"isactive__c":true,"attributedisplayname__c":"Type de ligne","displaysequence__c":"null","categorydisplaysequence__c":10,"customconfiguitemplate__c":null,"formatmask__c":null,"hasrule__c":false,"isconfigurable__c":true,"ishidden__c":false,"valueinnumber__c":null,"objecttype__c":"Product2","querycode__c":null,"isreadonly__c":false,"isnottranslatable__c":false,"isquerydriven__c":false,"querylabel__c":null,"id":"a0U3M0000013InCUAU","isrequired__c":false,"rulemessage__c":null,"uidisplaytype__c":"Dropdown","value__c":"GP","valuedatatype__c":"Picklist","valuedescription__c":null,"attributegrouptype__c":null,"attributeRunTimeInfo":{"dataType":"Picklist","uiDisplayType":"Dropdown","default":[{"value":"GP","sequence":40,"id":"52bed3eb-3bd1-82aa-59a3-c4239906e71e","displayText":"Grand Public"}],"values":[{"id":"52bed3eb-3bd1-82aa-59a3-c4239906e71e","displayText":"Grand Public","value":"GP","sequence":40}],"selectedItem":{"value":"GP","sequence":40,"id":"52bed3eb-3bd1-82aa-59a3-c4239906e71e","displayText":"Grand Public"}},"$$AttributeDefinitionEnd$$":null},{"$$AttributeDefinitionStart$$":null,"objectid__c":"a2f3M0000009wpdQAA","attributeid__c":"a0X3M000000OZTVUA4","attributecategoryid__c":"a0W3M000002oGhPUAU","categorycode__c":"INWIB2C_ACAT_MOBILE","categoryname__c":"Mobile","attributeuniquecode__c":"INWIB2C_ATT_ABOFORFAPP","attributeconfigurable__c":true,"attributedisplaysequence__c":"1","attributefilterable__c":false,"attributecloneable__c":true,"isactive__c":true,"attributedisplayname__c":"Application à partir de la nièm facture","displaysequence__c":"10","categorydisplaysequence__c":10,"customconfiguitemplate__c":null,"formatmask__c":null,"hasrule__c":false,"isconfigurable__c":true,"ishidden__c":true,"valueinnumber__c":null,"objecttype__c":"vlocity_cmt__ObjectClass__c","querycode__c":null,"isreadonly__c":false,"isnottranslatable__c":false,"isquerydriven__c":false,"querylabel__c":null,"id":"a0U3M000001CqhDUAS","isrequired__c":false,"rulemessage__c":null,"uidisplaytype__c":"Single Value","value__c":null,"valuedatatype__c":"Number","valuedescription__c":null,"attributegrouptype__c":null,"attributeRunTimeInfo":{"dataType":"Number","uiDisplayType":"Single Value","value":null},"$$AttributeDefinitionEnd$$":null},{"$$AttributeDefinitionStart$$":null,"objectid__c":"a2f3M0000009wpdQAA","attributeid__c":"a0X3M000000OZTaUAO","attributecategoryid__c":"a0W3M000002oGhPUAU","categorycode__c":"INWIB2C_ACAT_MOBILE","categoryname__c":"Mobile","attributeuniquecode__c":"INWIB2C_ATT_ABOFORFDIF","attributeconfigurable__c":true,"attributedisplaysequence__c":"1","attributefilterable__c":false,"attributecloneable__c":true,"isactive__c":true,"attributedisplayname__c":"Remise en différée","displaysequence__c":"10","categorydisplaysequence__c":10,"customconfiguitemplate__c":null,"formatmask__c":null,"hasrule__c":false,"isconfigurable__c":true,"ishidden__c":true,"valueinnumber__c":null,"objecttype__c":"vlocity_cmt__ObjectClass__c","querycode__c":null,"isreadonly__c":false,"isnottranslatable__c":false,"isquerydriven__c":false,"querylabel__c":null,"id":"a0U3M000001CqhIUAS","isrequired__c":false,"rulemessage__c":null,"uidisplaytype__c":"Single Value","value__c":null,"valuedatatype__c":"Number","valuedescription__c":null,"attributegrouptype__c":null,"attributeRunTimeInfo":{"dataType":"Number","uiDisplayType":"Single Value","value":null},"$$AttributeDefinitionEnd$$":null},{"$$AttributeDefinitionStart$$":null,"objectid__c":"01t3M000000xuJtQAI","attributeid__c":"a0X3M000000OaNZUA0","attributecategoryid__c":"a0W3M000002oGhPUAU","categorycode__c":"INWIB2C_ACAT_MOBILE","categoryname__c":"Mobile","attributeuniquecode__c":"INWIB2C_ATT_DC_EXISTXGO","attributeconfigurable__c":true,"attributedisplaysequence__c":"1","attributefilterable__c":false,"attributecloneable__c":true,"isactive__c":true,"attributedisplayname__c":"Exist XGo","displaysequence__c":"10","categorydisplaysequence__c":10,"customconfiguitemplate__c":null,"formatmask__c":null,"hasrule__c":false,"isconfigurable__c":true,"ishidden__c":true,"valueinnumber__c":null,"objecttype__c":"vlocity_cmt__ObjectClass__c","querycode__c":null,"isreadonly__c":false,"isnottranslatable__c":false,"isquerydriven__c":false,"querylabel__c":null,"id":"a0U3M000001EaTLUA0","isrequired__c":false,"rulemessage__c":null,"uidisplaytype__c":"Dropdown","value__c":"NON","valuedatatype__c":"Picklist","valuedescription__c":null,"attributegrouptype__c":null,"attributeRunTimeInfo":{"dataType":"Picklist","uiDisplayType":"Dropdown","default":[{"value":"NON","sequence":10,"id":"3d5eea6f-36fa-2de1-6f3a-47df1308f4d9","displayText":"NON"}],"values":[{"value":"NON","sequence":10,"id":"3d5eea6f-36fa-2de1-6f3a-47df1308f4d9","displayText":"NON"},{"value":"OUI","sequence":20,"id":"16ef43d9-9e0b-20e6-aa23-e8bfbcf36257","displayText":"OUI"}],"selectedItem":{"value":"NON","sequence":10,"id":"3d5eea6f-36fa-2de1-6f3a-47df1308f4d9","displayText":"NON"}},"$$AttributeDefinitionEnd$$":null}]}';           
+            OrderItem newOrderitem = new OrderItem(
+                vlocity_cmt__Action__c = 'Add', 
+                Product2Id = prod.Id, 
+                vlocity_cmt__JSONAttribute__c = JsonAttr, 
+                PriceBookEntryId=customPrice.Id, 
+                OrderId=neworder.Id, 
+                Quantity=1, 
+                UnitPrice=customPrice.UnitPrice, 
+                ServiceDate=Date.Today());
+            insert newOrderitem;
+        
+        
+         vlocity_cmt__ItemImplementation__c itemImpl1 = new vlocity_cmt__ItemImplementation__c(
+             Name = 'IAM purchase order',
+            vlocity_cmt__Implementation__c = 'IAMpurchaseorder');
+
+            vlocity_cmt__OrchestrationPlanDefinition__c planDef1 = new vlocity_cmt__OrchestrationPlanDefinition__c(Name ='Billing Test');
+            insert planDef1;
+
+            vlocity_cmt__OrchestrationItemDefinition__c itemDef1 = new vlocity_cmt__OrchestrationItemDefinition__c(
+            vlocity_cmt__OrchestrationPlanDefinitionId__c =planDef1.Id, 
+            Name = 'IAM purchase order',vlocity_cmt__itemImplementationId__c = itemImpl1.Id,
+            vlocity_cmt__GlobalKey__c = 'ac70f77d-0446-eec4-4f8a-b375ae61e3a');
+
+            insert itemDef1;
+        
+        vlocity_cmt__OrchestrationPlan__c planId1 = new vlocity_cmt__OrchestrationPlan__c(vlocity_cmt__State__c = 'In progress',
+            vlocity_cmt__OrderId__c = neworder.Id);
+            insert planId1;
+        neworder.vlocity_cmt__OrchestrationPlanId__c = planId1.Id;
+        update neworder;
+        
+        vlocity_cmt__FulfilmentRequest__c FRId1 = new vlocity_cmt__FulfilmentRequest__c(vlocity_cmt__Status__c = 'New',
+            vlocity_cmt__OrchestrationPlanId__c = planId1.Id,
+            vlocity_cmt__OrderId__c=neworder.Id);
+            insert FRId1;
+
+
+
+            vlocity_cmt__FulfilmentRequestLine__c FRLine1 = new vlocity_cmt__FulfilmentRequestLine__c(vlocity_cmt__Action__c = 'Add',
+                vlocity_cmt__FulfilmentRequestID__c = FRId1.Id); 
+            insert FRLine1;
+
+
+            vlocity_cmt__FulfilmentRequestLineDecompRelationship__c FRLineDecom1 = new vlocity_cmt__FulfilmentRequestLineDecompRelationship__c(
+            vlocity_cmt__DestinationFulfilmentRequestLineId__c = FRLine1.Id, 
+            vlocity_cmt__SourceOrderItemId__c = newOrderitem.Id);
+            insert FRLineDecom1;
+        
+        vlocity_cmt__OrchestrationItem__c item3 = new vlocity_cmt__OrchestrationItem__c(Name = 'IAM purchase order',
+            vlocity_cmt__OrchestrationPlanId__c = planId1.Id,
+            vlocity_cmt__State__c='Failed',
+            vlocity_cmt__FulfilmentRequestLineId__c = FRLine1.Id,
+            vlocity_cmt__OrderItemId__c = newOrderitem.Id);
+            insert item3;
+        
+       // Insert test Demande Deg records
+        InwiB2C_Commande_de_degroupage__c commandeDeg = new InwiB2C_Commande_de_degroupage__c (
+            InwiB2C_Order__c = neworder.Id
+        );
+        insert commandeDeg;
+
+        INWIB2C_DEMANDE_DEGROUPAGE__c demande = new INWIB2C_DEMANDE_DEGROUPAGE__c(
+            InwiB2C_Commande_de_degroupage__c = commandeDeg.Id,
+            InwiB2C_Statutdegroupage__c = 'SUS',
+            InwiB2C_CodeMotifRejet__c = '63',
+            InwiB2C_Compteur_relance__c = 3,
+            inwiB2C_retour_annulation_IAM__c = false,
+            InwiB2C_SEQ_NUM__c= 1
+            );
+        insert demande;
+        Test.setCreatedDate(demande.Id, DateTime.newInstance(2024,08,01));
+        
+        INWIB2C_DEMANDE_DEGROUPAGE__c demande1 = new INWIB2C_DEMANDE_DEGROUPAGE__c(
+            InwiB2C_Commande_de_degroupage__c = commandeDeg.Id,
+            InwiB2C_Statutdegroupage__c = 'SUS',
+            InwiB2C_CodeMotifRejet__c = '63',
+            InwiB2C_Compteur_relance__c = 3,
+            inwiB2C_retour_annulation_IAM__c = false,
+            InwiB2C_SEQ_NUM__c= 2
+            );
+        insert demande1;
+
+    }
+
+	 @IsTest
+    static void testBatchExecution() {
+
+        Integer batchSize = 200;
+        Test.startTest();
+        inwiB2C_AnnulDemDegSusp5joursBatch batchInstance = new inwiB2C_AnnulDemDegSusp5joursBatch(batchSize);
+
+        // Execute the batch
+        Database.executeBatch(batchInstance, batchSize);
+        Test.stopTest();
+
+        
+       List<EventBusSubscriber> eventSubscribers = [
+            SELECT Name, Position, Retries, LastError, Status 
+            FROM EventBusSubscriber 
+            WHERE Topic = 'inwiB2C_CallAnnulDmdDegroupage__e' 
+              AND Type = 'ApexTrigger'
+        ];
+        
+        // Assert that the event subscriber is working and processing events
+        System.assert(!eventSubscribers.isEmpty());
+        System.assertEquals('Running', eventSubscribers[0].Status);
+        System.assert(eventSubscribers[0].Position > 0);
+
+    }
+    
+      @IsTest
+    static void testTotalProcessedLimit() {
+        // Initialize batch with a specific batch size and simulate total processed limit
+        Integer batchSize = 50;
+        Test.startTest();
+        inwiB2C_AnnulDemDegSusp5joursBatch batchInstance = new inwiB2C_AnnulDemDegSusp5joursBatch(batchSize);
+
+        // Simulate the batch reaching the processing limit
+        batchInstance.totalProcessedRecords = 100;
+
+        // Execute the batch
+        Database.executeBatch(batchInstance, batchSize);
+        Test.stopTest();
+
+    }
+    
+    @isTest
+    static void testGetWorkingDateAfterXDays() {
+
+        DateTime inputDate = DateTime.now();
+        Integer numberOfDays = 3;
+
+        DateTime resultDate = inwiB2C_AnnulDemDegSusp5joursBatch.getWorkingDateAterXDays(inputDate, numberOfDays);
+
+
+        System.assertNotEquals(inputDate.addDays(3), resultDate);
+    }
+}

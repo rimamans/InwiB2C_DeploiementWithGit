@@ -1,0 +1,192 @@
+<template>
+<!-- Start historique modal-->
+  <lightning-button style="float:right;" variant="brand" label="Historique" title="Historique" onclick={openModal} class="slds-m-left_x-small"></lightning-button>
+
+  <template if:true={isModalOpen}>
+  <!-- Modal/Popup Box LWC starts here -->
+  <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+      <div class="slds-modal__container">
+          <!-- Modal/Popup Box LWC header here -->
+          <header class="slds-modal__header">
+              <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Fermer" onclick={closeModal}>
+                  <lightning-icon icon-name="utility:close"
+                      alternative-text="close"
+                      variant="inverse"
+                      size="small" ></lightning-icon>
+                  <span class="slds-assistive-text">Fermer</span>
+              </button>
+              <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Historique des offres de rétention</h2>
+          </header>
+          <!-- Modal/Popup Box LWC body starts here -->
+          <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+            <!--<div if:true={allrequestretention}>   
+              <c-inwib2cretentionofferhistory allrequestretention={allrequestretention} ></c-inwib2cretentionofferhistory>
+            </div>-->
+            
+              <div if:true={allrequestretention} class="wraperClass" style="overflow-x:auto;">
+                <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered">
+                    <thead>
+                      <tr class="slds-line-height_reset">
+                        <th class="" scope="col">
+                          <div class="slds-truncate" title="NDemande">Numéro de la demande</div>
+                        </th>
+                        <th class="" scope="col">
+                          <div class="slds-truncate" title="StatusDemande">Statut de la demande</div>
+                        </th>
+                        <th class="" scope="col">
+                          <div class="slds-truncate" title="StatusRetention">Statut Rétention</div>
+                        </th>
+                        <th class="" scope="col">
+                          <div class="slds-truncate" title="OfferName">Nom de l'offre</div>
+                        </th>                     
+                        <th class="" scope="col">
+                          <div class="slds-truncate" title="DateApplication">Date d'application</div>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    <template for:each={allrequestretention} for:item="request" >
+                        <tr key ={request.Id} >
+                            <td><lightning-button key={request.Id} variant="base" label={request.name} title="View Demande" onclick={handleDemandeResilView} value={request.id}
+                               class="buttonhyperlinkClass"></lightning-button></td>
+                            <td>{request.statutresil}</td>
+                            <td>{request.statutretention}</td>
+                            <td>{request.offerapplied}</td>
+                            <td>{request.dateapplied}</td>
+                        </tr>
+                    </template>                 
+                    </tbody>
+                  </table>
+
+            </div>
+
+           
+            <div if:false={allrequestretention} class="nocard slds-col slds-size--1-of-1 slds-text-align_center ">
+                Aucune offre de rétention  n'a été appliquée sur cette ligne courant les 365j.
+            </div>
+          
+          </div>
+          <!-- Modal/Popup Box LWC footer starts here -->
+          <footer class="slds-modal__footer">
+              <button class="slds-button slds-button_neutral" onclick={closeModal} title="Cancel">Fermer</button>
+              <!--<button class="slds-button slds-button_brand" onclick={submitDetails} title="OK">OK</button>-->
+          </footer>
+      </div>
+  </section>
+  <div class="slds-backdrop slds-backdrop_open"></div>
+  </template>
+
+<!-- End historique modal-->
+<br />
+  <div class="slds-p-right_small slds-m-bottom_xx-small slds-show_inline-block slds-size_12-of-12 slds-medium-size_6-of-12">
+    <lightning-record-edit-form object-api-name="InwiB2C_Demande_de_resiliation__c">
+      <lightning-messages></lightning-messages>
+      <!-- Catégorie -->
+      <lightning-input-field if:true={checkMobileEligibilite} class="" field-name="InwiB2C_Cat_gorie__c" onchange={handleCategoryChange}> </lightning-input-field>
+      <lightning-input-field if:true={checkFTTHADSLEligibilite} class="" field-name="INWIB2C_Categorie_Home__c" onchange={handleCategoryChange}> </lightning-input-field>
+      <lightning-input-field if:true={checkIdarEligibilite} class="" field-name="InwiB2C_Categorie_idar__c" onchange={handleCategoryChange}> </lightning-input-field>
+      <!-- Sous Catégorie (Motif) -->
+      <lightning-input-field if:true={checkMobileEligibilite} class="" field-name="InwiB2C_Motif_de_r_siliation__c" onchange={handleMotifChange}> </lightning-input-field>
+      <lightning-input-field if:true={checkFTTHADSLEligibilite} class="" field-name="INWIB2C_MotifResiliation_FTTH_ADSL__c" onchange={handleMotifChange}> </lightning-input-field>
+      <lightning-input-field if:true={checkIdarEligibilite} class="" field-name="Inwib2c_Motif_de_resiliation_idar__c" onchange={handleMotifChange}> </lightning-input-field>
+    </lightning-record-edit-form>
+  </div>
+    <br />
+    <div if:true={alloffers}>   
+      <!--<c-inwib2cretentionoffertemp alloffers={alloffers} numeromdn={numeromdn} idrequesttoret={idrequesttoret} subscriptionid={subscriptionid} todaydate={todaydate} startdatecycle={startdatecycle}></c-inwib2cretentionoffertemp>-->
+      <div class="wraperClass ">
+        <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered">
+            <thead>
+              <tr class="slds-line-height_reset">
+                <th class="" scope="col">
+                    <div class="slds-truncate" title="radios">Choix</div>
+                </th>  
+                <th class="" scope="col">
+                  <div class="slds-truncate" title="Offers">Offre de rétention</div>
+                </th>    
+                <th class="" scope="col">
+                  <div class="slds-truncate" title="OffersDesc">Description</div>
+                </th>                         
+              </tr>
+            </thead>
+            <tbody>
+            <template for:each={allnontextoffers} for:item="offer">
+                <tr key ={offer.Name}>
+                    <td><input type="radio" name="NonTextOfferRecords" onchange={handleSelectedOffer}
+                      id = {offer.Name}  
+                      data-ofrid={offer.Name}                             
+                      data-parcours={offer.LibOffre}
+                      data-pass={offer.PassEligible}
+                      data-typeparcours={offer.TypeParcours}
+                      data-active={offer.IsActive}/></td>
+                    <td>{offer.LibOffre}</td>
+                    <td>{offer.Desc}</td>
+                </tr>
+            </template>  
+            <template for:each={alltextoffers} for:item="textoffer">
+              <tr key ={textoffer.Name}>
+                  <td></td>
+                  <td>{textoffer.LibOffre}</td>
+                  <td style="white-space: pre-wrap;">{textoffer.Desc}</td>
+              </tr>
+          </template>                    
+            </tbody>
+          </table>
+
+    </div>
+    </div>
+
+    <div if:false={alloffers}>   
+      <div  if:true={alloffersexist}  class="nocard slds-col slds-size--1-of-1 slds-text-align_center ">
+          Aucune offre de rétention éligible n'a été trouvé.
+      </div>
+      <br />
+     
+    </div>
+    <br />
+  <div class ="slds-p-right_small slds-m-bottom_xx-small slds-show_inline-block slds-size_12-of-12 slds-medium-size_6-of-12">
+      <lightning-combobox 
+      name="Status" label="Statut Rétention" value={value}  placeholder="" options={options} onchange={handleChange} required></lightning-combobox>  
+    </div>
+    <div class="slds-p-right_small slds-m-bottom_xx-small slds-show_inline-block slds-size_12-of-12 slds-medium-size_6-of-12">
+  <template if:true={dossiercompletcond}>
+        <div>
+          <lightning-combobox name="dossiercomplet" label="Dossier complet" onchange={handleChangedossier} value={value} placeholder="" options={optionsdossier}
+           required></lightning-combobox>
+        </div>
+      </template>
+</div>
+  <template if:true={displaydossiercomplet}>
+  <div>
+    <lightning-input type="text" label="Motif"></lightning-input>
+</div>
+</template>
+<br />
+    <div if:true={retenuFlag}>
+      <c-inwi-b2-c_-otp-service record-id={subscriptionid} message={message} numeromdn={numeromdn} resiliation={resiliation}  requestresilid={idrequesttoret} onoptvalidation={getotpfromchild}>
+
+      </c-inwi-b2-c_-otp-service>
+     </div>
+
+    <br />
+
+   
+    <div class="slds-grid slds-wrap slds-grid_align-end omniscript-button-position">
+
+      <lightning-button style="margin:6px;" variant="brand" label="Précédent" title="Précédent" onclick={gotopreviousStep}
+      class=""></lightning-button>
+      
+      <div if:false={showapply}>
+        <lightning-button variant="brand" label="Terminer" title="Terminer" 
+        onclick={gotonextStep} style="float:right; margin:6px;" class="">
+        </lightning-button>
+      </div>
+        <div if:true={showapply}>
+          <lightning-button variant="brand" label="Appliquer l'offre" title="Apply" 
+          onclick={handleNext} style="float:right; margin:6px;" class="">
+          </lightning-button>
+        </div>
+             
+    </div>
+  
+</template>

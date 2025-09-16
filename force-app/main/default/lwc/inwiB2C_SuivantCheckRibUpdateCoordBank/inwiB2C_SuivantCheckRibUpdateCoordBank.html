@@ -1,0 +1,108 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 03-10-2022
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        <template if:true={checkmode}>
+    
+       <!--      <lightning-input style="padding: 10px;" class="slds-col slds-size_1-of-1 elementMargin2"
+            label="Code de la banque" type="text" name="code" maxlength="3" minlength="3"  data-theid="code"  required
+            value={codebank} pattern="[0-9][0-9][0-9]" onchange={handleChangeInput}
+            message-when-pattern-mismatch="Code banque doit contenir que 3 Chiffres"></lightning-input>
+        
+            <lightning-input disabled="true" type="text" style="padding: 10px;"
+            class="slds-col slds-size_1-of-1 elementMargin2" label="Nom de la banque" name="nombanque"
+            data-theid="nombanque" value={nombanque} onchange={handleChangeInput}></lightning-input>
+       -->
+            <div class="slds-grid slds-wrap slds-grid_vertical-stretch">
+              
+
+                <lightning-input style="padding: 10px;" class="slds-col slds-size_1-of-2 elementMargin2"
+                    label="Code de la banque" type="text" name="codebank" data-theid="codebank" required
+                    value={codebank} pattern="[0-9][0-9][0-9]" maxlength="3" minlength="3" onchange={handleChangeInput}
+                    message-when-pattern-mismatch="Code banque doit contenir que 3 Chiffres"></lightning-input>
+
+                <lightning-input style="padding: 10px;" class="slds-col slds-size_1-of-2 elementMargin2"
+                    label="Code guichet" pattern="[0-9][0-9][0-9]" type="text" name="codeguichet"
+                    data-theid="codeguichet" required value={codeguichet} maxlength="3" minlength="3" onchange={handleChangeInput}
+                    message-when-pattern-mismatch="Code guichet doit contenir que 3 Chiffres"></lightning-input>
+
+                <lightning-input style="padding: 10px;" class="slds-col slds-size_1-of-2 elementMargin2"
+                    label="Numéro de compte" type="text" name="comptebanquenum" data-theid="comptebanquenum" required
+                    value={comptebanquenum}  maxlength="16" minlength="16" onchange={handleChangeInput}></lightning-input>
+
+                <lightning-input style="padding: 10px;" class="slds-col slds-size_1-of-2 elementMargin2" label="Clé"
+                    name="clecompte" pattern="[0-9][0-9]" type="number" maxlength="2" minlength="2" data-theid="clecompte" required
+                    value={clecompte} onchange={handleChangeInput}
+                    message-when-pattern-mismatch="La clé  doit contenir que 2 Chiffres">
+                </lightning-input>
+
+                <lightning-input disabled="true" type="text" style="padding: 10px;"
+                    class="slds-col slds-size_1-of-2 elementMargin2" label="Nom de la banque" name="nombanque"
+                    data-theid="nombanque" value={nombanque} onchange={handleChangeInput}></lightning-input>
+
+                <lightning-input style="padding: 10px;" class="slds-col slds-size_1-of-2 elementMargin2"
+                    label="Nom de l'agence" name="nomagence" data-theid="nomagence"  value={nomagence}
+                    onchange={handleChangeInput}></lightning-input>
+            </div>
+        
+        
+
+
+
+            <br>
+            <span style="border-bottom: 1px solid rgb(217, 219, 221); width: 100%; display:block"></span>
+            <br>
+            <template if:true={haserror}>
+                <p style="color: red">{errormessage}</p>
+                </template>
+                <div class="slds-grid slds-wrap slds-grid_vertical-stretch">
+                <lightning-button variant="brand" label="Precedent" title="Precedent" 
+                onclick={prevStep} style="float:right" class="slds-col slds-size_1-of-2 elementMargin2">
+            </lightning-button>
+           <br>
+                <lightning-button variant="brand" label="Suivant" title="Soumettre" 
+                    onclick={gotonextStep} style="float:right" class="slds-col slds-size_1-of-2 elementMargin2">
+                </lightning-button>
+            </div>
+            <br>
+    
+        </template>
+
+        <template if:false={checkmode}>
+            <br>
+            <span style="border-bottom: 1px solid rgb(217, 219, 221); width: 100%; display:block"></span>
+            <br>
+    
+            <div class="slds-grid slds-wrap slds-grid_vertical-stretch">
+                
+            <!--   <lightning-button variant="brand" label="testt" title="testt"  
+                onclick={showVars} class="slds-m-left_x-small" style=" position: absolute; right: 190px; top: 5px;">
+            </lightning-button>  
+    --> 
+              
+                <lightning-button variant="brand" label="Suivant"  
+                    onclick={nextStep} style="float:right" class="slds-col slds-size_1-of-2 elementMargin2" >
+                </lightning-button>
+    
+            </div>
+    
+            </template>
+    
+    </template>

@@ -1,0 +1,208 @@
+<template>
+  <lightning-card title="Accès IAM">
+    <div class="slds-p-around_medium">
+      <!-- <lightning-radio-group
+        label="Avez-vous de la Fibre IAM ?"
+        name="iamAccess"
+        options={iamOptions}
+        value={hasIAMAccess}
+        type="radio"
+        onchange={handleIAMAccessChange}
+      >
+      </lightning-radio-group> -->
+
+      <template if:true={ShowInputND}>
+        <lightning-input
+          label="ND"
+          name="ND"
+          value={ND}
+          onchange={handleInputChange}
+          maxlength="10"  minlength="10"  pattern="^(05|08)[0-9]{0,9}$" 
+          message-when-pattern-mismatch="numero de designation doit être au format 05XXXXXXXXX ou 08XXXXXXXXX">
+        >
+        </lightning-input>
+
+        <lightning-input
+          label="Login"
+          name="Login"
+          value={Login}
+          onchange={handleInputChange}
+        >
+        </lightning-input>
+      </template>
+    </div>
+
+    <template if:true={showMap}>
+     
+        <div class="space">
+
+      <div class="slds-p-around-medium input-wrapper">
+        
+          <div class="coordinates">
+        <lightning-input
+          class="gps"
+          type="text"
+          label="Latitude"
+          value={latitudeGPS}
+          disabled
+        >
+        </lightning-input>
+
+        <lightning-input
+          class="gps"
+          type="text"
+          label="Longitude"
+          value={longitudeGPS}
+          disabled
+        >
+        </lightning-input>
+      </div>
+      </div>
+      <br />
+      <div class="button-container">
+        <lightning-button
+          class="btn-eligible"
+          variant="brand"
+          label="Tester mon éligibilité"
+          onclick={checkEligibilityFTTH}
+          if:true={isSearchDone}
+        ></lightning-button>
+        
+      </div>
+      <br>
+      <iframe src="/apex/inwiB2C_VfEligibilityFTTHAccessIAM"
+      style="width: 100%; height: 800px; border: none"></iframe>
+    </div>
+    <!-- ne pas afficher les champs de saisie avant le map -->
+        <template  if:true={isServiceAccIdCreated} >
+        <lightning-Input
+          class="combo"
+          type="search"
+          placeholder="Entrer une province/ville"
+          label="Province/ville"
+          value={searchProvince}
+          onclick={showProvinceOptionsHandler}
+          onchange={InitSearchProvince}
+        ></lightning-Input>
+
+        <template if:true={showProvinceOptions}>
+          <div class="dropdown-container">
+            <ul
+              style="max-width: 100%; margin-left: 20px"
+              class="slds-listbox slds-listbox_vertical slds-m-top_small"
+            >
+              <template
+                for:each={filteredProvinceVilleOptions}
+                for:item="option"
+              >
+                <li key={option.value}>
+                  <button
+                    class="dropdown-option"
+                    onclick={ProvinceOptionSelect}
+                    data-value={option.value}
+                  >
+                    {option.label}
+                  </button>
+                </li>
+              </template>
+            </ul>
+          </div>
+        </template>
+
+        <lightning-Input
+          class="combo"
+          type="search"
+          placeholder="Entrer votre quartier"
+          label="Quartier"
+          value={searchQuartier}
+          onclick={showQuartierOptionsHandler}
+          onchange={InitSearchQuartier}
+          disabled={quartierLoading}
+        ></lightning-Input>
+
+        <template if:true={showOptions}>
+          <div class="dropdown-container">
+            <ul
+              style="max-width: 100%; margin-left: 20px"
+              class="slds-listbox slds-listbox_vertical slds-m-top_small"
+            >
+              <template for:each={filteredQuartiersOptions} for:item="option">
+                <li key={option.value}>
+                  <button
+                    class="dropdown-option"
+                    onclick={QuartierOptionSelect}
+                    data-value={option.value}
+                  >
+                    {option.label}
+                  </button>
+                </li>
+              </template>
+            </ul>
+          </div>
+        </template>
+
+        <lightning-Input
+          class="combo"
+          type="search"
+          placeholder="Entrer votre voie"
+          label="Voie"
+          value={searchVoie}
+          onclick={showVoieOptionsHandler}
+          onchange={InitSearchVoie}
+          disabled={voieLoading}
+        ></lightning-Input>
+
+        <template if:true={showVoieOptions}>
+          <div class="dropdown-container">
+            <ul
+              style="max-width: 100%; margin-left: 20px"
+              class="slds-listbox slds-listbox_vertical slds-m-top_small"
+            >
+              <template for:each={filteredVoieOptions} for:item="option">
+                <li key={option.value}>
+                  <button
+                    class="dropdown-option"
+                    onclick={VoieOptionSelect}
+                    data-value={option.value}
+                  >
+                    {option.label}
+                  </button>
+                </li>
+              </template>
+            </ul>
+          </div>
+        </template>
+
+        <lightning-input
+          class="combo"
+          type="text"
+          label="Numéro dans la voie"
+          placeholder="Entrer votre numéro dans la voie "
+          value={numeroVoieValue}
+          onchange={handleNumVoieChange}
+          disabled={NumVoieLoading}
+          maxlength="10"
+        >
+        </lightning-input>
+        </template>
+        <br />
+        <lightning-button
+          class="slds-float_right"
+          variant="brand"
+          label="Suivant"
+          onclick={redirectAcquisition}
+          if:true={isServiceAccIdCreated}
+          
+        >
+        </lightning-button>
+
+        <!-- ne pas afficher les champs de saisie avant le map -->
+
+    </template >
+     <div class="slds-grid slds-grid_align-end">
+     
+    <lightning-button label="Valider" variant="brand" onclick={CheckEligiblite} class="slds-float_right"
+        style="padding: 10px; margin-top: 40px;"  if:true={ShowInputND}></lightning-button>
+</div>
+  </lightning-card>
+</template>

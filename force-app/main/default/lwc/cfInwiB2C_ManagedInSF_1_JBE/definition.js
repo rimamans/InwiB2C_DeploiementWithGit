@@ -1,0 +1,3 @@
+let definition = 
+                {"Cards":["InwiB2C_IsManagedInSF"],"GlobalKey__c":"InwiB2C_ManagedInSF/1/JBE/1626444007353","componentName":"cfInwiB2C_ManagedInSF_1_JBE","dataSource":{"type":null},"enableLwc":true,"lwc":{"DeveloperName":"cardCanvas1x","Id":"0Rb4K000000kQXbSAM","MasterLabel":"cardCanvas1x","NamespacePrefix":"vlocity_cmt","name":"cardCanvas1x"},"previewType":"designTime","repeatCards":false,"workspace":["InwiB2C_IsManagedInSF/JBE/1/1626444110131"]}; 
+            export default definition

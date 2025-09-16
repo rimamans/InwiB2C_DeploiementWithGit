@@ -1,0 +1,3 @@
+let definition = 
+                {"Cards":[],"dataSource":{"type":null},"enableLwc":true,"repeatCards":false,"lwc":{"MasterLabel":"cardCanvas1x","DeveloperName":"cardCanvas1x","Id":"0Rb4K000000kQXbSAM","name":"cardCanvas1x","NamespacePrefix":"vlocity_cmt"},"previewType":"designTime","componentName":"cfInwiB2C_Wakil_Souscription_Standard_1_EST","workspace":["Wakil_Souscription_Satandard/EST/1/1736953926685"],"GlobalKey__c":"InwiB2C_Wakil_Souscription_Standard/1/EST/1736953670961"}; 
+            export default definition

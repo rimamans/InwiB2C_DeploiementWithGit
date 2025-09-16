@@ -1,0 +1,10 @@
+.wraperClass{
+    border: 1px solid #5A245A;
+}
+
+
+
+.slds-table th { 
+    background-color: purple;
+    color: white;
+    }

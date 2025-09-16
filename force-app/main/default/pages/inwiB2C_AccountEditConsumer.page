@@ -1,0 +1,7 @@
+<apex:page >
+    <br/><br/>
+    <style type="text/css">
+        p { font-weight: bold; color: #FF0000; font-size: 24px; text-align: center}
+    </style>
+    <p>La modification de la fiche doit être faite via le parcours disponible sur la vue 360°</p>
+</apex:page>

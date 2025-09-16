@@ -1,0 +1,42 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 03-14-2025
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+    <template if:true={DisplayD2D}>
+        <lightning-input style="padding: 10px;" type="text" label="Nom de la plaque" value={plaque}
+        name="plaque"  disabled
+        class="slds-col slds-size_1-of-1 elementMargin2" >
+        </lightning-input>
+    </template>
+   
+    <template if:true={DisplayD2D}>
+        <lightning-input style="padding: 10px;" type="text" label="Adresse d'installation" value={addressinstallation}
+        name="addressinstallation"  disabled
+        class="slds-col slds-size_1-of-1 elementMargin2" >
+        </lightning-input>
+    </template>
+
+    <!-- info site cas vula -->
+    
+        <div class="slds-grid slds-wrap">
+            <lightning-input style="padding: 10px;" type="text" label="Type d'access internet" value={typeaccess}
+            name="typeaccess"  disabled
+            class="slds-col slds-size_1-of-1 elementMargin2" >
+            </lightning-input>
+            <template if:true={isInwi}>
+                <lightning-input style="padding: 10px;" type="text" label="Statut de la ligne" value={statutligne}
+                name="statutLigne"  disabled
+                class="slds-col slds-size_1-of-1 elementMargin2" >
+                </lightning-input>
+            </template>
+            <lightning-input label="Portabilite" class="slds-col slds-size_1-of-1 elementMargin2" value={portability} disabled style="padding: 10px;">
+            </lightning-input>
+        </div>
+        <div style="position: relative;padding:20px;">
+            <lightning-button label="Suivant" variant="brand" onclick={updateAttributesSF} class="slds-float_right"    style=" position: absolute; right: 10px; "></lightning-button>
+        </div>
+</template>

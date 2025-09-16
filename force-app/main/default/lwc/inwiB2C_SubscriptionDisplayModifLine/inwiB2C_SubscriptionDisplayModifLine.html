@@ -1,0 +1,119 @@
+<template>
+    <div class="slds-p-bottom--small">
+        <div class="slds-m-bottom_xx-large overflowVisible ">
+            Souscriptions
+            <template if:true={allsubscriptions} > 
+                <div class="wraperClass ">
+
+                    <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered">
+                        <thead>
+                          <tr class="slds-line-height_reset">
+                            <th class="" scope="col">
+                                <div class="slds-truncate" title="radios"></div>
+                              </th>  
+                            <th class="" scope="col">
+                              <div class="slds-truncate" title="MDN">MDN</div>
+                            </th>
+                            <th class="" scope="col">
+                              <div class="slds-truncate" title="Offre">Offre</div>
+                            </th>
+                            <th class="" scope="col">
+                              <div class="slds-truncate" title="Close Date">Statut</div>
+                            </th>
+                            <th class="" scope="col">
+                              <div class="slds-truncate" title="Stage">Date d’activation</div>
+                            </th>
+                            <th class="" scope="col">
+                              <div class="slds-truncate" title="Confidence">Compte Facturation</div>
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        <template for:each={allsubscriptions} for:item="subsc" >
+                            <tr key ={subsc.MDN} >
+                                <td><input type="radio" name="SubscriptionsRecords" onclick={handleSelectedSubscription}
+                                     id = {subsc.MDN} 
+                                     
+                                     data-idsub={subsc.IdSubscription} 
+
+                                     data-personcontacname={subsc.PersonContactName}
+                                     data-personcontacid={subsc.PersonContactID}
+                                     data-idprofileoffre={subsc.IdProfileOffre}
+                                     data-selectedsubstatus={subsc.Status}
+                                     data-profile={subsc.profile}
+                                     
+                                     data-accountnumber={subsc.AccountNumber} 
+                                     data-mdn={subsc.MDN} /></td>
+                                <td>{subsc.MDN}</td>
+                                <td>{subsc.Offre}</td>
+                                <td>{subsc.Status}</td>
+                                <td>{subsc.DateDeActivation}</td>
+                                <td>{subsc.AccountNumber}</td>
+                            </tr>
+                        </template>
+                      
+                        </tbody>
+                      </table>
+
+                </div>
+            </template>
+            <template if:false={numberofsubscriptions}  >   
+                <div  class="nocard slds-col slds-size--1-of-1 slds-text-align_center ">
+                    Ce compte n'a pas de souscriptions
+                </div>
+        </template>
+        <!--
+            <br />
+            Contacts
+            <template if:true={allcontacts} > 
+                <div class="wraperClass ">
+                    <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered">
+                        <thead>
+                          <tr class="slds-line-height_reset">
+                            <th class="" scope="col">
+                                <div class="slds-truncate" title="radios"></div>
+                              </th>  
+                            <th class="" scope="col">
+                              <div class="slds-truncate" title="Nom">Nom</div>
+                            </th>
+                            <th class="" scope="col">
+                              <div class="slds-truncate" title="Prénom">Prénom</div>
+                            </th>
+                            <th class="" scope="col">
+                              <div class="slds-truncate" title="CIN">CIN</div>
+                            </th>
+                            <th class="" scope="col">
+                              <div class="slds-truncate" title="Adresse">Adresse</div>
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        <template for:each={allcontacts} for:item="contact" >
+                            <tr key ={contact.MDN} >
+                                <td><input type="radio" name="ContactsRecords" onclick={handleSelectedContact} 
+                                    id ={contact.CIN} 
+                                    data-idcont={contact.ContactId} data-firstname={contact.FirstName}
+                                       data-lastname={contact.LastName}
+                                    /></td>
+                                <td>{contact.LastName}</td>
+                                <td>{contact.FirstName}</td>
+                                <td>{contact.CIN}</td>
+                                <td>{contact.Adresse}</td>
+                            </tr>
+                        </template>
+                      
+                        </tbody>
+                      </table>
+                </div>
+            </template>
+
+            <template if:false={sumofcontacts}  >   
+                <div  class="nocard slds-col slds-size--1-of-1 slds-text-align_center ">
+                    Ce compte n'a pas de contacts
+                </div>
+        </template>
+
+         -->
+        </div>
+    </div>
+</template>

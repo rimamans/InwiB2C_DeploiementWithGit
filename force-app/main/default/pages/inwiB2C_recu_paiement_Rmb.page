@@ -1,0 +1,78 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 12-23-2022
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<apex:page sidebar="false" renderAs="pdf" controller="InwiB2C_FormRemb" showHeader="false" applyBodyTag="false">
+
+    <head>
+        <style>
+            body {
+                font-family: 'Arial Unicode MS';
+                font-size: 12px;
+            }
+        
+
+            .wrap-it{
+                white-space: break-word;
+                word-break: break-all;
+            }
+
+            @page: first {
+                size: A4;
+                margin-top: 0px margin-right:0px;
+                margin-left: 0px;
+                margin-bottom: 0cm;
+            }
+
+            @page {
+                size: A4;
+                margin-top: 0px;
+                margin-right: 0px;
+                margin-left: 0px;
+                margin-bottom: 0cm;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div style="page-break-after:avoid ; height: 1100px ">
+            <img style="width:100%;" src="{!$Resource.inwiB2C_recu_paiement_Rmb}" />
+            <!--  -->
+            	<p style="position: absolute;top:140px;left: 250px;font-size: 14px">{!IF(contains(keys,'today'),output['today'], '')}</p>
+                <p style="position: absolute;top:162px;left: 250px;font-size: 14px">{!IF(contains(keys,'codedetransaction'),output['codedetransaction'], '')}</p>
+                <p style="position: absolute;top:210px;left: 220px;font-size: 14px">{!IF(contains(keys,'LastName'),output['LastName'], '')}</p> 
+                <p style="position: absolute;top:245px;left: 220px;font-size: 14px">{!IF(contains(keys,'FirstName'),output['FirstName'], '')}</p>
+                <p style="position: absolute;top:265px;left: 220px;font-size: 14px">{!IF(contains(keys,'cin'),output['cin'], '')}</p>
+                <p class="wrap-it" style="position: absolute;top:295px;left: 220px;font-size: 14px; ">{!IF(contains(keys,'Adressclient'),output['Adressclient'], '')}</p>
+                 <!-- <p style="position: absolute;top:310px;left: 220px;font-size: 14px">{!IF(contains(keys,'ville'),output['ville'], '')}</p>
+                <p style="position: absolute;top:330px;left: 220px;font-size: 14px">{!IF(contains(keys,'Quartier'),output['ville'], '')}</p>  -->
+            
+            
+                <p style="position: absolute;top:140px;left: 600px;font-size: 14px">{!IF(contains(keys,'pdv'),output['pdv'], '')}</p>
+                <p style="position: absolute;top:165px;left: 580px;font-size: 14px">{!IF(contains(keys,'User'),output['User'], '')}</p>
+            
+                <p style="position: absolute;top:205px;left: 600px;font-size: 14px">{!IF(contains(keys,'BillingAccount'),output['BillingAccount'], '')}</p>
+                <p style="position: absolute;top:225px;left: 600px;font-size: 14px">{!IF(contains(keys,'ModePaiement'),output['ModePaiement'], '')}</p>
+                <p style="position: absolute;top:245px;left: 600px;font-size: 14px">{!IF(contains(keys,'TotalAmount'),output['TotalAmount'], '')} Dhs</p>
+            
+            	
+                
+            
+                <p style="position: absolute;top:735px;left: 225px;font-size: 14px">{!IF(contains(keys,'pdv'),output['pdv'], '')}</p>
+                <p style="position: absolute;top:760px;left: 225px;font-size: 14px">{!IF(contains(keys,'User'),output['User'], '')}</p>
+                <p style="position: absolute;top:783px;left: 225px;font-size: 14px">{!IF(contains(keys,'today'),output['today'], '')}</p>
+                <p style="position: absolute;top:805px;left: 241px;font-size: 14px">{!IF(contains(keys,'codedetransaction'),output['codedetransaction'], '')}</p>
+                <p style="position: absolute;top:830px;left: 241px;font-size: 14px">{!IF(contains(keys,'codedetransaction'),output['codedetransaction'], '')}</p>
+                
+    
+               
+
+        </div>
+     
+    </body>
+
+
+</apex:page>

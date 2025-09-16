@@ -1,0 +1,3 @@
+let definition = 
+                {"Cards":["All compte Facturation"],"GlobalKey__c":"InwiB2C_Flayout_Compte_Facturation/1/OKI/1603230254816","componentName":"cfInwiB2C_Flayout_Compte_Facturation","dataSource":{"type":null},"enableLwc":true,"lwc":{"DeveloperName":"cardCanvas1x","Id":"0Rb4K000000kQXbSAM","MasterLabel":"cardCanvas1x","name":"cardCanvas1x"},"previewType":"runTime","repeatCards":false,"workspace":["All compte Facturation/OLP/1/1603230292053"]}; 
+            export default definition

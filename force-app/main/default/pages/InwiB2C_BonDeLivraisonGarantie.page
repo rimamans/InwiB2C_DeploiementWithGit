@@ -1,0 +1,67 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 08-28-2024
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<apex:page sidebar="false" renderAs="pdf" controller="InwiB2C_DocAdslController" showHeader="false" applyBodyTag="false">
+
+    <head>
+        <style>
+            body {
+                font-family: 'Arial Unicode MS';
+                font-size: 12px;
+            }
+
+            @page: first {
+                size: A4;
+                margin-top: 0px margin-right:0px;
+                margin-left: 0px;
+                margin-bottom: 0cm;
+            }
+
+            @page {
+                size: A4;
+                margin-top: 0px;
+                margin-right: 0px;
+                margin-left: 0px;
+                margin-bottom: 0cm;
+            }
+        </style>
+
+    </head>
+
+    <body>
+    
+        <apex:repeat value="{!loopList}" var="loopItem" id="theRepeat">
+            <apex:variable value="{!IF(loopItem > 1,7, 0)}" var="added" />
+                
+            <div style="page-break-after:auto;">         
+            <!--<img style="width:100%;" src="{!$Resource.inwiB2C_BonDeLivraisonGarantie}" />-->
+            <img style="width:100%;" src="{!$Resource.inwiB2C_BonDeLivraisonGarantieCompresser}" />
+
+                <div style="position: absolute;top: {! 143 + (loopItem *1117)}px;left: 17%;max-width: 450px;">{!IF(contains(keys,'CreateDate'),output['CreateDate'], '')}</div>
+                <div style="position: absolute;top: {! 167  + (loopItem *1117)}px;left: 30%;max-width: 450px;">{!IF(contains(keys,'NumBonLivraison'),output['NumBonLivraison'], '')}</div>
+                <div style="position: absolute;top: {! 250 + (loopItem *1116.5)}px;left: 35%;">{!IF(contains(keys,'FullName'),output['FullName'], '')}</div>
+                <div style="position: absolute;top: {! 188 + (loopItem *1116) + added}px;left: 25%;">{!IF(contains(keys,'AccountNumber'),output['AccountNumber'], '')}</div>
+                <div style="position: absolute;top: {! 210 + (loopItem *1116) + added}px;left: 25%;">{!IF(contains(keys,'OrderNumber'),output['OrderNumber'], '')}</div>
+                <div style="position: absolute;top: {! 280 + (loopItem *1116) + added}px;left: 19%;">{!IF(contains(keys,'AdressBondeLivraisonGrantie'),output['AdressBondeLivraisonGrantie'], '')}</div>
+                <div style="position: absolute;top: {! 326+ (loopItem *1116) + added}px;left: 29%;">{!IF(contains(keys,'MobilePhone'),output['MobilePhone'], '')}</div>
+                <div style="position: absolute;top: {! 349 + (loopItem *1116) + added}px;left: 18%;">{!IF(contains(keys,'AdresseMail'),output['AdresseMail'], '')}</div>
+                <div style="position: absolute;top: {! 404 + (loopItem *1116) + added}px;left: 8.5%;">{!IF(AND(contains(keys,'StatutDegroupage'), output['StatutDegroupage'] == 'LA'),'X', '')}</div>
+                <div style="position: absolute;top: {! 403 + (loopItem *1116) + added}px;left: 27.7%;">{!IF(AND(contains(keys,'StatutDegroupage'), output['StatutDegroupage'] == 'LI'),'X', '')}</div>
+                <!-- <div style="position: absolute;top: {! 405 + (loopItem *1116)}px;left: 70%;max-width: 450px;">{!IF(contains(keys,'DateInstallation'),output['DateInstallation'], '')}</div> -->
+                <div style="position: absolute;top: {! 495 + (loopItem *1116) + added}px;left: 13%;">{!IF(contains(keys,'Offre'),output['Offre'], '')}</div>
+                <div style="position: absolute;top: {! 495 + (loopItem *1116) + added}px;left: 60%;">{!IF(contains(keys,'Description'),output['Description'], 'Abonnement ADSL')}</div>
+                <div style="position: absolute;top: {! 595 + (loopItem *1116) + added}px;left: 12%;">{!IF(contains(keys,'Modele'),output['Modele'], '')}</div>
+                <div style="position: absolute;top: {! 595 + (loopItem *1116) + added}px;left: 50%;">{!IF(contains(keys,'NumIdentification'),output['NumIdentification'], '')}</div>
+                <div style="position: absolute;top: {! 670 + (loopItem *1116.5)}px;left: 45%;max-width: 450px;">{!IF(contains(keys,'CreateDate'),output['CreateDate'], '')}</div>
+
+            </div> 
+
+            </apex:repeat>
+    </body>
+
+
+</apex:page>

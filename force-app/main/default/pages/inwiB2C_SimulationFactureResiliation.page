@@ -1,0 +1,6 @@
+<apex:page sidebar="false" renderAs="pdf" showHeader="false" applyBodyTag="false">
+
+      <div style="page-break-after:always; height: 1122px">
+  
+  <img style="width:95%;" src="{!$Resource.SimulationFactureResiliation}" /></div>
+</apex:page>

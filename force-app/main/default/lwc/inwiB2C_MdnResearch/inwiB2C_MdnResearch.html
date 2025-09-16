@@ -1,0 +1,143 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 11-01-2024
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+    
+        <lightning-radio-group name="mdnChoiceradio" label="Option de numéro" options={mdnChoiceOptions} value={mdnChoiceAttributeValue}
+          type="radio" onchange={handleMdnChoiceChange}></lightning-radio-group>
+    
+        
+    
+
+
+
+    <template if:true={option2}>
+        <lightning-card variant="Narrow" title="Choix numéro" icon-name="utility:number_input">
+
+
+            <lightning-combobox name="progress" label="Type MDN" value={__mdnTypeValue} placeholder="Select MDN"
+                options={mdntyperecords} onchange={handleTypeMdnChange} disabled={enableTypeMdn}></lightning-combobox>
+
+
+            <template if:true={displayMDNChoice}>
+
+
+
+                <lightning-input type="text" label="Mdn filtre" value={mdnFilterAttributeValue}
+                    onchange={handleMdnFilterChange} class="slds-size_1-of-2"></lightning-input>
+
+                <br>
+
+                <lightning-button variant="brand" label="Recherche" title="recherche MDN" onclick={getMdnList}
+                    class="slds-m-left_x-large slds-m-top_x-large"></lightning-button>
+
+
+                <template if:true={records}>
+                    <lightning-combobox name="progress" label="Liste MDN" value={selectedmdn} placeholder="Select MDN"
+                        options={records} onchange={handleMdnSelection} class="slds-size_1-of-2"></lightning-combobox>
+
+                    <template if:true={__selectedmdnListItem}>
+                        <br>
+
+                        <lightning-button variant="brand" label="Sélectionner le MDN" title="Selection MDN"
+                            onclick={lockMDN} class="slds-m-left_x-large slds-m-top_x-large"></lightning-button>
+
+                    </template>
+
+
+                </template>
+
+            </template>
+
+            <template if:false={displayMDNChoice}>
+
+                <lightning-input type="text" label="MDN" value={mdnAttributeValue} disabled></lightning-input>
+
+
+            </template>
+
+
+
+
+        </lightning-card>
+    </template>
+
+    
+    <template if:true={option3}>
+        <template if:false={isLoading}>
+        <template if:true={isMdnGenerated}>
+            <lightning-card variant="Narrow" title="Choix numéro porté" icon-name="utility:number_input">
+    
+                <lightning-combobox name="operator" label="Choix opérateur" value={operatorAttributeValue}
+                    placeholder="Sélectionner un Opérateur" options={operatorOptions} onchange={handleOperatorChange}
+                    disabled={elligiblePortaInAttributeValue}></lightning-combobox>
+    
+                <lightning-input type="date" label='Date de portabilité' value={datePortaInAttributeValue}
+                    onchange={handleDatePortedChange} class="DateInput" disabled={elligiblePortaInAttributeValue}
+                    min={today}></lightning-input>
+    
+                
+                <lightning-input type="text" label='Numéro à porter' value={__mdnPortedValue}
+                    onchange={handleMdnPortedChange} class="MDNInput" disabled={elligiblePortaInAttributeValue}>
+                </lightning-input>
+    
+                <lightning-input type="text" label='RIO' value={rioAttributeValue} onchange={handleRioChange}
+                    class="RIOInput" disabled={displayRIO}></lightning-input>
+                    <br>
+                    <p>Le Code RIO ( Relevé Identité Opérateur) est votre identifiant unique propre à votre ligne. Il permet de vous identifier de manière sécurisée dans les démarches de portabilité.</p>
+                    <p>Vous pouvez obtenir votre Code RIO , à tout moment, en envoyant un SMS au 1234 ou en appelant le 220.</p>
+                    <br>
+                <template if:true={DisplayMdnProvisoire}>
+                 <lightning-input type="text" label='Numéro provisoire ' value={mdnAttributeValue}
+                        class="GeneratedMDNInput" disabled>
+                 </lightning-input>
+                </template>
+    
+                <br>
+    
+                <lightning-button variant="brand" label="Valider le MDN" title="Valider MDN" onclick={numberValidation}
+                    class="slds-m-left_x-large slds-m-top_x-large"></lightning-button>
+
+                <template if:false={isLoading}>
+                <lightning-button variant="brand" label="Valider RIO" title="Valider RIO" onclick={CheckRIO}
+                    disabled={displayRIO} class="slds-m-left_x-large slds-m-top_x-large"></lightning-button>
+                </template>
+            </lightning-card>
+        </template>
+        </template>
+    </template>
+
+    
+    <template if:true={option4}>
+        <lightning-card variant="Narrow" title="Choix numéro récupéré" icon-name="utility:number_input">
+
+            <template if:true={displayMDNChoice}>
+
+                <lightning-input type="text" label='Numéro à récupérer' value={__mdnRecoveredValue}
+                class="MDNRecoveredInput" onchange={handleMdnRecoveredChange} disabled={__isRecovered}>
+            </lightning-input>
+            <br>
+
+            <lightning-button variant="brand" label="Récupérer" title="Récupérer" onclick={RecoverMdn}
+                class="slds-m-left_x-large slds-m-top_x-large"></lightning-button>
+            </template>
+
+            <template if:false={displayMDNChoice}>
+
+                <lightning-input type="text" label="Numéro récupéré" value={__mdnRecoveredValue} disabled></lightning-input>
+
+
+            </template>
+
+        </lightning-card>
+    </template>
+
+
+
+
+
+</template>

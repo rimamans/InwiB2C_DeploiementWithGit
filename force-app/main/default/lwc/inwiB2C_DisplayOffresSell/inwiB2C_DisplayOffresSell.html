@@ -1,0 +1,363 @@
+<template>
+    <template if:false={isOffresCiblee}  >
+        <div  class="nocard-case slds-col slds-size--1-of-1 slds-text-align_center ">
+            Ce client n'a pas de offres Ciblee
+        </div>
+    </template>
+    <template if:true={isOffresCiblee} >
+        Les offres Ciblees
+        <div class="wrapperClassCiblee" >
+
+
+        <table  class="sty-table-case slds-table slds-table_bordered slds-table_fixed-layout warpertable">
+            <thead class="warpertablehead" >
+                <tr class="warpertableheadtr">
+                  <th  style="width:100px;" class="" scope="col">
+                      <div class="slds-truncate" title="L’offre">L’offre</div>
+                  </th>
+                  <th style="width:100px;"  class="" scope="col"> 
+                      <div class="slds-truncate" title="Argumentaire">Argumentaire</div>
+                  </th>
+                  <th style="width:80px;"  class="" scope="col"> 
+                      <div class="slds-truncate" title="Date de retour">Date de retour</div>
+                  </th>
+                  <th  style="width:50px;" class="" scope="col"> 
+                      <div class="slds-truncate" title="Points">Points</div>
+                  </th>
+                  <th style="width:80px;"  class="" scope="col">
+                      <div class="slds-truncate" title="Déjà proposée">Déjà proposée</div>
+                  </th>
+                  <th   class="retourclientth" scope="col">
+                    <div class="slds-truncate" title="Retour client">Retour client</div>
+                </th>
+                <th  class="motifth" scope="col">
+                    <div class="slds-truncate" title="Souscription concernée">Motif</div>
+                </th>
+                    
+                </tr>
+              </thead>
+                <tbody>
+                    
+                    <template  for:each={offresCibleeToShow} for:item="offre"  for:index="index"> 
+                        <template if:false={offre.hideoffre}>
+                        <tr  key={offre.Id}>
+                        <td class="slds-cell-wrap" > <div class="">{offre.Description}</div> </td>
+                        <td class="slds-cell-wrap" > <div class="">{offre.Argumentaire}</div> </td>
+                        <td class="slds-cell-wrap" > <div class="">{offre.dateModification}</div> </td>
+                        <td class="slds-cell-wrap" > <div class="">{offre.points}</div> </td>
+                        <td class="slds-cell-wrap" >  
+
+                                <lightning-input    data-idvalue={offre.MDN} 
+                                                    value={offre.isAlreadyProposed}
+                                                    id={index} 
+                                                    placeholder="Offre proposée"
+                                                    disabled=true 
+                                ></lightning-input>
+
+                            </td>
+
+                            <td class="slds-cell-wrap" > 
+                                <div class="wraperlightningcomboboxcib">
+
+                                <lightning-combobox id={offre.idRetourElementCible} 
+                                data-offreid={offre.Id} 
+                                data-description={offre.Description} 
+                                data-argumentaire={offre.Argumentaire} 
+                                data-datedebut={offre.DateDebut} 
+                                data-datefin={offre.DateFin} 
+                                data-idcampagne={offre.IdCampagne} 
+                                data-priorite={offre.Priorite} 
+                                data-points={offre.points} 
+            data-typeoffre={offre.typeoffre} 
+            data-date={offre.date} 
+
+                                                    data-customidrt={offre.Id} 
+                                                    data-mdn={offre.MDN} 
+                                                    value={offre.RetourClient}
+                                                    placeholder="Retour Client"
+                                                    options={RetourClient}
+                                                    disabled={offre.disableRetourClient} 
+                                                    onchange={handleRetourClientChange} >
+                                </lightning-combobox></div>
+
+                            </td>
+                            <td  class="slds-cell-wrap" >  
+                                <div class="wraperlightningcomboboxcib">
+  
+                                <lightning-combobox id={offre.Id} 
+                                data-description={offre.Description} 
+                                data-argumentaire={offre.Argumentaire} 
+                                data-datedebut={offre.DateDebut} 
+                                data-datefin={offre.DateFin} 
+                                data-idcampagne={offre.IdCampagne} 
+                                data-priorite={offre.Priorite} 
+                                data-points={offre.points} 
+                                data-date={offre.date} 
+
+                                                    data-offreid={offre.Id} 
+                                                    data-typeoffre={offre.typeoffre} 
+                                                    data-customidmt={offre.Id} 
+                                                    data-mdn={offre.MDN} 
+                                                    value={offre.Motif}
+                                                    placeholder="Motif"
+                                                    options={offre.MotifOptionsCiblee}
+                                                    disabled={offre.isDisabled} 
+                                                    onchange={handleMotifChange} >
+                                </lightning-combobox></div>
+                            </td>
+                            
+
+                        </tr>
+                    </template>
+                </template>
+                </tbody>
+              </table>
+        </div>
+    </template>
+        
+    <template if:false={isOffresEligible}  >
+        <div  class="nocard-case slds-col slds-size--1-of-1 slds-text-align_center ">
+            <br/>
+            <br/>    
+            Ce client n'a pas de ventes additionnelles 
+        </div>
+    </template>
+    <template if:true={isOffresEligible}  >
+        <br/>
+        <br/>
+        Les ventes additionnelles
+        <div class="wrapperClassEligible" >
+            <table  class="sty-table-case slds-table slds-table_bordered slds-table_fixed-layout warpertable">
+                <thead class="warpertablehead" >
+                    <tr class="warpertableheadtr">
+                          <th  style="width:100px;" class="" scope="col">
+                          <div class="slds-truncate" title="L’offre">L’offre</div>
+                      </th>
+                      <th style="width:100px;"  class="" scope="col"> 
+                          <div class="slds-truncate" title="Argumentaire">Argumentaire</div>
+                      </th>
+                      <th style="width:80px;"  class="" scope="col"> 
+                          <div class="slds-truncate" title="Date de retour">Date de retour</div>
+                      </th>
+                      <th  style="width:50px;" class="" scope="col"> 
+                          <div class="slds-truncate" title="Points">Points</div>
+                      </th>
+                      <th style="width:80px;"  class="" scope="col">
+                          <div class="slds-truncate" title="Déjà proposée">Déjà proposée</div>
+                      </th>
+                      <th   class="retourclientth" scope="col">
+                          <div class="slds-truncate" title="Retour client">Retour client</div>
+                      </th>
+                      <th  class="motifth" scope="col">
+                          <div class="slds-truncate" title="Souscription concernée">Motif</div>
+                      </th>
+                        
+                    </tr>
+                  </thead>
+                <tbody>
+                    <template for:each={offresEligibleToShow} for:item="offre" for:index="index">  
+                        <tr  key={offre.Id}>
+                        <td class="slds-cell-wrap" > <div class="">{offre.Description}</div> </td>
+                        <td class="slds-cell-wrap" > <div class="">{offre.Argumentaire}</div> </td>
+                        <td class="slds-cell-wrap" > <div class="">{offre.dateModification}</div> </td>
+                        <td class="slds-cell-wrap" > <div class="">{offre.points}</div> </td>
+
+                        <td class="slds-cell-wrap" >   
+                                <lightning-input  
+                                                    value={offre.isAlreadyProposed}
+                                                    id={index} 
+                                                    placeholder="Offre proposée"
+                                                    disabled=true 
+                                ></lightning-input>
+                            </td>
+
+                            <td class="slds-cell-wrap" > 
+                                <div class="wraperlightningcomboboxeli">
+                                <lightning-combobox id={offre.idRetourElementEligible} 
+                                tabindex="-1" 
+
+                                data-description={offre.Description} 
+                                data-argumentaire={offre.Argumentaire} 
+                                data-datedebut={offre.DateDebut} 
+                                data-datefin={offre.DateFin} 
+                                data-idcampagne={offre.IdCampagne} 
+                                data-priorite={offre.Priorite} 
+                                data-points={offre.points} 
+                                data-date={offre.date} 
+
+                                                    data-offreid={offre.Id} 
+                                                    data-customidrt={offre.Id} 
+                                                    data-typeoffre={offre.typeoffre} 
+                                                    value={offre.RetourClient}
+                                                    placeholder="Retour Client"
+                                                    options={RetourClient}
+                                                    disabled={offre.disableRetourClient} 
+                                                    onchange={handleRetourClientChange} >
+                                </lightning-combobox>
+                            </div>
+                            </td>
+                            
+                            <td  class="slds-cell-wrap" >    
+                                <div class="wraperlightningcomboboxeli">
+                                    <lightning-combobox id={offre.idMotifElementEligible} 
+                                tabindex="-1" 
+                                data-description={offre.Description} 
+                                data-argumentaire={offre.Argumentaire} 
+                                data-datedebut={offre.DateDebut} 
+                                data-datefin={offre.DateFin} 
+                                data-idcampagne={offre.IdCampagne} 
+                                data-priorite={offre.Priorite} 
+                                data-points={offre.points} 
+                                data-date={offre.date} 
+
+                                                    data-offreid={offre.Id} 
+                                                    data-customidmt={offre.Id} 
+                                                    data-typeoffre={offre.typeoffre} 
+                                                    value={offre.Motif}
+                                                    placeholder="Motif"
+                                                    options={offre.MotifOptionsEligible}
+                                                    disabled={offre.isDisabled} 
+                                                    onchange={handleMotifChange} >
+                                </lightning-combobox>
+                            </div>
+                        </td>
+                            
+
+                        </tr>
+                    </template>
+                </tbody>
+              </table>
+        </div>
+    </template>
+    
+
+
+
+    <template if:false={isOffresGeneric}  >
+        <div  class="nocard-case slds-col slds-size--1-of-1 slds-text-align_center ">
+            <br/>
+            <br/>    
+            Ce client n'a pas de offres Generique
+        </div>
+    </template>
+
+    <template if:true={isOffresGeneric}  >
+        <br/>
+        <br/>
+       Les offres generiques
+        <div class="wrapperClassGeneric" >
+            <table  class="sty-table-case slds-table slds-table_bordered slds-table_fixed-layout warpertable">
+                <thead class="warpertablehead" >
+                    <tr class="warpertableheadtr">
+                          <th  style="width:100px;" class="" scope="col">
+                          <div class="slds-truncate" title="L’offre">L’offre</div>
+                      </th>
+                      <th style="width:100px;"  class="" scope="col"> 
+                          <div class="slds-truncate" title="Argumentaire">Argumentaire</div>
+                      </th>
+                      <th style="width:80px;"  class="" scope="col"> 
+                          <div class="slds-truncate" title="Date de retour">Date de retour</div>
+                      </th>
+                      <th  style="width:50px;" class="" scope="col"> 
+                          <div class="slds-truncate" title="Points">Points</div>
+                      </th>
+                      <th style="width:80px;"  class="" scope="col">
+                          <div class="slds-truncate" title="Déjà proposée">Déjà proposée</div>
+                      </th>
+                      <th   class="retourclientth" scope="col">
+                        <div class="slds-truncate" title="Retour client">Retour client</div>
+                    </th>
+                    <th  class="motifth" scope="col">
+                        <div class="slds-truncate" title="Souscription concernée">Motif</div>
+                    </th>
+                    </tr>
+                  </thead>
+                <tbody>
+                    <template for:each={offresGenericToShow} for:item="offre" for:index="index">  
+                        <tr  key={offre.Id}>
+                        <td class="slds-cell-wrap" > <div class="">{offre.Description}</div> </td>
+                        <td class="slds-cell-wrap" > <div class="">{offre.Argumentaire}</div> </td>
+                        <td class="slds-cell-wrap" > <div class="">{offre.dateModification}</div> </td>
+                        <td class="slds-cell-wrap" > <div class="">{offre.points}</div> </td>
+
+                        <td class="slds-cell-wrap" >   
+                                <lightning-input  
+                                                    value={offre.isAlreadyProposed}
+                                                    id={index} 
+                                                    placeholder="Offre proposée"
+                                                    disabled=true 
+                                ></lightning-input>
+                            </td>
+
+                            <td class="slds-cell-wrap" > 
+                                <div class="wraperlightningcomboboxgen">
+
+                                <lightning-combobox id={offre.idRetourElementGeneric} 
+                                                    data-offreid={offre.Id} 
+                                                    data-customidrt={offre.Id} 
+                                                    tabindex="0" 
+
+                                                    
+                                                    data-description={offre.Description} 
+                                                    data-argumentaire={offre.Argumentaire} 
+                                                    data-datedebut={offre.DateDebut} 
+                                                    data-datefin={offre.DateFin} 
+                                                    data-idcampagne={offre.IdCampagne} 
+                                                    data-priorite={offre.Priorite} 
+                                                    data-points={offre.points} 
+                                                    data-date={offre.date} 
+
+                                                    data-typeoffre={offre.typeoffre} 
+                                                    value={offre.RetourClient}
+                                                    placeholder="Retour Client"
+                                                    options={RetourClient}
+                                                    disabled={offre.disableRetourClient} 
+                                                    onchange={handleRetourClientChange} >
+                                </lightning-combobox></div>
+                            </td>
+                            <td  class="slds-cell-wrap" > 
+                                <div class="wraperlightningcomboboxgen">
+   
+                                <lightning-combobox id={offre.idMotifElementGeneric} 
+                                                    data-offreid={offre.Id} 
+                                                    data-customidmt={offre.Id} 
+                                                    data-typeoffre={offre.typeoffre} 
+                                                    data-date={offre.date} 
+                                                    tabindex="0" 
+
+                                                    data-description={offre.Description} 
+                                                    data-argumentaire={offre.Argumentaire} 
+                                                    data-datedebut={offre.DateDebut} 
+                                                    data-datefin={offre.DateFin} 
+                                                    data-idcampagne={offre.IdCampagne} 
+                                                    data-priorite={offre.Priorite} 
+                                                    data-points={offre.points} 
+
+                                                    
+                                                    value={offre.Motif}
+                                                    placeholder="Motif"
+                                                    options={offre.MotifOptionsGeneric}
+                                                    disabled={offre.isDisabled} 
+                                                    onchange={handleMotifChange} >
+                                </lightning-combobox></div>
+                            </td>
+                            
+
+                        </tr>
+                    </template>
+                </tbody>
+              </table>
+        </div>
+    </template>
+
+
+
+    <br  />
+    <br  />
+    <lightning-button variant="brand" label="Sauvegarder" title="Sauvegarder" 
+    onclick={saveModifs} class="slds-m-right_x-small"  slot="actions"></lightning-button>
+
+
+
+
+</template>

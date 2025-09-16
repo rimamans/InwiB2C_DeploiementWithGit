@@ -1,0 +1,71 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 02-07-2023
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<apex:page sidebar="false" renderAs="pdf" controller="inwib2c_first_bill_controller" showHeader="false" applyBodyTag="false">
+
+    <head>
+        <style>
+            body {
+                font-family: 'Arial Unicode MS';
+                font-size: 12px;
+
+            }
+
+            @page {
+                size: A4;
+                margin-top: 0px;
+                margin-right: 0px;
+                margin-left: 0px;
+                margin-bottom: 0px;
+                width: 210mm;
+                height: 297mm;
+            }
+        </style>
+
+    </head>
+
+    <body  >
+        <apex:variable var="index" value="{!0}" />
+        <img style="width:97%; height: 95%" src="{!$Resource.inwib2c_ChangementSIM}" /> 
+
+        <apex:repeat value="{!data}" var="loopItem" id="theRepeat">  
+
+            <div style="page-break-after:auto;" >
+                <p style="position: absolute;top: {! (index * 1115) + 155}px;left: 60%;">{!IF(contains(keys,'clientname'),loopItem['clientname'], '')}</p>
+                <p style="position: absolute;top:{! (index * 1115) + 185}px;left: 60%;">{!IF(contains(keys,'address'),loopItem['address'], '')}</p>
+                <p style="position: absolute;top:{! (index * 1115) + 210}px;left: 60%;">{!IF(contains(keys,'region'),loopItem['region'], '')}</p>
+                <p style="position: absolute;top:{! (index * 1115) + 225}px;left: 60%;">{!IF(contains(keys,'ville'),loopItem['ville'], '')}</p>
+                <p style="position: absolute;top:{! (index * 1115) + 240}px;left: 60%;">{!IF(contains(keys,'pays'),loopItem['pays'], '')}</p>
+
+
+                <p style="position: absolute;top:{! (index * 1115) + 300}px;left: 30%;">{!IF(contains(keys,'gamme'),loopItem['gamme'], '')}</p>
+                <p style="position: absolute;top:{! (index * 1115) + 320}px;left: 30%;">{!IF(contains(keys,'numfacture'),loopItem['numfacture'], '')}</p>
+                <p style="position: absolute;top:{! (index * 1115) + 338}px;left: 30%;">{!IF(contains(keys,'activationdate'),loopItem['activationdate'], '')}</p>
+
+                <p style="position: absolute;top:{! (index * 1115) + 370}px;left: 30%;">{!IF(contains(keys,'num_cf'),loopItem['num_cf'], '')}</p>
+                <p style="position: absolute;top:{! (index * 1115) + 390}px;left: 30%;">{!IF(contains(keys,'offer'),loopItem['offer'], '')}</p>
+                <p style="position: absolute;top:{! (index * 1115) + 412}px;left: 30%;">{!IF(contains(keys,'numligne'),loopItem['numligne'], '')}</p>
+
+                 <p style="position: absolute;top:{! (index * 1115) + 510}px;right: 546px;"> Frais de changement de forfait</p>
+
+
+                <p style="position: absolute;top:{! (index * 1115) + 510}px;left: 90%;">{!IF(contains(keys,'montantHT'),loopItem['montantHT'], '')}</p>
+                <p style="position: absolute;top:{! (index * 1115) + 530}px;left: 90%;">{!IF(contains(keys,'timbre'),loopItem['timbre'], '')}</p>
+                <p style="position: absolute;top:{! (index * 1115) + 567}px;left: 90%;">{!IF(contains(keys,'totalttc'),loopItem['totalttc'], '')}</p>
+                <p style="position: absolute;top:{! (index * 1115) + 588}px;left: 90%;">{!IF(contains(keys,'montantTVA'),loopItem['montantTVA'], '')}</p>
+                <p style="position: absolute;top:{! (index * 1115) + 624}px;left: 90%;">{!IF(contains(keys,'totalttc'),loopItem['totalttc'], '')}</p>
+                <p style="position: absolute;top:{! (index * 1115) + 610}px;left: 90%;">{!IF(contains(keys,'timbre'),loopItem['timbre'], '')}</p>
+
+            </div>
+            <apex:variable var="index" value="{!index + 1}" /> 
+
+        </apex:repeat>
+
+    </body>
+
+
+</apex:page>

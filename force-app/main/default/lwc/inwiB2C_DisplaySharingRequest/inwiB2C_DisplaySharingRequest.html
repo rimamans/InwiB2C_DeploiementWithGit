@@ -1,0 +1,313 @@
+<template>
+    <div style="border-style: solid; border-color: #92107F; padding: 10px; border-radius: 6px;">
+
+
+        <div class="slds-grid">
+            <div class="slds-col slds-size_1-of-2">
+                <div class="slds-border_bottom">
+                    <lightning-input type="text" id="numPartage" label="N° Partage" value={__Numero_Partage} readonly="true"></lightning-input>
+                </div>
+            </div>&ensp;
+            <div class="slds-col slds-size_1-of-2">
+                <div class="slds-border_bottom">
+                    <lightning-input type="text" label="Numéro Attribut" id="ndAttribut" value={__Nd_Attribut} readonly="true"></lightning-input>
+                </div>
+            </div>
+        </div>
+
+        <div class="slds-grid">
+            <div class="slds-col slds-size_1-of-2">
+                <div class="slds-border_bottom">
+                    <lightning-input type="text" id="numContact" label="numero Contact" value={__NumeroContact} readonly="true"></lightning-input>
+                </div>
+            </div>&ensp;
+            <div class="slds-col slds-size_1-of-2">
+                <div class="slds-border_bottom">
+                    <lightning-input type="text" label="Numéro carte d'identité" id="NumCIN" value={__Nationalid} readonly="true"></lightning-input>
+                </div>
+            </div>
+        </div>
+
+        <div class="slds-grid">
+            <div class="slds-col slds-size_1-of-2">
+                <div class="slds-border_bottom">
+                    <lightning-input type="text" id="numVoie" label="Numéro de la voie" value={__Numero_Voie} readonly="true"></lightning-input>
+                </div>
+            </div>&ensp;
+            <div class="slds-col slds-size_1-of-2">
+                <div class="slds-border_bottom">
+                    <lightning-input type="text" label="Numéro désignation" id="NumDesignation" value={__NumeroDesignation} readonly="true"></lightning-input>
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="slds-grid">
+            <div class="slds-col slds-size_1-of-2">
+                <div class="slds-border_bottom">
+                    <label for="CompteLabel">Client</label>
+                    <br><lightning-formatted-url label={__AccountName} id="CompteLabel" value={urlCompte}  target="_blank" readonly="true"></lightning-formatted-url>
+                </div>
+            </div>&ensp;
+            <div class="slds-col slds-size_1-of-2">
+                <div class="slds-border_bottom">
+                    <label for="orderLabel">Commande</label><br>
+                    <lightning-formatted-url value={urlOrder} label={__OrderNumber} target="_blank" id="orderLabel" readonly="true"></lightning-formatted-url>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="slds-grid">
+            <div class="slds-col slds-size_1-of-2">
+                <div class="slds-border_bottom">
+                    <lightning-input type="text" id="Statut" label="Statut de la demande" value={statutLabel} readonly="true"></lightning-input>
+                </div>
+            </div>
+            &ensp;
+            <div class="slds-col slds-size_1-of-2"> 
+                <lightning-combobox data-id="MotifAnnValue" id="ann"  label="Motif d'annulation"
+                 options={motifAnnulationPicklist} value={__Motif_Annulation}    readonly={motifAnn} required={requiredMotifAnn}  ></lightning-combobox>
+            </div>
+        </div>
+
+
+        <div class="slds-grid">
+            <div class="slds-col slds-size_1-of-2">
+                <div class="slds-border_bottom">
+                    <lightning-input type="text" label="Prénom" id="Firstname"  value={__FirstName} readonly="true"></lightning-input>
+                </div>
+            </div>&ensp;
+            <div class="slds-col slds-size_1-of-2">
+                <div class="slds-border_bottom">
+                    <lightning-input type="text" label="Nom" id="LastName" value={__LastName} readonly="true"></lightning-input>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="slds-grid">
+            <div class="slds-col slds-size_1-of-2">
+                <div class="slds-border_bottom">
+                    <lightning-input type="text" label="Niveau du Signal" id="LevelSignal" value={__Level_Signal} readonly="true"></lightning-input>
+                </div>
+            </div>&ensp;
+            <div class="slds-col slds-size_1-of-2">
+                <div class="slds-border_bottom">
+                    <lightning-input type="text" id="Commune" label="Commune" value={__Commune} readonly="true"></lightning-input>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="slds-grid">
+            <div class="slds-col slds-size_1-of-2">
+                <div class="slds-border_bottom">
+                    <lightning-input type="text" id="InstallationCPE" label="Installation CPE" value={__Installation_CPE} readonly="true"></lightning-input>
+                </div>
+            </div>&ensp;
+            <div class="slds-col slds-size_1-of-2">
+                <div class="slds-border_bottom">
+                    <lightning-input type="text" label="Identifiant CPE" id="IdentifiantCPE" value={__Identifiant_CPE} readonly="true"></lightning-input>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="slds-grid">
+            <div class="slds-col slds-size_1-of-2">
+                <div class="slds-border_bottom">
+                    <lightning-input type="text" id="LineId" label="Id de ligne" value={__LineId} readonly="true"></lightning-input>
+                </div>
+            </div>&ensp;
+            <div class="slds-col slds-size_1-of-2">
+                <div class="slds-border_bottom">
+                    <lightning-input type="text" label="Login" id="Login" value={__Login} readonly="true"></lightning-input>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+        <div class="slds-grid">
+            <div class="slds-col slds-size_1-of-2">
+                <div class="slds-border_bottom">
+                    <lightning-input type="text" id="Motif" label="Motif" value={__Motif} readonly="true"></lightning-input>
+                </div>
+            </div>&ensp;
+            <div class="slds-col slds-size_1-of-2">
+                <div class="slds-border_bottom">
+                    <lightning-input type="text" label="Operateur commercial" id="operateurComm" value={__Operateur_Commercial} readonly="true"></lightning-input>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="slds-grid">
+            <div class="slds-col slds-size_1-of-2">
+                <div class="slds-border_bottom">
+                    <lightning-input type="text" id="Owner" label="Id Owner" value={__OwnerId} readonly="true"></lightning-input>
+                </div>
+            </div>&ensp;
+            <div class="slds-col slds-size_1-of-2">
+                <div class="slds-border_bottom">
+                    <lightning-input type="text" label="Portabilité" id="Portabilite" value={__Portabilite} readonly="true"></lightning-input>
+                </div>
+            </div>
+        </div>
+
+        <div class="slds-grid">
+            <div class="slds-col slds-size_1-of-2">
+                <div class="slds-border_bottom">
+                    <lightning-input type="text" id="Province" label="Province" value={__Province} readonly="true"></lightning-input>
+                </div>
+            </div>&ensp;
+            <div class="slds-col slds-size_1-of-2">
+                <div class="slds-border_bottom">
+                    <lightning-input type="text" label="Quartier" id="Quartier" value={__Quartier} readonly="true"></lightning-input>
+                </div>
+            </div>
+        </div>
+
+        <div class="slds-grid">
+            <div class="slds-col slds-size_1-of-2">
+                <div class="slds-border_bottom">
+                    <lightning-input type="text" id="rendezvous" label="rendezvous" value={__Rendezvous} readonly="true"></lightning-input>
+                </div>
+            </div>&ensp;
+            <div class="slds-col slds-size_1-of-2">
+                <div class="slds-border_bottom">
+                    <lightning-input type="text" label="Sigle" id="sigle" value={__SavPlus} readonly="true"></lightning-input>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="slds-grid">
+            <div class="slds-col slds-size_1-of-2">
+                <div class="slds-border_bottom">
+                    <lightning-input type="text" label="Sequence" id="Sequence" value={__Sequence} readonly="true"></lightning-input>
+                </div>
+            </div>&ensp;
+            <div class="slds-col slds-size_1-of-2">
+                <div class="slds-border_bottom">
+                    <lightning-input type="text" id="CompteurRecyclage" label="Compteur Recyclage" value={__Compteur_Recyclage} readonly="true"></lightning-input>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="slds-grid">
+            <div class="slds-col slds-size_1-of-2">
+                <div class="slds-border_bottom">
+                    <br><label for="siteLabel">Site</label><br><br>
+                    <!-- <lightning-input type="text" label="Site" id="nomSite" value={__nomSite} readonly="true"></lightning-input> -->
+                    <lightning-formatted-url value={urlSite} label={__nomSite} target="_blank" id="siteLabel" readonly="true"></lightning-formatted-url>
+                </div>
+            </div>&ensp;
+            <div class="slds-col slds-size_1-of-2">
+                <div class="slds-border_bottom">
+                    <lightning-input type="text" id="OperateurInfras" label="Operateur Infrastructure" value={__Operateur_Infrastructure} readonly="true"></lightning-input>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="slds-grid">
+            <div class="slds-col slds-size_1-of-2">
+                <div class="slds-border_bottom">
+                    <lightning-input type="text" label="Voie" id="Voie" value={__Voie} readonly="true"></lightning-input>
+                </div>
+            </div>&ensp;
+            <div class="slds-col slds-size_1-of-2">
+                <div class="slds-border_bottom">
+                    <lightning-input type="text" label="Vitesse" id="Vitesse" value={__Vitesse} readonly="true"></lightning-input>
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="slds-grid">
+            <div class="slds-col slds-size_1-of-2">
+                <div class="slds-border_bottom">
+                    <lightning-input type="text" label="Type d'operation" id="Type_d_operation" value={__Type_d_operation} readonly="true"></lightning-input>
+                </div>
+            </div>&ensp;
+            <div class="slds-col slds-size_1-of-2">
+                <div class="slds-border_bottom">
+                    <lightning-input type="text" label="Statut de la Ligne" id="StatutLigne" value={__Statut_Ligne} readonly="true"></lightning-input>
+                </div>
+            </div>
+        </div>
+
+        <div class="slds-grid">
+            <div class="slds-col slds-size_1-of-2">
+                <div class="slds-border_bottom">
+                    <lightning-input type="text" label="Type de partage" id="__Type_de_partage" value={__Type_de_partage} readonly="true"></lightning-input>
+                </div>
+            </div>&ensp;
+            <!--R-SL Ticket B-29934 19/06/2025 start-->
+            <div class="slds-col slds-size_1-of-2">
+                <div class="slds-border_bottom">
+                    <lightning-input type="text" label="Date de mise en service" id="__DateMiseEnService" value={__DateMiseEnService} readonly="true"></lightning-input>
+                </div>
+            </div>
+             <!--R-SL Ticket B-29934 19/06/2025 end-->
+            
+
+        </div>
+
+        <div class="slds-grid">
+            <div class="slds-col slds-size_1-of-2">
+                <div class="slds-border_bottom">
+                    <br><label for="createdByLabel">Créer par</label><br><br>
+                    <!-- <lightning-input type="text" label="Créer par" id="CreatedBy" value={__CreatedBy} readonly="true"></lightning-input> -->
+                    <lightning-formatted-url value={urlCreatedBy} label={__CreatedBy} target="_blank" id="createdByLabel" readonly="true"></lightning-formatted-url>
+                </div>
+            </div>&ensp;
+            <div class="slds-col slds-size_1-of-2">
+                <div class="slds-border_bottom">
+                    <br><label for="modifiedByLabel">Modifié par</label><br><br>
+                    <!-- <lightning-input type="text" label="Modifié par" id="LastModifiedBy" value={__LastModifiedBy} readonly="true"></lightning-input> -->
+                    <lightning-formatted-url value={urlModifiedBy} label={__LastModifiedBy} target="_blank" id="modifiedByLabel" readonly="true"></lightning-formatted-url>
+                </div>
+            </div>
+           
+        </div>
+        
+          <div class="slds-grid">
+            
+            <div class="slds-col slds-size_1-of-2">
+                <div class="slds-border_bottom"><br>
+                    <lightning-input type="text" label="Commentaire par" id="Commentaire" value={__Commentaire} readonly="true"></lightning-input>
+                </div>
+            </div>
+           
+            
+        </div>
+        
+
+    </div>
+
+    
+    <template if:false={isViewMode}> 
+        <template if:true={isLoading}>
+            <lightning-spinner 
+                alternative-text="Traitement en cours" 
+                size="small" 
+                class="slds-m-right_medium">
+            </lightning-spinner>
+        </template>
+        <lightning-button label="Valider" onclick={handleCancel} variant="neutral" class="slds-float_right" style="padding: 10px;" disabled={isLoading}></lightning-button>
+    </template>
+
+ <lightning-button variant="brand" label="Précédent" onclick={handlePrevious}  class="slds-float_right" style="padding: 10px;"></lightning-button>
+    
+</template>

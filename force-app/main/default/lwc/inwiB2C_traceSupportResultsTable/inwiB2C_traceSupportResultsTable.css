@@ -1,0 +1,28 @@
+/* Safe dropdown positioning */
+.slds-combobox_container {
+    position: relative;
+}
+
+.custom-dropdown {
+    position: absolute;
+    z-index: 10000;
+    background: white;
+    border: 1px solid #ccc;
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.custom-dropdown li {
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+.custom-dropdown li:hover {
+    background-color: #f3f3f3;
+}
+
+.forceCommunityThemeLayout, .comm-page-custom-css,
+:host {
+    overflow: visible !important;
+}

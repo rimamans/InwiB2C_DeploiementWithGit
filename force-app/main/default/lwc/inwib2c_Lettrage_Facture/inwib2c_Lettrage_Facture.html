@@ -1,0 +1,126 @@
+<template>
+    <div class="wraperClass">
+        <div style="margin-bottom: 30px">
+            <p><strong>Montant Paiement: </strong> {__montant}</p>
+            <p><strong>Montant Libre: </strong> {montantTotal}</p>
+            <p style="margin-top: 20px;"><strong>Total Versement: </strong> {totalVersement}</p>
+        </div>
+    </div>
+    <div class="wraperClass">
+        <table class="sty-table-case slds-table slds-table_bordered slds-table_fixed-layout">
+            <thead>
+                <tr class="">
+                    <th class="" scope="col" style="width: 4%;">
+                        
+                    </th>
+                    <th class="" scope="col" style="width: 4%;">
+                        #
+                    </th>
+                    <th class="" scope="col">
+                        N° Compte
+                    </th>
+                    <th class="" scope="col">
+                        N° Facture
+                    </th>
+                    <th class="" scope="col">
+                        Cycle Fact
+                    </th>
+                    <th class="" scope="col">
+                        Mois
+                    </th>
+                    <th class="" scope="col">
+                        Date d'échéance
+                    </th>
+                    <th class="" scope="col">
+                        Montant HT
+                    </th>
+                    <th class="" scope="col">
+                        Montant TTC
+                    </th>
+                    <th class="" scope="col">
+                        Montant Restant
+                    </th>
+                    <th class="" scope="col">
+                        Montant à Verser
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <template for:each={__data} for:item="item">
+                    <tr key={item.index}>
+                        <td class="slds-cell-wrap">
+                            <input type="checkbox" name={item.index}  value={selected}
+                                                onclick={handleSelectLigne} 
+                                                 />
+                        </td>
+                        <td class="slds-cell-wrap">
+                            {item.ligneNumber}
+                        </td>
+                        <td class="slds-cell-wrap">
+                            {item.billingAccountId}
+                        </td>
+                        <td class="slds-cell-wrap">
+                            {item.Id}
+                        </td>
+                        <td class="slds-cell-wrap">
+                            {item.cycle}
+                        </td>
+                        <td class="slds-cell-wrap">
+                            {item.invoice_month}
+                        </td>
+                        <td class="slds-cell-wrap">
+                            {item.invoicePaymentDueDate}
+                        </td>
+                        <td class="slds-cell-wrap">
+                            {item.invoice_ht}
+                        </td>
+                        <td class="slds-cell-wrap">
+                            {item.invoiceAmount}
+                        </td>
+                        <td class="slds-cell-wrap">
+                            {item.remainingAmount}
+                        </td>
+                        <td>
+                            <lightning-input type="text" onchange={handleChangeMontant} style="width: 70px"
+                                name={item.index} value={item.montantVerse}></lightning-input>
+                        </td>
+                    </tr>
+                </template>
+
+            </tbody>
+        </table>
+    </div>
+    <template if:true={showErrors}>
+        <div class="wraperClass" style="margin-top: 20px;">
+            <strong style="color: red;">Erreurs</strong>
+            <ol class="slds-m-around_medium">
+                <template for:each={__dataErrors} for:item="item">
+                    <li key={item}>
+                        {item}
+                    </li>
+                </template>
+            </ol>
+        </div>
+    </template>
+    <div class="slds-grid slds-gutters" style="margin-top: 25px;">
+        <div class="slds-size_1-of-3">
+            <div style="float: left;">
+                <lightning-button label="Précédent" title="Précédent" onclick={handleBack} disabled={__saving}
+                    class="slds-m-left_x-small"></lightning-button>
+            </div>
+        </div>
+        <div class="slds-size_1-of-3">
+            <p style="color: red">{errorMessage}</p>
+        </div>
+        <div class="slds-size_1-of-3">
+            <div style="float: right;">
+                <lightning-button variant="brand" label="Suivant" title="Suivant" onclick={handleValidate}
+                    disabled={__saving} class="slds-m-left_x-small"></lightning-button>
+            </div>
+
+        </div>
+
+    </div>
+
+
+</template>

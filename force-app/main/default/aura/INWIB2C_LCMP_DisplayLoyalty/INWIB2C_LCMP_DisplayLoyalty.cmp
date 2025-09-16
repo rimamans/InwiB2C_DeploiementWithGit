@@ -1,0 +1,39 @@
+<aura:component implements="flexipage:availableForAllPageTypes,force:hasRecordId" access="global" controller="INWIB2C_DisplayLoyaltySubscription_CC">
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:attribute name="recordId" type="String"/>
+    <aura:attribute name="response" type="INWIB2C_CSDisplayLoyaltySubscriptionResp" />
+	<lightning:layoutItem flexibility="grow" size="12" largeDeviceSize="6" smallDeviceSize="12" padding="around-small">
+            
+          <div class="slds-grid slds-wrap form-edit-inline">     
+                <ul>
+                    <li class="slds-form-element slds-hint-parent ">
+                        <div class="slds-col slds-size_12-of-12">
+                            <span class="slds-form-element__label"><lightning:formattedText value="{! $Label.c.INWIB2C_availablePoints }" /></span>
+                            <div class="slds-form-element__control">
+                                <span class="slds-form-element__static"><lightning:formattedText value="{! v.response.CSDisplayLoyaltySubscriptionInteraction[0].CSLoyaltyAcount.availablePoints}" /></span>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="slds-form-element slds-hint-parent ">
+                        <div class="slds-col slds-size_12-of-12">
+                            <span class="slds-form-element__label"><lightning:formattedText value="{! $Label.c.INWIB2C_totalPoints }" /></span>
+                            <div class="slds-form-element__control">
+                                <span class="slds-form-element__static"><lightning:formattedText value="{! v.response.CSDisplayLoyaltySubscriptionInteraction[0].CSLoyaltyAcount.totalPoints}" /></span>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="slds-form-element slds-hint-parent ">
+                        <div class="slds-col slds-size_12-of-12">
+                            <span class="slds-form-element__label"><lightning:formattedText value="{! $Label.c.INWIB2C_blockedPoints }" /></span>
+                            <div class="slds-form-element__control">
+                                <span class="slds-form-element__static"><lightning:formattedText value="{! v.response.CSDisplayLoyaltySubscriptionInteraction[0].CSLoyaltyAcount.blockedPoints}" /></span>
+                            </div>
+                        </div>
+                    </li>
+                    
+              </ul>
+            </div>
+        </lightning:layoutItem>
+</aura:component>

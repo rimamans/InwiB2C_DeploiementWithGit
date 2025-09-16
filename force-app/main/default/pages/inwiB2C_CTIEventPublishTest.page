@@ -1,0 +1,40 @@
+<apex:page >
+    <script>
+        // Load the Message Channel token in a variable
+        var SAMPLEMC = "{!$MessageChannel.CTIMessageChannel__c}";
+        function handleClick() {
+
+            console.log('in handleClick')
+            const message = {
+                ctiIteractionNumber: "D12341DFQR532452",
+                data: { 
+                    ctiMDN: "212929132122", 
+                    ctiSource: "Email Inbound", 
+                    ctiEmailSource: "test@test.com",
+                    ctiFacebookId: "facebook123",
+                    ctiTwitterId: "twitter452",
+                    vlocityInteractionId: "azer23423GSFDGSD"
+                } 
+            }
+
+            /*const message = {
+                ctiIteractionNumber: "D12341DFQR532452",
+                data: { 
+                    ctiMDN: "", 
+                    ctiSource: "Email Inbound", 
+                    ctiEmailSource: "",
+                    ctiFacebookId: "203001057148766",
+                    ctiTwitterId: ""
+                } 
+            }*/
+            
+            sforce.one.publish(SAMPLEMC, message);
+
+            //sfutil.publishCTIInformation("ctiIteractionNumber", "ctiMDN", "ctiSourc", "ctiEmailSource", "ctiFacebookId", "ctiTiwtterId","vlocityInteractionId" )
+        }
+    </script>
+    <div>
+        <p>Publish SampleMessageChannel</p>
+        <button onclick="handleClick()">Publish</button>
+    </div>
+</apex:page>

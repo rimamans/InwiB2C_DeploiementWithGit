@@ -1,0 +1,66 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 02-25-2022
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+  <template if:false={isOffresToDisplayEmpty}>
+    <lightning-radio-group style="font-size: 10px;" name="Categories" label="Categories:" onchange={handleCategoryChange} options={categoriesOptions} value="allCategories" type="button">
+    </lightning-radio-group>
+    <br><br>
+    <div class="slds-grid slds-wrap slds-grid_vertical-stretch cardCover">
+
+      <template for:each={dataOffers} for:item="product">
+        <template if:true={product.isQualified}>
+          <template if:true={product.isVisible}>
+
+            <div class="slds-col slds-size_1-of-3 containerCard" key={product.id} data-idproduct={product.id}
+              data-productname={product.name}
+              data-idproduit={product.idproduit} onclick={handleProductSelectionFromDev}>
+
+              <table style="height: 100%;">
+                <tr>
+                  <td class="">
+                    <div class="titleSection">{product.name}</div>
+                  </td>
+
+                  <td class="">
+                    <div class="titleSection">{product.price}
+                      <br>
+                      <div style="font-size:15px;">dh
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </template>
+        </template>
+      </template>
+
+
+
+    </div>
+
+    <!--
+    <lightning-button variant="brand" label="testt" title="testt" onclick={showVars} class="slds-m-left_x-small"
+      style=" position: absolute; right: 190px; top: 5px;">
+    </lightning-button>
+-->
+  </template>
+
+
+  <template if:true={isOffresToDisplayEmpty}> 
+    <br><br>
+    <br><br>
+
+
+    <div style="text-align: center;"> il n'y a pas d'options à afficher</div>
+
+    <br><br>
+    <br><br>
+
+  </template>
+</template>

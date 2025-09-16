@@ -1,0 +1,37 @@
+<template>    
+        <div class="via-slds riders-list-canvas container-table-canvas" >
+            <div class="slds-card slds-p-around--small np-card">
+                
+                <div class={titleStyle}>
+                    
+                    <h3 class="slds-p-bottom--small slds-truncate " >
+                        <b> </b>
+                    </h3>
+                </div>
+              
+              
+                <div class="slds-p-bottom--small">
+                    <div class="slds-m-bottom_xx-large overflowVisible">
+                        <div if:true={records}>                    
+                            <lightning-datatable
+                                class="style-table" 
+                                key-field="Id"
+                                columns={columns}
+                                data={records} 
+                                draft-values={draftValues}
+                                onrowaction={handleRowAction}
+                                hide-checkbox-column= true
+                                sorted-direction={sortDirection}
+                                sorted-by={sortedBy}
+                                onsort={onHandleSort}>>
+                            </lightning-datatable>
+                        </div>
+                        <div if:false={records}>                    
+                            Aucune souscription éligible à afficher
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>    
+</template>

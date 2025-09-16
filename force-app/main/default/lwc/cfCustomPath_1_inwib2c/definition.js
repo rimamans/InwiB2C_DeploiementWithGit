@@ -1,0 +1,3 @@
+let definition = 
+                {"GlobalKey__c":"customPath/inwib2c/1/1632400111753","dataSource":{"type":null,"value":{"bundle":"inwiB2C_getDataForCustomPath","inputMap":{}}},"enableLwc":true,"filter":{},"states":[{"conditions":{"group":[{"field":"$scope.data.status","operator":"===","type":"system","value":"'active'"}]},"customLwc":true,"customLwcAttributes":[{"name":"records","val":"$scope.records"}],"customLwcRepeat":false,"definedActions":{"actions":[]},"fields":[],"flyoutAttributes":[],"isSmartAction":false,"lwc":{"DeveloperName":"inwib2c_OrderPath","Id":"0Rb25000000AK14CAG","MasterLabel":"Order Path","name":"inwib2c_OrderPath"},"name":"Active","smartAction":{}}],"title":""}; 
+            export default definition

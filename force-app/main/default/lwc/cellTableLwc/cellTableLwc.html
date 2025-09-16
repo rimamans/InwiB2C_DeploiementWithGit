@@ -1,0 +1,38 @@
+<template>
+    <template if:false={islistTableNiv}>
+        <div if:true={isLink} class="slds-truncate">
+            <a href={url} onclick={handleClick}>
+                <vlocity_cmt-output-field
+                record={element}
+                field-name={field.name}
+                type={field.type}
+            ></vlocity_cmt-output-field>
+            </a>
+        </div>
+        <div if:false={isLink} class="slds-truncate">
+            <vlocity_cmt-output-field
+                record={element}
+                field-name={field.name}
+                type={field.type}
+            ></vlocity_cmt-output-field>
+        </div>
+    </template>
+    <template if:true={islistTableNiv}>
+        <div if:true={isLink} class="slds-truncate" style="height:17px;">
+            <a href={url} onclick={handleClick}>
+                <vlocity_cmt-output-field
+                record={element}
+                field-name={field.name}
+                type={field.type}
+            ></vlocity_cmt-output-field>
+            </a>
+        </div>
+        <div if:false={isLink} class="slds-truncate" style="height:17px;">
+            <vlocity_cmt-output-field
+                record={element}
+                field-name={field.name}
+                type={field.type}
+            ></vlocity_cmt-output-field>
+        </div>
+    </template>
+</template>

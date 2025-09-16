@@ -1,0 +1,64 @@
+<template >
+    <div class="via-slds riders-list-canvas container-table-canvas" if:true={records}>
+        <div class="slds-card slds-p-around--small np-card">
+
+            <div class={titleStyle}>
+                
+                <h3 class="slds-p-bottom--small slds-text-heading--small slds-truncate " >
+                   
+                    <div class="slds-grid slds-wrap slds-size_1-of-1 slds-p-left_medium">
+                      
+
+                    </div>
+                </h3>
+            </div>
+            
+            <template if:true={profil}>
+
+           <div class="slds-p-bottom--small">
+                <div class="slds-m-bottom_xx-large overflowVisible ">
+                    <div >                    
+                        <div class="wraperClass ">
+                            <lightning-datatable
+                                class="tab-style slds-table slds-table_bordered slds-table_col-bordered" 
+                                key-field="Id"
+                                columns={columns}
+                                data={loyaltyTransaction} 
+                                draft-values={draftValues}
+                                onrowaction={handleRowAction}
+                                hide-checkbox-column= true>
+                            </lightning-datatable>
+                        </div>
+                    </div>
+            </div>
+                
+            </div>
+        </template>
+        <template if:false={profil}>
+
+            <div class="slds-p-bottom--small">
+                 <div class="slds-m-bottom_xx-large overflowVisible ">
+                     <div >                    
+                         <div class="wraperClass ">
+                             <lightning-datatable
+                                 class="tab-style slds-table slds-table_bordered slds-table_col-bordered" 
+                                 key-field="Id"
+                                 columns={columnsfalse}
+                                 data={loyaltyTransaction} 
+                                 draft-values={draftValues}
+                                 onrowaction={handleRowAction}
+                                 hide-checkbox-column= true>
+                             </lightning-datatable>
+                         </div>
+                     </div>
+             </div>
+                 
+             </div>
+         </template>
+
+        </div>
+
+    </div>
+
+
+</template>

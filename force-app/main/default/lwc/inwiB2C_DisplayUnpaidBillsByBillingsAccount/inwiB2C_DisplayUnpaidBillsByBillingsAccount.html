@@ -1,0 +1,84 @@
+<template>
+    <lightning-card title="">
+        <template lwc:if={isloading}>
+            <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+        </template>
+        <template lwc:else>
+        <div class="slds-m-around_x-small">
+            <template lwc:if={isbillingAccountsEmpty}>
+                        <p>Aucune factures impayées n'est trouvées</p>
+                    </template>
+            <template lwc:else>
+                <div  style="max-height: 32rem;overflow: scroll;max-width:100%">
+                    <table class="slds-table slds-table_cell-buffer slds-table_bordered  slds-table--col-bordered slds-m-top_medium">
+                        <thead>
+                            <tr>
+                                <th style="border-left: 1px solid #c9c9c9;">N° CF</th>
+                                <th>MDN</th>
+                                <th>Offre</th>
+                                <th class="slds-cell-wrap">Statut de la souscription</th>
+                                <th>Nom</th>
+                                <th>Prenom</th>
+                                <th>N° Facture</th>
+                                <th>Période facturée</th>
+                                <th>Montant TTC</th> 
+                                <th>Statut</th> 
+                                <th>Date d’échéance</th>          
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template for:each={billingAccounts} for:item="billingAccount">   
+                                <td  style="border-left: 1px solid #c9c9c9;" class="slds-table--col-bordered " key={billingAccount.id} rowspan={billingAccount.countBills}  >
+                                        <lightning-input type="radio" label={billingAccount.id} name={billingAccount.id} checked={billingAccount.isChecked} onchange={handleCheckboxChange}></lightning-input>
+                                </td>
+                                 <td key={billingAccount.id} rowspan={billingAccount.countBills}>
+                                 <template  for:each={billingAccount.Subs} for:item="sub">  
+                                    <p key={sub.MDN} >{sub.MDN}</p> 
+                                </template> 
+                                </td>
+
+                                <td key={billingAccount.id} rowspan={billingAccount.countBills}>
+                                 <template  for:each={billingAccount.Subs} for:item="sub">  
+                                    <p class="col-text" key={sub.MDN} >{sub.Offer}</p> 
+                                </template> 
+                                </td>
+
+                                <td key={billingAccount.id} rowspan={billingAccount.countBills}>
+                                 <template  for:each={billingAccount.Subs} for:item="sub">  
+                                    <p class="col-text" key={sub.MDN} >{sub.Statut}</p> 
+                                </template> 
+                                </td> 
+                                <td class="slds-table--col-bordered " key={billingAccount.id} rowspan={billingAccount.countBills}  >
+                                    {billingAccount.LastName}
+                                </td>
+                                <td class="slds-table--col-bordered " key={billingAccount.id} rowspan={billingAccount.countBills}  >
+                                    {billingAccount.FirstName}  
+                                </td> 
+                                 <template  for:each={billingAccount.bills} for:item="bill">     
+                                    <tr  key={bill.id} data-billing={billingAccount.id}  >
+                                            <td style="border-left: 1px solid #c9c9c9;"><lightning-input type="checkbox" checked={bill.isChecked} disabled={bill.isDisabled} name={bill.id}  label={bill.id} onchange={handleBillCheckboxChange}></lightning-input></td>
+                                            <td>{bill.billDate}</td> 
+                                            <td>{bill.montant}</td>
+                                            <td>{bill.status}</td>
+                                            <td>{bill.paymentDueDate}</td>
+                                    </tr>
+                                </template>                      
+                            </template>
+                        </tbody>
+                    </table>  
+                </div> 
+                    </template>
+                    
+                    <div class="slds-grid slds-gutters slds-float_right slds-m-top_medium">
+                    <div class="slds-col">
+                        <lightning-button label="Precedent" class="slds-float_right" onclick={handlePreviousStep}></lightning-button>
+                    </div>
+                    <div class="slds-col">
+                <lightning-button label="Suivant" class="slds-float_right" variant="brand"  disabled={disableSave} onclick={handleNextStep}></lightning-button>
+                    </div>
+                    
+                </div>
+        </div>
+        </template>
+    </lightning-card>
+</template>

@@ -1,0 +1,13 @@
+@media all and (max-width: 500px) {
+    
+.slds-button {
+    width: 160px;
+    font-variant: 22px;
+    position: fixed;
+    right:20px;
+ 
+}
+}
+/* .slds-button--brand{
+    
+} */

@@ -1,0 +1,116 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 07-25-2024
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+    <template if:true={stepOk}>
+        <div class="slds-progress slds-progress_vertical">
+            <ol class="slds-progress__list">
+                <template for:each={parentSteps} for:item="step">
+                    <li class={step.class} key={step.code} value={step.code}>
+
+                        <template if:true={step.isComplete}>
+                            <span class="slds-icon_container slds-icon-utility-success slds-progress__marker slds-progress__marker_icon slds-progress__marker_icon-success" title="Complete">
+                                <svg class="slds-icon slds-icon_xx-small" aria-hidden="true">
+                                  <use xlink:href="/apexpages/slds/latest/assets/icons/utility-sprite/svg/symbols.svg#success"></use>
+                                </svg>
+                                <span class="slds-assistive-text">Complete</span>
+                              </span>
+                        </template>
+
+                        <template if:true={step.isActive}>
+                            <div class="slds-progress__marker">
+                                <span class="slds-assistive-text">Active</span>
+                            </div>
+                        </template>
+
+                        <template if:true={step.isNotActive}>
+                            <div class="slds-progress__marker"></div>
+                        </template>
+
+                        <template if:true={step.isError}>
+                            <span class="slds-icon_container slds-icon-utility-error slds-progress__marker slds-progress__marker_icon" title="Error">
+                                <svg class="slds-icon slds-icon_xx-small" aria-hidden="true">
+                                <use xlink:href="/apexpages/slds/latest/assets/icons/utility-sprite/svg/symbols.svg#error"></use>
+                                </svg>
+                                <span class="slds-assistive-text">Error</span>
+                            </span>
+
+                        </template>
+
+                        <template if:false={step.expand}>
+                            <div class="slds-progress__item_content slds-grid slds-grid_align-spread slds-text-heading_medium" data-id={step.code} data-key={step.code} onclick={showSubSteps}>
+                                {step.name}
+                                <br>
+                                &nbsp;&nbsp;{step.date}
+                            </div>
+                        </template>
+
+                        <template if:true={step.expand}>
+                            <div class="slds-progress__item_content slds-grid slds-grid_align-spread slds-text-heading_medium" data-id={step.code} data-key={step.code} onclick={showSubSteps}>
+                                {step.name} 
+                                <br>
+                                &nbsp;&nbsp;{step.date}
+                                <template if:true={step.seeMore}>
+                                    <br>
+                                    <div class="slds-progress slds-progress_vertical" >
+                                        <ol class="slds-progress__list">
+                                            <template for:each={step.subSteps} for:item="subStep">
+                                                <li class={subStep.class} key={subStep.code} value={subStep.code}>
+
+                                                    <template if:true={subStep.isComplete}>
+                                                        <span class="slds-icon_container slds-icon-utility-success slds-progress__marker slds-progress__marker_icon" >
+                                                            <svg class="slds-icon slds-icon_xx-small" aria-hidden="true">
+                                                              <use style="color:black;fill:black"  xlink:href="/apexpages/slds/latest/assets/icons/utility-sprite/svg/symbols.svg#record"></use>
+                                                            </svg>
+                                                          </span>
+                                                    </template>
+                            
+                                                    <template if:true={subStep.isActive}>
+                                                        <div class="slds-progress__marker">
+                                                            <span class="slds-assistive-text">Active</span>
+                                                        </div>
+                                                    </template>
+
+                                                    <template if:true={subStep.isNotActive}>
+                                                        <div class="slds-progress__marker"></div> 
+                                                    </template>
+                            
+                                                    <template if:true={subStep.isError}>
+                                                        <span class="slds-icon_container slds-icon-utility-error slds-progress__marker slds-progress__marker_icon" title="Error">
+                                                            <svg class="slds-icon slds-icon_xx-small" aria-hidden="true">
+                                                            <use xlink:href="/apexpages/slds/latest/assets/icons/utility-sprite/svg/symbols.svg#error"></use>
+                                                            </svg>
+                                                            <span class="slds-assistive-text">Error</span>
+                                                        </span>
+                                                    </template>
+
+                                                    <div class="slds-progress__item_content slds-grid slds-grid_align-spread" data-id={subStep.code} data-key={subStep.code}>
+                                                        {subStep.name}
+                                                        <br>
+                                                        &nbsp;&nbsp;{subStep.date}
+                                                    </div>
+                                                </li>
+                                            </template>
+                                        </ol>
+                                    </div>
+                                </template>
+                            </div>
+                        </template>
+                    </li>
+                </template>
+            </ol>
+        </div>
+    </template>
+
+    <template if:false={stepOk}>
+        <br><br>
+        <br><br>
+        <div style="text-align: center;" class="slds-text-color_destructive">Le module de suivi des commandes fournit des informations concernant les commandes à partir du 24 juillet 2024.</div>
+        <br><br>
+        <br><br>
+    </template>
+</template>

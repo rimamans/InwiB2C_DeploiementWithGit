@@ -1,0 +1,19 @@
+<template>
+
+<div>
+<br>
+<br>
+<br>
+</div>
+    <div class="slds-grid slds-wrap slds-grid_vertical-stretch" style="float:right">
+        <template if:true={isok}>
+        <lightning-button variant="brand" label="Terminer" onclick={navigateToHomePage}
+        class="slds-m-left_x-small">
+        </lightning-button>
+    </template>
+    <template if:false={isok}>
+        <lightning-button  variant="brand" label="Précédent" onclick={gotopreviousStep}
+        class="slds-m-left_x-small"></lightning-button>
+    </template>
+    </div>
+</template>

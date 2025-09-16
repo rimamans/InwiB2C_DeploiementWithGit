@@ -1,0 +1,36 @@
+<template>
+
+    <lightning-button variant="brand" label="Afficher la liste des services éligibles"
+        title="Afficher la liste des services éligibles" onclick={getContectServices}
+        class="slds-m-left_x-large slds-m-top_x-large"></lightning-button>
+
+    <template if:true={__dataServices}>
+        <!-- <lightning-datatable
+        data={__returnedProduct.serviceRef}
+        columns={contentServiceColumns}
+        key-field="name"
+        onrowselection={selectProduct}>
+    </lightning-datatable> -->
+
+        <lightning-accordion class="example-accordion">
+            <template for:each={__dataServices} for:item="serviceItem">
+                <lightning-accordion-section key={serviceItem.name} name={serviceItem.name} label={serviceItem.name}>
+                    <div>
+                        <lightning-datatable key-field="combination_id" data={serviceItem.serviceCombinations}
+                            show-row-number-column hide-checkbox-column columns={columns} onrowaction={handleActivate}>
+                        </lightning-datatable>
+                    </div>
+                </lightning-accordion-section>
+            </template>
+        </lightning-accordion>
+        </br>
+        <Strong>Historique: </Strong>
+        </br>
+        </br>
+        </br>
+        <lightning-datatable key-field="transaction_id" data={__dataHistory} show-row-number-column hide-checkbox-column
+            columns={history_columns} onrowaction={handleResendCode}>
+        </lightning-datatable>
+    </template>
+
+</template>

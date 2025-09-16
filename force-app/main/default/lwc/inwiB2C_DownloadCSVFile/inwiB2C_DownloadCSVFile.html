@@ -1,0 +1,32 @@
+<template>
+    <lightning-card  title="Résulat du chargement: ">
+        <p class="slds-p-horizontal_small">Nombre des souscriptions à traiter:&nbsp;<b>{eligiblesrecordsnumber}</b></p>
+        &nbsp;
+        <lightning-button icon-name="utility:download" 
+        label="Télécharger" 
+        title="Download CSV File"
+        onclick={downloadCSVFile} variant="brand"></lightning-button>
+        <br>
+        <p class="slds-p-horizontal_small">Nombre des souscriptions à rejeter:&nbsp;<b>{noneligiblesrecordsnumber}</b>
+            &nbsp;
+            <lightning-button icon-name="utility:download" 
+            label="Télécharger" 
+            title="Download CSV File"
+            onclick={downloadCSVFile} variant="brand"></lightning-button>
+        </p>
+        
+    <br>
+    <br>
+    <div class="slds-grid slds-wrap slds-grid_vertical-stretch">
+        <lightning-button variant="brand-outline" label="Annuler" title="Annuler" onclick={handleCancel}
+        class=" " style="position: absolute;right: 100px;"></lightning-button>
+
+
+        <lightning-button variant="brand" label="Soumettre" title="Soumettre" 
+            onclick={handleNext} style="position: absolute;right: 0px;" class="">
+        </lightning-button>
+
+    </div>
+    </lightning-card>
+   <br>
+</template>

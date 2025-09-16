@@ -1,0 +1,10 @@
+<template>
+    <lightning-button onclick={Open}>Assigner la visite</lightning-button>
+    <template if:true={show}>
+        <lightning-modal-header label="Users"></lightning-modal-header>
+        <lightning-modal-body> test de modal </lightning-modal-body>
+        <lightning-modal-footer>
+            <lightning-button label="Annuler" onclick={Close}></lightning-button>
+        </lightning-modal-footer>
+    </template>
+</template>

@@ -1,0 +1,56 @@
+<template>
+    
+
+        <div class="wraperClass ">
+            <table class="sty-table-case slds-table slds-table_bordered slds-table_fixed-layout">
+                <thead>
+                  <tr class="">
+                   
+                    <th class="" scope="col">
+                      <div class="slds-truncate" title="Nom">Nom</div>
+                    </th>
+                    <th class="" scope="col">
+                      <div class="slds-truncate" title="Prénom">Prénom</div>
+                    </th>
+                    <th class="" scope="col">
+                      <div class="slds-truncate" title="CIN">Adresse</div>
+                    </th>
+
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Email">Ville</div>
+                      </th>    
+                      <th class="" scope="col">
+                        <div class="slds-truncate" title="Type">Region</div>
+                      </th>                                         
+                    <!--<th class="" scope="col">
+                        <div class="slds-truncate" title="Type">Type</div>
+                      </th>-->
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Action">Action</div>
+                      </th>  
+                  </tr>
+                </thead>
+                <tbody>
+                    <template for:each={allcontact} for:item="ligne" >
+                        <tr key ={ligne.Id} >
+                            <td class="slds-cell-wrap" > <div class="slds-line-clamp">{ligne.LastName}</div> </td>
+                            <td class="slds-cell-wrap" > <div class="slds-line-clamp">{ligne.FirstName}</div> </td>
+                            <td class="slds-cell-wrap" > <div class="slds-line-clamp">{ligne.Adresse}</div> </td>
+                            <td class="slds-cell-wrap" > <div class="slds-line-clamp">{ligne.Ville}</div> </td>
+                            
+                            <td class="slds-cell-wrap" > <div class="slds-line-clamp">{ligne.Region}</div> </td>
+                            <!--<td class="slds-cell-wrap" > <div class="slds-line-clamp">{ligne.Status}</div> </td>-->
+                            <td class="slds-cell-wrap" ><div class="slds-line-clamp"><lightning-button label="Vue 360°"  onclick={handleAccountSelection} 
+                                 id={ligne.Id} name={ligne} ></lightning-button></div>
+                            </td>
+                            
+                        </tr>
+                    </template>
+                  
+                    </tbody>
+                  </table>
+        </div>
+
+
+
+</template>

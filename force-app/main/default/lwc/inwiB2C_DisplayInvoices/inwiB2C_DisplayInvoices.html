@@ -1,0 +1,77 @@
+<template>
+    <div class="slds-p-bottom--small">
+        <div class="slds-m-bottom_xx-large overflowVisible ">
+            <template if:true={records}>
+                <div class="wraperClass ">
+
+                    <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered">
+                        <thead>
+                            <tr class="slds-line-height_reset">
+                                <th class="th" scope="col">
+                                    <div class="slds-truncate" title="radios"></div>
+                                </th>
+                                <th class="th" scope="col">
+                                    <div class="slds-truncate" title="Num">Numero de facture</div>
+                                </th>
+                                <th class="th" scope="col">
+                                    <div class="slds-truncate" title="periode">période facturée</div>
+                                </th>
+                                <th class="th" scope="col">
+                                    <div class="slds-truncate" title="amount">Montant TTC</div>
+                                </th>
+                                <th class="th" scope="col">
+                                    <div class="slds-truncate" title="status">Statut</div>
+                                </th>
+                                <th class="th" scope="col">
+
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template for:each={allunpayedinvoices} for:item="invoice">
+                                <tr class="unpay" key={invoice.Id}>
+                                    <td><input type="checkbox" onclick={handleSelectedInvoices} data-idinv={invoice.Id}
+                                            data-startd={invoice.invoiceStartDate} data-endd={invoice.invoiceEndDate}
+                                            data-invamount={invoice.invoiceAmount} data-status={invoice.status}
+                                            data-invdate={invoice.InvoiceDate}
+                                            data-invduedate={invoice.invoicePaymentDueDate} /></td>
+                                    <td>{invoice.Id}</td>
+                                    <td>Du {invoice.invoiceStartDate} au {invoice.invoiceEndDate} </td>
+                                    <td>{invoice.invoiceAmount}</td>
+                                    <td>{invoice.status}</td>
+                                    <td><span class="unpayedinvoices">&#10003;</span></td>
+                                </tr>
+                            </template>
+                            <template for:each={allpayedinvoices} for:item="invoice">
+                                <tr key={invoice.Id} class="pay">
+                                    <td><input type="checkbox" checked disabled /></td>
+                                    <td>{invoice.Id}</td>
+                                    <td>Du {invoice.invoiceStartDate} au {invoice.invoiceEndDate} </td>
+                                    <td>{invoice.invoiceAmount}</td>
+                                    <td>{invoice.status}</td>
+                                    <td><span class="payedinvoices">&#10003;</span></td>
+                                </tr>
+                            </template>
+                        </tbody>
+                    </table>
+
+                </div>
+
+                <span style="border-bottom: 1px solid rgb(217, 219, 221); width: 100%; display:block"></span>
+                <br>
+                <div style="float: right; margin-top: 10px;">
+                    <button class="slds-button slds-button_neutral" title="Précédent" type="button" onclick={handlePrevious} style="margin-right: 10px;width: 112px;height: 34px;">Précédent</button>
+                    <button class="slds-button slds-button_brand" title="Suivant" type="button" onclick={handleNext} style="width: 112px;">Suivant</button>
+                </div>
+
+
+                <!--   
+                <div class="slds-line-clamp"></div><lightning-button variant="brand" label="Précèdent"  title="Précèdent"
+                onclick={handlePrevious} class="slds-var-m-right_xxx-small" style="position: absolute;right: 600px;" ></lightning-button></div>
+                <div class="slds-line-clamp"></div><lightning-button variant="brand" label="Suivant"  title="Suivant"
+                onclick={handleNext} class="slds-var-m-right_xxx-small" style="position: absolute;right: 400px;" ></lightning-button></div>
+            -->
+            </template>
+        </div>
+    </div>
+</template>

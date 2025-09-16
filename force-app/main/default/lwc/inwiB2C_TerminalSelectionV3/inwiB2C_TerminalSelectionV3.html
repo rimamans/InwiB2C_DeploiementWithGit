@@ -1,0 +1,241 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 04-04-2025
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+  <template if:true={updateOngoing}>
+      
+      <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-02" aria-modal="true" aria-describedby="modal-content-id-2" class="slds-modal slds-fade-in-open">
+          <div class="slds-modal__container">
+              
+              <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-2">
+                  <div class="wraperClass ">
+                      
+                      <div style="text-align:center">Veuillez attendre quelques instants</div>
+                      <div class="demo-only" style="height:6rem;position:relative">
+                          <div class="slds-spinner_container">
+                          <div role="status" class="slds-spinner slds-spinner_medium slds-spinner_brand">
+                              <span class="slds-assistive-text">Loading</span>
+                              <div class="slds-spinner__dot-a"></div>
+                              <div class="slds-spinner__dot-b"></div>
+                          </div>
+                          </div>
+                      </div>
+      
+                  </div>
+              </div>
+
+          </div>
+      </section>
+      <div class="slds-backdrop slds-backdrop_open"></div>
+  </template>  
+<template if:false={updateOngoing}>
+
+
+  <template if:true={imeiAttribute}>
+    
+      <template if:false={iseshop}>
+    
+         <template if:false={imeiDisabled}>
+          <p >Terminal sélectionné: {modelSelectioneValue} </p>
+          <br>
+          <template if:true={isaccessoire}>
+
+            <lightning-radio-group name="radioGroup"
+                                  label="Choix Catégorie:"
+                                  options={options}
+                                  value={categorie}
+                                  type="radio"
+                                  onchange={handleChangeSelection}>
+                                  
+            </lightning-radio-group>
+            </template>
+            <br>       
+            <template if:false={isagencevalidationbocrcd2d}>
+                <lightning-input
+                  value={__modelFilter}
+                  name="Filtre Modèles"
+                  label="Filtre Modèles"
+                  type="text"
+                  class="modelFilterInput slds-size_1-of-2"
+                  onchange={hanldleFilterEntry}>
+                </lightning-input>
+         
+                    <br>
+                  <lightning-button variant="brand" label="Recherche terminal" title="Valider" onclick={searchTerminal} class="slds-size_2-of-2"></lightning-button>
+                    <br>
+          
+                  <div style="height:200px"> 
+                     <lightning-datatable
+                      key-field="codeArticle"
+                      data={__modeleOptions}
+                      columns={modelColumns}
+                      max-row-selection=1
+                      onrowselection={handleChangeModele}
+                      selected-rows={selectedRowIds}>
+                      
+                     </lightning-datatable>
+                   </div>
+
+
+          </template>
+       
+
+          <template if:true={imeiDisabled}>
+              <lightning-input
+                value={modeleLabelAttributeValue}
+                name="Modèle"
+                label="Modèle"
+                type="text"
+                disabled>
+              </lightning-input>
+
+              <lightning-input
+                value={modeleAttributeValue}
+                name="Code Article"
+                label="Code Article"
+                type="text"
+                disabled>
+          
+              </lightning-input>
+
+          </template>
+          </template>
+      </template> 
+
+      <template if:true={iseshop}>
+          <lightning-input
+            value={modeleLabelAttributeValue}
+            name="Modèle"
+            label="Modèle"
+            type="text"
+            disabled>
+          </lightning-input>
+
+          <lightning-input
+            value={modeleAttributeValue}
+            name="Code Article"
+            label="Code Article"
+            type="text"
+            disabled>
+    
+          </lightning-input>
+      </template>
+         <!--   
+      <template if:true={isftth}>
+          <template if:false={imeiDisabled}>
+            <template if:false={CheckdisponibiliteReservationterminaux}>
+                <br>
+              <lightning-button variant="brand" label="Valider le terminal" title="Valider" onclick={validateTerminalOnly} class="slds-m-left_x-large slds-m-top_x-large"></lightning-button>
+            </template>
+          </template>
+          
+          
+      </template>
+
+ -->
+        <!-- <template if:true={isftth}> -->
+     <template if:true={disabledinputimei}>
+        <template if:false={CheckdisponibiliteReservationterminaux}>
+            <template if:true={displayimeiftth}>
+              <lightning-input
+              value={imeiAttributeValue}
+              name={serialTypeAttributeValue}
+              label={imeiLabel}
+              type="text"
+              onchange={hanldleImeiEntry}
+              class="imeiInput"
+              disabled={imeiDisabled}>
+              </lightning-input>
+           </template>
+         </template>
+
+           <template if:false={imeiDisabled}>
+                     <br>
+           <template if:true={displayimeiftth}>
+           <template if:false={CheckdisponibiliteReservationterminaux}>
+                        
+                     <lightning-button variant="brand" label="Valider le terminal" title="Valider" onclick={validateIMEI}  disabled={disableValiderTerm} class="slds-m-left_x-large slds-m-top_x-large"></lightning-button>
+           </template>
+           </template>
+           
+           <template if:false={isagencevalidationbocrcd2d}>
+           <template if:false={displayimeiftth}>           
+            <lightning-button variant="brand" label="Valider le terminal" title="Valider" onclick={ValidateCodeArticle} class="slds-m-left_x-large slds-m-top_x-large"></lightning-button>
+           </template>
+          </template>
+
+         </template>
+              <!--      </template> -->
+           <!--   
+          <template if:true={iseshop}>
+             
+              <lightning-input
+                  value={imeiAttributeValue}
+                  name={serialTypeAttributeValue}
+                  label={imeiLabel}
+                  type="text"
+                  onchange={hanldleImeiEntry}
+                  class="imeiInput"
+                  disabled={inputdisabled}
+                  data-name="some"
+              ></lightning-input>
+      
+              
+                  <br>
+                  
+                 
+                 
+               <lightning-button variant="brand" label="Valider le terminal" title="Valider" onclick={validateIMEI} class="slds-m-left_x-large slds-m-top_x-large"></lightning-button>
+             
+          
+          </template>
+              -->
+          </template>
+
+      <template if:true={CheckdisponibiliteReservationterminaux}>
+        <template if:false={imeiDisabled}>
+              <br>
+              <div class="slds-col slds-size_8-of-12 slds-m-bottom--medium "> 
+                  <lightning-Input type="search" placeholder={nameagencelivraison} label="Agence de livraison" value={agencelivraisonvalue}  class="agenceName" onchange={handleChanged}> </lightning-input>    
+                      <template if:true={show}>
+                          <div class="slds-col slds-size_12-of-12 slds-m-bottom--medium slds-box">
+                          <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+                              <template for:each={optionsArray} for:item="item">
+                                  <li key={item.AgenceId} class="slds-listbox__item">
+          
+                                    <a >  <p data-idacc={item.AgenceId}
+                                      data-name={item.Name} data-codeagence={item.CodeAgence} onclick={handleSelect} >{item.CodeAgence},{item.Name}</p> </a>
+                                       
+                                   
+                                      </li>
+                                      
+                                  </template>
+                              </ul>
+                           </div>
+                      </template>
+              </div>
+              <lightning-button variant="brand" label="Réserver le terminal" title="Réserver" onclick={CheckDisponibiliteTerminal} class="slds-m-left_x-large slds-m-top_x-large"></lightning-button>
+            </template>
+              <template if:true={imeiDisabled}>
+                <lightning-input
+                value={imeiAttributeValue}
+                name={serialTypeAttributeValue}
+                label={imeiLabel}
+                type="text"
+                onchange={hanldleImeiEntry}
+                class="imeiInput"
+                disabled>
+                </lightning-input>
+               </template>
+            </template>
+
+  </template>
+   
+
+  
+</template>
+</template>

@@ -1,0 +1,64 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 02-06-2023
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<apex:page renderAs="pdf" controller="InwiB2C_FormRemb" applyHtmlTag="false" showHeader="false">
+
+    <head>
+        <style>
+            body {
+                font-family: 'Arial Unicode MS';
+                font-size: 12px;
+
+            }
+
+            @page {
+                size: A4;
+                margin: 0px
+            }
+        </style>
+    </head>
+
+    <body>
+   
+        <div>
+       <img style="width: 100%; height: 100%" src="{!$Resource.InwiB2C_Recu_Restitution}" />
+            <p style="position: absolute;top: 137px;left: 255px;font-size: 12px">{!IF(contains(keys,'createdDate'),output['createdDate'], '')}</p>
+            <p style="position: absolute;top: 157px;left: 255px;font-size: 12px">{!IF(contains(keys,'today'),output['today'], '')}</p>
+
+            <p style="position: absolute;top: 137px;left: 607px;font-size: 12px">{!IF(contains(keys,'pdv'),output['pdv'], '')}</p>
+            <p style="position: absolute;top: 157px;left: 590px;font-size: 12px">{!IF(contains(keys,'User'),output['User'], '')}</p>
+            
+           <p style="position: absolute;top: 175px;left: 255px;font-size: 12px">{!IF(contains(keys,'CodeTransactionFmd'),output['CodeTransactionFmd'], '')}</p>
+           <p style="position: absolute;top: 195px;left: 255px;font-size: 12px">{!IF(contains(keys,'CodeTransactionFmd'),output['CodeTransactionFmd'], '')}</p>
+                       
+            <p style="position: absolute;top: 270px;left: 255px;font-size: 12px">{!IF(contains(keys,'MontantFMD'),output['MontantFMD'],'')}</p>
+            <p style="position: absolute;top: 287px;left: 255px;font-size: 12px">{!IF(contains(keys,'ModePaiement_Restitution'),output['ModePaiement_Restitution'], '')}</p>
+            
+            <p style="position: absolute;top: 270px;left: 610px;font-size: 12px">{!IF(contains(keys,'FirstName'),output['FirstName'], '')}</p>
+            <p style="position: absolute;top: 285px;left: 610px;font-size: 12px">{!IF(contains(keys,'LastName'),output['LastName'], '')}</p>
+            <p style="position: absolute;top: 304px;left: 610px;font-size: 12px">{!IF(contains(keys,'cin'),output['cin'], '')}</p>
+            <p style="position: absolute;top: 324px;left: 610px;font-size: 12px">{!IF(contains(keys,'OrderNumber'),output['OrderNumber'], '')}</p>
+           
+           
+            <p style="position: absolute;top: 468px;left: 100px;font-size: 9.5px">{!IF(contains(keys,'NomArticle'),output['NomArticle'], '')}</p>
+            <p style="position: absolute;top: 468px;left: 315px;font-size: 10px">{!IF(contains(keys,'NumSerieTerminal'),output['NumSerieTerminal'], '')}</p>
+            <p style="position: absolute;top: 468px;left: 470px;font-size: 10px">{!IF(contains(keys,'quantity'),output['quantity'], '')}</p>
+            <p style="position: absolute;top: 470px;left: 592px;font-size: 10px">{!IF(contains(keys,'Offre'),output['Offre'], '')}</p>
+
+            <p style="position: absolute;top: 762px;left: 285px;font-size: 12px">{!IF(contains(keys,'pdv'),output['pdv'], '')}</p>
+            <p style="position: absolute;top: 780px;left: 240px;font-size: 12px">{!IF(contains(keys,'User'),output['User'], '')}</p>
+            <p style="position: absolute;top: 800px;left: 285px;font-size: 12px">{!IF(contains(keys,'cin'),output['cin'], '')}</p>
+            <p style="position: absolute;top: 820px;left: 285px;font-size: 12px">{!IF(contains(keys,'createdDate'),output['createdDate'], '')}</p>
+            <p style="position: absolute;top: 839px;left: 285px;font-size: 12px">{!IF(contains(keys,'today'),output['today'], '')}</p>
+
+          
+            <p style="position: absolute;top: 861px;left: 285px;font-size: 12px">{!IF(contains(keys,'CodeTransactionFmd'),output['CodeTransactionFmd'], '')}</p>
+
+            <p style="position: absolute;top: 877px;left: 285px;font-size: 14px">{!IF(contains(keys,'MontantFMD'),output['MontantFMD'], '')}</p> 
+        </div>
+    </body>
+</apex:page>

@@ -1,0 +1,37 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 02-24-2025
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+
+    <template if:true={lineItems}>
+        
+
+
+       <!-- Level1 Attributes -->
+
+       <template for:each={lineItems.records} for:item="currentItem" >
+                <span key ={currentItem.Id.value} >
+
+
+                    <c-inwi-b2-c_-display-item-attributes item={currentItem} action-type={actionType} typeparcour={__typeparcour} paiement={__paiement} modelivraison={__modelivraison} showservice={__showservice} nameagencelivraison={__nameagencelivraison} codeagencelivraison={__codeagencelivraison} selectedmodel={__selectedmodel} disabledinputimei={__disabledinputimei} user-profile={userProfile} segment-offer={segmentOffer} reprisesuitelivraison={__reprisesuitelivraison} haspermissionsetlastmile={__haspermissionsetlastmile}  valeurpreordersap={__valeurpreordersap} onitemattributesvaluechange={hanldeItemAttributesValueChange} onitemattributeswithoutimei={handleItemAttributesWithoutImei} onitemattributesvalidationerror={handleitemattributesvalidationerror} oncustomitemattribvaluechangewithnext={handlecustomitemattribvaluechangewithnext}> </c-inwi-b2-c_-display-item-attributes>
+
+                    
+
+    
+                </span>
+
+        </template>
+
+        
+
+
+
+
+
+    </template>
+    
+</template>

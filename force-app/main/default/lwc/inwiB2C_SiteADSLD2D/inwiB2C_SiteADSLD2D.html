@@ -1,0 +1,526 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 02-23-2024
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+    <template if:true={isLoading}>
+        <div class="exampleHolder">
+            <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+        </div>
+    </template>
+  <!--    <template if:false={demandeIAM}><-->
+    <template if:false={isLoading}>
+    <template if:true={Step1}>
+        
+       
+                        <div style="border-style: solid; border-color: #92107F; padding: 10px; border-radius: 10px;">
+                       <!-- <div class="slds-grid slds-wrap slds-grid_vertical-stretch">-->
+                            info adresse INWI
+                        <div class="slds-grid slds-wrap">
+                         
+                             
+                     <template if:false={DisplayAdress}>
+                            <lightning-input style="padding: 10px;" type="text" label="Adresse facture INWI" value={adressename}
+                            name="addInwi"  disabled
+                            class="slds-col slds-size_1-of-1 elementMargin2" >
+                            </lightning-input> 
+                    </template>
+                        <template if:true={DisplayAdress}>
+                            <lightning-input style="padding: 10px;" type="text" label="Adresse d'installation" value={addressInstallation}
+                            name="addressInstallation"  disabled
+                            class="slds-col slds-size_1-of-1 elementMargin2" >
+                            </lightning-input>
+                        </template>
+                 <!--   </template><-->
+                    <br>
+                  
+   
+              
+                </div>
+                </div>
+                
+                <br> <br>
+
+                <div style="border-style: solid; border-color: #92107F; padding: 10px; border-radius: 10px;">
+                <!-- <div class="slds-grid slds-wrap slds-grid_vertical-stretch">-->
+                    Info de degroupage
+               
+                  
+                    <div class="slds-grid slds-wrap">  
+                <lightning-combobox style="padding: 10px;" placeholder="Choisi le statut de dégroupage" onchange={ChangeStatus} label="Statut de dégroupage" required
+                value={valueStatus} class="slds-col slds-size_1-of-2 elementMargin2"  options={options} disabled={FlagSuivant}  > 
+                </lightning-combobox>
+               <template if:true={FlagSuivant}>
+                <template if:false={StepDeg}>
+                    <lightning-input style="padding: 10px;" type="tel" label="Numéro de désignation (ND)" value={numND}
+                    name="numND"  required pattern="^(05)[0-9]{0,9}$"  maxlength="10" minlength="10"   message-when-pattern-mismatch="numero de designation doit être au format 05XXXXXXXXX"
+                    class="slds-col slds-size_1-of-2 elementMargin2" onchange={handleChangeInput}  disabled>
+                    </lightning-input>
+                </template></template>
+                <template if:true={StepDeg}>
+                    <lightning-input style="padding: 10px;" type="tel" label="Numéro de désignation (ND)" value={numND}
+                    name="numND"  required pattern="^(05)[0-9]{0,9}$"  maxlength="10" minlength="10"   message-when-pattern-mismatch="numero de designation doit être au format 05XXXXXXXXX"
+                    class="slds-col slds-size_1-of-2 elementMargin2" onchange={handleChangeInput}  disabled={FlagSuivant}>
+                    </lightning-input>
+               
+
+                <lightning-input style="padding: 10px;" type="text" label="Nom IAM" value={nomIAM}
+                name="nomIAM" placeholder="Saisir le nom IAM" required 
+                class="slds-col slds-size_1-of-2 elementMargin2" onchange={handleChangeInput} minlength="1" message-when-too-short="nomIAM Vide"  disabled={FlagSuivant} ><!--disabled={FlagSuivant}-->
+                </lightning-input>
+
+                <lightning-input style="padding: 10px;" type="text" label="Prénom IAM" value={prenomIAM}
+                name="prenomIAM" placeholder="Saisir le prénom IAM" required   minlength="1" message-when-too-short="Prénom IAM Vide"
+                class="slds-col slds-size_1-of-2 elementMargin2"  disabled={FlagSuivant} onchange={handleChangeInput} ><!---->
+                </lightning-input>
+            </template>
+                <lightning-input style="padding: 10px;" type="text" label="Nom du site" value={nomSite}
+                name="nomSite" placeholder="Saisir le nom du site" required  
+                class="slds-col slds-size_1-of-2 elementMargin2" onchange={handleChangeInput} minlength="1" message-when-too-short="Nom de site Vide" disabled={FlagSuivant} ><!--disabled={FlagSuivant}-->
+                </lightning-input>
+               
+                    <div class="slds-col slds-size_1-of-2" style="display:flex;  align-items: center">
+                <template if:true={FlagSuivant}>  
+                 <lightning-textarea style="resize: horizontal; padding: 10px; width: 100%;"  type="text" label="Adresse facture IAM" value={addIAM}
+                    name="addIAM" rows="2"  disabled  class={varclass}
+                    onchange={handleChangeInput}>
+                    </lightning-textarea> 
+               </template>
+                    <template if:false={FlagSuivant}> 
+                    <lightning-input style="resize: none; padding: 10px;"  type="text" label="Adresse facture IAM" value={addIAM}
+                    name="addIAM"   disabled  class={varclass}
+                    onchange={handleChangeInput}>
+                    </lightning-input>
+        
+                </template>
+
+               <template if:false={FrequiredField}> 
+                    <span  style="cursor: pointer;"  onclick={InfoDegroupage} >&#128269;</span></template>
+                   </div>
+              
+             <!--     <template if:true={StatusDeg} slds-col slds-size_2-of-3>
+                
+                    <span onclick={InfoDegroupage}  class="slds-col slds-size_1-of-2 elementMargin2" >&#128269;</span>
+                   
+                  
+                        <lightning-button label="Recherche Adresse IAM" variant="brand" onclick={InfoDegroupage} class="slds-float_right"    style="padding: 10px;" disabled={FrequiredField}></lightning-button>
+                   
+                </template>--> 
+             </div></div>
+           <!--  <template if:false={DisplayAdressInst}>
+             <template if:false={FlagSuivant}> 
+             <div style="position: relative;padding:20px; text-align: right;">
+             <lightning-button variant="brand" label="Suivant" title="Suivant" onclick={gotonextStep} class="slds-m-right_small"></lightning-button>
+             </div>
+            </template>
+            </template> --> 
+
+   <!--   <template if:false={Step1}>-->
+    <!--   Statut inactive & active-->
+    <template if:true={isShowModal}>
+        <template if:true={isLoadinginModal}>
+            <div class="exampleHolder">
+                <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+            </div>
+        </template>
+        <template if:false={isLoadinginModal}>
+        <template  if:false={eligibleIAM}>
+
+            <section  role="alert" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-backdrop slds-backdrop_open" >
+                <div class="slds-modal__container">
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+     
+                    <template if:false={FlagFinalisation}>
+                        
+                 <!-- modal header start -->
+                 <!--  <header class="slds-modal__header">
+                      <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={hideModalBox}>
+                         <lightning-icon icon-name="utility:close"
+                            alternative-text="close"
+                            variant="inverse"
+                            size="small" ></lightning-icon>
+                         <span class="slds-assistive-text">Confirmer</span>
+                      </button>
+                   
+                      <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">{title}</h2>
+                   </header>  -->
+               
+                   <!-- modal body start -->
+                  
+                   <template if:false={demandeIAM}>
+                    <div style="border-style: solid; border-color: #92107F; padding: 10px; border-radius: 10px;">
+                        <div class="slds-grid slds-wrap slds-grid_vertical-stretch">
+                            Adresse du site au format IAM :
+                           
+                               
+                            <div class="slds-grid slds-wrap">
+                         <div class="slds-col slds-size_1-of-2">
+                            <!--chb ano B-15151 02/04/2024 begin -->
+           <label class="slds-form-element__label">Province/Ville<span class="slds-required">*</span></label>
+           <!--chb ano B-15151 02/04/2024 end --> 
+                             <lightning-input  placeholder="Province/Ville" onchange={GetProvince}  type="search" onfocus={showPicklistOptionsProvince}
+                                value={labelProvince}  > 
+                                </lightning-input >
+                                            <div if:true={searchResultsProvince} class="slds-dropdown slds-dropdown_length-5 slds-dropdown_fluid"
+                                        role="listbox">
+                                        <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+                                            <template for:each={searchResultsProvince} for:item="searchResultsProvince">
+                                                <li key={searchResultsProvince.value} data-value={searchResultsProvince.value} role="presentation"
+                                                    onclick={selectSearchResultProv} class="slds-listbox__item">
+                                                    <div class="slds-media slds-listbox__option slds-listbox__option_plain slds-media_small "
+                                                        role="option">
+                                                        <span class="slds-media__body">
+                                                            <span class="slds-truncate" title={searchResultsProvince.label}>
+                                                                {searchResultsProvince.label}
+                                                            </span>
+                                                        </span>
+                                                    </div>
+                                                </li>
+                                            </template>
+                                        </ul>
+                                    </div>
+                                </div>
+                               <!--  <lightning-combobox placeholder="Commune" onchange={GetCommune}  label="Commune" required
+                                value={CommuneV} class="slds-col slds-size_1-of-2 elementMargin2"  options={communeValues}  style="padding: 10px;"> 
+                                </lightning-combobox> -->
+                             <div class="slds-col slds-size_1-of-2">
+                                 <!--chb ano B-15151 02/04/2024 begin -->
+                    <label class="slds-form-element__label">Commune<span class="slds-required">*</span></label>  
+                    <!--chb ano B-15151 02/04/2024 end -->
+                               <lightning-input placeholder="Commune" onchange={GetCommune} 
+                                value={labelCommune}  type="search" onfocus={showPicklistOptionsCommune} disabled={disableCommune} > 
+                                </lightning-input>
+                                <div if:true={searchResultsCommune} class="slds-dropdown slds-dropdown_length-5 slds-dropdown_fluid"
+                                role="listbox">
+                                <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+                                    <template for:each={searchResultsCommune} for:item="searchResultsCommune">
+                                        <li key={searchResultsCommune.value} data-value={searchResultsCommune.value} role="presentation"
+                                            onclick={selectSearchResultCommune} class="slds-listbox__item">
+                                            <div class="slds-media slds-listbox__option slds-listbox__option_plain slds-media_small "
+                                                role="option">
+                                                <span class="slds-media__body">
+                                                    <span class="slds-truncate" title={searchResultsCommune.label}>
+                                                        {searchResultsCommune.label}
+                                                    </span>
+                                                </span>
+                                            </div>
+                                        </li>
+                                    </template>
+                                </ul>
+                            </div> </div>
+                               <!-- <lightning-combobox placeholder="Quartier" onchange={GetQuartier}  label="Quartier" required
+                                value={QuartierIAM} class="slds-col slds-size_1-of-2 elementMargin2"  options={QuartierValuesIAM} style="padding: 10px;"> 
+                                </lightning-combobox>
+                               -->
+                                <div class="slds-col slds-size_1-of-2">
+                                     <!--chb ano B-15151 02/04/2024 begin -->
+                     <label class="slds-form-element__label">Quartier<span class="slds-required">*</span></label>
+                     <!--chb ano B-15151 02/04/2024 end -->
+                                    <lightning-input placeholder="Quartier" onchange={GetQuartier}  
+                                     value={labelQuartier}  type="search" onfocus={showPicklistOptionsQuartierIAM} disabled={disableQuartierIAM}  > 
+                                    </lightning-input>
+                                <div if:true={searchResultsQuartierIAM} class="slds-dropdown slds-dropdown_length-5 slds-dropdown_fluid"
+                                role="listbox">
+                                <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+                                    <template for:each={searchResultsQuartierIAM} for:item="searchResultsQuartierIAM">
+                                        <li key={searchResultsQuartierIAM.value} data-value={searchResultsQuartierIAM.value} role="presentation"
+                                            onclick={selectSearchResultQuartierIAM} class="slds-listbox__item">
+                                            <div class="slds-media slds-listbox__option slds-listbox__option_plain slds-media_small "
+                                                role="option">
+                                                <span class="slds-media__body">
+                                                    <span class="slds-truncate" title={searchResultsQuartierIAM.label}>
+                                                        {searchResultsQuartierIAM.label}
+                                                    </span>
+                                                </span>
+                                            </div>
+                                        </li>
+                                    </template>
+                                </ul>
+                            </div> </div>
+                                <!--<lightning-combobox placeholder="Voie" onchange={getVoies}  label="Voie" required
+                                value={Voie} class="slds-col slds-size_1-of-2 elementMargin2"  options={VoieValues}   style="padding: 10px;"> 
+                                </lightning-combobox>-->
+                                <div class="slds-col slds-size_1-of-2">
+                                     <!--chb ano B-15151 02/04/2024 begin -->
+                       <label class="slds-form-element__label">Voie<span class="slds-required">*</span></label>
+                       <!--chb ano B-15151 02/04/2024 end -->
+                                <lightning-input placeholder="Voie" onchange={getVoies}
+                                value={labelVoie}   type="search" onfocus={showPicklistOptionsVoie}  disabled={disableVoie} > 
+                                </lightning-input>
+                                <div if:true={searchResultsVoie} class="slds-dropdown slds-dropdown_length-5 slds-dropdown_fluid"
+                                role="listbox">
+                                <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+                                    <template for:each={searchResultsVoie} for:item="searchResultsVoie">
+                                        <li key={searchResultsVoie.value} data-value={searchResultsVoie.value} role="presentation"
+                                            onclick={selectSearchResultVoie} class="slds-listbox__item">
+                                            <div class="slds-media slds-listbox__option slds-listbox__option_plain slds-media_small "
+                                                role="option">
+                                                <span class="slds-media__body">
+                                                    <span class="slds-truncate" title={searchResultsVoie.label}>
+                                                        {searchResultsVoie.label}
+                                                    </span>
+                                                </span>
+                                            </div>
+                                        </li>
+                                    </template>
+                                </ul>
+                            </div> </div></div>
+                                <!--<lightning-combobox placeholder="Numéro de la voie" onchange={getNumVoies}  label="Numéro de la voie" 
+                                value={Numerovoie} class="slds-col slds-size_1-of-2 elementMargin2"  options={NumerovoieValues}  style="padding: 10px;"> 
+                                </lightning-combobox>-->
+                                <div class="slds-col slds-size_1-of-2">
+                                    <label class="slds-form-element__label">Numéro de la voie</label>   
+                                <lightning-input placeholder="Numéro de la voie" onchange={getNumVoies}  
+                                value={labelNumVoie}   type="search" onfocus={showPicklistOptionsNumVoies} onkeydown={handleKeyPress} disabled={disableNumVoie}> 
+                                </lightning-input>
+                                <div if:true={searchResultsNumVoies} class="slds-dropdown slds-dropdown_length-5 slds-dropdown_fluid"
+                                role="listbox">
+                                <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+                                    <template for:each={searchResultsNumVoies} for:item="searchResultsNumVoies">
+                                        <li key={searchResultsNumVoies.value} data-value={searchResultsNumVoies.value} role="presentation"
+                                            onclick={selectSearchResultNumVoies} class="slds-listbox__item">
+                                            <div class="slds-media slds-listbox__option slds-listbox__option_plain slds-media_small "
+                                                role="option">
+                                                <span class="slds-media__body">
+                                                    <span class="slds-truncate" title={searchResultsNumVoies.label}>
+                                                        {searchResultsNumVoies.label}
+                                                    </span>
+                                                </span>
+                                            </div>
+                                        </li>
+                                    </template>
+                                </ul>
+                            </div>
+                               
+                            </div> <!--CHB ano B-14497 27/02/2024 begin-->
+                               <div class="slds-col slds-size_1-of-2">
+                                <label class="slds-form-element__label">Bâtiment</label>
+                                <lightning-input type="text" onchange={handleinputIAM} name="batiment"
+                                 placeholder="Saisir le Bâtiment" value={batiment} 
+                                maxlength="5" message-when-pattern-mismatch="batiment doit contenir que 5 Chiffres">
+                                </lightning-input>
+                            </div><div class="slds-col slds-size_1-of-2">
+                                <label class="slds-form-element__label">Escalier</label>
+                                <lightning-input type="text" onchange={handleinputIAM} name="escalier"
+                                 placeholder="Saisir l'Escalier" value={escalier} 
+                                maxlength="3"  message-when-pattern-mismatch="Escalier doit contenir que 3 Chiffres">
+                            </lightning-input>
+                            </div><div class="slds-col slds-size_1-of-2">
+                                <label class="slds-form-element__label">Etage</label> 
+                                <lightning-input type="text" onchange={handleinputIAM} name="etage"
+                                 placeholder="Saisir l'Etage" value={etage} 
+                                maxlength="2"  message-when-pattern-mismatch="Etage doit contenir que 2 Chiffres">
+                                </lightning-input>
+                            </div><div class="slds-col slds-size_1-of-2">
+                                <label class="slds-form-element__label">Porte</label>
+                                <lightning-input type="text" onchange={handleinputIAM}  name="porte"
+                                placeholder="Saisir la Porte" value={porte} 
+                                maxlength="5"  message-when-pattern-mismatch="Porte doit contenir que 5 Chiffres">    
+                            </lightning-input><!--CHB ano B-14497 27/02/2024 end-->
+                            </div>
+                            </div></div></div>
+                               <!-- </div></div></div>-->
+                  
+                
+                       
+                     
+                   
+                        <lightning-button label="Rechercher" variant="brand" onclick={checkFieldsIAM} class="slds-float_right"    style="padding: 10px;"  disabled={flagSearch}></lightning-button>
+                       <!-- <template if:true={demandeIAM}>  disabled={synchronisation}-->
+
+                            <lightning-button label="Demande support IAM" variant="brand" onclick={demandeSuPIAM} class="slds-float_right"    style="padding: 10px;"></lightning-button>
+                      <!--   </template>-->
+                        <lightning-button label="Annuler" variant="brand" onclick={handleCancel} class="slds-float_right"    style="padding: 10px;"></lightning-button>
+                        
+                      
+                  </template>
+                  <template if:true={fshowDemandeSupport}>
+                        
+     
+                    <div style="border-style: solid; border-color: #92107F; padding: 10px; border-radius: 10px;">
+                        <div class="slds-grid slds-wrap slds-grid_vertical-stretch">
+               <!-- chb ano B-B-22082 09/12/2024 end 
+                    <lightning-combobox placeholder="Province/Ville" onchange={GetProvince}  label="Province/Ville" required
+                value={ProvinceVille} class="slds-col slds-size_1-of-2 elementMargin2"  options={provinceValues}   style="padding: 10px;"> 
+                </lightning-combobox>
+              --> 
+              <div class="slds-grid slds-wrap">
+                <div class="slds-col slds-size_1-of-1">
+              <label class="slds-form-element__label">Province/Ville<span class="slds-required">*</span></label>
+                  
+              <lightning-input placeholder="Province/Ville"
+                     onchange={Getprovince} 
+                     type="search" onclick={showPicklistOptionsProvince}
+                     value={labelProvince}>
+                 </lightning-input>
+            
+                 <div if:true={searchResultsProvince}
+                     class="slds-dropdown slds-dropdown_length-5 slds-dropdown_fluid"
+                     role="listbox">
+                     <ul class="slds-listbox slds-listbox_vertical"
+                         role="presentation" >
+                         <template for:each={searchResultsProvince}
+                             for:item="searchResultsProvince">
+                             <li key={searchResultsProvince.value}
+                                 data-value={searchResultsProvince.value}
+                                 role="presentation"
+                                 onclick={selectSearchResultProv}
+                                 class="slds-listbox__item" >
+                                 <div class="slds-media slds-listbox__option slds-listbox__option_plain slds-media_small "
+                                     role="option">
+                                     <span class="slds-media__body">
+                                         <span class="slds-truncate"
+                                             title={searchResultsProvince.label} >
+                                             {searchResultsProvince.label}
+                                         </span>
+                                     </span>
+                                 </div>
+                             </li>
+                         </template>
+                     </ul>
+                 </div></div>
+            <!--
+             <lightning-input  type="text" placeholder="Adresse client" onchange={handleInputDemande}  label="Adresse client" required
+            value={AdClient} class="slds-col slds-size_1-of-2 elementMargin2"    style="padding: 10px;"> 
+            </lightning-input> 
+              -->
+              <div class="slds-col slds-size_1-of-1">
+                  <label class="slds-form-element__label">Adresse client</label>                                                      
+                  <lightning-input type="text" onchange={handleInputDemande}
+                  placeholder="Saisir Adresse client" value={AdClient} onkeydown={handleKeyDownVilleSupport}>
+                  </lightning-input>
+              </div>
+            </div>
+             
+            
+          
+        </div></div>
+            <lightning-button label="Envoyer la demande" variant="brand" onclick={callAPIdemandeIAM} class="slds-float_right"    style="padding: 10px;" disabled={FlagButtonSend}></lightning-button>
+            <lightning-button label="Annuler" variant="brand" onclick={hideModalBox} class="slds-float_right"    style="padding: 10px;"></lightning-button>
+                        
+            </template>
+        </template>
+                    <template if:true={FlagFinalisation}>
+                        <div id="variants" class="row slds-box slds-text-heading_small">
+                       
+                            <lightning-icon icon-name="utility:success" alternative-text="Success!" title="success variant" variant="success"></lightning-icon>
+                            <lightning-formatted-text class="slds-form-element__label slds-col" value="Votre demande a bien été envoyée au support IAM."></lightning-formatted-text>
+                         </div>
+                 
+                  
+                   <lightning-button label="Terminer" variant="brand" onclick={Terminer} class="slds-float_right"    style="padding: 10px;"></lightning-button>
+                </template></div>
+                   <!-- modal footer start
+                   <footer class="slds-modal__footer">
+                    <button class="slds-button slds-button_neutral" onclick={hideModalBox}>Annuler</button>
+                    <button class="slds-button slds-button_neutral" onclick={Search}>Rechercher</button>
+               
+                   </footer>-->
+               
+                </div>
+             </section>
+           
+        </template>
+          </template>
+            </template>
+    </template>
+
+    <!-- CHB 15/02/2024-->
+    <template if:true={fshowPopupModif}>
+        <section role="alert" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+            aria-describedby="modal-content-id-1" class="slds-backdrop slds-backdrop_open">
+            <div class="slds-modal__container">
+                <div class="slds-modal__content slds-p-around_medium">
+    
+                    <div class="row slds-box slds-text-heading_small">
+                
+                        <lightning-icon icon-name="utility:info_alt" alternative-text="Success!" title="success variant"
+                            variant="error" style="font-size: smaller; margin-right: 0.5rem;" class="slds-icon-text-error"></lightning-icon>
+                        <lightning-formatted-text class="slds-form-element__label slds-col"   style="text-align: center; display: flex; align-items: center; justify-content: center;"
+                            value="Êtes-vous sûr de vouloir modifier les informations de dégroupage ?"></lightning-formatted-text>
+                    </div>
+    
+    
+    
+                    <lightning-button label="Confirmer" variant="brand" onclick={checkTraitementRollback} class="slds-float_right"
+                        style="padding: 10px;"></lightning-button>
+                    <lightning-button label="Annuler" variant="brand" onclick={hideModalBoxModif} class="slds-float_right"
+                        style="padding: 10px;"></lightning-button>
+                </div>
+            </div>
+        </section>
+    </template>
+
+
+    <template if:false={FlagSuivant}>
+        <template if:false={Step1}>
+            <template if:true={eligibleIAM}>
+                <lightning-datatable class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered"
+                    aria-label="Example table of Opportunities with vertical borders" key-field="id" columns={columns}
+                    data={__data} hide-checkbox-column=true>
+                </lightning-datatable>
+                <!--statut inactive
+            -->
+                <template if:false={StepDeg}>
+                    <template if:true={displayMDNChoice}>
+                        <lightning-input type="text" label="ND filtre" value={mdnFilter} onchange={handleMdnFilterChange}
+                            class="slds-size_1-of-2"></lightning-input>
+    
+                        <br>
+    
+                        <lightning-button variant="brand" label="Recherche" title="recherche ND" onclick={getMdnList}
+                            class="slds-m-left_x-large slds-m-top_x-large"></lightning-button>
+    
+                        <template if:true={records}>
+                            <lightning-combobox name="progress" label="Liste ND" value={selectedmdn}
+                                placeholder="Select MDN" options={records} onchange={handleMdnSelection}
+                                class="slds-size_1-of-2"></lightning-combobox>
+    
+                            <template if:true={__selectedmdnListItem}>
+                                <br>
+    
+                                <lightning-button variant="brand" label="Sélectionner le numéro de désignation"
+                                    title="Selection MDN" onclick={selectND}
+                                    class="slds-m-left_x-large slds-m-top_x-large"></lightning-button>
+                            </template>
+                        </template>
+                    </template>
+                </template>
+                 <template if:false={displayMDNChoice}>
+
+                    <lightning-input type="text" label="numéro de désignation" value={numND}  class="slds-size_1-of-2" disabled></lightning-input>
+
+
+                  </template>
+            
+            <lightning-button label="Synchroniser" variant="brand" onclick={Synchronise} class="slds-float_right" style="padding: 10px;" disabled={synchronisation}></lightning-button>
+            <template if:false={disablePrecedent}>
+            <lightning-button label="Précedent" variant="brand" onclick={Previous} class="slds-float_right"  style="padding: 10px;" ></lightning-button>
+        </template>
+         </template>
+<template if:true={StepDeg}>
+<!--   Statut active-->
+    </template>
+   <!--  <template  if:false={eligibleIAM}>
+        <lightning-button label="Rechercher" variant="brand" onclick={Search} class="slds-float_right"    style="padding: 10px;" disabled={flagSearch}></lightning-button>
+    </template>-->
+      <!--  <lightning-button label="Précédent" variant="brand" onclick={Precedent} class="slds-float_right"    style="padding: 10px;" disabled={flagPrecedent}></lightning-button>-->
+       
+             
+</template></template>
+
+          
+</template> <!--</template>-->
+
+<template if:true={FlagSuivant}>
+    <template if:true={requalification}>
+    <lightning-button label="Suivant" variant="brand" onclick={next} class="slds-float_right"    style="padding: 10px;" ></lightning-button>
+   <!-- CHB 15/02/2024
+     <lightning-button label="Rechercher" variant="brand" onclick={InfoDegroupage} class="slds-float_right"    style="padding: 10px;" ></lightning-button>-->
+     <lightning-button label="Modifier" variant="brand" onclick={handleOnClickModifier} class="slds-float_right"
+     style="padding: 10px;"></lightning-button></template>
+</template>
+</template>

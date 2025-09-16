@@ -1,0 +1,26 @@
+<template>
+
+    <div>
+    <br>
+    <br>
+    <br>
+    </div>
+        <div class="slds-grid slds-wrap slds-grid_vertical-stretch" style="float:right">
+            <template if:true={isok}>
+                <template if:false={updaterdv}>
+            <lightning-button variant="brand" label="Suivant" onclick={gotonextStep}
+            class="slds-m-left_x-small">
+            </lightning-button>
+        </template>
+            <template if:true={updaterdv}>
+            <lightning-button variant="brand" label="Soumettre" onclick={gotonextStep}
+            class="slds-m-left_x-small">
+            </lightning-button>
+            </template>
+        </template>
+        <template if:false={isok}>
+            <lightning-button  variant="brand" label="Précédent" onclick={gotopreviousStep}
+            class="slds-m-left_x-small"></lightning-button>
+        </template>
+        </div>
+    </template>

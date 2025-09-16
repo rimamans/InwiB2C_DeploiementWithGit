@@ -1,0 +1,21 @@
+<template>
+  <ul role="group">
+      <template for:each={apidata} for:item="node">
+          <li aria-expanded="true" aria-label="Tree Branch" aria-level={node.depth} role="treeitem" key={node.id}>
+              <div class="slds-tree__item vertical-layout">
+                  <lightning-input type="checkbox" name="isChecked" label={node.label} checked={node.isChecked} onchange={handleInputChange} data-index={node.id}></lightning-input>
+                  <div style="display: flex; gap: 30px;">
+                      <lightning-input type="number" style="width: 100%;" name="Objectif_SIM" label="Objectif Vente Carte SIM" value={node.Objectif_SIM} onchange={handleInputChange} data-index={node.id}></lightning-input>
+                      <lightning-input type="number" style="width: 100%;" name="Objectif_SIM_Dealer" label="Objectif Vente SIM Dealer" value={node.Objectif_SIM_Dealer} onchange={handleInputChange} data-index={node.id}></lightning-input>
+                      <lightning-input type="number" style="width: 100%;" name="Objectif_SC" label="Objectif Vente SC" value={node.Objectif_SC} onchange={handleInputChange} data-index={node.id}></lightning-input>
+                  </div>
+                  <div>
+                      <template if:true={node.children}>
+                          <c-inwi-c-g-c_-demande-de-visite-tree-view apidata={node.children} oninputchange={handleNodeUpdateEvent} is-recursive="true"></c-inwi-c-g-c_-demande-de-visite-tree-view>
+                      </template>
+                  </div>
+              </div>
+          </li>
+      </template>
+  </ul>
+</template>

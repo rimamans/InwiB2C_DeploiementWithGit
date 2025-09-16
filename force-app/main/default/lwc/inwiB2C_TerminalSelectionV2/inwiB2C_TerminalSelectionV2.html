@@ -1,0 +1,43 @@
+<template>
+
+    <template if:true={imeiAttribute}>
+        <lightning-combobox
+                    name={marqueAttribute.label}
+                    label={marqueAttribute.label}
+                    value={marqueAttributeValue}
+                    options={__marqueOptions}
+                    onchange={handleChangeMarque}
+                    disabled></lightning-combobox>
+
+    
+        <lightning-combobox
+                    name={modelAttribute.label}
+                    label={modelAttribute.label}
+                    value={modeleAttributeValue}
+                    options={__modeleOptions}
+                    onchange={handleChangeModele}
+                    disabled={imeiDisabled}></lightning-combobox>
+
+        
+            <lightning-input
+                value={imeiAttributeValue}
+                name={serialTypeAttributeValue}
+                label={imeiLabel}
+                type="text"
+                onchange={hanldleImeiEntry}
+                class="imeiInput"
+                disabled={imeiDisabled}
+            ></lightning-input>
+            <template if:false={imeiDisabled}>
+                <br>
+                
+                <lightning-button variant="brand" label="Valider le terminal" title="Valider" onclick={validateIMEI} class="slds-m-left_x-large slds-m-top_x-large"></lightning-button>
+
+            </template>
+
+    </template>
+
+
+    
+    
+</template>

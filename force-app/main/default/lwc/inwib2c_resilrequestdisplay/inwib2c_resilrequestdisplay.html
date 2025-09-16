@@ -1,0 +1,97 @@
+<template>
+    <template if:true={labelstepcreate}>
+        <!-- Affichage Options Type et Motif -->
+        <div if:true={isftthadsl} class="slds-p-right_small slds-m-bottom_xx-small slds-show_inline-block slds-size_12-of-12 slds-medium-size_6-of-12">
+            <lightning-record-edit-form object-api-name="InwiB2C_Demande_de_resiliation__c">
+              <lightning-messages></lightning-messages>
+              <lightning-input-field class="slds-size_1-of-2" field-name="Type__c" onchange={handleTypeChange} required="true" style="width:400px;"> </lightning-input-field>
+              <lightning-input-field if:true={eligibiliteCasSpecial} class="slds-size_1-of-2" field-name="Motif__c" onchange={handleMotifChange} required="true" style="width:400px;"> </lightning-input-field>
+            </lightning-record-edit-form>
+          </div>
+        <!---->
+        <div if:true={displayButtonCreateDemande} class="slds-grid slds-wrap slds-grid_vertical-stretch">
+            <lightning-button variant="brand" label="Créer la demande" title="Create" onclick={createnewrequest}
+                disabled={disabled} class="slds-m-left_x-large slds-m-top_x-large">
+            </lightning-button>
+        </div>
+    </template>
+
+    <br />
+    <br />
+    <br />
+    <template if:true={labelstepcancel}>
+        <lightning-button variant="brand" label="Annuler la demande" title="CancelRequest" onclick={gotocancelStep}
+            style="float:left; margin:6px;" class="">
+        </lightning-button>
+    </template>
+
+    <div class="slds-grid slds-wrap slds-grid_align-end omniscript-button-position">
+
+
+        <lightning-button style="margin:6px;" variant="brand" label="Précédent" title="Précédent"
+            onclick={gotopreviousStep} class=""></lightning-button>
+
+            
+                <!--<lightning-button variant="brand" label="Terminer" title="Terminer" onclick={gotonextStep}
+            style="float:right; margin:6px;" class="">
+        </lightning-button>-->
+            
+            
+
+        <!--<template if:true={buttonterminepdv}>
+            <lightning-button variant="brand" label="Terminer" title="Terminer" onclick={gotonextStep}
+                style="float:right; margin:6px;" class="">
+            </lightning-button>
+        </template>-->
+
+        <!--<template if:true={iiterminedrcrm}>
+            <lightning-button variant="brand" label="Terminer" title="Terminer" onclick={gotonextStep}
+                style="float:right; margin:6px;" class="">
+            </lightning-button>
+        </template>-->
+
+        <!--<template if:true={iterminedrcrm}>
+            <lightning-button variant="brand" label="Terminer" title="Terminer" onclick={gotonextStep}
+                style="float:right; margin:6px;" class="">
+            </lightning-button>
+        </template>-->
+
+        <!--<template if:true={labelstepexist}>
+            <lightning-button variant="brand" label="Terminer" title="Terminer" onclick={gotonextStep}
+                style="float:right; margin:6px;" class="">
+            </lightning-button>
+        </template>-->
+
+        <template if:true={forjustificatifspdv}>
+            <lightning-button variant="brand" label="Suivant" title="Resiliate"
+                onclick={gotoresilStep} style="float:right; margin:6px;" class="">
+            </lightning-button>
+
+        </template>
+
+        <template if:true={procederesil}>
+            <lightning-button variant="brand" label="Procéder à la résiliation" title="Resiliate"
+                onclick={gotoresilStep} style="float:right; margin:6px;" class="">
+            </lightning-button>
+
+        </template>
+
+       <!--template if:true={labelsteprestitution}>
+             <lightning-button variant="brand" label="Restitution Matériel" title="Restitution" onclick={gotorestitutionStep}
+            style="float:right; margin:6px;" class="">
+        </lightning-button>
+
+        </template--> 
+
+      
+        <template if:true={labelstepretention}>
+            <lightning-button variant="brand" label="Rétention" title="Retention" onclick={gotoretentionStep}
+                style="float:right; margin:6px;" class="">
+            </lightning-button>
+        </template>
+
+
+
+
+    </div>
+</template>

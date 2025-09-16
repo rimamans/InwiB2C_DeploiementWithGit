@@ -1,0 +1,3 @@
+let definition = 
+                {"Cards":["Flyout_Souscription_Compte_Facturation"],"GlobalKey__c":"INWI-B2C_Flayout_Souscription_Compte_Facturation/1/EST/1602803928404","componentName":"cfINWIB2C_Flayout_Souscription_Compte_Facturation_1_EST","dataSource":{"type":null},"enableLwc":true,"lwc":{"DeveloperName":"cardCanvas1x","Id":"0Rb4K000000kQXbSAM","MasterLabel":"cardCanvas1x","name":"cardCanvas1x"},"previewType":"designTime","repeatCards":false,"workspace":["Flyout_Souscription_Compte_Facturation/OKI/1/1602803981733"]}; 
+            export default definition

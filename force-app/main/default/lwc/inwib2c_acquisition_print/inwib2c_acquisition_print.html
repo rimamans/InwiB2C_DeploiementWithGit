@@ -1,0 +1,33 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 02-20-2023
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+    <template if:false={__loading}>
+        <div class="slds-grid slds-wrap" style="margin-top: 20px;">
+            <template if:true={__disablefristbilling}>  
+            <div class="slds-col slds-size_3-of-12">
+                <button style="margin: 0; width: 96.5%" class="slds-button slds-button_brand" onclick={handlePrint}>
+                    Simulation premiére facture
+                </button>
+            </div>
+        </template>
+            <template if:true={__displayFactureFMSFMD}>
+                <!--<template if:true={isShowed}></template>-->
+            <div class="slds-col slds-size_3-of-12">
+                <button style="margin: 0; width: 96.5%; margin-left: 3px;" class="slds-button slds-button_brand" onclick={handlePrintFMS}> {buttonLabel}
+                </button>
+            </div>
+        </template>
+        </div>
+    </template>
+    <template if:true={__loading}>
+        <div style="margin-top: 20px;text-align: center; ">
+            <p style="font-weight: bold;">Chargement en cours...</p>
+        </div>
+    </template>
+
+</template>

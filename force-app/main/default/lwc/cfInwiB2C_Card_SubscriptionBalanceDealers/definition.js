@@ -1,0 +1,3 @@
+let definition = 
+                {"GlobalKey__c":"InwiB2C_Card_SubscriptionBalanceDealers/RMA/1/1635166794338","dataSource":{"type":null,"value":{}},"enableLwc":true,"filter":{},"states":[{"conditions":{"group":[{"field":"$scope.data.status","operator":"===","type":"system","value":"'active'"}]},"customLwc":true,"customLwcAttributes":[{"name":"records","val":"$scope.records"}],"customLwcRepeat":false,"definedActions":{"actions":[]},"fields":[],"isSmartAction":false,"lwc":{"DeveloperName":"inwiB2C_DisplayBalanceDealer","Id":"0Rb25000000ASBDCA4","MasterLabel":"inwiB2C_DisplayBalanceDealers","name":"inwiB2C_DisplayBalanceDealer"},"name":"Active","smartAction":{}}],"title":"Balances Lignes Dealer"}; 
+            export default definition

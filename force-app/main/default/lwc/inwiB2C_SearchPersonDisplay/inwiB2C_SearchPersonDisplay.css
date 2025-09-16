@@ -1,0 +1,18 @@
+/*Added BY AAR 13/10/2020  */
+.THIS .tab-style thead th span {
+    background-color: #16325c !important;
+    color: white;
+}
+
+.wraperClass{
+    border: 1px solid #5A245A;
+}
+
+.tab-style{
+    background-color: #16325c !important;
+
+    zoom : 80%;
+}
+
+
+/*END OF AAR's ADDITION  13/10/2020 */

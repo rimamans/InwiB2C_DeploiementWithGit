@@ -1,0 +1,77 @@
+/*Added BY JBE 24/03/2021  */
+table, th, td {
+    border: 1px solid black;
+  }
+
+  td {
+    color:black;
+  }
+
+  .header {
+    font-size: 20px;
+  }
+
+  th {
+    text-align: left;
+  }
+
+  .NextStepButton {
+    transition-duration: 0.4s;
+    color:#FFFFFF;
+    background-color:#862a88;
+    font-weight:bold;
+    text-align:center;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+    background: rgb(134, 42, 136);
+    width: 600px;
+    height: 35px;
+    border-radius: 10px;
+  }
+
+  .NextStepButton1 {
+    transition-duration: 0.4s;
+    color:#FFFFFF;
+    background-color:#862a88;
+    font-weight:bold;
+    text-align:center;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+    background: rgb(134, 42, 136);
+    width: 600px;
+    height: 35px;
+    border-radius: 10px;
+  }
+
+  .UnblockButton{
+    transition-duration: 0.4s;
+    color:#FFFFFF;
+    background-color:#862a88;
+    font-weight:bold;
+    text-align:center;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+    background: rgb(134, 42, 136);
+    width: 600px;
+    height: 35px;
+    border-radius: 10px;
+  }
+
+  .NextStepButton:hover {
+    background-color:#FFFFFF;
+    color:#862a88;
+
+  }
+  .TextUnblockSuccess{
+    background-color: cadetblue;
+    padding: 8px;
+    color:black;
+    font-size: 15px;
+    font-weight:bold;
+  }
+
+  .TextUnblockError{
+    background-color:indianred;
+    padding: 8px;
+    color:black;
+    font-size: 15px;
+    font-weight:bold;
+  }
+/*END OF JBE's ADDITION  13/10/2020 */

@@ -1,0 +1,33 @@
+<template>
+
+    <template if:false={isAssetIccDifIccSub}>
+        
+    <!--lightning-input type="text" label="MDN" value={mdnAttributeValue} read-only ></lightning-input-->
+
+    <template if:true={Changed}>
+         <lightning-input class="slds-col slds-size_1-of-2" value={__oldICC} name="ICC"  label={libelleICC} type="text" style="margin-left: -14px;" disabled></lightning-input>
+    </template>
+    <template if:false={Changed}>
+        <lightning-input class="slds-col slds-size_1-of-2" value={__subscriptionICC} name="ICC"  label={libelleICC} type="text" disabled style="margin-left: -14px;"></lightning-input>
+        <div class="slds-col slds-size_1-of-2" >
+            <lightning-input  value={iccAttributeValue} name="ICC" label="Nouveau ICC:"
+                type="text" onchange={hanldleIccEntry} class="iccInput" style="margin-left: -14px;"></lightning-input>
+                <br>
+        <lightning-button label="Rechercher"  onclick={handleKeyUp} variant="brand"></lightning-button>
+        </div>
+        <br>
+        </template>
+        <div style="float: right; margin-top: 10px;">
+            <button class="slds-button slds-button_neutral" title="Précédent" type="button" onclick={handlePrevious} style="margin-right: 10px;width: 112px;height: 34px;">Précédent</button>
+            <button class="slds-button slds-button_brand" title="Suivant" type="button" onclick={handleSave} disabled={disableSave} style="width: 112px;">Suivant</button>
+        </div>
+           <!--<lightning-button label="Soumettre"  onclick={handleSave} disabled={disableSave}></lightning-button>--> 
+    </template>
+
+    <template if:true={isAssetIccDifIccSub}>
+        <br>
+        <div class="slds-text-color_error slds-text-heading_medium slds-text-align_center">Erreur lors de la génération du SMO, prière de prendre contact avec le support</div>
+    </template>
+    <br>
+
+</template>

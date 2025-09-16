@@ -1,0 +1,52 @@
+<template>
+    <template if:false={isOffresToDisplayEmpty}>
+      <br><br>
+      <div class="slds-grid slds-wrap slds-grid_vertical-stretch cardCover">
+        <template for:each={sortedOffers} for:item="product">
+  
+              <div class="slds-col slds-size_1-of-3 containerCard" key={product.code} 
+                data-productname={product.name} data-productprix={product.prix} data-productcode={product.code}
+                 data-prixmigration={product.prixMigration} data-profil={product.profil} onclick={handleProductSelectionFromDev}>
+  
+                <table style="height: 100%;">
+                  <tr>
+                    <td class="">
+                      <div class="titleSection">{product.name}</div>
+                    </td>
+  
+                    <td class="">
+                      <div class="titleSection">{product.prix}
+                        <br>
+                        <div style="font-size:15px;">dh
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+        </template>
+  
+  
+  
+      </div>
+  
+      <!--
+      <lightning-button variant="brand" label="testt" title="testt" onclick={showVars} class="slds-m-left_x-small"
+        style=" position: absolute; right: 190px; top: 5px;">
+      </lightning-button>
+  -->
+    </template>
+  
+  
+    <template if:true={isOffresToDisplayEmpty}> 
+      <br><br>
+      <br><br>
+  
+  
+      <div style="text-align: center;"> il n'y a pas d'options à afficher</div>
+  
+      <br><br>
+      <br><br>
+  
+    </template>
+  </template>

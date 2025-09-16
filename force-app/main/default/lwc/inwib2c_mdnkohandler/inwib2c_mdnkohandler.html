@@ -1,0 +1,17 @@
+<!--* Sujet: MGEN3727B Besoin Identification MDM_TRE_Data_Reporting_V1.0
+ * author : khaoula kanboua
+ * last modify by : Khaoula kanboua  19/06/2025--> 
+<template>
+    <lightning-datatable
+        key-field="Id"
+        data={displayData} 
+        columns={columns}
+        hide-checkbox-column="true"
+        show-row-number-column="true" onrowaction={handleClick}>
+    </lightning-datatable>
+
+    <div class="slds-m-around_medium">
+        <p class="slds-align_absolute-center"> page {page} de {totalPage}</p>
+        <c-inwi-b2-c_-child-paginator onprevious={prevHandler} onnext={nextHandler}></c-inwi-b2-c_-child-paginator>
+    </div>
+</template>

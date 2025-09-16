@@ -1,0 +1,16 @@
+<apex:page standardController="InwiB2C_Hist_Relance__c" lightningStylesheets="true">
+    <apex:form >
+        <div style="height:auto">
+            <apex:pageBlock mode="edit">
+                <apex:pageBlockSection columns="2">
+                    <apex:outputField value="{!InwiB2C_Hist_Relance__c.InwiB2C_NumeroDegroupage__c}" label="Numéro de dégroupage" />
+                    <apex:outputField value="{!InwiB2C_Hist_Relance__c.InwiB2C_ND__c}" label="ND" />
+                    <apex:outputText value="{0,date,dd/MM/yyyy hh:mm:ss}" label="date de relance"> 
+                            <apex:param value="{!DATETIMEVALUE(InwiB2C_Hist_Relance__c.InwiB2C_Date_relance__c)}" />
+                        </apex:outputText>
+                    <apex:outputField value="{!InwiB2C_Hist_Relance__c.InwiB2C_Commande_degroupage__c}" label="Commande de dégroupage" />
+                </apex:pageBlockSection>
+            </apex:pageBlock>
+        </div>
+    </apex:form>
+</apex:page>

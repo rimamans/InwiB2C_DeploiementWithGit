@@ -1,0 +1,33 @@
+<template>
+    <div class="datatable-container">
+        <div style="height: 300px;">
+            <lightning-datatable
+                key-field="Id"
+                data={data1}
+                columns={columns1}
+                hide-checkbox-column
+                max-row-selection="0">
+            </lightning-datatable>
+        </div>
+
+        <div style="height: 300px;">
+            <lightning-datatable
+                key-field="Id"
+                data={data2}
+                columns={columns2}
+                hide-checkbox-column
+                max-row-selection="0">
+            </lightning-datatable>
+        </div>
+
+        <div style="height: 300px;">
+            <lightning-datatable
+                key-field="Id"
+                data={data3}
+                columns={columns3}
+                hide-checkbox-column
+                max-row-selection="0">
+            </lightning-datatable>
+        </div>
+    </div>
+</template>

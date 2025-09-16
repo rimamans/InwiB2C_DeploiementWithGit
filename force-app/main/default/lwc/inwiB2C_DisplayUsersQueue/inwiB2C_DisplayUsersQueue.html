@@ -1,0 +1,15 @@
+<template>
+
+    <lightning-card title= "Sélectionner un utilisateur">
+
+        <lightning-radio-group name="UsersList"
+                                label="Liste des utilisateurs disponibles:"
+                                options={authusers}
+                                onchange={ChangeUserEvent}
+                                value={value}
+                                type="radio"></lightning-radio-group>
+          
+    
+    </lightning-card>
+    
+</template>

@@ -1,0 +1,28 @@
+<template>
+    <lightning-tabset>
+        <lightning-tab label="Upload">
+            <lightning-card>
+                <div class="slds-col slds-size_3-of-4" style="margin-left: 3%">
+                    <lightning-file-upload accept={acceptedCSVFormats} onuploadfinished={uploadFileHandler} required></lightning-file-upload>
+                </div>
+            </lightning-card>
+        </lightning-tab>
+
+        <lightning-tab label="Historique" title="Historique">
+            <div style="height: 100%" >
+                <lightning-datatable
+                        key-field="id"
+                        hide-checkbox-column="true"
+                        columns={columns}
+                        data={data}
+                        onrowaction={handlesClick}>
+                </lightning-datatable>
+            </div>
+            <div class="slds-m-around_medium">
+                <p class="slds-align_absolute-center"> page {page} de {totalPage}</p>
+                <c-inwi-b2-c_-child-paginator onprevious={prevHandler} onnext={nextHandler}></c-inwi-b2-c_-child-paginator>
+            </div>
+        </lightning-tab>
+
+    </lightning-tabset>
+</template>

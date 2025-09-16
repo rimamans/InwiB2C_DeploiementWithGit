@@ -1,0 +1,488 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+-  @last modified on  : 08-30-2024
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<apex:page standardController="Order" tabStyle="Order" lightningStylesheets="true">
+    <apex:form >
+        <div style="height:auto">
+            <apex:pageBlock mode="edit">
+                <apex:pageBlockSection columns="2">
+                    <apex:outputField value="{!Order.OrderNumber}" label="Numéro de la commande" />
+                    <apex:outputField value="{!Order.InwiB2C_PreOrderSapId__c}" label="Précommande SAP ID" rendered="{!Order.inwiB2C_Canal__c == 'inwiB2C_Eshop' || Order.inwiB2C_Canal__c == 'inwiB2C_Televente'}"
+                    />
+
+                    <!--apex:outputField value="{!Order.InwiB2C_Offre__c}" label="Offre"/-->
+                    <apex:outputField value="{!Order.inwib2c_MotifAnnulation__c}" label="Motif d'annulation" rendered="{!Order.inwib2c_MotifAnnulation__c != ''}"
+                    />
+                    <!--FTTH FMD Complement Acyl 27/02/2025 Start-->
+                    <apex:outputField value="{!Order.inwib2c_Sous_Motif__c}" label="Sous Motif d'annulation" rendered="{!Order.inwib2c_Sous_Motif__c != ''}"
+                    />
+                    <!--FTTH FMD Complement Acyl 27/02/2025 End-->
+                    <apex:outputField value="{!Order.InwiB2C_MotifDeRejet__c}" label="Motif SN" rendered="{!Order.InwiB2C_MotifDeRejet__c != ''}"
+                    />
+
+                    <apex:outputField value="{!Order.Name}" />
+                    <apex:outputField value="{!Order.AccountId}" label="Compte Client" />
+                    <apex:outputField value="{!Order.Old_Account_id__c}" label="Ancien Compte Client" rendered="{!Order.inwiB2C_TypeActeDeGestion__c == 'InwiB2C_Cession_ligne_PREPAYE'}"
+                    />
+                    <apex:outputText value="{!IF((Order.inwiB2C_TypeActeDeGestion__c != 'inwiB2C_ChangementDeCarteSIM' && Order.InwiB2C_Type_Offer__c != 'Cameleon'), Order.inwib2c_DetailMotif__c, "
+                        ")}" label="Détail motif" />
+                    <!--ACYL BEGIN-->
+                    <apex:outputField value="{!Order.Motif_RollBack__c}" label="Motif de rollback" rendered="{!NOT(ISBLANK(Order.Motif_RollBack__c))}"
+                    />
+                    <!--ACYL END-->
+
+                    <apex:outputField value="{!Order.inwib2c_TypeDeLaCommande__c}" label="Type de la commande" />
+                    <apex:outputField value="{!Order.inwiB2C_Statut__c}" label="Statut">
+                        <apex:actionSupport event="onchange" rerender="editableBlock" />
+                    </apex:outputField>
+                    <!--YM BEGIN-->
+                    <apex:outputField value="{!Order.InwiB2C_Subscription_Migration__c}" label="Numéro de la ligne" />
+                    <!--YM END-->
+
+                    <!--CH-Y BEGIN-->
+                    <apex:outputField value="{!Order.Numero_de_commande_Wakil__c}" label="Numéro de commande Wakil" />
+                    <!--CH-Y END-->
+
+
+                    <!--apex:outputField value="{!Order.OrderStep__c}" label="OrderStep"/-->
+                    <apex:outputField value="{!Order.inwiB2C_TypeActeDeGestion__c}" label="Type d’acte de gestion" rendered="{!Order.inwib2c_TypeDeLaCommande__c == 'inwiB2C_Modification'}"
+                    />
+                    <apex:outputField value="{!Order.EffectiveDate}" label="Date de début de la commande" />
+                    <apex:outputField value="{!Order.inwiB2C_Requete__c}" label="Requête" rendered="{!Order.inwib2c_TypeDeLaCommande__c != 'inwiB2C_Acquisition'}"
+                    />
+                    <!--K_KA MGEN3685 BEGIN-->
+                    <apex:outputField value="{!Order.InwiB2C_NiveauSignal__c}" label="Niveau de signal" rendered="{!Order.InwiB2C_Type_Offer__c == 'FTTH'}" />
+                    <!--K_KA MGEN3685 END-->
+                    <apex:outputField value="{!Order.inwib2c_AvecPortabilite__c}" label="Avec portabilité" rendered="{!Order.inwib2c_TypeDeLaCommande__c == 'inwiB2C_Acquisition'}"
+                    />
+                    <!--Start ACYL 18/0/2025 B-27336-->
+                    <apex:outputField value="{!Order.Old_Account_id__c}" label="Ancien Compte Client" rendered="{!Order.inwiB2C_TypeActeDeGestion__c == 'InwiB2C_Cession_ligne_AM'}"
+                    />
+                    <!--end ACYL 18/0/2025 B-27336-->
+                    <!-- <apex:outputField value="{!Order.InwiB2CAdressEmailContact__c}" label="AdressEmailContact" rendered="{!Order.inwib2c_TypeDeLaCommande__c == 'inwiB2C_Acquisition'}" />/-->
+                    <!--apex:outputField value="{!Order.InwiB2C_Prestataire_de_livraison__c}" label="Prestataire de livraison" rendered="{!Order.inwiB2C_Canal__c == 'inwiB2C_Eshop' && Order.inwib2c_TypeDeLaCommande__c == 'inwiB2C_Acquisition'}" /-->
+                    <!--apex:outputField value="{!Order.InwiB2C_sortie_de_stock_sap__c}" label="sortie de stock sap" rendered="{!Order.inwiB2C_Canal__c == 'inwiB2C_Eshop' && Order.inwib2c_TypeDeLaCommande__c == 'inwiB2C_Acquisition'}" /-->
+                    <!--apex:outputField value="{!Order.InwiB2C_DescriptionPromoStar__c}" label="Description Promo Star" rendered="{!Order.inwiB2C_Canal__c == 'inwiB2C_Eshop' && Order.inwib2c_TypeDeLaCommande__c == 'inwiB2C_Acquisition'}" /-->
+                    <!--apex:outputField value="{!Order.InwiB2C_Balance_Migration__c}" label="Balance Migration" rendered="{!Order.inwiB2C_Canal__c == 'inwiB2C_Eshop' && Order.inwib2c_TypeDeLaCommande__c == 'inwiB2C_Acquisition'}"/-->
+                    &nbsp;
+
+                    <apex:outputField value="{!Order.CreatedById}" label="Créé par" rendered="{!Order.inwiB2C_Canal__c != 'inwiB2C_D2D'}" />
+                    <apex:outputField value="{!Order.inwiB2C_Animateur_D2D__c}" label="Animateur" rendered="{!Order.inwiB2C_Canal__c == 'inwiB2C_D2D'}"
+                    />
+                    <!--chb 16/05/2024 MC_SF24-023_FMD payants sur le canal D2D begin-->
+                    <apex:outputField value="{!Order.inwiB2C_Superviseur_D2D__c}" label="Superviseur" rendered="{!Order.inwiB2C_Canal__c == 'inwiB2C_D2D'}"
+                    />
+                    <!--chb 16/05/2024 MC_SF24-023_FMD payants sur le canal D2D end -->
+                    <apex:outputField value="{!Order.CreatedDate}" label="Date de création" />
+                    <apex:outputField value="{!Order.inwiB2C_TypeDeMigration__c}" label="Type de migration" rendered="{!Order.inwib2c_TypeDeLaCommande__c == 'inwiB2C_Migration'}"
+                    />
+                    <apex:outputField value="{!Order.inwiB2C_NouvelleValeur__c}" label="Nouvelle valeur" rendered="{!Order.inwib2c_TypeDeLaCommande__c == 'inwiB2C_Modification' || Order.inwib2c_TypeDeLaCommande__c == 'InwiB2C_Acquisition_Accessoire_Gratuit'}"
+                    />
+                    <apex:outputField value="{!Order.LastModifiedById}" label="Dernière modification par" />
+                    <apex:outputField value="{!Order.inwiB2C_AncienneValeur__c}" label="Ancienne valeur" rendered="{!Order.inwib2c_TypeDeLaCommande__c == 'inwiB2C_Modification'}"
+                    />
+
+                    <apex:outputField value="{!Order.LastModifiedDate}" label="Date derrnière modification" />
+                    <apex:outputField value="{!Order.OwnerId}" label="Propriétaire de la commande" /> &nbsp;
+                    <!--<apex:outputText value="{!IF(Order.InwiB2C_Type_Offer__c == 'FTTH', Order.vlocity_cmt__DefaultServiceAccountId__c, " ")}"
+                        rendered="{!IF(Order.vlocity_cmt__DefaultServiceAccountId__c != Order.AccountId, true, false)}" label="Informations du site d'installation"
+                    /> CHB 13/09/2023-->
+                    <apex:outputField value="{!Order.vlocity_cmt__DefaultServiceAccountId__c}" label="Informations du site d'installation" rendered="{!Order.vlocity_cmt__DefaultServiceAccountId__c !='' }"
+                    />
+                    <!--Start ASSIA TAHRAOUI 03/06/2025-->
+                    <apex:outputField value="{!Order.InwiB2C_NumeroDealer__c }" label="Numéro Dealer" rendered="{!Order.Account.Inwib2c_Segment_march__c == 'Dealer' || Order.Account.Inwib2c_Segment_march__c == 'Super Dealer' || CONTAINS(Order.InwiB2C_Offre__c, 'Dealer')}"
+                    />
+                    <apex:outputField value="{!Order.InwiB2C_IdTransactionEVC__c  }" label="Id Transaction EVC" rendered="{!Order.Account.Inwib2c_Segment_march__c == 'Dealer' || Order.Account.Inwib2c_Segment_march__c == 'Super Dealer' || CONTAINS(Order.InwiB2C_Offre__c, 'Dealer')}"
+                    />
+                    <!--End ASSIA TAHRAOUI 03/06/2025-->
+                    
+                </apex:pageBlockSection>
+
+
+
+                <apex:pageBlockSection title="Compte De Facturation" rendered="{!IF(Order.inwiB2C_TypeActeDeGestion__c == 'inwiB2C_ChangementTitulaire' || Order.inwiB2C_TypeActeDeGestion__c == 'inwiB2C_RegroupementCompte',true, false)}"
+                    columns="2">
+                    <apex:outputField value="{!Order.inwib2c_TypeDeLaCommande__c}" label="Type de la commande" />
+                    <apex:outputField value="{!Order.inwiB2C_TypeActeDeGestion__c}" label="Type d’acte de gestion" />
+                    <apex:outputField value="{!Order.AccountId}" label="Compte Client" />
+                    <apex:outputField value="{!Order.Old_Account_id__c}" label="Ancien Compte Client" />
+                    <apex:outputField value="{!Order.vlocity_cmt__DefaultBillingAccountId__c}" label="Compte Facturation" />
+                    <apex:outputField value="{!Order.Old_Billing_Account_Id__c}" label="Ancien Compte Facturation" />
+                </apex:pageBlockSection>
+
+
+
+
+
+
+
+
+
+
+
+                <apex:pageBlockSection title="Informations sur l’offre" columns="2">
+                    <apex:outputField value="{!Order.InwiB2C_Offre__c}" label="Offre" />
+                    <!-- Libelle Flexi 23/01/25 Start changer 30j par Flexi -->
+                    <apex:outputText value="{!IF((Order.InwiB2C_Type_Offer__c == 'IdarDuo' || Order.InwiB2C_Type_Offer__c == 'Idar Duo' || Order.InwiB2C_Type_Offer__c == 'idar duo' ||
+                    Order.InwiB2C_Type_Offer__c == 'FTTH' || Order.InwiB2C_Type_Offer__c == 'ADSL' || Order.InwiB2C_Type_Offer__c == 'Home Postpaye'),'Home Postpayé',IF((Order.InwiB2C_Type_Offer__c == 'Cameleon'),'Mobile postpayé forfait Flexi',IF((Order.InwiB2C_Type_Offer__c == 'Postpaye'),'Postpayé',IF((Order.InwiB2C_Type_Offer__c == 'Mobile Postpaye'),'Mobile Postpayé',Order.InwiB2C_Type_Offer__c))))}"
+                        label="Type offre" />
+                    <apex:outputField value="{!Order.InwiB2C_Statut_FAR__c}" label="Statut FAR" rendered="{!Order.inwib2c_TypeDeLaCommande__c == 'inwiB2C_Acquisition' || Order.inwiB2C_TypeDeMigration__c  == 'InwiB2C_MigrationPrePostpayé' || Order.inwiB2C_TypeActeDeGestion__c ='inwiB2C_ChangementTypeLigne' || Order.inwiB2C_TypeDeMigration__c  == 'Migration Postpayé Postpayé' }"
+                    />
+
+                </apex:pageBlockSection>
+
+
+
+                <!--YM BEGIN-->
+                <apex:pageBlockSection title="Compte de facturation" columns="2" rendered="{!Order.inwib2c_TypeDeLaCommande__c != 'InwiB2C_Acquisition_Accessoire_Gratuit'}">
+                    <!--YM END-->
+                    <apex:outputField value="{!Order.vlocity_cmt__DefaultBillingAccountId__c}" label="Compte de facturation" />
+                    <apex:outputField value="{!Order.vlocity_cmt__DefaultBillingAccountId__r.InwiB2C_Mode_de_paiement__c}" label="Mode de paiement"
+                    />
+                    <apex:outputField value="{!Order.vlocity_cmt__DefaultBillingAccountId__r.InwiB2C_Cycle_de_facturation__c}" label=" Cycle de facturation"
+                    />
+
+
+                </apex:pageBlockSection>
+
+
+
+
+
+                <apex:pageBlockSection title="Informations Agence/Partenaire" columns="2">
+                    <apex:outputField value="{!Order.inwiB2C_Canal__c}" />
+                    <apex:outputField value="{!Order.inwib2c_Distributeur__c}" />
+                    <apex:outputField value="{!Order.inwib2c_Partenaire__c}" />
+                    <apex:outputField value="{!Order.inwiB2C_Dealer__c}" label="Dealer" />
+                </apex:pageBlockSection>
+
+                <apex:pageBlockSection title="Information Contrat" columns="2" rendered="{!Order.inwiB2C_TypeActeDeGestion__c != 'inwiB2C_SAVInterneChangementDeTerminalModem' && Order.inwiB2C_TypeActeDeGestion__c != 'inwiB2C_SAVInterneChangementDeCarteSIM'}|| inwiB2C_TypeDeMigration__c !='Migration Postpayé Postpayé'}">
+                    <apex:outputField value="{!Order.ContractId}" />
+                </apex:pageBlockSection>
+
+                <!-- M-DJ B-28802 afficher le motif changement cart sim pour acte gestion changement carte sim avec rehab pour sav esim besin -->
+                <apex:pageBlockSection title="Changement de carte SIM" columns="2" rendered="{!Order.inwiB2C_TypeActeDeGestion__c == 'inwiB2C_ChangementDeCarteSIM' || Order.inwiB2C_TypeActeDeGestion__c == 'inwiB2C_SAVInterneChangementDeCarteSIM' || Order.inwiB2C_TypeActeDeGestion__c == 'inwiB2C_ChangementDeCarteSIMAvecRehab'}">
+                    <!-- M-DJ B-28802 afficher le motif changement cart sim pour acte gestion changement carte sim avec rehab pour sav esim end -->
+                    <apex:outputField value="{!Order.inwiB2C_MotifChangementCarteSim__c}" />
+                    <apex:outputField value="{!Order.inwiB2C_MotifDeRefusBO__c}" />
+                </apex:pageBlockSection>
+
+                <apex:pageBlockSection title="Changement de Terminal/Modem" columns="2" rendered="{!Order.inwiB2C_TypeActeDeGestion__c == 'inwiB2C_ChangementDeTerminalModem'|| Order.inwiB2C_TypeActeDeGestion__c == 'inwiB2C_SAVInterneChangementDeTerminalModem'}">
+                    <apex:outputField value="{!Order.inwiB2C_MotifChangementTerminalModem__c}" />
+                    <apex:outputField value="{!Order.inwiB2C_AncienModele__c}" />
+                    <apex:outputField value="{!Order.inwiB2C_NouveauModele__c}" />
+                </apex:pageBlockSection>
+
+                <apex:pageBlockSection title="Suspension" rendered="{!Order.inwiB2C_TypeActeDeGestion__c == 'inwiB2C_Suspension'}">
+                    <apex:outputField value="{!Order.inwiB2C_TypeDeSuspension__c}" />
+                    <apex:outputField value="{!Order.inwiB2C_MotifDeSuspension__c}" />
+                </apex:pageBlockSection>
+
+
+                <apex:pageBlockSection title="Changement option et attributes" rendered="{!Order.inwiB2C_TypeActeDeGestion__c == 'inwiB2C_ChangementOffre'}">
+                    <apex:outputField value="{!Order.inwib2c_TypeDeLaCommande__c}" />
+                    <apex:outputField value="{!Order.inwiB2C_TypeActeDeGestion__c}" />
+                </apex:pageBlockSection>
+
+                <apex:pageBlockSection title="Déconnecter service " rendered="{!Order.inwiB2C_TypeActeDeGestion__c == 'InwiB2C_DéconnecterService'}">
+                    <apex:outputField value="{!Order.inwib2c_TypeDeLaCommande__c}" />
+                    <apex:outputField value="{!Order.inwiB2C_TypeActeDeGestion__c}" />
+                    <apex:outputField value="{!Order.inwib2c_Partenaire__c}" label="Agent" />
+                    <apex:outputField value="{!Order.AccountId}" label="Client" />
+                    <apex:outputField value="{!Order.inwiB2C_MotifResiliation__c}" label="Motif de résiliation" />
+                </apex:pageBlockSection>
+
+
+                <apex:pageBlockSection title="Changement type de ligne" rendered="{!Order.inwiB2C_TypeActeDeGestion__c == 'inwiB2C_ChangementTypeLigne'}">
+                    <apex:outputField value="{!Order.inwib2c_TypeDeLaCommande__c}" />
+                    <apex:outputField value="{!Order.inwiB2C_TypeActeDeGestion__c}" />
+                    <apex:outputField value="{!Order.inwiB2C_AncienneValeur__c}" label="Ancienne valeur" />
+                    <apex:outputField value="{!Order.inwiB2C_NouvelleValeur__c}" label="Nouvelle valeur" />
+                    <apex:outputField value="{!Order.CreatedDate}" label="Date effective de la migration" />
+                    <apex:outputField value="{!Order.inwib2c_Partenaire__c}" label="Agent" />
+                    <apex:outputField value="{!Order.inwiB2C_Canal__c}" label="Canal" />
+                    <apex:outputField value="{!Order.InwiB2C_FMS_Total__c}" label="Frais additionnels" />
+                    <apex:outputField value="{!Order.AccountId}" label="Client" />
+                </apex:pageBlockSection>
+
+                <apex:pageBlockSection title="Migration postpapée-postpayée " rendered="{!Order.inwiB2C_TypeDeMigration__c == 'Migration Postpayé Postpayé'}">
+                    <apex:outputField value="{!Order.inwib2c_TypeDeLaCommande__c}" />
+                    <apex:outputField value="{!Order.inwiB2C_TypeActeDeGestion__c}" />
+                    <apex:outputField value="{!Order.inwiB2C_AncienneValeur__c}" label="Ancienne valeur" />
+                    <apex:outputField value="{!Order.inwiB2C_NouvelleValeur__c}" label="Nouvelle valeur" />
+                    <apex:outputField value="{!Order.CreatedDate}" label="Date effective de la migration" />
+                    <apex:outputField value="{!Order.inwib2c_Partenaire__c}" label="Partenaire" />
+                    <apex:outputField value="{!Order.inwiB2C_Canal__c}" label="Canal" />
+                    <apex:outputField value="{!Order.inwiB2C_Fees_Amount__c}" label="Frais additionnels" />
+                    <apex:outputField value="{!Order.InwiB2C_Ancien_type_de_ligne__c}" label="Ancien type de ligne" />
+                    <apex:outputField value="{!Order.InwiB2C_Nouveau_type_de_ligne__c}" label="Nouveau type de ligne" />
+                    <apex:outputField value="{!Order.AccountId}" label="Client" />
+                    <apex:outputField value="{!Order.InwiB2C_Migration_gratuite__c}" label="Migration gratuite" />
+                </apex:pageBlockSection>
+
+                <!--ACYL BEGIN-->
+                <apex:pageBlockSection title="information Migration FTTH IDAR" rendered="{!Order.inwiB2C_TypeDeMigration__c == 'InwiB2C_Migration_FTTH_Vers_IDAR'}">
+
+                    <apex:outputField value="{!Order.inwiB2C_AncienneValeur__c}" label="Ancienne valeur" />
+                    <apex:outputField value="{!Order.inwiB2C_NouvelleValeur__c}" label="Nouvelle valeur" />
+                    <apex:outputField value="{!Order.InwiB2C_Mode_de_paiement_FMS__c}" />
+                    <apex:outputField value="{!Order.InwiB2C_Code_de_transaction_FMS__c}" />
+                    <apex:outputField value="{!Order.InwiB2C_FMS_Total__c}" label="FMS" />
+                    <apex:outputText value="{!IF(Order.Mode_de_paiement_FMD__c == 'EnEspece', 'En Espèce', IF(Order.Mode_de_paiement_FMD__c == 'inwiB2C_EnEspece', 'En Espèce', Order.Mode_de_paiement_FMD__c))}"
+                        label="Mode de paiement FMD" />
+                    <apex:outputField value="{!Order.InwiB2C_CodeTransactionFMD__c}" />
+
+                    <apex:outputField value="{!Order.InwiB2C_FMD_Total__c}" label="FMD" />
+                </apex:pageBlockSection>
+
+                <apex:pageBlockSection title="information Migration ADSL IDAR" rendered="{!Order.inwiB2C_TypeDeMigration__c == 'InwiB2C_Migration_ADSL_Vers_IDAR'}">
+
+                    <apex:outputField value="{!Order.inwiB2C_AncienneValeur__c}" label="Ancienne valeur" />
+                    <apex:outputField value="{!Order.inwiB2C_NouvelleValeur__c}" label="Nouvelle valeur" />
+                    <apex:outputField value="{!Order.InwiB2C_Mode_de_paiement_FMS__c}" />
+                    <apex:outputField value="{!Order.InwiB2C_Code_de_transaction_FMS__c}" />
+                    <apex:outputField value="{!Order.InwiB2C_FMS_Total__c}" label="FMS" />
+                </apex:pageBlockSection>
+
+                <apex:pageBlockSection title="information Migration FTTH ADSL" rendered="{!Order.inwiB2C_TypeDeMigration__c == 'InwiB2C_Migration_FTTH_Vers_ADSL'}">
+
+                    <apex:outputField value="{!Order.inwiB2C_AncienneValeur__c}" label="Ancienne valeur" />
+                    <apex:outputField value="{!Order.inwiB2C_NouvelleValeur__c}" label="Nouvelle valeur" />
+                    <apex:outputField value="{!Order.InwiB2C_Mode_de_paiement_FMS__c}" />
+                    <apex:outputField value="{!Order.InwiB2C_Code_de_transaction_FMS__c}" />
+                    <apex:outputField value="{!Order.InwiB2C_FMS_Total__c}" label="FMS" />
+                    <apex:outputText value="{!IF(Order.Mode_de_paiement_FMD__c == 'EnEspece', 'En Espèce', IF(Order.Mode_de_paiement_FMD__c == 'inwiB2C_EnEspece', 'En Espèce', Order.Mode_de_paiement_FMD__c))}"
+                        label="Mode de paiement FMD" />
+                    <apex:outputField value="{!Order.InwiB2C_CodeTransactionFMD__c}" />
+
+                    <apex:outputField value="{!Order.InwiB2C_FMD_Total__c}" label="FMD" />
+                </apex:pageBlockSection>
+                <!--ACYL END-->
+
+
+                <apex:pageBlockSection title="information Migration ADSL FTTH" rendered="{!Order.inwiB2C_TypeDeMigration__c == 'InwiB2C_Migration_ADSL_Vers_FTTH'}">
+
+                    <apex:outputField value="{!Order.inwiB2C_AncienneValeur__c}" label="Ancienne valeur" />
+                    <apex:outputField value="{!Order.inwiB2C_NouvelleValeur__c}" label="Nouvelle valeur" />
+                    <apex:outputField value="{!Order.InwiB2C_Mode_de_paiement_FMS__c}" />
+                    <apex:outputField value="{!Order.InwiB2C_Code_de_transaction_FMS__c}" />
+                    <apex:outputField value="{!Order.InwiB2C_FMS_Total__c}" label="FMS" />
+                    <apex:outputText value="{!IF(Order.Mode_de_paiement_FMD__c == 'EnEspece', 'En Espèce', IF(Order.Mode_de_paiement_FMD__c == 'inwiB2C_EnEspece', 'En Espèce', Order.Mode_de_paiement_FMD__c))}"
+                        label="Mode de paiement FMD" />
+                    <apex:outputField value="{!Order.InwiB2C_CodeTransactionFMD__c}" />
+
+                    <apex:outputField value="{!Order.InwiB2C_FMD_Total__c}" label="FMD" />
+                </apex:pageBlockSection>
+                
+                <!--Rosa Begin-->
+                <apex:pageBlockSection title="information Migration IDAR 4G 5G" rendered="{!Order.inwiB2C_TypeDeMigration__c == 'InwiB2C_MigrationIdar4GversIdar5G'}">
+
+                    <apex:outputField value="{!Order.inwiB2C_AncienneValeur__c}" label="Ancienne valeur" />
+                    <apex:outputField value="{!Order.inwiB2C_NouvelleValeur__c}" label="Nouvelle valeur" />
+                    <apex:outputField value="{!Order.InwiB2C_Mode_de_paiement_FMS__c}" />
+                    <apex:outputField value="{!Order.InwiB2C_Code_de_transaction_FMS__c}" />
+                    <apex:outputField value="{!Order.InwiB2C_FMS_Total__c}" label="FMS" />
+                    <apex:outputText value="{!IF(Order.Mode_de_paiement_FMD__c == 'EnEspece', 'En Espèce', IF(Order.Mode_de_paiement_FMD__c == 'inwiB2C_EnEspece', 'En Espèce', Order.Mode_de_paiement_FMD__c))}"
+                        label="Mode de paiement FMD" />
+                    <apex:outputField value="{!Order.InwiB2C_CodeTransactionFMD__c}" />
+
+                    <apex:outputField value="{!Order.InwiB2C_FMD_Total__c}" label="FMD" />
+                </apex:pageBlockSection>
+                
+                <apex:pageBlockSection title="information Migration IDAR 5G 4G " rendered="{!Order.inwiB2C_TypeDeMigration__c == 'InwiB2C_MigrationIdar5GversIdar4G'}">
+
+                    <apex:outputField value="{!Order.inwiB2C_AncienneValeur__c}" label="Ancienne valeur" />
+                    <apex:outputField value="{!Order.inwiB2C_NouvelleValeur__c}" label="Nouvelle valeur" />
+                    <apex:outputField value="{!Order.InwiB2C_Mode_de_paiement_FMS__c}" />
+                    <apex:outputField value="{!Order.InwiB2C_Code_de_transaction_FMS__c}" />
+                    <apex:outputField value="{!Order.InwiB2C_FMS_Total__c}" label="FMS" />
+                    <apex:outputText value="{!IF(Order.Mode_de_paiement_FMD__c == 'EnEspece', 'En Espèce', IF(Order.Mode_de_paiement_FMD__c == 'inwiB2C_EnEspece', 'En Espèce', Order.Mode_de_paiement_FMD__c))}"
+                        label="Mode de paiement FMD" />
+                    <apex:outputField value="{!Order.InwiB2C_CodeTransactionFMD__c}" />
+
+                    <apex:outputField value="{!Order.InwiB2C_FMD_Total__c}" label="FMD" />
+                </apex:pageBlockSection>
+                <!--Rosa end-->
+
+                <apex:pageBlockSection title="Migration postpapée-prépayée " rendered="{!Order.inwiB2C_TypeDeMigration__c == 'InwiB2C_MigrationPost_Prepayé'}">
+                    <apex:outputField value="{!Order.inwib2c_TypeDeLaCommande__c}" />
+                    <apex:outputField value="{!Order.inwiB2C_TypeActeDeGestion__c}" />
+                    <apex:outputField value="{!Order.inwib2c_DetailMotif__c}" label="Motif de migration" />
+                    <!--apex:outputField value="{!Order.InwiB2C_AvecFraisResiliation__c}" label="Avec des frais de résiliation  " /-->
+                    <apex:outputField value="{!Order.inwib2c_Partenaire__c}" label="Partenaire" />
+                    <apex:outputField value="{!Order.inwiB2C_Canal__c}" label="Canal" />
+                    <apex:outputField value="{!Order.AccountId}" label="Client" />
+                </apex:pageBlockSection>
+
+
+
+
+
+
+
+
+                <apex:pageBlockSection title="Réhabilitation" rendered="{!Order.inwiB2C_TypeActeDeGestion__c == 'inwiB2C_Rehabilitation'}">
+                    <!--Fraude 05/07/24 Ila Start-->
+                    <apex:outputField value="{!Order.InwiB2C_Type_de_rehabilitation__c}" />
+                    <!--Fraude 05/07/24 Ila End-->
+                    <apex:outputField value="{!Order.inwiB2C_MotifDeRehabilitation__c}" />
+
+                </apex:pageBlockSection>
+
+                <apex:pageBlockSection title="Informations Fidélité" rendered="{!Order.inwib2c_TypeDeLaCommande__c == 'inwiB2C_Modification' && Order.inwiB2C_TypeActeDeGestion__c != 'inwiB2C_SAVInterneChangementDeTerminalModem' && Order.inwiB2C_TypeActeDeGestion__c != 'inwiB2C_SAVInterneChangementDeCarteSIM' && Order.inwiB2C_TypeActeDeGestion__c != 'InwiB2C_Restitution_equipement'}">
+                    <apex:outputField value="{!Order.inwib2c_NombreDePoints__c}" />
+                    <apex:outputField value="{!Order.inwib2c_ComplementMonetaire__c}" />
+                    <apex:outputField value="{!Order.inwib2c_ReferenceLM__c}" />
+                </apex:pageBlockSection>
+
+                <apex:pageBlockSection title="Remboursement d’offre" rendered="{!Order.inwib2c_TypeDeLaCommande__c == 'inwiB2C_Modification' && Order.inwiB2C_TypeActeDeGestion__c = 'InwiB2C_Remboursement_Offre'}">
+                    <apex:outputField value="{!Order.InwiB2C_MontantRembourse__c }" label="Montant remboursé" />
+                    <apex:outputField value="{!Order.inwib2c_CodeDeTransaction__c}" label="Id transaction PayX de remboursement" />
+                    <apex:outputField value="{!Order.InwiB2C_Code_de_transaction_FMS__c}" label="Id transaction PayX de remboursement FMS" />
+
+                    <!-- <apex:outputtext value="{!IF(Order.InwiB2C_FMS_Total__c < 0, (Order.InwiB2C_FMS_Total__c + Order.InwiB2C_FMD_Total__c)-50,  (Order.InwiB2C_FMS_Total__c + Order.InwiB2C_FMD_Total__c)-50)} "
+                        label="Montant remboursé" /> -->
+                    <apex:outputField value="{!Order.InwiB2C_CodeTransactionFMD__c}" label="Id transaction PayX de remboursement FMD" />
+                    <apex:outputField value="{!Order.InwiB2C_statut_retour__c}" label="Statut retour" />
+
+                </apex:pageBlockSection>
+
+                <apex:pageBlockSection title="Remboursement d’offre" rendered="{!Order.inwib2c_TypeDeLaCommande__c == 'inwiB2C_Migration' && Order.inwiB2C_TypeDeMigration__c == 'InwiB2C_Migration_Post_Pré_suite_SatisfaitRemboursé'}">
+                    <apex:outputField value="{!Order.InwiB2C_MontantRembourse__c }" label="Montant remboursé" />
+                    <apex:outputField value="{!Order.inwib2c_CodeDeTransaction__c}" label="Id transaction PayX de remboursement" />
+                    <apex:outputField value="{!Order.InwiB2C_Code_de_transaction_FMS__c}" label="Id transaction PayX de remboursement FMS" />
+
+                </apex:pageBlockSection>
+
+
+                <apex:pageBlockSection title="Migration Retention Cascade" rendered="{!Order.inwib2c_TypeDeLaCommande__c == 'inwiB2C_Migration' && Order.inwiB2C_TypeDeMigration__c = 'InwiB2C_Migration_Retention_Cascade'}">
+                    <apex:outputField value="{!Order.inwiB2C_AncienneValeur__c}" label="Ancien forfait" />
+                    <apex:outputField value="{!Order.inwiB2C_NouvelleValeur__c}" label="Nouveau forfait" />
+                </apex:pageBlockSection>
+
+                <apex:pageBlockSection title="Restitution d’équipement" rendered="{!Order.inwib2c_TypeDeLaCommande__c == 'inwiB2C_Modification' && Order.inwiB2C_TypeActeDeGestion__c = 'InwiB2C_Restitution_equipement'}">
+                    <apex:outputField value="{!Order.InwiB2C_FMD_Total__c}" label="Montant remboursé" />
+                    <apex:outputField value="{!Order.InwiB2C_CodeTransactionFMD__c}" label="Id transaction PayX de remboursement" />
+                    <apex:outputField value="{!Order.InwiB2C_N_s_rie_d_quipement__c}" label="N° de série d'équipement" />
+                    <apex:outputField value="{!Order.InwiB2C_Mod_le__c}" label="Modéle" />
+                    <apex:outputField value="{!Order.InwiB2C_statut_retour__c}" label="Statut retour" />
+
+                </apex:pageBlockSection>
+                <!--CHB 26/02/2024 SAV Vacay-->
+                <apex:pageBlockSection title="Informations de paiement terminal/SIM" rendered="{!Order.inwiB2C_TypeActeDeGestion__c == 'inwiB2C_ChangementDeCarteSIM' || Order.inwib2c_TypeDeLaCommande__c == 'inwiB2C_Acquisition' || Order.inwiB2C_TypeDeMigration__c == 'InwiB2C_MigrationPrePostpayé' || Order.inwiB2C_TypeDeMigration__c == 'InwiB2C_MigrationPrePostpayéPorta'|| Order.inwiB2C_TypeDeMigration__c == 'InwiB2C_MigrationPreCameleonPorta'|| Order.inwiB2C_TypeDeMigration__c == 'InwiB2C_Migration_come-back' || (Order.inwiB2C_TypeActeDeGestion__c =='inwiB2C_ChangementDeTerminalModem' && Order.inwib2c_CodeDeTransaction__c !='') || Order.inwiB2C_TypeActeDeGestion__c =='inwiB2C_ChangementDeCarteSIMAvecRehab' }">
+                    <!-- <apex:outputText value="{!Order.inwib2c_ModeDePaiement__c}" /> -->
+
+                    <!-- TTM: Vente Terminaux mobile a credit-->
+                    <apex:outputText value="{!IF(Order.inwib2c_ModeDePaiement__c == 'EnEspece', 'En Espèce',  IF(Order.inwib2c_ModeDePaiement__c == 'inwiB2C_E-paiement', 'E-paiement',  IF(Order.inwib2c_ModeDePaiement__c == 'inwiB2C_EnEspece', 'En Espèce',  IF(Order.inwib2c_ModeDePaiement__c == 'inwiB2C_Vente_credit', 'Vente à crédit', Order.inwib2c_ModeDePaiement__c))))}"
+                        label="Mode de paiement FMD" />
+                    <!-- TTM: Vente Terminaux mobile a credit-->
+
+
+
+                    <apex:outputField value="{!Order.inwib2c_CodeDeTransaction__c}" />
+
+
+
+                </apex:pageBlockSection>
+
+                <apex:pageBlockSection title="Informations de paiement FMS" rendered="{!Order.inwib2c_TypeDeLaCommande__c == 'inwiB2C_Acquisition' || Order.inwiB2C_TypeDeMigration__c == 'InwiB2C_MigrationPrePostpayé' || Order.inwiB2C_TypeDeMigration__c == 'InwiB2C_Migration_come-back' || Order.inwiB2C_TypeDeMigration__c == 'InwiB2C_MigrationPrePostpayéPorta'|| Order.inwiB2C_TypeDeMigration__c == 'InwiB2C_MigrationPreCameleonPorta'}">
+                    <apex:outputText value="{!IF(Order.InwiB2C_Mode_de_paiement_FMS__c == 'EnEspece', 'En Espèce',  IF(Order.InwiB2C_Mode_de_paiement_FMS__c == 'inwiB2C_E-paiement', 'E-paiement',  IF(Order.InwiB2C_Mode_de_paiement_FMS__c == 'inwiB2C_EnEspece', 'En Espèce', IF(Order.InwiB2C_Mode_de_paiement_FMS__c == 'inwiB2C_TPE', 'TPE', Order.InwiB2C_Mode_de_paiement_FMS__c))))}"
+                        label="Mode de paiement FMS" />
+
+                    <apex:outputField value="{!Order.InwiB2C_Code_de_transaction_FMS__c}" />
+                    <apex:outputField value="{!Order.InwiB2C_FMS_Total__c}" label="FMS" />
+                </apex:pageBlockSection>
+
+                <apex:pageBlockSection title="Information de paiement FMD" rendered="{!((Order.inwib2c_TypeDeLaCommande__c == 'inwiB2C_Acquisition' && Order.InwiB2C_Type_Offer__c != 'Cameleon') || Order.inwiB2C_TypeDeMigration__c == 'InwiB2C_Migration_ADSL_Vers_IDAR' || Order.inwiB2C_TypeDeMigration__c == 'InwiB2C_MigrationPrePostpayé' || Order.inwiB2C_TypeDeMigration__c == 'InwiB2C_MigrationPrePostpayéPorta' || Order.inwiB2C_TypeDeMigration__c == 'InwiB2C_Migration_come-back' || Order.inwib2c_TypeDeLaCommande__c !='inwiB2C_ChangementDeTerminalModem') && Order.InwiB2C_FMD_Total__c > 0 }">
+                    <!-- <apex:outputText value="{!IF(Order.Mode_de_paiement_FMD__c == 'EnEspece', 'En Espèce', Order.Mode_de_paiement_FMD__c)}" label="Mode de paiement FMD"
+                    /> -->
+                    <apex:outputText value="{!IF(Order.Mode_de_paiement_FMD__c == 'EnEspece', 'En Espèce', IF(Order.Mode_de_paiement_FMD__c == 'inwiB2C_EnEspece', 'En Espèce', Order.Mode_de_paiement_FMD__c))}"
+                        label="Mode de paiement FMD" />
+
+
+
+
+
+
+                    <apex:outputField value="{!Order.InwiB2C_CodeTransactionFMD__c}" />
+
+                    <apex:outputField value="{!Order.InwiB2C_FMD_Total__c}" label="FMD" />
+
+                </apex:pageBlockSection>
+
+
+                <apex:pageBlockSection title="Informations Livraison" rendered="{!Order.inwiB2C_Canal__c == 'inwiB2C_Eshop'||Order.inwiB2C_Canal__c == 'InwiB2C_Ehop-Agence'||Order.inwiB2C_Canal__c == 'inwiB2C_Televente' ||Order.inwiB2C_Canal__c == 'InwiB2C_Télévente-Agence'  && Order.inwib2c_TypeDeLaCommande__c == 'inwiB2C_Acquisition'}">
+                    <apex:outputField value="{!Order.inwib2c_ModeDeLivraison__c}" />
+                    <apex:outputField value="{!Order.inwib2c_StatutDeLivraison__c}" />
+                    <!--apex:outputField value="{!Order.inwib2c_StatutDeLivraison__c}"/-->
+                    <apex:outputField value="{!Order.inwib2c_AgenceDeLivraison__c}" rendered="{!IF(Order.inwib2c_ModeDeLivraison__c == 'inwiB2C_Domicile', false, true)}"
+                    />
+                    <apex:outputField value="{!Order.inwib2c_AdresseDeLivraison__c}" />
+                    <apex:outputField value="{!Order.inwib2c_InstructionsDeLivraison__c}" />
+                    <apex:outputField value="{!Order.Inwib2c_statut_Eshop__c}" label="Statut livraison E-shop" rendered="{!Order.inwiB2C_Canal__c == 'inwiB2C_Eshop'||Order.inwiB2C_Canal__c == 'InwiB2C_Ehop-Agence'}"
+                    />
+                    <apex:outputField value="{!Order.inwiB2C_Statut_Televente__c}" label="Statut livraison Televente" rendered="{!Order.inwiB2C_Canal__c == 'inwiB2C_Televente'||Order.inwiB2C_Canal__c == 'InwiB2C_Télévente-Agence'}"
+                    />
+                    <apex:outputField value="{!Order.InwiB2C_code_de_transaction_Eshop__c}" label="Code Transaction Eshop" rendered="{!Order.inwiB2C_Canal__c == 'inwiB2C_Eshop'||Order.inwiB2C_Canal__c == 'InwiB2C_Ehop-Agence'}"
+                    />
+                    
+                </apex:pageBlockSection>
+
+
+                <apex:pageBlockSection title="Informations Livraison" rendered="{!Order.inwiB2C_Canal__c == 'inwiB2C_D2D'}">
+                    <apex:outputField value="{!Order.InwB2C_Statut_livraison_D2D__c}" />
+                    <!--Start ASSIA TAHRAOUI 29/08/2025 TTM MGEN3687 Refonte signature électronique D2D-->
+                    <apex:outputField value="{!Order.InwiB2C_DateSigatureContratD2D__c}" label="Date Sigature Contrat D2D" 
+                    />
+                     <apex:outputField value="{!Order.InwiB2C_luApproveeD2D__c}" label="lu Approvee D2D" 
+                    />
+                    <!--End ASSIA TAHRAOUI 29/08/2025-->
+                </apex:pageBlockSection>
+
+                <!-- CHB ano B-15306 04/04/2024 add InwiB2C_MigrationPrePostAvecIdentification -->
+                <apex:pageBlockSection title="Informations OTP" rendered="{!Order.inwiB2C_TypeDeMigration__c == 'InwiB2C_MigrationPrePostAvecIdentification' || ((Order.inwib2c_TypeDeLaCommande__c != 'inwiB2C_Acquisition' && (Order.InwiB2C_Type_Offer__c == 'idar duo' || Order.InwiB2C_Type_Offer__c == 'FTTH' || Order.InwiB2C_Type_Offer__c == 'Idar Duo' || Order.InwiB2C_Type_Offer__c == 'ADSL')) && (Order.inwiB2C_Canal__c != 'inwiB2C_Televente'&& Order.inwiB2C_Canal__c != 'inwiB2C_Eshop'))}">
+                    <apex:outputField value="{!Order.ContactEmail__c}" label="Contact" />
+                    <apex:outputField value="{!Order.inwiB2C_CodeOTPEnvoye__c}" label="Code envoyé" />
+                    <apex:outputField value="{!Order.inwiB2C_Canal__c}" label="Canal" />
+                </apex:pageBlockSection>
+                <apex:pageBlockSection title="Information de paiement TPE">
+
+                    <apex:outputField value="{!Order.InwiB2C_NomBanque__c}" label="Nom de la banque" />
+
+                    <apex:outputField value="{!Order.InwiB2C_TypeCarte__c}" label="Type de carte" />
+
+                </apex:pageBlockSection>
+
+                <apex:pageBlockSection title="Informations OTP" rendered="{!Order.inwib2c_TypeDeLaCommande__c == 'inwiB2C_Acquisition' && Order.inwiB2C_Canal__c == 'inwiB2C_Televente'}">
+                    <apex:outputField value="{!Order.ContactEmail__c}" label="Contact" />
+                    <apex:outputField value="{!Order.inwiB2C_CodeOTPEnvoye__c}" label="Code envoyé" />
+                    <apex:outputField value="{!Order.inwiB2C_Canal__c}" label="Canal" />
+                    <apex:outputField value="{!Order.inwib2c_OtpStatutTelevente__c}" label="Statut authentification client " />
+
+                </apex:pageBlockSection>
+
+                <apex:pageBlockSection title="Informations changement de numéro" rendered="{!Order.inwiB2C_TypeActeDeGestion__c == 'inwiB2C_ModificationDeNumero'}">
+                    <apex:outputField value="{!Order.InwiB2C_TypeChangedMDN__c}" />
+                    <apex:outputField value="{!Order.InwiB2C_PricedChangedMdn__c}" />
+                </apex:pageBlockSection>
+                <!--ANO 10905 CHB-->
+                <apex:pageBlockSection title="Informations Résiliation" rendered="{!Order.inwiB2C_Demande_de_resiliation__c != ''}">
+                    <apex:outputField value="{!Order.inwiB2C_Demande_de_resiliation__c}" label="Demande de résiliation" />
+
+                </apex:pageBlockSection>
+
+                <!-- TTM: Vente Terminaux mobile a credit-->
+                <apex:pageBlockSection title="Vente terminal à crédit" rendered="{!Order.inwib2c_ModeDePaiement__c == 'inwiB2C_Vente_credit'}">
+                    <apex:outputField value="{!Order.inwiB2C_Num_dossier__c}" />
+                    <apex:outputField value="{!Order.inwib2c_Duree_credit__c}" />
+                </apex:pageBlockSection>
+                <!-- TTM: Vente Terminaux mobile a credit-->
+
+            </apex:pageBlock>
+        </div>
+    </apex:form>
+</apex:page>

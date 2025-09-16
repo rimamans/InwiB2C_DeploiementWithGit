@@ -1,0 +1,45 @@
+<template>
+    <div class="slds-p-bottom--small">
+        <div class="slds-m-bottom_xx-large overflowVisible ">
+            <template if:true={recordcase}>
+                <template if:true={isLoading}>
+                    <div class="wraperClass">
+                        <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+                    </div>
+                </template>
+
+                <template if:false={isLoading}>
+                    <div class="wraperClass">
+                        <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered"
+                            style="table-layout:fixed;">
+                            <thead>
+                                <tr class="slds-line-height_reset">
+                                    <th class="" scope="col">
+                                        <div class=".slds-truncates" title="radios">Choix</div>
+                                    </th>
+                                    <th class="" scope="col">
+                                        <div class="slds-truncate" title="NUM">Numero de la requete</div>
+                                    </th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <template for:each={__recordcase} for:item="cases">
+                                    <tr key={cases.Id}>
+                                        <td><input type="radio" name="CaseRecords"
+                                                onclick={handleSelectedAccounts} id={cases.Id} data-idcase={cases.Id}
+                                                checked />
+                                        </td>
+                                        <td style="white-space:normal;">{cases.CaseNumber}</a></td>
+                                       
+                                    </tr>
+                                </template>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </template>
+            </template>
+        </div>
+    </div>
+</template>

@@ -1,0 +1,62 @@
+/*** STYLES ***/
+.via-slds.container-table-canvas .slds-grid .slds-form-element__control {
+  display: inline-block;
+}
+.via-slds.slds-card {
+  min-height: 196,67px;
+}
+.via-slds.element__control {
+      height: 15;
+      width: 20px;
+}
+.via-slds.slds-button{
+  height: 15;
+  width: 20px;
+}
+.via-slds.container-table-canvas .overflowVisible {
+  overflow: visible;
+  position: relative;
+  z-index: 1;
+
+}
+.via-slds.container-table-canvas .overflowAuto {
+  overflow: auto;
+}
+
+.via-slds p {
+  margin: 0px !important;
+}
+
+.via-slds .slds-text-link--reset, .via-slds .slds-text-link--reset:active, .via-slds .slds-text-link--reset:focus, .via-slds .slds-text-link--reset:hover {
+  text-decoration: underline;
+  color: #0070d2;
+}
+
+/*Added to fix height issue*/
+body {
+  position: relative;
+}
+
+.cfp-hotkeys, .cfp-hotkeys-container {
+  width: auto;
+  height: auto;
+}
+
+.cfp-hotkeys-container {
+  display: block !important;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  color: #333;
+  font-size: 1em;
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.cfp-content, .cfp-hotkeys {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+}

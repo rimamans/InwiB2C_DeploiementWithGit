@@ -1,0 +1,94 @@
+<!--
+  @description       :  ce lwc represente la partie recherche  du  parcours recycle commande ftth 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 02-06-2025
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+   <!--template if:true={isLoading}>
+        <div class="exampleHolder">
+            <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+        </div>
+    </template>
+    <template if:false={isLoading}-->
+      
+        <div class="slds-col">
+            <lightning-Input type="search" label="Numéro de commande" value={valueOrder} onchange={handleChangedOrder} data-id="NumOrder"  class="slds-col slds-size_1-of-2 elementMargin1"  >  </lightning-input>
+                <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+                    <template for:each={optionsArrayOrder} for:item="item">
+                        <li key={item.Id} class="slds-listbox__item">
+                            <a style="text-decoration: none; size: 5px;" >
+                                <p data-id={item.Id} data-number={item.number} onclick={handleSelectOrder}>{item.number}</p> 
+                            </a>
+                            </li>                        
+                    </template>
+                </ul>
+        </div>
+        <!--div class="slds-col">
+            <lightning-input type="text" data-id="MotifEchec" label="Motif d'échec de raccordement" 
+                class="slds-col slds-size_1-of-2 elementMargin1" value={valueMotif} >
+            </lightning-input>
+        </div-->
+        <div class="slds-col">
+           
+            <lightning-combobox label="Motif d'échec de raccordement"  class="slds-col slds-size_1-of-2 elementMargin1" 
+             placeholder="Selectionner un motif" value={valueMotif} options={MotifPicklist}  onfocus={handleMotifchange}  onchange={handleSelectMotif} data-id="MotifEchec">
+           </lightning-combobox>
+       
+        </div>
+
+        <div class="slds-col">
+            <lightning-Input type="search" placeholder="Chercher un client"  label="Client" value={valueAccount} onchange={handleChangedAccount} data-id="account" class="slds-col slds-size_1-of-2 elementMargin1" >  </lightning-input>
+                <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+                    <template for:each={optionsArrayAccount} for:item="item">
+                        <li key={item.Id} class="slds-listbox__item">
+                            <a style="text-decoration: none; size: 5px;">  <p data-id={item.Id}
+                            data-number={item.name} onclick={handleSelectAccount}>{item.name}</p> </a>
+                            <!--button 
+                
+                            style="width: 100%; background: none; border: none; text-align: left; padding: 10px; font-size: 14px; color: #ad08ba; cursor: pointer;"
+                            onclick={handleSelectAccount} data-id={item.Id}
+                            data-number={item.name}>
+                            {item.name}
+                          </button-->  
+                            </li>                        
+                        </template>
+                    </ul>
+        </div>
+        <div class="slds-col">
+            <lightning-input type="text" data-id="Num contact" label="Numéro de contact" 
+                class="slds-col slds-size_1-of-2 elementMargin1" value={NumContact} >
+            </lightning-input>
+        </div>
+        <div class="slds-col">
+            <lightning-input type="text" data-id="CIN" label="CIN" 
+                class="slds-col slds-size_1-of-2 elementMargin1" value={CIN}>
+            </lightning-input>
+        </div>
+        <div class="slds-col">
+           
+            <lightning-combobox label="Statut de la demande"  class="slds-col slds-size_1-of-2 elementMargin1" 
+             placeholder="Selectionner un statut" value={valueStatut} options={statutDemandePicklist} onfocus={handleStatutchange} onchange={handleSelectStatut} data-id="statutDemande">
+           </lightning-combobox>
+       
+        </div>
+
+        <div class="slds-col">
+            <lightning-input type="number" data-id="Compteur_repechage" label="Compteur de repéchage" 
+                class="slds-col slds-size_1-of-2 elementMargin1" value={Compteur_repechage} >
+            </lightning-input>
+        </div>
+            <!--R-SL 14/02/2025 begin modification du parcours recyclage ftth pour ajouter le champ de recherche nd-->
+         <div class="slds-col">
+            <lightning-input type="text" data-id="ND" label="Numéro de la ligne FTTH" 
+                class="slds-col slds-size_1-of-2 elementMargin1" value={valueND} onchange={handleNDChange}
+                
+                pattern="[0-9]{12}" >
+            </lightning-input>
+        </div>
+          <!--R-SL 14/02/2025 end-->
+        <lightning-button variant="brand" label="Rechercher" data-theid="search" title="Rechercher"
+        onclick={handleSearch} class="slds-float_right"></lightning-button>
+        
+</template>

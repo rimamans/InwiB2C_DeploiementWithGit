@@ -1,0 +1,4 @@
+.vertical-layout{
+    flex-direction: column!important; 
+    gap:40px
+}

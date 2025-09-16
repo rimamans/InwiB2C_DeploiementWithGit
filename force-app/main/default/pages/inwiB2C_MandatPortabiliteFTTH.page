@@ -1,0 +1,66 @@
+<apex:page sidebar="false" renderAs="pdf" controller="InwiB2C_DocAdslController" showHeader="false" applyBodyTag="false">
+
+    <head>
+        <style>
+            body {
+                font-family: 'Arial Unicode MS';
+                font-size: 12px;
+            }
+
+            @page: first {
+                size: A4;
+                margin-top: 0px margin-right:0px;
+                margin-left: 0px;
+                margin-bottom: 0cm;
+            }
+
+            @page {
+                size: A4;
+                margin-top: 0px;
+                margin-right: 0px;
+                margin-left: 0px;
+                margin-bottom: 0cm;
+            }
+        </style>
+
+    </head>
+
+    <body>
+    
+        <apex:repeat value="{!loopList}" var="loopItem" id="theRepeat">
+            <apex:variable value="{!IF(loopItem > 1,7, 0)}" var="added" />
+                
+            <div style="page-break-after:auto;"> 
+                    <div style="{!IF(output['canal'] == 'inwiB2C_Eshop','display:block','display:none')}">
+
+                        <img style="width:100%;" src="{!$Resource.inwib2c_MandatPortabiliteEshopCompresser}" />
+                        </div>
+                    <div style="{!IF(output['canal'] != 'inwiB2C_Eshop','display:block','display:none')}">    
+                     <img style="width:100%;" src="{!$Resource.inwib2c_Mandat_de_portabilite_FTTH_RIO}"/>
+
+                    </div>
+                <div style="position: absolute;top: {! 164 + (loopItem *2241)}px;left: 20%;max-width: 450px;">{!IF(contains(keys,'FullName'),output['FullName'], '')}</div>
+                <div style="position: absolute;top: {! 185  + (loopItem *2241)}px;left: 27%;max-width: 450px;">{!IF(contains(keys,'TypePieceIdentite'),output['TypePieceIdentite'], '')}</div>
+                <div style="position: absolute;top: {! 206 + (loopItem *2241)}px;left: 30%; max-width: 450px;">{!IF(contains(keys,'CIN'),output['CIN'], '')}</div>
+                <div style="position: absolute;top: {! 231 + (loopItem *2239)}px;left: 15%;max-width: 450px;">{!IF(contains(keys,'AdresseMail'),output['AdresseMail'], '')}</div>
+                <div style="position: absolute;top: {! 248 + (loopItem *2240) + added}px;left: 27%;max-width: 450px;">{!IF(contains(keys,'NumPorter'),output['NumPorter'], '')}</div>
+                <div style="position: absolute;top: {! 270.5 + (loopItem *2240) + added}px;left: 27%;max-width: 450px;">{!IF(contains(keys,'CodeRio'),output['CodeRio'], '')}</div>
+
+                <div style="position: absolute;top: {! 312 + (loopItem *2240)}px;left: 83%;max-width: 450px;">INWI</div>
+                <div style="position: absolute;top: {! 354 + (loopItem *2239)}px;left: 32.7%;max-width: 440px;">{!IF(AND(contains(keys,'Operateur'), output['Operateur'] == 'WIN'),'X', '')}</div>
+                <div style="position: absolute;top: {! 354 + (loopItem *2239)}px;left: 54.6%;max-width: 440px;">{!IF(AND(contains(keys,'Operateur'), output['Operateur'] == 'MARMT'),'X', '')}</div>
+                <div style="position: absolute;top: {! 354 + (loopItem *2239)}px;left: 75.5%;max-width: 440px;">{!IF(AND(contains(keys,'Operateur'), output['Operateur'] == 'MARM1'),'X', '')}</div>
+                <div style="position: absolute;top: {! 808 + (loopItem *2240.5)}px;left: 40%;max-width: 450px;">{!IF(contains(keys,'CreateDate'),output['CreateDate'], '')}</div>
+
+             </div>                                          
+
+            <!-- CGV  -->
+            <div>
+                <img style="width:100%;" src="{!$Resource.inwib2c_CGV_Mandat_de_portabilite_FTTH_RIO}" />
+
+            </div>
+            </apex:repeat>
+    </body>
+
+
+</apex:page>

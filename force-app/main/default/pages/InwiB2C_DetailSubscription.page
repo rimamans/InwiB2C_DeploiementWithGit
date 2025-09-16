@@ -1,0 +1,61 @@
+<apex:page standardController="vlocity_cmt__Subscription__c" tabStyle="vlocity_cmt__Subscription__c" lightningStylesheets="true">
+    <apex:form >
+            <apex:pageBlock mode="edit">
+                <apex:pageBlockSection title="Informations" columns="2">
+                    <apex:outputField value="{!vlocity_cmt__Subscription__c.Inwib2c_Num_ro_de_la_ligne__c}" label="Numéro de la ligne" />
+                    <apex:outputField value="{!vlocity_cmt__Subscription__c.Inwib2c_Profil__c}" label="Profil" />
+                    <apex:outputField value="{!vlocity_cmt__Subscription__c.Inwib2c_Offre__c}" label="Offre" />
+                    <apex:outputField value="{!vlocity_cmt__Subscription__c.Inwib2c_SegmentLigne__c}" label="Segment ligne" />
+                    <apex:outputField value="{!vlocity_cmt__Subscription__c.Inwib2c_Terminal__c}" label="Terminal" />
+                    <!-- Suppression du champ "Numéro de série de terminal" et remplacement par IMSI -->
+                    <apex:outputField value="{!vlocity_cmt__Subscription__c.InwiB2C_IMSI__c}" label="IMSI" />
+                    <apex:outputField value="{!vlocity_cmt__Subscription__c.InwiB2C_Point_de_vente__c}" label="Point de vente" />
+                    <!-- Utilisation d'un div vide pour ne pas casser la structure -->
+                    <apex:outputText value="" />
+                    <apex:outputField value="{!vlocity_cmt__Subscription__c.InwiB2C_Date_d_activation__c}" label="Date d’activation" />
+                    <apex:outputField value="{!vlocity_cmt__Subscription__c.Inwib2c_type_de_sim__c}" label="Type de sim" />
+                    <apex:outputField value="{!vlocity_cmt__Subscription__c.InwiB2C_Date_de_fin_d_engagement__c}" label="Date de fin d'engagement" />
+                    <apex:outputField value="{!vlocity_cmt__Subscription__c.inwib2c_Categorie_de_sim__c}" label="Catégorie de sim" />
+                    <apex:outputField value="{!vlocity_cmt__Subscription__c.InwiB2C_Dur_e_d_engagement__c}" label="Durée d'engagement" />
+                    <apex:outputField value="{!vlocity_cmt__Subscription__c.InwiB2C_Dur_e_d_engagement__c}" label="compte de facturation" />
+                    <!-- lien-->
+                    <apex:outputField value="{!vlocity_cmt__Subscription__c.InwiB2C_Statut_du_compte_de_facturation__c}" label="Statut du compte de facturation" />
+                    <apex:outputField value="{!vlocity_cmt__Subscription__c.InwiB2C_Type_de_Handset__c}" label="Type de Handset" />
+                    <apex:outputField value="{!vlocity_cmt__Subscription__c.InwiB2C_Dur_e_d_engagement__c}" label="Durée d'engagement" />
+                    <apex:outputField value="{!vlocity_cmt__Subscription__c.InwiB2C_Id_profil__c}" label="Id profil" />
+                    <apex:outputField value="{!vlocity_cmt__Subscription__c.InwiB2C_Contract__c}" label="Contract" />
+                    <!-- lien-->
+                    <apex:outputField value="{!vlocity_cmt__Subscription__c.InwiB2C_Partenaire__c}" label="Partenaire" />
+                    <!-- lien-->
+                    <apex:outputField value="{!vlocity_cmt__Subscription__c.InwiB2C_Canal__c}" label="Canal" />
+                    <apex:outputField value="{!vlocity_cmt__Subscription__c.InwiB2C_Distributeur__c}" label="Distributeur" />
+                    <!-- lien-->
+                    
+                        <apex:outputField value="{!vlocity_cmt__Subscription__c.inwiB2C_NombreActivationClientParJour__c}" label="Nombre d'activation client par jour" />
+                        <apex:outputField value="{!vlocity_cmt__Subscription__c.inwiB2C_OptionIdentification__c}" label="Option d'identification" />
+                        <apex:outputField value="{!vlocity_cmt__Subscription__c.Inwib2C_Type_Offre__c}" label="Type de l'offre" />
+                        <apex:outputField value="{!vlocity_cmt__Subscription__c.inwiB2C_managedInSF__c}" label="managed In SF" />
+                        <apex:outputField value="{!vlocity_cmt__Subscription__c.InwiB2C_A_r_silier__c}" label="Contacter Savedesk" />
+                        <apex:outputField value="{!vlocity_cmt__Subscription__c.Blacklist__c}" label="Blacklisté" />
+                        <apex:outputField value="{!vlocity_cmt__Subscription__c.inwiB2C_Montant_de_l_abonnement__c}" label="Montant de l’abonnement" />
+                        <apex:outputField value="{!vlocity_cmt__Subscription__c.Potentiel_migration_ou_upsell__c}" label="Potentiel migration ou upsell" />
+                        <apex:outputField value="{!vlocity_cmt__Subscription__c.InwiB2C_Famille_d_offre__c}" label="Famille d'offre" />
+                        <apex:outputField value="{!vlocity_cmt__Subscription__c.inwib2c_Categorie_de_sim__c}" label="Catégorie de sim" />
+                   
+                </apex:pageBlockSection>
+                
+                <!-- Ajout des champs "Créé par" et "Dernière modification par" sur la même ligne sans label -->
+                <apex:pageBlockSection columns="2">
+                    <apex:outputField value="{!vlocity_cmt__Subscription__c.CreatedById}" styleClass="slds-p-right_small"/>
+                    <apex:outputField value="{!vlocity_cmt__Subscription__c.LastModifiedById}" styleClass="slds-p-left_small"/>
+                </apex:pageBlockSection>
+
+                <!-- Ajout des champs "Date de création" et "Date de dernière modification" sur la même ligne -->
+                <apex:pageBlockSection columns="2">
+                    <apex:outputField value="{!vlocity_cmt__Subscription__c.CreatedDate}" styleClass="slds-p-right_small"/>
+                    <apex:outputField value="{!vlocity_cmt__Subscription__c.LastModifiedDate}" styleClass="slds-p-left_small"/>
+                </apex:pageBlockSection>
+            </apex:pageBlock>
+        
+    </apex:form>
+</apex:page>

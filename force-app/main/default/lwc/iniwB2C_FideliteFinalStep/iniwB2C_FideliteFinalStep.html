@@ -1,0 +1,27 @@
+<template>
+    <div class="slds-grid slds-wrap">
+        <div class="slds-col slds-size_12-of-12">
+            <div style="border-style: solid; border-color: #92107F; padding: 10px; border-radius: 10px;">
+        
+        <strong>Detail Commande: </strong>
+       
+        <p><span style="font-weight: bold;">N° de ligne :</span>  {mdn}</p>
+        <p><span style="font-weight: bold;">Terminal Sélectionné :</span>  {codearticle} /{produit}</p>
+        <p><span style="font-weight: bold;">Id de la commande d'achat : </span> {orderid}</p>
+        <p if:true={showIMEI} ><span style="font-weight: bold;">IMEI : </span> {imei}</p>
+    </div>
+        </div>
+    </div>
+        
+            <lightning-button  style="padding: 10px;" variant="brand" label="Finaliser la commande" title="Finaliser la commande"
+                onclick={burnPoints} class="slds-float_right"  >
+            </lightning-button>
+       <!--
+    <div class="slds-grid slds-gutters">
+        <div class="slds-col">
+            <lightning-button style="margin-top: 10px; width: 100%;" variant="brand" label="Finaliser la commande (Données figées)" title="Finaliser la commande (Données figées)"
+                onclick={burnPointsStatic} class="slds-col">
+            </lightning-button>
+        </div>-->
+    
+</template>

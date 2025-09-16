@@ -1,0 +1,59 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 03-17-2022
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+
+
+    <div class="slds-grid slds-wrap">
+        <div class="slds-col slds-size_6-of-12">
+            <lightning-combobox placeholder="Pays" onchange={ChangePays} data-theid="Pays" label="Pays" required disabled="true"
+                value={valuePays} class="slds-col slds-size_1-of-1 elementMargin2" options={PaysValues}>
+            </lightning-combobox>
+           
+           
+        </div>
+
+
+    </div>
+
+    <div class="slds-grid slds-wrap slds-grid_vertical-stretch">
+        <lightning-combobox style="padding: 10px;" placeholder="sélectionnez une ville" onchange={ChangeVille}
+            data-theid="Ville" value={v} label="Ville" required class="slds-col slds-size_1-of-2 elementMargin2"
+            options={VilleValues}>
+        </lightning-combobox>
+      
+    <lightning-input type="text" style="padding: 10px;" disabled data-theid="Region" label="Region" value={r}
+    placeholder="sélectionnez une region" class="slds-col slds-size_1-of-2 elementMargin2">
+</lightning-input>
+        
+        <template if:false={isToSpecify}>
+            <lightning-combobox style="padding: 10px;" placeholder="sélectionnez un quartier" onchange={ChangeQuartier}
+                data-theid="Quartier" value={q} label="Quartier" class="slds-col slds-size_1-of-2 elementMargin2"
+                options={QuartierValues}>
+            </lightning-combobox>
+        </template>
+        <template if:true={isToSpecify}>
+            <lightning-input style="padding: 10px;" type="text" onchange={ChangePrecisionQuartier}
+                data-theid="PrecisionQuartier" label="Précision Quartier" placeholder="Précisez le quartier" value={pq}
+                class="slds-col slds-size_1-of-2 elementMargin2">
+            </lightning-input>
+        </template>
+        <lightning-input style="padding: 10px;" type="number" label="Code Postal" value={codepostal} name="codepostal"
+        placeholder="Saisir code postal" pattern="[0-9]{5,5}" maxlength="5" minlength="5"   message-when-pattern-mismatch="Code postal doit contenir que 5 Chiffres" class="slds-col slds-size_1-of-2 elementMargin2"
+        onchange={handleChangeInput}>
+    </lightning-input>
+    <lightning-input style="padding: 10px;" type="text" label="Complément d'adresse" value={complementaddress}
+        name="complementaddress" placeholder="Saisir Complément d'adresse"
+        class="slds-col slds-size_1-of-2 elementMargin2" onchange={handleChangeInput}>
+    </lightning-input>
+    </div>
+ <!--   <template if:true={showother}>
+        <div class="slds-grid slds-wrap slds-grid_vertical-stretch">
+           
+        </div>
+    </template>-->
+</template>

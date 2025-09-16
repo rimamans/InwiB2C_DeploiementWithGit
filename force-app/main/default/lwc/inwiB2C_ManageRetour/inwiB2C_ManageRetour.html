@@ -1,0 +1,124 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 10-06-2022
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+   
+  
+        <div class="wraperClass">
+
+           
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered"
+                style="table-layout:fixed;">
+                <thead>
+                    <tr class="slds-line-height_reset">
+                        <th class="" scope="col" style="width: 6%;">
+                            <div class="slds-truncate" title="radios"></div>
+                        </th>
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="Numéro de Série">Numéro de Série</div>
+                        </th>
+                        <th class="" scope="col" style="width: 12%;">
+                            <div class="slds-truncate" title="Numéro de la Ligne">Numéro de la Ligne</div>
+                        </th>
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="Modéle">Modéle</div>
+                        </th>
+                       
+                        <th class="" scope="col" style="width: 12%;">
+                            <div class="slds-truncate" title="Code Article" >Code Article</div>
+                        </th>
+                        <th class="" scope="col" style="width: 12%;">
+                            <div class="slds-truncate" title="Agence de vente" >Agence de vente</div>
+                        </th>
+                        <th class="" scope="col" style="width: 9%;">
+                            <div class="slds-truncate" title="Consigné">Consigné</div>
+                        </th>
+                        <th class="" scope="col" style="width: 21%;">
+                            <div class="slds-truncate" title="Statut" >Statut </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+        
+                    <template for:each={__record2} for:item="mat">
+                        <tr key={mat.Id}>
+                            <td>
+                                <template if:true={profil}>
+                                <input type="checkbox" name="data"
+                                onchange={handleSelectedAccounts}  id={mat.Id} data-statut={mat.InwiB2C_Statut_de_retour__c} data-idline={mat.Id} data-codearticle={mat.InwiB2C_Code_Article__c} data-serialnumber={mat.InwiB2C_Num_ro_de_s_rie__c} 
+                                 />
+                                </template>
+                                <template if:false={profil}>
+                                    <input type="checkbox" name="data"
+                                    onchange={handleSelectedAccounts}  id={mat.Id} data-statut={mat.InwiB2C_Statut_de_retour__c} data-idline={mat.Id} data-codearticle={mat.InwiB2C_Code_Article__c} data-serialnumber={mat.InwiB2C_Num_ro_de_s_rie__c} 
+                                    disabled />
+                                    </template>
+                                </td>
+                                <td style="white-space:normal;">{mat.InwiB2C_Num_ro_de_s_rie__c}</a></td>
+                                <td style="white-space:normal;">{mat.InwiB2C_Num_ro_de_la_ligne__c}</td>
+                                <td style="white-space:normal;">{mat.InwiB2C_Modele__c}</td>
+                                <td style="white-space:normal;">{mat.InwiB2C_Code_Article__c}</td>
+                                <td style="white-space:normal;">{mat.InwiB2C_Code_Agence_Init__c}</td>
+                                <td style="white-space:normal;">{mat.InwiB2C_Consign__c}</td>
+                                <td>
+                                    <lightning-combobox 
+                                    name="mat.Id"
+                                    value={value}
+                                    placeholder={mat.InwiB2C_Statut_de_retour__c}
+                                    options={options}
+                                    onchange={handleChange}
+                                    id={mat.Id}
+                                    data-idacc={mat.Id}
+                                    data-codearticle={mat.InwiB2C_Code_Article__c}
+                                    data-serialnumber={mat.InwiB2C_Num_ro_de_s_rie__c}
+                                    ></lightning-combobox>
+                           
+                                </td>
+                        </tr>
+                   </template>
+                </tbody>
+            </table>
+
+        
+         
+        </div>
+
+        <br>
+            
+        <br>
+        <div class="slds-grid slds-wrap slds-grid_vertical-stretch" style="float:right">
+        
+           
+                <lightning-button variant="brand-outline" label="Précédent"  onclick={gotopreviousStep}
+                class="slds-m-left_x-small"></lightning-button>
+         
+            
+                   <span></span>
+                   <template if:true={profil}>
+                    <template if:true={selectedLabel}>
+                <lightning-button variant="brand" label="Confirmer" title="Soumettre" onclick={gotonextStep} 
+                class="slds-m-left_x-small">
+                </lightning-button>
+            </template>
+            <template if:false={selectedLabel}>
+                <lightning-button variant="brand" label="Confirmer" title="Soumettre" onclick={gotonextStep} 
+                class="slds-m-left_x-small" disabled>
+                </lightning-button>
+            </template>
+            </template>
+            <template if:false={profil}>
+                <lightning-button variant="brand" label="Terminer" onclick={navigateToHomePage}
+                class="slds-m-left_x-small">
+                </lightning-button>
+            </template>
+    
+    
+            </div>
+    
+    
+   
+</template>

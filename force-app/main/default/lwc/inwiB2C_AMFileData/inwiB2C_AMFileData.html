@@ -1,0 +1,27 @@
+<template>
+    <lightning-card title="Upload de fichiers CSV">
+        <!-- Sélection de fichier -->
+        <div class="slds-col slds-size_3-of-4" style="margin: 10px;">
+            <lightning-file-upload 
+                label="Choisissez un fichier CSV"
+                accept=".csv" 
+                onuploadfinished={uploadFileHandler}>
+            </lightning-file-upload>
+        </div>
+        
+        <!-- Message de succès avec le nom du fichier -->
+        <template if:true={filename}>
+            <div class="slds-col slds-size_2-of-3" style="color: black; margin-top: 10px;">
+                Le fichier {filename} a été chargé avec succès.
+            </div>
+        </template>
+
+        <!-- Bouton "Suivant" -->
+        <lightning-button 
+            label="Suivant" 
+            onclick={handleNext} 
+            class="slds-m-top_medium" 
+            variant="brand">
+        </lightning-button>
+    </lightning-card>
+</template>

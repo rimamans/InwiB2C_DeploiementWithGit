@@ -1,0 +1,77 @@
+<template>
+        <lightning-card variant="Narrow" title="Panier" icon-name="standard:webcart">
+                <lightning-button label="valider" variant="brand" class="slds-button slds-button_brand slds-button_stretch" onclick={Next} disabled={__disableValidate} slot="actions" ></lightning-button>
+
+            <div class="wraperClass ">
+                <table class="sty-table-case slds-table slds-table_bordered slds-table_fixed-layout">
+                    <thead>
+                        <tr class="">
+                            <th class="slds-text-align_center" scope="col">
+                                <div class="slds-truncate" title="Produit">Items</div>
+                            </th>
+                            <th style="word-wrap: break-word;">
+                                A Payer maintenant
+                            </th>
+                            <th class="slds-text-align_center" scope="col">
+                                <p>Prochaine Facture</p>
+                            </th>
+                            <th class="slds-text-align_center" scope="col">
+                                <p>Abonnement mensuel</p>
+                                <p>hors remise</p>
+                            </th>
+                            <th class="slds-text-align_center" scope="col">
+                                <div class="slds-truncate" title="oneTime">Promotion</div>
+                            </th>
+                            <th class="slds-text-align_center" scope="col">
+                                <div class="slds-truncate" title="Error"></div>
+                            </th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template for:each={cart} for:item="item">
+                            <tr key={item.itemname} style={item.styleColor}>
+                                <td class="slds-text-align_center">
+                                    <div class="slds-line-clamp">{item.itemname}</div>
+                                </td>
+                                <td class="slds-text-align_center">
+                                    <lightning-formatted-number value={item.price} format-style="decimal">
+                                    </lightning-formatted-number>
+                                </td>
+                                <td class="slds-text-align_center">
+                                    <lightning-formatted-number value={item.price_first_bill} format-style="decimal">
+                                    </lightning-formatted-number>
+                                </td>
+                                <td class="slds-text-align_center">
+                                    <lightning-formatted-number value={item.price_abonnement} format-style="decimal">
+                                    </lightning-formatted-number>
+                                </td>
+                                <td class="slds-text-align_center">
+                                    {item.promotion}
+                                </td>
+                                <td class="slds-cell-wrap">
+                                    <template if:true={item.isparent}>
+                                        <div class="slds-line-clamp">
+                                            <template if:true={item.parent.has_error_messages}>
+                                                <lightning-button-icon icon-name="utility:warning"
+                                                    variant="destructive-text" alternative-text="Selectionner"
+                                                    name={item.parent} onclick={openModal}>
+                                                </lightning-button-icon>
+                                            </template>
+                                            <lightning-button-icon icon-name="utility:delete" variant="destructive-text"
+                                                alternative-text="Supprimer" name={item.parent} onclick={deleteItem}>
+                                            </lightning-button-icon>
+                                            <lightning-button-icon icon-name="utility:setup" variant="destructive-text"
+                                                alternative-text="Configurer" name={item.parent} onclick={selectItem}>
+                                            </lightning-button-icon>
+                                        </div>
+                                    </template>
+                                </td>
+                            </tr>
+                        </template>
+
+                    </tbody>
+                </table>
+            </div>
+        </lightning-card>
+</template>

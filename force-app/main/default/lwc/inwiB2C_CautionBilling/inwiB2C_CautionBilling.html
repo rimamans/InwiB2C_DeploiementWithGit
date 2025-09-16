@@ -1,0 +1,38 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 06-15-2022
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template >
+    
+    <div class="via-slds riders-list-canvas container-table-canvas" if:true={records}>
+        <div class="slds-card slds-p-around--small np-card">
+
+           
+
+            <div class="slds-p-right_small slds-m-bottom_xx-small slds-show_inline-block slds-size_12-of-12 slds-medium-size_12-of-12">
+                <div class="slds-m-bottom_xx-large overflowVisible ">
+                    <div >                    
+                        <div class="wraperClass ">
+                            <lightning-datatable
+                                class="tab-style slds-table slds-table_bordered slds-table_col-bordered" 
+                                key-field="RefCaution"
+                                columns={columns}
+                                data={list} 
+                                draft-values={draftValues}
+                                onrowaction={handleRowAction}
+                                hide-checkbox-column= true>
+                            </lightning-datatable>
+                        </div>
+                    </div>
+            </div>
+                
+            </div>
+        </div>
+
+    </div>
+
+
+</template>

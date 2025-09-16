@@ -1,0 +1,3 @@
+let definition = 
+                {"Cards":["LacemenetParcoursRechargeSubscription"],"GlobalKey__c":"inwiB2C_LancementParcoursRecharge_FromSubscription/1/JBE/1615761251647","componentName":"cfInwiB2C_LancementParcoursRecharge_FromSubscription","dataSource":{"type":null},"enableLwc":true,"lwc":{"DeveloperName":"cardCanvas1x","Id":"0Rb4K000000kQXbSAM","MasterLabel":"cardCanvas1x","name":"cardCanvas1x"},"previewType":"runTime","repeatCards":false,"workspace":["LacemenetParcoursRechargeSubscription/JBE/1/1615761485190"]}; 
+            export default definition

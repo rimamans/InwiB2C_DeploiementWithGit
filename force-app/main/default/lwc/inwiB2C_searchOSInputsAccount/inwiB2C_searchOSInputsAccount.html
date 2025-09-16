@@ -1,0 +1,47 @@
+<template>
+
+    <template if:true={showSearchByName}>
+        <div class="slds-grid slds-wrap slds-grid_vertical-stretch">
+            <lightning-input type="text" onchange={handleLastNameChange} data-theid="lastname" label="Nom" value={lastname}
+                class="slds-col slds-size_1-of-2"></lightning-input>
+        </div>    
+        <div class="slds-grid slds-wrap slds-grid_vertical-stretch">
+            <lightning-input type="text" onchange={handleFirstNameChange} data-theid="firstname" label="Prénom" value={firstname}
+                class="slds-col slds-size_1-of-2"></lightning-input>
+        </div>    
+    </template>
+    
+    <div class="slds-grid slds-wrap slds-grid_vertical-stretch">
+        <lightning-input type="text" onchange={handleCINChange} data-theid="CIN" label="CIN" value={c}
+            class="slds-col slds-size_1-of-2"></lightning-input>
+    </div>
+
+
+    <div class="slds-grid slds-wrap slds-grid_vertical-stretch">
+        <lightning-input type="number" onchange={handleMDNChange} data-theid="MDN" label="MDN" value={m}
+            pattern="212[0-9]{9}" message-when-pattern-mismatch="l'MDN doit avoir 12 chiffre."
+            class="slds-col slds-size_1-of-2"></lightning-input>
+    </div>
+
+    <div class="slds-grid slds-wrap slds-grid_vertical-stretch">
+        <lightning-input type="Text" onchange={handleBillingAccChange} data-theid="BAN"
+            label="Numéro du compte de facturation" value={b} class="slds-col slds-size_1-of-2">
+        </lightning-input>
+    </div>
+
+    <div class="slds-grid slds-wrap slds-grid_vertical-stretch">
+        <lightning-input type="Text" onchange={handleInvoiceNumberChange} data-theid="INV" label="Numéro de facture"
+            value={i} class="slds-col slds-size_1-of-2"></lightning-input>
+    </div>
+
+    <br>
+
+    <!-- <lightning-button variant="brand" label="Recherche" data-theid="searche" title="Recherche" onclick={handleSearch}
+        class="slds-m-left_x-small" style="display:none"></lightning-button> -->
+    <div style="float: right; margin-top: 10px;">
+        <lightning-button variant="brand" data-theid="searche" label="Recherche" title="Recherche" onclick={handleSearch}
+            class="slds-button slds-button_brand slds-button_stretch"  style="display:none; width: 112px;">
+        </lightning-button>
+    </div>
+
+</template>

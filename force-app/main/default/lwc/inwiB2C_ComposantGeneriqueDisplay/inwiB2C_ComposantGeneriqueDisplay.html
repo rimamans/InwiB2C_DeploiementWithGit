@@ -1,0 +1,20 @@
+<template>
+    <div class="slds-p-bottom--small">
+        <div class="slds-m-bottom_xx-large overflowVisible ">
+            Composant Generique
+            <template if:true={istext}>
+                <h1>{allmdn.label}</h1>
+                <lightning-input type="number" name="input1" value={myVar} onchange={handleMsisdn}></lightning-input> 
+            </template>
+            <template if:true={isselect}>
+                <h1>{allmdn.label}</h1>
+                <select class="slds-select" id="select-01" onchange={handleItemClicked}>
+                    <option></option>
+                    <template for:each={allmdn.values} for:item="listitem" >
+                        <option key={listitem.label} value={listitem.label}>{listitem.value}</option>
+                    </template>
+                </select>
+            </template>
+        </div>
+    </div>
+</template>

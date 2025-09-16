@@ -1,0 +1,35 @@
+.ManagedInSF
+{
+    text-align: center;
+    font-style: bold;
+
+    
+  }  
+  
+    .slds-alert_warning
+  {
+      background-color: #df7c55;	
+      text-align: center;
+      font-style: bold;
+  
+  
+    }
+
+    .slds-alert_warning2
+    {
+        background-color: #7cc260;	
+        text-align: center;
+        font-style: bold;
+    
+    
+      }
+
+
+
+  .NotManagedInSF
+{
+    text-align: center;
+    font-style: bold;
+
+
+  }

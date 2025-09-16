@@ -1,0 +1,227 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 10-19-2022
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+     
+    <template if:true={haserror}>
+      <p style="color: red">{errormessage}</p>
+     
+  </template><template if:true={datainfo}>
+   
+ 
+        <strong class="slds-align_absolute-center" style="height:10rem">Liste des sites</strong>
+     
+<lightning-combobox style="width:50%" name="statuseligible" label="Statut d'éligibilité" value={valuestatus} placeholder="Selectionner le statut" options={options} onchange={handleChangestatus} ></lightning-combobox>
+   <br>
+  <div class="wraperClass">
+    <table class="slds-table slds-table_cell-buffer  slds-table_col-bordered "
+        style="border-style: solid; border-color: #92107F; padding: 10px; border-radius: 10px;">
+      <thead>
+                <tr class="slds-line-height_reset" style="border-style: solid; border-color: #92107F; padding: 10px; border-radius: 10px;">
+                    
+                    <th scope="col" >
+                        
+                        <div class="slds-truncate"  title="radios">choix</div>
+                    </th>
+                    <th class="" scope="col" >
+                        <div class="slds-truncate">Adresse</div>
+                    </th>
+                    <th class="sortable" scope="col">
+                        <div class="slds-truncate">Eligible</div>
+                    
+                    </th>
+                 <!--   <th class="" scope="col">
+                        <div class="slds-truncate">Nd</div>
+                    </th>-->
+                    
+                </tr>
+            </thead>
+            <tbody>
+                <template for:each={__data} for:item="item">
+                    <tr key={item.index} style="border-style: solid; border-color: #92107F; padding: 1px; border-radius: 1px;">
+                    
+                        <td  ><input type="radio" name="choix" 
+                            onchange={handleSelectedAccounts} id={item.Id} data-idline={item.Id} data-city={item.City}
+                           />
+                            </td>
+                        <td >
+                            {item.Adresse}
+                        </td>
+                        <td >
+                            {item.Eligibilite}
+                        </td>
+                    <!--    <td  >
+                            {item.Nd}
+                        </td>-->
+                    </tr>
+                </template>
+            </tbody>
+        </table>
+        
+
+    </div>
+
+
+
+</template> 
+<template if:false={datainfo}>
+
+<div style="text-align: center; margin-top: 30px;">
+    <div  class="slds-text-heading_large"><p style="color: red">Le client ne possède aucun site, veuillez créer un nouveau site.</p>
+    </div>
+</div>
+</template>
+<br>
+
+
+<template if:true={eligible}>
+
+<br>
+<!-- <strong class="slds-align_absolute-center" style="height:5rem"> Liste des adresses</strong>-->
+<!-- <div class="slds-text-heading_large">  <center><p>Liste des adresses  </p></center> </div>-->
+<br><!-- 
+<div class="wraperClass">
+    <table class="slds-table slds-table_cell-buffer slds-table_col-bordered"
+   
+    style="border-style: solid; border-color: #92107F; padding: 10px; border-radius: 10px;">
+       <thead>
+        <tr class="slds-line-height_reset" style="border-style: solid; border-color: #92107F; padding: 10px; border-radius: 10px;">
+            <th scope="col">
+                <div class="slds-truncate" title="radios">choix</div>
+            </th>
+            <th class="" scope="col">
+                <div class="slds-truncate">Adresse</div>
+            </th>
+              </tr>
+          </thead>
+          <tbody>
+              <template for:each={__dataEligible} for:item="itemE">
+                  <tr key={itemE.index}  style="border-style: solid; border-color: #92107F; padding: 10px; border-radius: 10px;">
+                  
+                      <td><input type="radio" name="choixAd" 
+                          onchange={handleSelectAdress} id={itemE.adressId} data-idline={itemE.adressId}
+                        
+                           data-city={itemE.city} 
+                           data-region={itemE.region} 
+                           data-sroid={itemE.sroId} 
+                           data-nroid={itemE.nroId}  />
+                          </td>
+                      <td class="slds-cell-wrap">
+                        {itemE.building},{itemE.street}, {itemE.postalCode},{itemE.city},{itemE.district},{itemE.region},{itemE.countryCode},{itemE.sroId},{itemE.nroId}
+                      </td>
+                     
+                  </tr>
+              </template>
+          </tbody>
+      </table>
+      
+
+
+</div>-->
+<br>
+<!-- <template if:true={nodataplaque}>
+    <div style="text-align: center; margin-top: 30px;">
+        <div  class="slds-text-heading_large"><p style="color: red">Site non éligible, aucune plaque n'est retournée.</p>
+        </div>
+    </div>
+</template>-->
+<template if:false={nodataplaque}>
+<!-- <div class="slds-text-heading_large">  <center><p>Liste des plaques  </p></center> </div>-->
+<strong class="slds-align_absolute-center" style="height:5rem"> Liste des plaques</strong>
+
+
+
+
+
+<br>
+<br><!--//CHB B-10015 ano 21/06/2023 ajout search-->
+<div class="slds-grid slds-gutters">
+    <div class="slds-col slds-size_1-of-4" style="border-right: 1px solid rgb(217, 219, 221);">
+        <div>
+            <lightning-input type="text" value={search} onchange={handleChangeSearch} label="Rechercher par nom"></lightning-input>
+        </div>
+       
+    </div>
+    <div class="slds-col slds-size_3-of-4">
+        <div class="wraperClass " style="min-height: 250px;">
+
+            <table class="sty-table-case slds-table slds-table_bordered slds-table_fixed-layout">
+                <thead>
+                    <tr class="">
+                        <th class="" scope="col">
+                <div class="slds-truncate" title="radios">choix</div>
+            </th>
+            <th class="" scope="col">
+                <div class="slds-truncate">Ville</div>
+            </th>
+            <th class="" scope="col">
+                <div class="slds-truncate">Reférence</div>
+            </th>
+            <th class="" scope="col">
+                <div class="slds-truncate">Nom</div>
+            </th>
+            <th class="" scope="col">
+                <div class="slds-truncate">Vendeur</div>
+            </th>
+                 
+        </tr>
+          </thead>
+          <tbody>
+              <template for:each={__dataplaque} for:item="itemPlaque">
+                  <tr key={itemPlaque.index}  style="border-style: solid; border-color: #92107F; padding: 10px; border-radius: 10px;">
+                  
+                      <td><input type="radio" name="itemPlaque.Id" onclick={handleSelectPlaque}
+                           id={itemPlaque.Id} data-idline={itemPlaque.Id}
+                           data-city={itemPlaque.place.city} 
+                           data-referredtype={itemPlaque.referredType} 
+                           data-name={itemPlaque.name} 
+                           data-vendor={itemPlaque.vendor}
+                           data-statut={itemPlaque.statut}
+                           />
+                          </td>
+                      <td class="slds-cell-wrap">
+                          {itemPlaque.place.city}
+                      </td>
+                      <td class="slds-cell-wrap">
+                          {itemPlaque.referredType}
+                      </td>
+                      <td class="slds-cell-wrap">
+                          {itemPlaque.name}
+                      </td>
+                      <td class="slds-cell-wrap">
+                        {itemPlaque.vendor}
+                    </td>
+                  </tr>
+              </template>
+          </tbody>
+      </table>
+    </div> </div>
+
+  </div>
+</template>
+<template if:true={step}>
+<template if:true={stepAd}>
+<div style="position: relative;padding:20px;">
+   
+    <lightning-button label="Suivant" variant="brand" onclick={next} class="slds-float_right"    style=" position: absolute; right: 10px; "></lightning-button>
+</div>
+</template>
+</template>
+</template>
+    <template if:true={loading}>
+
+        <div style="position: relative;padding:20px;">
+            <lightning-button   label="Liste des plaques" variant="brand" onclick={appelAPIPlaque} class="slds-float_right"    style=" position: absolute; right: 10px; "></lightning-button>
+
+          <!--  <lightning-button  label="Test Eligibilité" onclick={appelAPI} class="slds-float_right" 
+            style=" position: absolute;  right: 90px; "></lightning-button>
+        --></div> 
+</template>
+<!--  
+<lightning-button style="margin-right: 5px; " variant="brand" label="Annuler la commande1" onclick={handleCancel}>
+</lightning-button>-->
+</template>

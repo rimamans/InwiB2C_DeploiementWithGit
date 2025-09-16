@@ -1,0 +1,3 @@
+let definition = 
+                {"GlobalKey__c":"InwiB2C_getSubEliAccount/LBI/1/1646819938943","dataSource":{"type":null,"value":{"resultVar":""}},"enableLwc":true,"filter":{},"states":[{"conditions":{"group":[{"field":"$scope.data.status","operator":"===","type":"system","value":"'active'"}]},"customLwc":true,"customLwcAttributes":[{"name":"records","val":"$scope.records"}],"customLwcRepeat":false,"definedActions":{"actions":[]},"fields":[],"isSmartAction":false,"lwc":{"DeveloperName":"inwiB2C_DisplaySubscriptionsEligiblesFromAccount","Id":"0Rb25000000Axh0CAC","MasterLabel":"Inwi Souscriptions","name":"inwiB2C_DisplaySubscriptionsEligiblesFromAccount"},"name":"Active","smartAction":{}}],"title":"Souscriptions éligibles"}; 
+            export default definition

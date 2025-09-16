@@ -1,0 +1,112 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 06-05-2023
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<apex:page standardController="InwiB2C_Demande__c"  tabStyle="InwiB2C_Demande__c"  lightningStylesheets="true">
+    <apex:form >
+        <div style="height:auto">
+            <apex:pageBlock mode="maindetail">
+               <apex:pageBlockSection title="Informations générales"  rendered="{!InwiB2C_Demande__c.Type_de_modification__c='Fiche_client'}">
+                    <apex:outputField value="{!InwiB2C_Demande__c.Name}" label="Numéro de la demande" /> 
+                    <apex:outputField value="{!InwiB2C_Demande__c.Type_de_modification__c}" label="Type de la demande" /> 
+                    <apex:outputField value="{!InwiB2C_Demande__c.InwiB2C_Account__c}" label="Client" /> 
+                    <apex:outputField value="{!InwiB2C_Demande__c.InwiB2C_Partenaire__c}" label="Partenaire" /> 
+                    <apex:outputField value="{!InwiB2C_Demande__c.CreatedById}" label="Agent initiateur de la demande" /> 
+                    <apex:outputField value="{!InwiB2C_Demande__c.LastModifiedById}" label="Validateur BO" /> 
+                    <apex:outputField value="{!InwiB2C_Demande__c.Date_de_validation__c}" label="Date de validation" /> 
+                    <apex:outputField value="{!InwiB2C_Demande__c.InwiB2C_Statut__c}" label="Statut" />  
+                </apex:pageBlockSection>
+
+                <apex:pageBlockSection title="Modification fiche client"  rendered="{!InwiB2C_Demande__c.Type_de_modification__c='Fiche_client'}">
+                    <apex:outputField value="{!InwiB2C_Demande__c.oldFirstName__c}" label="Ancien Prénom" />    
+                    <apex:outputField value="{!InwiB2C_Demande__c.FirstName__c}" label="Nouveau Prénom" /> 
+                    <apex:outputField value="{!InwiB2C_Demande__c.oldLastName__c}" label="Ancien Nom" /> 
+                    <apex:outputField value="{!InwiB2C_Demande__c.LastName__c}" label="Nouveau Nom" /> 
+                    
+                
+                    <apex:outputField value="{!InwiB2C_Demande__c.old_Type_pi_ce_identit__c}" label="Ancien Type CIN" />
+                    <apex:outputField value="{!InwiB2C_Demande__c.InwiB2C_Type_CIN__c}" label="Nouveau Type CIN" /> 
+                    <apex:outputField value="{!InwiB2C_Demande__c.old_Pi_ce_d_identit__c}" label="Ancien CIN" />
+                    <apex:outputField value="{!InwiB2C_Demande__c.InwiB2C_CIN__c}" label="Nouveau CIN" /> 
+                    <apex:outputField value="{!InwiB2C_Demande__c.old_Email__c}" label="Ancien Email" />
+                    <apex:outputField value="{!InwiB2C_Demande__c.Email__c}" label="Nouveau Email" /> 
+                    <apex:outputField value="{!InwiB2C_Demande__c.old_phone__c}" label="Ancien Numero de télephone" />
+                    <apex:outputField value="{!InwiB2C_Demande__c.Phone__c}" label="Nouveau Numero de téléphone" /> 
+                    <apex:outputField value="{!InwiB2C_Demande__c.InwiB2C_phone2__c}" label="Ancien Numero de télephone 2" />
+                    <apex:outputField value="{!InwiB2C_Demande__c.InwiB2C_Account__r.inwib2c_PartenaireNumContact2__c}" label="Nouveau Numero de téléphone 2 " />    
+                    <apex:outputField value="{!InwiB2C_Demande__c.InwiB2C_Ancienne_Flag_Rural_Urbain__c}" label="Ancien Flag Rural ou Urbain" />
+                    <apex:outputField value="{!InwiB2C_Demande__c.InwiB2C_Flag_Rural_Urbain__c}" label="Nouveau Flag Rural ou Urbain" /> 
+                    <apex:outputField value="{!InwiB2C_Demande__c.InwiB2C_Ancienne_Canal__c}" label="Ancien Canal" />
+                    <apex:outputField value="{!InwiB2C_Demande__c.InwiB2C_Nouvelle_canal__c}" label="Nouveau Canal" /> 
+
+                    <apex:outputField value="{!InwiB2C_Demande__c.InwiB2C_Ancien_Vendeur__c}" label="Ancien Vendeur" />
+                    <apex:outputField value="{!InwiB2C_Demande__c.InwiB2C_Vendeur__c}" label="Nouveau Vendeur" /> 
+                    <apex:outputField value="{!InwiB2C_Demande__c.InwiB2C_Old_Distributeur2__c}" label="Ancien Distributeur rattaché au détaillant" />
+                    <!--<apex:outputField value="{!InwiB2C_Demande__c.InwiB2C_Old_Distributeur__c}" label="Ancien Distributeur rattaché au détaillant" />
+                    
+                    <apex:outputField value="{!InwiB2C_Demande__c.InwiB2C_Account__r.Parent.Name}" label="Nouveau Distributeur rattaché au détaillant" />-->
+                   <apex:outputField value="{!InwiB2C_Demande__c.InwiB2C_Account__r.InwiB2C_Distributeur__c}" label="Nouveau Distributeur rattaché au détaillant" />
+                    
+                </apex:pageBlockSection>
+                
+
+                
+                    
+                <apex:pageBlockSection title="Modification d'adresse"  rendered="{!InwiB2C_Demande__c.Type_de_modification__c='Fiche_client'}">
+                    <apex:outputField value="{!InwiB2C_Demande__c.Ancien_compl_ment_d_adresse__c}" label="Ancienne adresse " />    
+                    <apex:outputField value="{!InwiB2C_Demande__c.InwiB2C_Account__r.InwiB2C_Address__r.InwiB2C_Adresse__c}" label="Nouvelle adresse " />
+                    <apex:outputField value="{!InwiB2C_Demande__c.InwiB2C_Account__r.InwiB2C_Address__r.InwiB2C_Pays__r.Name}" label="Pays" />
+                    <apex:outputField value="{!InwiB2C_Demande__c.InwiB2C_Account__r.InwiB2C_Address__r.InwiB2C_Pays__r.Name}" label="Pays" />    
+                    
+
+                    <apex:outputField value="{!InwiB2C_Demande__c.Ancienne_precision_Quartier__c}" label="Ancien precision quartier" />
+                    <apex:outputField value="{!InwiB2C_Demande__c.Nouvelle_pr_cision_Quartier__c}" label="Nouveau precision quartier" />
+                    <apex:outputField value="{!InwiB2C_Demande__c.InwiB2C_old_Region_Name__c}" label="Ancienne région" />
+                    <apex:outputField value="{!InwiB2C_Demande__c.InwiB2C_Account__r.inwib2c_Region__c}" label="Nouvelle région" /> 
+
+                    <apex:outputField value="{!InwiB2C_Demande__c.InwiB2C_Ancienne_Sous_Region__c}" label="Ancienne sous région" /> 
+                    <apex:outputField value="{!InwiB2C_Demande__c.InwiB2C_Sous_Region__c}" label="Nouvelle sous région" /> 
+
+                    <apex:outputField value="{!InwiB2C_Demande__c.InwiB2C_Ville_Douar__c}" label="Ancienne ville ou Douar" /> 
+                    <apex:outputField value="{!InwiB2C_Demande__c.inwib2c_Nouvelle_Ville_Douar__c}" label="Nouvelle ville ou Douar" /> 
+                    <apex:outputText value="{!InwiB2C_Demande__c.inwib2c_Geolocalisation_Latitude__c}" label="Ancienne Latitude" /> 
+                    <apex:outputText value="{!InwiB2C_Demande__c.InwiB2C_Account__r.inwib2c_Geolocalisation__Latitude__s}" label="Nouvelle Latitude" />
+                    <apex:outputText value="{!InwiB2C_Demande__c.inwib2c_Geolocalisation_Longitude__c}" label="Ancienne Longitude" /> 
+                    <apex:outputText value="{!InwiB2C_Demande__c.InwiB2C_Account__r.inwib2c_Geolocalisation__Longitude__s}" label="Nouvelle Longitude" /> 
+
+ 
+
+
+
+                </apex:pageBlockSection>
+
+
+
+                <apex:pageBlockSection title="Remboursement Client"  rendered="{!InwiB2C_Demande__c.Type_de_modification__c='Remboursement client'}">   
+                <apex:outputField value="{!InwiB2C_Demande__c.InwiB2C_Old_Order__c}" label="Commande FTTH/ADSL" />   
+                <apex:outputField value="{!InwiB2C_Demande__c.InwiB2C_Subscription__c}" label="Souscription FTTH/ADSL" />
+                <apex:outputField value="{!InwiB2C_Demande__c.InwiB2C_NumSerie_Mac__c}" label="Numéro de série FTTH/ADSL" />  
+                <apex:outputField value="{!InwiB2C_Demande__c.Montant_Rembourse_Ftth_Adsl__c}" label="Le montant remboursé FTTH/ADSL" />   
+                <apex:outputField value="{!InwiB2C_Demande__c.InwiB2C_TransactionCode_Ftth_Adsl__c}" label="Code de transaction  FTTH ADSL" />   
+                <apex:outputField value="{!InwiB2C_Demande__c.InwiB2C_Order__c}" label="Commande Day1" />  
+                <apex:outputField value="{!InwiB2C_Demande__c.InwiB2C_SubscriptionDay1__c}" label="Souscription Day1" />
+                <apex:outputField value="{!InwiB2C_Demande__c.InwiB2c_NumeroDeSerie__c}" label="Numéro de série Connect day 1" /> 
+                <apex:outputField value="{!InwiB2C_Demande__c.MontantRembourseConnectDay_1__c}" label="Le montant remboursé connect day1" /> 
+                <apex:outputField value="{!InwiB2C_Demande__c.InwiB2C_TransactionCode_Connect_Day1__c}" label="Code de transaction  Connect day1" />   
+                <apex:outputField value="{!InwiB2C_Demande__c.CreatedById}" label="Créée par " />   
+                <apex:outputField value="{!InwiB2C_Demande__c.LastModifiedById}" label="Modifiée par" />   
+                <apex:outputField value="{!InwiB2C_Demande__c.LastModifiedDate}" label="Date de la dernière modification" />   
+                <apex:outputField value="{!InwiB2C_Demande__c.Date_de_creation_de_la_demande__c}" label="Date de création" />   
+              </apex:pageBlockSection>
+                
+           
+               
+                
+     
+            </apex:pageBlock>    
+        </div>  
+    </apex:form>
+</apex:page>

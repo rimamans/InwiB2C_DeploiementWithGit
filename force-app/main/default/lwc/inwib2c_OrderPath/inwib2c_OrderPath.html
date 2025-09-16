@@ -1,0 +1,11 @@
+<template>
+    <div class="c-container"
+        style="background-color: white;border: 2px grey;border-radius: 5px;padding: 10px 10px 10px 10px;">
+        <lightning-progress-indicator current-step={status} type="path" variant="base" >
+            <template for:each={steps} for:item="step">
+                <lightning-progress-step label={step.label} value={step.value} key={step.label}>
+                </lightning-progress-step>
+            </template>
+        </lightning-progress-indicator>
+    </div>
+</template>

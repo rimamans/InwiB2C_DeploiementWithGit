@@ -1,0 +1,131 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 02-24-2025
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+    <template if:true={item}>
+
+        <template if:false={updateOngoing}>
+
+            <template for:each={item.records} for:item="currentItem" >
+               
+                <span key ={currentItem.Id.value} >
+                    <c-inwi-b2-c_-display-item-attributes item={currentItem} action-type={actionType} isaccessoire={__isaccessoire}   user-profile={userProfile} showservice={__showservice} segment-offer={segmentOffer} productoffer={productoffer} typeparcour={__typeparcour} paiement={__paiement} typecanal={__typecanal} modelivraison={__modelivraison} nameagencelivraison={__nameagencelivraison} codeagencelivraison={__codeagencelivraison} selectedmodel={__selectedmodel} reprisesuitelivraison={__reprisesuitelivraison} disabledinputimei={__disabledinputimei} valeurpreordersap={__valeurpreordersap} onitemattributesvaluechange={hanldeItemAttributesValueChange} onitemattributeswithoutimei={handleItemAttributesWithoutImei} onitemattributesvalidationerror={handleitemattributesvalidationerror} oncustomitemattribvaluechangewithnext={handlecustomitemattribvaluechangewithnext}> </c-inwi-b2-c_-display-item-attributes>
+                </span>
+            </template>
+            <br>
+            <template if:true={ShowButton}>
+                <template if:false={isHidden}>
+                    <lightning-button variant="brand" label="Suivant"   title="Check Code Article SAP" onclick={CheckArticleCodeAvailabilityInSAP} style="float: right;"></lightning-button></div>
+                </template>
+                </template>
+    
+                <template if:false={ShowButton}>
+                <template if:false={isHidden}>
+                    <lightning-button variant="brand" label="Suivant"  onclick={handleSave} style="float: right;"></lightning-button></div>
+                </template>
+                </template>
+        </template>
+       <!-- Level1 Attributes -->
+
+       
+
+        
+
+        
+       
+        <!--template if:true={updateOngoing}>
+            <h1>Mise à jour de l'attribut en cours</h1> 
+
+        </template-->
+    
+        <template if:true={updateOngoing}>
+           
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-02" aria-modal="true" aria-describedby="modal-content-id-2" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-2">
+                        <div class="wraperClass ">
+                            
+                            <div style="text-align:center">Veuillez attendre quelques instants</div>
+                            <div class="demo-only" style="height:6rem;position:relative">
+                                <div class="slds-spinner_container">
+                                  <div role="status" class="slds-spinner slds-spinner_medium slds-spinner_brand">
+                                    <span class="slds-assistive-text">Loading</span>
+                                    <div class="slds-spinner__dot-a"></div>
+                                    <div class="slds-spinner__dot-b"></div>
+                                  </div>
+                                </div>
+                              </div>
+            
+                        </div>
+                    </div>
+    
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>   
+
+
+        <template if:true={isModalOpen}>
+            <!-- Modal/Popup Box LWC starts here -->
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <!-- Modal/Popup Box LWC header here -->
+                    <header class="slds-modal__header">
+                        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Fermer" onclick={closeModal}>
+                            <lightning-icon icon-name="utility:close"
+                                alternative-text="close"
+                                variant="inverse"
+                                size="small" ></lightning-icon>
+                            <span class="slds-assistive-text">Close</span>
+                        </button>
+                        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Erreur de validation <lightning-badge></lightning-badge></h2>
+                    </header>
+                    <!-- Modal/Popup Box LWC body starts here -->
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                        <div class="wraperClass ">
+                            <table class="sty-table-case slds-table slds-table_bordered slds-table_fixed-layout">
+                                <thead>
+                                <tr class="">
+            
+                                    
+                                    <th class="" scope="col">
+                                    <div class="slds-truncate" title="Produit">Erreur</div>
+                                    </th>
+                                    
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <template for:each={errorList} for:item="error" >
+                                    <tr key ={error.message} >
+                                        <td class="slds-cell-wrap" > <div class="slds-line-clamp">{error.message}</div> </td>
+            
+                                    </tr>
+                                </template>
+                            
+                                </tbody>
+                            </table>
+            
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>    
+
+        <!--
+        
+    -->
+
+
+
+
+
+    </template>
+    
+</template>

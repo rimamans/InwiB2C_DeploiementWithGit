@@ -1,0 +1,41 @@
+/*Added BY JBE 13/10/2020  */
+table, th, td {
+    border: 1px solid black;
+  }
+
+  td {
+    color:black;
+  }
+
+  .header {
+    font-size: 20px;
+  }
+
+  table{
+
+    width:80%;
+  }
+
+  th {
+    text-align: left;
+  }
+
+  .StatusStyle .DateStyle
+  {
+    width:35%;
+  }
+
+  .CounterStyle {
+    width: 10%;
+  }
+
+
+  .TextUnblockError{
+    background-color:indianred;
+    padding: 8px;
+    color:black;
+    font-size: 15px;
+    font-weight:bold;
+  }
+
+/*END OF JBE's ADDITION  23/03/2021 */

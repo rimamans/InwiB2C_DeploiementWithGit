@@ -1,0 +1,38 @@
+<template>
+    <!-- Champ de saisie du MDN -->
+    <div class="slds-grid slds-wrap slds-grid_vertical-stretch">
+        <lightning-input
+            type="number"
+            onchange={handleMDNChange}
+            data-theid="MDN"
+            label="MDN"
+            value={m}
+            pattern="212[0-9]{9}"
+            message-when-pattern-mismatch="Le MDN doit contenir 12 chiffres."
+            class="slds-col slds-size_1-of-1 elementMargin1">
+        </lightning-input>
+    </div>
+
+    <br><br><br>
+
+    <!-- Bouton de recherche -->
+    <lightning-button
+        variant="brand"
+        label="Recherche"
+        data-theid="searche"
+        title="Recherche"
+        onclick={handleSearch}
+        class="slds-m-left_x-small"
+        style="display: none">
+    </lightning-button>
+
+    <br><br>
+
+    <!-- Instructions -->
+    <div>
+        <b>Vous pouvez rechercher une personne en saisissant :</b><br><br>
+        1. <u>Soit</u> le <b>Nom</b> <span style="color: #ff0000"><b>ET</b></span> le <b>Prénom</b> avec trois caractères minimum par champ.<br>
+        2. <u>Soit</u> la <b>CIN</b>.<br>
+        3. <u>Soit</u> le <b>MDN</b>.<br>
+    </div>
+</template>

@@ -1,0 +1,32 @@
+<template>
+    <lightning-card title="Demandes de Visite Stats" icon-name="custom:custom63">
+        <div class="date-container slds-m-bottom_medium">
+            <lightning-input 
+                type="date" 
+                label="Start Date" 
+                value={startDate} 
+                onchange={handleStartDateChange} 
+                class="date-input">
+            </lightning-input>
+            <lightning-input 
+                type="date" 
+                label="End Date" 
+                value={endDate} 
+                onchange={handleEndDateChange} 
+                class="date-input">
+            </lightning-input>
+        </div>
+        <lightning-datatable
+            key-field="id"
+            data={data}
+            columns={columns}
+            hide-checkbox-column="true"
+        >
+        </lightning-datatable>
+        <lightning-button 
+            label="Export as Sheet" 
+            onclick={exportToExcel} 
+            class="slds-m-bottom_small"
+        ></lightning-button>
+    </lightning-card>
+</template>

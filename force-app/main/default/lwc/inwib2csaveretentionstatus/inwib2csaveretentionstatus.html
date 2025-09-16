@@ -1,0 +1,53 @@
+<template>
+  <div
+    class="slds-p-right_small slds-m-bottom_xx-small slds-show_inline-block slds-size_12-of-12 slds-medium-size_12-of-12">
+    <div
+      class="slds-p-right_small slds-m-bottom_xx-small slds-show_inline-block slds-size_12-of-12 slds-medium-size_6-of-12">
+      <lightning-combobox name="StatusRet" label="Statut Rétention" value={value} placeholder="" options={options}
+        onchange={handleChange} required></lightning-combobox>
+    </div>
+    <br />
+    <div class="slds-p-right_small slds-m-bottom_xx-small slds-show_inline-block slds-size_12-of-12 slds-medium-size_6-of-12">
+      <template if:true={displaydossiercomp}>
+        <div>
+          <lightning-combobox name="dossiercomplet" label="Dossier complet" onchange={handleChangedossier} value={value} placeholder="" options={optionsdossier}
+           required></lightning-combobox>
+        </div>
+      </template>
+      <template if:true={displayqualification}>
+        <div>
+          <lightning-combobox name="Qualification" label="Qualification" onchange={handleChangequalification} value={value} placeholder="" options={Qualification}
+           required></lightning-combobox>
+        </div>
+      </template>
+</div>
+<template if:true={displaydossiercomplet}>
+  <div>
+    <lightning-input value={motifretention} type="text" label="Motif" onchange={handleChangemotif}></lightning-input>
+</div>
+</template>
+<br />
+    <div if:true={retenuFlag}>
+      <c-inwi-b2-c_-otp-service record-id={subscriptionid} message={message} numeromdn={numeromdn} resiliation={resiliation} onoptvalidation={getotpfromchild} requestresilid={idrequesttoret}>
+
+      </c-inwi-b2-c_-otp-service>
+     </div>
+    <!-- <lightning-button variant="brand" label="Sauvegarder" title="Sauvegarder" 
+                onclick={savestep} class="slds-m-left_x-large slds-m-top_x-large">
+            </lightning-button>-->
+            <!--oncustomotpvaluechange={handlecustomotpvaluechange}-->
+    <br />
+
+    <div class="slds-grid slds-wrap slds-grid_align-end omniscript-button-position">
+
+      <lightning-button style="margin:6px;" variant="brand" label="Précédent" title="Précédent"
+        onclick={gotopreviousStep} class=""></lightning-button>
+
+      <div if:true={displayNext}>
+        <lightning-button variant="brand" label="Terminer" title="Terminer" onclick={savestep}
+          style="float:right; margin:6px;" class="">
+        </lightning-button>
+      </div>
+    </div>
+  </div>
+</template>

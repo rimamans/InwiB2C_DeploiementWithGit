@@ -1,0 +1,69 @@
+<!-- <template>
+    
+        <div class="slds-grid slds-wrap slds-grid_vertical-stretch">
+            <lightning-input type="number" onchange={handleMDNChange} data-theid="MDN"  
+                label="MDN" value={m}
+                pattern="212[0-9]{9}"
+                message-when-pattern-mismatch="l'MDN doit avoir 12 chiffre."
+                class="slds-col slds-size_1-of-1 elementMargin1"></lightning-input>
+        </div>
+    
+        <br>
+        <br>
+        <br>
+    
+        <lightning-button variant="brand" label="Recherche" data-theid="searche" title="Recherche"
+        onclick={handleSearch} class="slds-m-left_x-small" style="display:none"></lightning-button>
+    
+    
+    </template> -->
+
+    <template>
+        <!--
+            <b>Vous pouvez rechercher une personne en saisissant : </b><br><br>
+        
+        1. <u>Soit</u> le <b>Nom</b>   <span style="color: #ff0000"><b> ET</b></span> le <b>Prénom</b> avec trois caractères minimum par champ.<br>
+        2. <u>Soit</u> la <b>CIN</b>.<br>
+        3. <u>Soit</u> le <b>MDN</b>.<br>
+        -->
+        
+            <div class="slds-grid slds-wrap slds-grid_vertical-stretch">
+                <lightning-input type="text" onchange={handleNomChange} data-theid="Nom" 
+                    label="Nom" value={n}
+                    class="slds-col slds-size_1-of-1 elementMargin1" >
+                </lightning-input>
+            </div>
+        
+            <div class="slds-grid slds-wrap slds-grid_vertical-stretch">
+                <lightning-input type="text" onchange={handlePrenomChange} data-theid="Prenom" 
+                    label="Prénom" value={p}
+                    class="slds-col slds-size_1-of-1 elementMargin1"></lightning-input>
+        
+            </div>
+        
+        
+        
+            <div class="slds-grid slds-wrap slds-grid_vertical-stretch">
+                <lightning-input type="text" onchange={handleCINChange} data-theid="CIN"  
+                    label="CIN" value={c}
+                    class="slds-col slds-size_1-of-1 elementMargin1"></lightning-input>
+            </div>
+        
+        
+            <div class="slds-grid slds-wrap slds-grid_vertical-stretch">
+                <lightning-input type="number" onchange={handleMDNChange} data-theid="MDN"  
+                    label="MDN" value={m}
+                    pattern="212[0-9]{9}"
+                    message-when-pattern-mismatch="l'MDN doit avoir 12 chiffre."
+                    class="slds-col slds-size_1-of-1 elementMargin1"></lightning-input>
+            </div>
+        
+            <br>
+            <br>
+            <br>
+        
+            <lightning-button variant="brand" label="Recherche" data-theid="searche" title="Recherche"
+            onclick={handleSearch} class="slds-m-left_x-small" style="display:none"></lightning-button>
+        
+        
+        </template>

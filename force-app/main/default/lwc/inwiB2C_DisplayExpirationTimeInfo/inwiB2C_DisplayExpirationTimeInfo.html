@@ -1,0 +1,25 @@
+<template>
+  <template if:true={isCameleon}>
+    <div class="via-slds riders-list-canvas container-table-canvas">
+      <div class="slds-card slds-p-around--small np-card">
+       
+          <p class="stytimeexp">
+            <span
+              class="datetxt"
+              >Date d'expiration</span
+            ><span
+              class="datenum" if:true={diff} style="color: red;"
+              >{ExpirationTime} </span
+            >
+            <span
+              class="datenum" if:false={diff} style="color: green;"
+              >{ExpirationTime} </span
+            >
+          </p>
+          
+          <br>
+        
+      </div>
+    </div>
+  </template>
+</template>

@@ -1,0 +1,110 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 01-13-2025
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<apex:page sidebar="false" renderAs="pdf" controller="inwib2c_first_bill_controller" showHeader="false" applyBodyTag="false">
+
+    <head>
+        <style>
+            body {
+                font-family: 'Arial Unicode MS';
+                font-size: 12px;
+
+            }
+
+            @page {
+                size: A4;
+                margin-top: 0px;
+                margin-right: 0px;
+                margin-left: 0px;
+                margin-bottom: 0px;
+                width: 210mm;
+                height: 297mm;
+            }
+        </style>
+
+    </head>
+
+    <body>
+        <apex:variable var="index" value="{!0}" />
+        <apex:repeat value="{!data}" var="loopItem" id="theRepeat">
+            <div>
+                <div style="{!IF(loopItem['TypeContrat'] == 'IdarDuo' && loopItem['TypeDeMigration'] != 'MigVersIdar'  ,'display:block','display:none')}">
+                    <img style="width:97%; height: 95%" src="{!$Resource.first_bill_idar}" />
+                </div>
+                <div style="{!IF(loopItem['TypeContrat'] == 'Postpayé' || loopItem['TypeContrat'] == 'Prépayé'  ,'display:block','display:none')}">
+                    <img style="width:97%; height: 95%" src="{!$Resource.first_bill}" />
+                </div>
+                <div style="{!IF(loopItem['TypeContrat'] == 'FTTH' && loopItem['TypeDeMigration'] != 'MigIdarVerFtth' && loopItem['TypeDeMigration'] != 'MigADSLVersFtth','display:block','display:none')}">
+                    <img style="width:97%; height: 95%" src="{!$Resource.first_bill_ftth}" />
+                </div>
+                <div style="{!IF(loopItem['TypeContrat'] == 'ADSL' && loopItem['TypeDeMigration'] != 'MigIdarVerADSL' && loopItem['TypeDeMigration'] != 'MigADSLVersFtth' ,'display:block','display:none')}">
+                    <img style="width:97%; height: 95%" src="{!$Resource.InwiB2C_first_bill_ADSL}" />
+                </div>
+                <div style="{!IF(loopItem['TypeDeMigration'] == 'MigIdarVerFtth' && loopItem['TypeDeMigration'] != 'MigIdarVerADSL' && loopItem['TypeDeMigration'] != 'MigADSLVersFtth','display:block','display:none')}">
+                    <img style="width:97%; height: 95%" src="{!$Resource.inwiB2C_firstBill_migFtth}" />
+                </div>
+                <div style="{!IF(loopItem['TypeDeMigration'] != 'MigIdarVerFtth' && loopItem['TypeDeMigration'] != 'MigIdarVerADSL' && loopItem['TypeDeMigration'] == 'MigADSLVersFtth','display:block','display:none')}">
+                    <img style="width:97%; height: 95%" src="{!$Resource.inwiB2C_firstBill_migFtth}" />
+                </div>
+                <div style="{!IF(loopItem['TypeDeMigration'] != 'MigIdarVerFtth' && loopItem['TypeDeMigration'] == 'MigIdarVerADSL' && loopItem['TypeDeMigration'] != 'MigADSLVersFtth'  ,'display:block','display:none')}">
+                    <img style="width:97%; height: 95%" src="{!$Resource.Inwib2c_firstbill_migrtionAdsl}" />
+                </div>
+                <div style="{!IF(loopItem['TypeDeMigration'] == 'MigVersIdar' && loopItem['TypeDeMigration'] != 'MigIdarVerADSL' && loopItem['TypeDeMigration'] != 'MigADSLVersFtth' && loopItem['TypeDeMigration'] != 'MigIdarVerFtth'  ,'display:block','display:none')}">
+                    <img style="width:97%; height: 95%" src="{!$Resource.inwiB2C_firstBill_MigIdar}" />
+                </div>
+                <div style="{!IF(loopItem['TypeDeMigration'] != 'MigIdarVerFtth' && loopItem['TypeDeMigration'] != 'MigIdarVerADSL' && loopItem['TypeDeMigration'] != 'MigADSLVersFtth' && loopItem['TypeDeMigration'] != 'MigVersIdar' ,'display:block','display:none')}">
+
+                <p style="position: absolute;top: {! (index * 1115) + 175}px;left: 55%;">{!IF(contains(keys,'clientname'),loopItem['clientname'], '')}</p>
+                <p style="position: absolute;top: {! (index * 1115) + 207}px;left: 62%;">{!IF(contains(keys,'periodfactureedd'),loopItem['periodfactureedd'], '')}</p>
+                <p style="position: absolute;top: {! (index * 1115) + 207}px;left: 75%;">{!IF(contains(keys,'periodfactureedf'),loopItem['periodfactureedf'], '')}</p>
+                <p style="position: absolute;top: {! (index * 1115) + 240}px;left: 55%;">{!IF(contains(keys,'offer'),loopItem['offer'], '')}</p>
+
+
+                <p style="position: absolute;top: {! (index * 1115) + 308}px;left: 180px; color: #A3338F; font-size: 16px; font-weight: bold">{!IF(contains(keys,'firstPhrase'),loopItem['firstPhrase'], '')}</p>
+                <p style="position: absolute;top: {! (index * 1115) + 328}px;left: 265px; color: #A3338F; font-size: 16px; font-weight: bold">{!IF(contains(keys,'secondPhrase'),loopItem['secondPhrase'], '')}</p>
+
+                <p style="position: absolute;top: {! (index * 1115) + 390}px;left: 10%;">{!IF(contains(keys,'activationdate'),loopItem['activationdate'], '')}</p>
+                <p style="position: absolute;top: {! (index * 1115) + 390}px;left: 32%;">{!IF(contains(keys,'firstdaycycle'),loopItem['firstdaycycle'], '')}</p>
+                <p style="position: absolute;top: {! (index * 1115) + 390}px;left: 60%;">{!IF(contains(keys,'secondbill'),loopItem['secondbill'], '')}</p>
+
+                 <p style="position: absolute;top: {! (index * 1115) + 534}px;left: 12%; color: white; font-size: 18px">{!IF(contains(keys,'days'),loopItem['days'], '')}</p>
+                <p style="position: absolute;top: {! (index * 1115) + 610}px;left: 9%; color: #E73E91; font-size: 22px; font-weight: bold">{!IF(contains(keys,'priceprorata'),loopItem['priceprorata'], '')}</p>
+                <p style="position: absolute;top: {! (index * 1115) + 610}px;left:48%; color: #A3338F; font-size: 22px; font-weight: bold">{!IF(contains(keys,'pricefirstmonth'),loopItem['pricefirstmonth'], '')}</p>
+                <p style="position: absolute;top: {! (index * 1115) + 686}px;left:74%; color: #FFFFFF; font-size: 22px; font-weight: bold">{!IF(contains(keys,'total'),loopItem['total'], '')}</p>
+                <p style="position: absolute;top: {! (index * 1115) + 947}px;left: 242px; color: #D157A3; font-size: 11px; font-weight: bold">{!IF(contains(keys,'startday'),loopItem['startday'], '')}</p>
+            </div> 
+
+                <div style="{!IF(loopItem['TypeDeMigration'] == 'MigIdarVerFtth' || loopItem['TypeDeMigration'] == 'MigIdarVerADSL' ||  loopItem['TypeDeMigration'] == 'MigADSLVersFtth' || loopItem['TypeDeMigration'] == 'MigVersIdar' ,'display:block','display:none')}">
+     
+                    <p style="position: absolute;top: {! (index * 1115) + 170}px;left: 55%;">{!IF(contains(keys,'clientname'),loopItem['clientname'], '')}</p>
+                    <p style="position: absolute;top: {! (index * 1115) + 200}px;left: 59%;">{!IF(contains(keys,'FirstcycledayMigidar'),loopItem['FirstcycledayMigidar'], '')}</p>
+                    <p style="position: absolute;top: {! (index * 1115) + 200}px;left: 71%;">{!IF(contains(keys,'periodfactureedMig'),loopItem['periodfactureedMig'], '')}</p>
+                    <p style="position: absolute;top: {! (index * 1115) + 235}px;left: 55%;">{!IF(contains(keys,'offer'),loopItem['offer'], '')}</p>
+
+                    <p style="position: absolute;top: {! (index * 1115) + 290}px;left: 180px; color: #A3338F; font-size: 16px; font-weight: bold">{!IF(contains(keys,'firstPhraseMig'),loopItem['firstPhraseMig'], '')}</p>
+                    <p style="position: absolute;top: {! (index * 1115) + 310}px;left: 265px; color: #A3338F; font-size: 16px; font-weight: bold">{!IF(contains(keys,'secondPhraseMig'),loopItem['secondPhraseMig'], '')}</p>
+    
+                    <p style="position: absolute;top: {! (index * 1115) + 360}px;left: 8%;">{!IF(contains(keys,'FirstcycledayMigidar'),loopItem['FirstcycledayMigidar'], '')}</p>
+                    <p style="position: absolute;top: {! (index * 1115) + 360}px;left: 63%;">{!IF(contains(keys,'LastDaycycle'),loopItem['LastDaycycle'], '')}</p>
+                    <p style="position: absolute;top: {! (index * 1115) + 360}px;left: 78%;">{!IF(contains(keys,'NextCycle'),loopItem['NextCycle'], '')}</p>
+     
+                    <p style="position: absolute;top: {! (index * 1115) + 584}px;left:32%; color: #A3338F; font-size: 22px; font-weight: bold">{!IF(contains(keys,'pricefirstmonth'),loopItem['pricefirstmonth'], '')}</p>
+                    <p style="position: absolute;top: {! (index * 1115) + 665}px;left:69%; color: #FFFFFF; font-size: 22px; font-weight: bold">{!IF(contains(keys,'totalMig'),loopItem['totalMig'], '')}</p>
+                    <p style="position: absolute;top: {! (index * 1115) + 908}px;left: 221px; color: #D157A3; font-size: 13px; font-weight: bold">{!IF(contains(keys,'startdayMig'),loopItem['startdayMig'], '')}</p>
+                </div>
+
+
+
+            </div>
+            <apex:variable var="index" value="{!index + 1}" />
+
+        </apex:repeat>
+
+    </body>
+
+
+</apex:page>

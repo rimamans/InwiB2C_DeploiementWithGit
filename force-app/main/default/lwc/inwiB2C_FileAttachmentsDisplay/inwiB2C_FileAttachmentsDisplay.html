@@ -1,0 +1,30 @@
+<template>
+
+    <lightning-input type="file" label="Select Document" onchange={handleFileChange}></lightning-input>
+    <lightning-button label="Ajouter un document" onclick={handleAddDocument}></lightning-button>
+
+    <template  if:true={__existingDocuments}>
+        <br><br>
+        <lightning-datatable
+        key-field="documentId"
+
+        columns={columnsFilesDisplay}
+        data={__existingDocuments} 
+        hide-checkbox-column
+        onrowaction={handleRowAction}
+        
+        >
+        </lightning-datatable>
+    </template>
+    
+    <!--
+    <template if:true={isdisplay}>
+
+        <lightning-button variant="show Image" label="show Image" title="SEND SOCKET" 
+            onclick={shoImg} class="slds-m-left_x-small"></lightning-button>
+        <br><br>
+        <img src={url} data-idimage="theimg" class="image"/>
+
+    </template>
+    -->
+</template>

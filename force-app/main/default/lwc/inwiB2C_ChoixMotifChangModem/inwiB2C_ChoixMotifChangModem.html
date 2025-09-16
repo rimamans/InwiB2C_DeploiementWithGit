@@ -1,0 +1,18 @@
+<template>
+    <div style="border-style: solid; border-color: #92107F; padding: 10px; border-radius: 30px;">
+     
+            <div class="slds-grid slds-wrap slds-grid_vertical-stretch" style="margin-bottom: 10px;">
+            <lightning-radio-group name="radioGroup" label="Choix de motif" options={options} type="radio" required
+                value={optionMotif} onchange={handleChange} style="padding: 10px; font-size: 20px;">
+            </lightning-radio-group>
+            <br />
+            <br />
+        </div> 
+        
+        </div>
+             <div style="position: relative;padding:20px;">
+                <lightning-button  label="Précedent" onclick={gotopreviousStep}  class="slds-float_right" 
+                style=" position: absolute;  right: 90px; "></lightning-button>
+                <lightning-button label="Suivant" variant="brand" onclick={next} class="slds-float_right"    style=" position: absolute; right: 10px; "></lightning-button>
+            </div>
+</template>

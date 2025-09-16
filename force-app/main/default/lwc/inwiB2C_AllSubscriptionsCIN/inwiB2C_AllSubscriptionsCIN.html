@@ -1,0 +1,33 @@
+<template>
+    <div class="via-slds riders-list-canvas container-table-canvas" >
+      <div class="slds-card slds-p-around--small np-card">
+          
+        <div style="font-size: 20px;">
+              <h1 class="slds-p-bottom--small slds-truncate "  >
+                  <b >Liste des souscriptions liée à ce numéro CIN:</b>
+              </h1>
+           
+          </div>
+          <div style="font-size: 15px;">
+            <h4>Veuillez cocher les lignes que le client souhaite garder</h4>
+         </div>
+          <div class="slds-p-bottom--small" >
+              <div class="slds-m-bottom_xx-large " >                
+                      <lightning-datatable
+                          class="style-table" 
+                          key-field="Id"
+                          columns={columns}
+                          data={list} 
+                          onrowselection={handleSelectedSubscription}
+
+                         >
+                      </lightning-datatable>
+              </div>
+            </div>
+            <template if:true={areDetailsVisible}>
+                <lightning-button label="Suivant"  onclick={SaveAndNext} ></lightning-button>
+            </template>
+    
+      </div>
+  </div>
+  </template>

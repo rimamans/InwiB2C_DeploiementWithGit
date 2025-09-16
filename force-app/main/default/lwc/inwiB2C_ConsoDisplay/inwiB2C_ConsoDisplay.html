@@ -1,0 +1,138 @@
+<template>
+    <div class="via-slds riders-list-canvas container-table-canvas" if:true={records2}>
+        <div class="slds-card slds-p-around--small np-card">
+            <template if:true={showCard}>
+                <div class={titleStyle}>
+
+                    <h3 class="slds-p-bottom--small slds-text-heading--small slds-truncate ">
+
+                        <div class="slds-grid slds-wrap slds-size_1-of-1 slds-p-left_medium">
+                            <div
+                                class="slds-p-right_small slds-m-bottom_xx-small slds-show_inline-block slds-size_12-of-12 slds-medium-size_4-of-12">
+                                <lightning-input type="time" name="totalDuration" label="Durée Totale"
+                                    value={totals.totalDuration} disabled time-style="medium">
+                                </lightning-input>
+                            </div>
+                            <div
+                                class="slds-p-right_small slds-m-bottom_xx-small slds-show_inline-block slds-size_12-of-12 slds-medium-size_4-of-12">
+                                <lightning-input type="number" label="Montant Total" value={totals.totalAmount}
+                                    formatter="currency" disabled>
+                                </lightning-input>
+                            </div>
+                            <div
+                                class="slds-p-right_small slds-m-bottom_xx-small slds-show_inline-block slds-size_12-of-12 slds-medium-size_4-of-12">
+                                <lightning-input type="text" label="Volume Data Total" value={totals.totalGPRSVolume}
+                                    disabled>
+                                </lightning-input>
+                            </div>
+                        </div>
+                    </h3>
+                </div>
+                <div class={titleStyle}>
+
+                    <h3 class="slds-p-bottom--small slds-text-heading--small slds-truncate ">
+
+                        <div class="slds-grid slds-wrap slds-size_1-of-1 slds-p-left_medium">
+                            <div
+                                class="slds-p-right_small slds-m-bottom_xx-small slds-show_inline-block slds-size_12-of-12 slds-medium-size_6-of-12">
+                                <lightning-button label="Afficher le résumé par Balance" variant="neutral"
+                                    onclick={displayRecapBalance}></lightning-button>&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            </div>
+                            <div
+                                class="slds-p-right_small slds-m-bottom_xx-small slds-show_inline-block slds-size_12-of-12 slds-medium-size_6-of-12">
+                                <lightning-button label="Exporter en Excel" variant="neutral" onclick={downloadXls}>
+                                </lightning-button>
+
+                            </div>
+
+                        </div>
+                    </h3>
+                </div>
+                <div class="slds-p-bottom--small">
+                    <div class="slds-m-bottom_xx-large overflowVisible ">
+                        <div>
+                            <div class="wraperClass ">
+                                <lightning-datatable class="tab-style slds-table_col-bordered" key-field="Id"
+                                    columns={columns} show-row-number-column data={data} onrowaction={handleRowAction}
+                                    hide-checkbox-column="true" sorted-direction={sortDirection} sorted-by={sortedBy}
+                                    onsort={handleSortAccountData}>
+                                </lightning-datatable>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </template>
+        </div>
+
+    </div>
+
+    <template if:true={openBalanceDetail}>
+        <div class="demo-only" style="height: 640px;">
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+                aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                            title="Close" onclick={closeModal}>
+                            <lightning-icon icon-name="utility:close" size="medium">
+                            </lightning-icon>
+                            <span class="slds-assistive-text">Fermer</span>
+                        </button>
+                        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Détail des Balances de
+                            Consommation</h2>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                        <div class="wraperClass ">
+
+                            <lightning-datatable class="tab-style" key-field="Id" columns={listBalColumns}
+                                data={listBalData} hide-checkbox-column=true>
+                            </lightning-datatable>
+
+                        </div>
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <lightning-button label="Fermer" variant="neutral" onclick={closeModal}></lightning-button>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </div>
+    </template>
+
+    <template if:true={openBalanceRecap}>
+        <div class="demo-only" style="height: 640px;">
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-02" aria-modal="true"
+                aria-describedby="modal-content-id-2" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                            title="Close" onclick={closeModalRecap}>
+                            <lightning-icon icon-name="utility:close" size="medium">
+                            </lightning-icon>
+                            <span class="slds-assistive-text">Fermer</span>
+                        </button>
+                        <h2 id="modal-heading-02" class="slds-text-heading_medium slds-hyphenate">Récapitulatif des
+                            Balances de Consommation</h2>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-2">
+                        <div class="wraperClass ">
+
+                            <lightning-datatable class="tab-style" key-field="Id" columns={listBalRcapolumns}
+                                data={balanceList} hide-checkbox-column=true>
+                            </lightning-datatable>
+
+                        </div>
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <lightning-button label="Fermer" variant="neutral" onclick={closeModalRecap}></lightning-button>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </div>
+    </template>
+</template>

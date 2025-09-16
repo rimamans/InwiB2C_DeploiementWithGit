@@ -1,0 +1,119 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 11-23-2021
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+  
+   
+       
+    <!-- Modal/Popup Box LWC body starts here -->
+    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+        <lightning-card title="Nouveau Compte Facturation">
+            <lightning-layout>
+                <lightning-layout-item size="6">
+                    <!-- Displaying fields to get information. -->
+
+                    <lightning-input  label="Name" name="accoutName"  data-theid="accoutName"
+                       ></lightning-input>
+                   
+                      <lightning-combobox placeholder="Mode de paiement" data-theid="ModePaiement"
+                      label="Mode de paiement" options={ModePaiementPicklistvalues}>
+                  </lightning-combobox>
+
+
+                        <lightning-radio-group name="radioGroup"
+                        label="choix d'adresse"
+                        options={options}
+                        type="radio"
+                        checked
+                        required
+                        default="option2"
+                        onchange={handleChange1}
+                        ></lightning-radio-group>
+
+
+</lightning-layout-item>
+</lightning-layout>
+
+</lightning-card>
+</div>
+
+
+<!--
+<template if:true={loading}>
+
+<lightning-card title="Nouveau Compte Facturation">
+<lightning-layout>
+<lightning-layout-item size="6">
+
+    <lightning-input class="slds-p-around_medium" label="Name" name="accoutName" 
+        onchange={nameChangedHandler}></lightning-input>
+    <lightning-input class="slds-p-around_medium" label="Account Number" name="accoutNumber" 
+        onchange={numberChangedHandler}></lightning-input>
+    <lightning-input class="slds-p-around_medium" label="Phone" type="phone" name="accountPhone" 
+        onchange={phoneChangedHandler}></lightning-input>
+    <br/>
+    <lightning-button class="slds-m-left_x-small" label="Create Account" variant="brand" 
+        onclick={createAccount}></lightning-button>
+</lightning-layout-item>
+</lightning-layout>
+</lightning-card>
+</template>
+
+-->
+
+
+<template  if:true={fieldVisible}>
+
+<div class="slds-grid slds-wrap slds-grid_vertical-stretch">
+
+<lightning-combobox placeholder="Pays" onchange={ChangePays} data-theid="Pays" label="Pays" required
+value={valuePays} class="slds-col slds-size_1-of-2 elementMargin2" options={PaysValues} >
+</lightning-combobox>
+<!--
+<lightning-combobox placeholder="sélectionnez un pays" onchange={ChangeRegion} data-theid="Region"
+label="Region" required class="slds-col slds-size_1-of-2 elementMargin2" options={RegionValues}>
+</lightning-combobox>
+-->
+<lightning-input type="text" disabled data-theid="Region" label="Region" value={r}
+placeholder="sélectionnez une ville" class="slds-col slds-size_1-of-2 elementMargin2">
+</lightning-input>
+
+
+</div>
+
+
+<div class="slds-grid slds-wrap slds-grid_vertical-stretch">
+
+<lightning-combobox placeholder="sélectionnez une ville" onchange={ChangeVille} data-theid="Ville" value={v}
+label="Ville" required class="slds-col slds-size_1-of-2 elementMargin2" options={VilleValues} >
+</lightning-combobox>
+
+<template if:false={isToSpecify}>
+<lightning-combobox placeholder="sélectionnez une ville" onchange={ChangeQuartier} data-theid="Quartier"
+value={q} label="Quartier" class="slds-col slds-size_1-of-2 elementMargin2" options={QuartierValues} >
+</lightning-combobox>
+</template>
+
+<template if:true={isToSpecify}>
+<lightning-input type="text" onchange={ChangePrecisionQuartier} data-theid="PrecisionQuartier"
+label="Précision Quartier" placeholder="Précisez le quartier" value={pq}
+class="slds-col slds-size_1-of-2 elementMargin2" >
+</lightning-input>
+
+</template>
+
+</div>
+</template>
+<template  if:false={fieldVisible}>
+<b class="keyword">Adresse Client:</b>{addressclient} 
+</template>
+
+
+<div class="slds-clearfix">
+    <lightning-button label="Suivant" onclick={createAccount} class="slds-float_right"></lightning-button>
+</div>
+</template>

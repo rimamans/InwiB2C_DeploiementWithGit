@@ -1,0 +1,146 @@
+<template>
+
+    <lightning-card variant="Narrow" title={changeType} icon-name="utility:number_input">
+
+        <template if:true={terminalModeleValue}>
+
+            <template if:false={Changed}>
+
+                <template if:true={isloading}>
+                     <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+                </template>
+                <template if:false={isloading}>
+               
+                <template if:true={isidarvacay}>
+                    <lightning-radio-group name="radioGroup" label="" options={options} type="radio" value={retourne} onchange={handleSelectedRestitueOption} disabled={disableRadio}>
+                        </lightning-radio-group>
+                    <br>
+                    <lightning-input value={terminalModelLabelValue} style="width: 50%;" name="Ancien Modèle" label="Ancien Modèle" type="text"
+                    disabled>
+                    </lightning-input>
+
+
+                    <template if:true={restitue}>
+                        <lightning-input value={terminalOldIMEIValue} name="IMEI" label="Ancien IMEI" type="text"
+                        onchange={hanldleOldImeiEntry} style="width: 50%;" class="imeiInput"></lightning-input>
+                       <br/>
+                        
+                        <template if:true={errorImei}>
+                            <p style="color:red ;">L'EMEI sasie ne correspond pas a celui dans la souscription</p>
+                        </template>
+                        <template if:true={valideIMEI}>
+                            <p>
+                             <lightning-icon icon-name="utility:success" alternative-text="Success" variant="success" size="small" style="margin-right: 4px;"></lightning-icon>
+                               <span>L'EMEI sasie correspond a celui dans la souscription</span>
+                               </p>
+                        </template>
+                        <br/>
+                        <lightning-button label="Valider l'IMEI" style="width: 50%;color:#A846A9 ;" variant="brand" onclick={validateOldIMEI}></lightning-button>
+                    </template>
+
+                    <template if:false={restitue}>
+                        <template if:true={ismodem}>
+                            <lightning-input value={terminalModeleValue} style="width: 50%;" name="Ancien Code article" label="Ancien Code article" type="text"
+                            disabled>
+                            </lightning-input>
+                        </template>
+                        <lightning-input type="text" label={labelOldIMEI} value={iemiValue} style="width: 50%;" disabled></lightning-input>         
+                    </template>
+
+                    <template if:true={modellist}>
+                        <lightning-combobox
+                            name="progress"
+                            label="Nouveau Modèle"
+                            value={terminalModelLabelValue}
+                            placeholder="Selectionner un Modèle"
+                            options={modellist}
+                            style="width: 50%;"
+                            onchange={handleModelSelection} ></lightning-combobox>                
+                    </template>
+
+                    <lightning-input value={terminalNewIMEIValue} name="IMEI" label={labelNewIMEI} type="text"
+                        onchange={hanldleImeiEntry} style="width: 50%;" class="imeiInput"></lightning-input>
+                        <br>
+                        <br>
+                    <lightning-button label="Rechercher" style="width: 50%;color:#A846A9 ;" variant="brand" onclick={searchIMEIButton} disabled={disableSearchButtom}></lightning-button>
+                </template>
+
+                <template if:false={isidarvacay}>
+                    <lightning-input value={terminalModelLabelValue} style="width: 50%;" name="Ancien Modèle" label="Ancien Modèle" type="text"
+                    disabled>
+                    </lightning-input>
+                    <template if:true={ismodem}>
+                        <lightning-input value={terminalModeleValue} style="width: 50%;" name="Ancien Code article" label="Ancien Code article" type="text"
+                        disabled>
+                        </lightning-input>
+                    </template>
+
+                    <template if:false={isSwapONTFTTH}>
+                        <lightning-input type="text" label={labelOldIMEI} value={iemiValue} style="width: 50%;" disabled></lightning-input>
+                    </template>
+                    
+                    <template if:true={isSwapONTFTTH}>
+                        <lightning-input value={terminalOldIMEIValue} name="IMEI" label="IMEI/ESN" type="text" disabled={valideIMEI}  onchange={hanldleOldImeiEntry} style="width: 50%;" class="imeiInput"></lightning-input>
+                        
+                        <template if:true={errorImei}>
+                            <p style="color:red ;">L'IMEI/ESN sasie ne correspond pas a celui dans la souscription</p>
+                        </template>
+                        <template if:true={valideIMEI}>
+                            <p>
+                             <lightning-icon icon-name="utility:success" alternative-text="Success" variant="success" size="small" style="margin-right: 4px;"></lightning-icon>
+                               <span>L'IMEI/ESN sasie correspond a celui dans la souscription</span>
+                               </p>
+                               
+                        </template>
+                        <br/>
+                        <lightning-button label="Valider l'IMEI" style="width: 50%;color:#A846A9 ;" variant="brand" onclick={validateOldIMEI}></lightning-button>
+                    </template>
+                    
+                    <template if:false={isSwapONTFTTH}>
+                        <lightning-input value={terminalNewIMEIValue} name="IMEI" label={labelNewIMEI} type="text"
+                        onchange={hanldleImeiEntry} style="width: 50%;" class="imeiInput"></lightning-input>
+                        <br>
+                        <br>
+                    <lightning-button label="Rechercher" style="width: 50%;color:#A846A9 ;" variant="brand"  onclick={searchIMEIButton}></lightning-button>
+                    </template>
+
+                    <template if:true={isSwapONTFTTH}>
+                        <lightning-input value={terminalNewIMEIValue} name="IMEI" label="Nouveau IMEI/ESN" type="text"
+                        onchange={hanldleImeiEntry} style="width: 50%;" class="imeiInput"></lightning-input>
+                        <br>
+                        <br>
+                    <lightning-button label="Rechercher" style="width: 50%;color:#A846A9 ;" variant="brand" disabled={disableSearchButtom} onclick={searchIMEIButton}></lightning-button>
+                    </template>
+
+                    
+                </template>
+                </template>
+            </template>
+
+            <template if:true={Changed}>
+
+                <lightning-input value={terminalModelLabelValue} style="width: 50%;" name="Nouveau Modèle" label="Nouveau Modèle" type="text"
+                    disabled>
+                </lightning-input>
+
+                <template if:false={isSwapONTFTTH}>
+                    <lightning-input type="text" label={labelNewIMEI} style="width: 50%;" value={iemiValue} disabled></lightning-input>
+                </template>
+                <template if:true={isSwapONTFTTH}>
+                    <lightning-input type="text" label="Nouveau IMEI/ESN" style="width: 50%;" value={iemiValue} disabled></lightning-input>
+                </template>
+
+
+            </template>
+
+
+
+
+
+        </template>
+    </lightning-card>
+
+
+    <lightning-button label="Suivant" style="color:#A846A9 ;" class="slds-float_right" variant="brand" onclick={handleSave} disabled={disableSave}></lightning-button>
+
+</template>

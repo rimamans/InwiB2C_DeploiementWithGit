@@ -1,0 +1,72 @@
+<template>
+    <template if:false={__addaccount}>
+
+        <div style="float: right; margin-bottom: 10px;">
+            <template if:true={displayNew}>
+                <lightning-button style="margin-right: 5px;" label="Créer un compte" variant="brand"
+                    onclick={addNewAccount} slot="actions">
+                </lightning-button>
+            </template>
+        </div>
+        <div class="wraperClass">
+            <table class="sty-table-case slds-table slds-table_bordered slds-table_fixed-layout">
+                <thead>
+                    <tr class="">
+                        <th class="" scope="col">
+                            Sélectionnée
+                        </th>
+                        <th style="word-wrap: break-word;">
+                            Numéro de compte
+                        </th>
+                        <th style="word-wrap: break-word;">
+                            Statut
+                        </th>
+                        <th style="word-wrap: break-word;">
+                            Mode de paiement
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template for:each={__data} for:item="item">
+                        <tr key={item.index}>
+                            <td class="slds-cell-wrap">
+                                <input type="checkbox" name={item.index} status={item.checked} onclick={selectItem}
+                                    checked={item.checked} />
+                            </td>
+                            <td class="slds-cell-wrap">
+                                {item.AccountNumber}
+                            </td>
+                            <td class="slds-cell-wrap">
+                                {item.Status}
+                            </td>
+                            <td class="slds-cell-wrap">
+                                {item.ModePaiement}
+                            </td>
+                        </tr>
+                    </template>
+
+                </tbody>
+            </table>
+        </div>
+        <div style="float: right; margin-top: 10px;">
+          <!--  <lightning-button style="margin-right: 5px;" label="Précédent" disabled={saving} variant="brand"
+                onclick={handleGoBack} slot="actions">
+            </lightning-button>-->
+            <lightning-button label="Suivant" disabled={saving} variant="brand" onclick={SaveAndNext} slot="actions">
+            </lightning-button>
+            <template if:true={__hasError}>
+                <p style="color: red;">Veuillez sélectionner un compte....</p>
+            </template>
+        </div>
+    </template>
+
+    <template if:true={__addaccount}>
+        <div class="wraperClass">
+            <c-inwi-b2-c_create-billingaccount from="changementtitulaire" onaddnewaccount={addNewAccount}
+                addressclient={__addressclient} compteclientid={__newaccountid}
+                onaddbillingaccount={handleAddBillingAccount}>
+            </c-inwi-b2-c_create-billingaccount>
+        </div>
+    </template>
+
+</template>

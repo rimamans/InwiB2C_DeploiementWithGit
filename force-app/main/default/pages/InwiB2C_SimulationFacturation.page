@@ -1,0 +1,58 @@
+<apex:page sidebar="false" renderAs="pdf" controller="InwiB2C_SimulationFacturation_Controller" showHeader="false" applyBodyTag="false">
+    <head>
+        <style>
+            body {
+                font-family: 'Arial Unicode MS';
+                font-size: 12px;
+            }
+
+            @page {
+                size: A4;
+                margin: 0px;
+                width: 210mm;
+                height: 297mm;
+            }
+
+            .highlight {
+                  color: white;
+                font-weight: bold;
+            }
+        </style>
+    </head>
+
+    <body>
+        <!-- Image de fond -->
+        <img style="width:100%; height: auto;" src="{!$Resource.InwiB2C_FacturationCam}" />
+
+        <div>
+            <!-- Informations personnelles -->
+            <p style="position: absolute; top: 353px; left: 210px; font-size: 12px;">
+                <span class="highlight">{!name}</span>
+            </p>
+            <p style="position: absolute; top: 377px; left: 370px; font-size: 12px;">
+                <span class="highlight">{!TEXT(DAY(dateActivForfait)) & '/' & LPAD(TEXT(MONTH(dateActivForfait)), 2, '0') & '/' & TEXT(YEAR(dateActivForfait))}</span>
+
+
+            </p>
+
+            <!-- Présentation du forfait -->
+            <p style="position: absolute; top: 512px; left: 200px; font-size: 12px;">
+                <span class="highlight">{!nomForfait}</span>
+            </p>
+            <!-- <p style="position: absolute; top: 555px; left: 110px; font-size: 12px;">
+                <span class="highlight">{!detailsForfait}</span>
+            </p>-->
+
+            <!-- Informations utiles -->
+            <p style="position: absolute; top: 649px; left: 310px; font-size: 12px;">
+                <span class="highlight">{!IF(frais != null, TEXT(frais) & ' DH', '0 DH')}</span>
+            </p>
+            <p style="position: absolute; top: 673px; left: 333px; font-size: 12px;">
+                <span class="highlight">{!TEXT(DAY(dateDemarrageForfait)) & '/' & LPAD(TEXT(MONTH(dateDemarrageForfait)), 2, '0') & '/' & RIGHT(TEXT(YEAR(dateDemarrageForfait)), 2)}</span>
+            </p>
+            <p style="position: absolute; top: 696px; left: 430px; font-size: 12px;">
+                <span class="highlight">{!TEXT(DAY(dateLimitPaiement)) & '/' & LPAD(TEXT(MONTH(dateLimitPaiement)), 2, '0') & '/' & RIGHT(TEXT(YEAR(dateLimitPaiement)), 2)}</span>
+            </p>
+        </div>
+    </body>
+</apex:page>

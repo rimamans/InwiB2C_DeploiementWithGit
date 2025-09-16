@@ -1,0 +1,40 @@
+<template >
+    <div class="via-slds riders-list-canvas container-table-canvas" if:true={records}>
+
+            
+
+           <div class="slds-p-bottom--small">
+                  
+                        <div class="wraperClass ">
+                            <lightning-datatable
+                                key-field="id"
+                                columns={columns}
+                                data={records} 
+                                max-row-selection="1"
+                                onrowselection={getSelectedBalance}
+                                selected-rows={preSelectedRows}
+                                required>
+                                 
+                            </lightning-datatable>
+                            
+                        </div>
+                        <lightning-input type="date" value={ValidityDateValue} name="ValidityDate" format="yyyy-MM-dd" onchange={handleValidityDateChange} label="Nouvelle date d'expiration"></lightning-input>
+
+                        <br/>
+                        
+                        <lightning-button class="ChangeDateButton" label="Modifier la date d'expiration" onclick={ChangeBalanceDate}></lightning-button>     
+ 
+                        <br/>
+                        <br/>
+                    <template if:true={ChangeDateSuccess} >    
+                        <span class="TextChangeDateSuccess">     Le changement de la date d'expiration de la balance s'est bien effectuée       </span>
+                      </template>
+                      <template if:true={ChangeDateError} >   
+                        <span class="TextChangeDateError">      Erreur. Le changement de la date d'expiration de la balance s'est mal éffectuée      </span>
+                      </template>
+            </div>
+            <br/>
+            <br/>
+    </div>
+
+</template>

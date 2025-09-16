@@ -1,0 +1,77 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 02-04-2025
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<apex:page sidebar="false" renderAs="pdf" controller="InwiB2C_DocAdslController" showHeader="false" applyBodyTag="false">
+
+    <head>
+        <style>
+            body {
+                font-family: 'Arial Unicode MS';
+                font-size: 12px;
+            }
+
+            @page: first {
+                size: A4;
+                margin-top: 0px margin-right:0px;
+                margin-left: 0px;
+                margin-bottom: 0cm;
+            }
+
+            @page {
+                size: A4;
+                margin-top: 0px;
+                margin-right: 0px;
+                margin-left: 0px;
+                margin-bottom: 0cm;
+            }
+        </style>
+
+    </head>
+
+    <body>
+    
+        <apex:repeat value="{!loopList}" var="loopItem" id="theRepeat">
+            <apex:variable value="{!IF(loopItem > 1,7, 0)}" var="added" />
+                
+            <div style="page-break-after:auto;">         
+                <!-- <div style="{!IF(output['canal'] == 'inwiB2C_Eshop' && (output['OfferType'] == 'ADSL'),'display:block','display:none')}">
+
+                    <img style="width:100%;" src="{!$Resource.inwib2c_MandatPortabiliteEshopCompresser}" />
+               </div> -->
+                    <!-- <div style="{!IF(output['canal'] != 'inwiB2C_Eshop','display:block','display:none')}">
+                        <img style="width:100%;" src="{!$Resource.inwib2c_MANDAT_SPECIAL_DE_PORTABILITE_ADSL_RIO}"/>
+
+                    </div> -->
+
+                 <img style="width:100%;" src="{!$Resource.inwib2c_MandatSpecialPortabilite}"/>
+
+                
+                <div style="position: absolute;top: {! 164 + (loopItem *1119)}px;left: 20%;max-width: 450px;">{!IF(contains(keys,'FullName'),output['FullName'], '')}</div>
+                <div style="position: absolute;top: {! 185  + (loopItem *1119)}px;left: 27%;max-width: 450px;">{!IF(contains(keys,'TypePieceIdentite'),output['TypePieceIdentite'], '')}</div>
+                <div style="position: absolute;top: {! 206 + (loopItem *1119)}px;left: 30%; max-width: 450px;">{!IF(contains(keys,'CIN'),output['CIN'], '')}</div>
+                <div style="position: absolute;top: {! 228 + (loopItem *1119)}px;left: 15%;max-width: 450px;">{!IF(contains(keys,'AdresseMail'),output['AdresseMail'], '')}</div>
+                <div style="position: absolute;top: {! 248 + (loopItem *1118) + added}px;left: 25%;max-width: 450px;">{!IF(contains(keys,'NumPorter'),output['NumPorter'], '')}</div>
+                <div style="position: absolute;top: {! 270 + (loopItem *1118) + added}px;left: 20%;max-width: 450px;">{!IF(contains(keys,'CodeRio'),output['CodeRio'], '')}</div>
+
+                <div style="position: absolute;top: {! 310 + (loopItem *1119)}px;left: 83%;max-width: 450px;">INWI</div>
+                <div style="position: absolute;top: {! 352 + (loopItem *1119)}px;left: 32.7%;max-width: 440px;">{!IF(AND(contains(keys,'Operateur'), output['Operateur'] == 'WIN'),'X', '')}</div>
+                <div style="position: absolute;top: {! 352 + (loopItem *1119)}px;left: 55.4%;max-width: 440px;">{!IF(AND(contains(keys,'Operateur'), output['Operateur'] == 'MARMT'),'X', '')}</div>
+                <div style="position: absolute;top: {! 352 + (loopItem *1119)}px;left: 75.6%;max-width: 440px;">{!IF(AND(contains(keys,'Operateur'), output['Operateur'] == 'MARM1'),'X', '')}</div>
+                <div style="position: absolute;top: {! 805 + (loopItem *1119)}px;left: 40%;max-width: 450px;">{!IF(contains(keys,'CreateDate'),output['CreateDate'], '')}</div>
+
+             </div>                                          
+
+            
+            <!-- <div>
+                <img style="width:100%;" src="{!$Resource.inwiB2C_CGV_Contrat_ADSL_Compresser}"/>
+
+            </div> -->
+            </apex:repeat>
+    </body>
+
+
+</apex:page>

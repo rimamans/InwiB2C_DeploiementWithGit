@@ -1,0 +1,45 @@
+<template>
+  <lightning-card title="Je teste mon éligibilité">
+    <div class="info-banner">
+      <lightning-icon
+        icon-name="utility:info"
+        size="medium"
+        class="info-icon"
+      ></lightning-icon>
+      <p class="info-text">
+        Vous pouvez saisir et rechercher une adresse puis choisir votre immeuble
+        parmi les points verts affichés. Si vous ne le trouvez pas, faites une
+        nouvelle recherche ou cliquez sur
+        <strong>« Je n’ai pas trouvé mon immeuble »</strong> pour passer à
+        l’étape suivante.
+      </p>
+    </div>
+
+    <iframe
+      src="/apex/inwiB2C_VfEligibilityFTTHOnlyInwi"
+      style="width: 100%; height: 800px; border: none"
+    ></iframe>
+  </lightning-card>
+
+  <template if:true={isSearchDone}>
+    <div class="bordered-box">
+      <div class="content-noadress">
+        <div class="icon-text">
+          <lightning-icon
+            class="color-icon"
+            size="small"
+            icon-name="utility:home"
+            alternative-text="Home"
+          ></lightning-icon>
+          <span class="large-text">Je ne trouve pas ma résidence</span>
+        </div>
+        <lightning-button
+          class="new-address-button"
+          label="Je n’ai pas trouvé mon immeuble"
+          variant="brand"
+          onclick={nextStep}
+        ></lightning-button>
+      </div>
+    </div>
+  </template>
+</template>

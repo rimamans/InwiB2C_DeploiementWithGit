@@ -1,0 +1,32 @@
+<template>
+    <div class="slds-p-around-medium input-wrapper">
+        <lightning-input
+        class="combo"
+        type="text"
+        label=" ND"
+        placeholder="Entrer votre numéro de designation "
+        value={ND}
+        onchange={handleND}
+        required
+      >
+      </lightning-input>
+      <br/>
+       <lightning-input
+        class="combo"
+        type="text"
+        label=" login"
+        placeholder="Entrer votre  login "
+        value={login}
+        onchange={handleND}
+        required
+      >
+      </lightning-input>
+       <br />
+        <lightning-button
+          class="check-btn"
+          variant="brand"
+          label="Vérifier"
+        >
+        </lightning-button>
+      </div>
+</template>

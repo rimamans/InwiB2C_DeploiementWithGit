@@ -1,0 +1,98 @@
+<template>
+  <lightning-card title="Saisie d'adresse Maroc Telecom">
+    <div class="slds-p-around-medium">
+      <lightning-combobox
+        class="combo"
+        label="Province/Ville"
+        placeholder="Entrer votre province/ville"
+        required
+        value={selectedProVille}
+        options={proVilleOptions}
+        onchange={handleProvinceChange}
+      >
+      </lightning-combobox>
+      <div class="slds-grid slds-gutters">
+        <div class="slds-col slds-size_1-of-2">
+          <lightning-input
+            class="combo"
+            label="Commune"
+            placeholder="Entrer votre commune"
+            value={selectedCommuneLibelle}
+            required
+            disabled={isCommuneDisabled}
+          >
+          </lightning-input>
+        </div>
+        <div class="slds-col slds-size_1-of-2">
+          <lightning-combobox
+            class="quartier"
+            label="Quartier"
+            placeholder="Entrer votre quartier"
+            required
+            value={selectedQuartier}
+            options={quartierOptions}
+            onchange={handleQuartierChange}
+          >
+          </lightning-combobox>
+        </div>
+      </div>
+
+      <lightning-combobox
+        class="combo"
+        label="Voie"
+        placeholder="Entrer votre voie"
+        required
+        value={selectedVoie}
+        options={voieOptions}
+        onchange={handleVoieChange}
+      >
+      </lightning-combobox>
+
+      <lightning-combobox
+        class="combo"
+        label="Numéro dans la voie"
+        placeholder="Entrer votre numéro dans la voie "
+        required
+        value={selectedNumeroVoie}
+        options={numeroVoieOptions}
+        onchange={handleNumVoieChange}
+      >
+      </lightning-combobox>
+    </div>
+  </lightning-card>
+   <lightning-card title="Je teste mon éligibilité">
+    <div class="input-button-container">
+      <lightning-input
+        id="autocomplete"
+        class="address-input"
+        placeholder="Saisissez votre adresse"
+        value={address}
+        onchange={handleAddressChange}
+      ></lightning-input>
+      <lightning-button
+        class="btn-space"
+        label="Tester mon éligibilité"
+        onclick={checkEligibilityFTTH}
+      ></lightning-button>
+    </div>
+    <div class="button-container">
+      <lightning-button
+      class="btn-acqui"
+      variant="brand"
+      label="Suivant"
+      onclick={redirectAcquisition}>
+      </lightning-button>
+      <br>
+      </div>
+    <iframe src="/apex/GoogleMapIframe" style="width: 100%; height:800px; border: none;"></iframe>
+  </lightning-card>
+      <div class="bordered-box">
+      <div class="content-noadress">
+        <div class="icon-text">
+          <lightning-icon class="color-icon" size="small" icon-name="utility:home" alternative-text="Home"></lightning-icon>
+          <span class="large-text">Je ne trouve pas mon adresse</span>
+          <lightning-button class="new-address-button" label="Nouvelle adresse" variant="brand"></lightning-button>
+        </div>
+        </div>
+      </div>
+</template>

@@ -1,0 +1,231 @@
+<template>
+        
+            <template if:true={opencases}  >
+
+                <div class="wraperClass ">
+                    <div id="containerDiv" onmousemove={handlemousemove} onmouseup={handlemouseup}
+                    ondblclick={handledblclickresizable}
+                    class="slds-table_header-fixed_container slds-border_right slds-border_left tableScroll"
+                    onscroll={tableOuterDivScrolled}>
+                   <div id="tableViewInnerDiv" onscroll={tableScrolled} class="slds-scrollable_y tableViewInnerDiv">
+
+
+                        <table  
+                        class="slds-table slds-table_bordered slds-table_header-fixed slds-table_resizable-cols slds-table_fixed-layout">                        <thead>
+                          <tr class="">
+                            <th class="slds-is-resizable dv-dynamic-width" scope="col" style="width:150px;" title="Column 1">
+                                <div class="slds-cell-fixed" style="width:150px;">
+                                    <a class="slds-th__action slds-text-link--reset ">
+                                        <span class="slds-truncate">Numéro de la requête</span>
+                                    </a>
+                                    <div class="slds-resizable">
+                                        <span class="slds-resizable__handle" onmousedown={handlemousedown}>
+                                            <span class="slds-resizable__divider"></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </th>
+
+
+                            <th class="slds-is-resizable dv-dynamic-width" scope="col" style="width:100px;" title="Column 1">
+                                <div class="slds-cell-fixed" style="width:100px;">
+                                    <a class="slds-th__action slds-text-link--reset ">
+                                        <span class="slds-truncate">Récapitulatif</span>
+                                    </a>
+                                    <div class="slds-resizable">
+                                        <span class="slds-resizable__handle" onmousedown={handlemousedown}>
+                                            <span class="slds-resizable__divider"></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </th>
+                            <th class="slds-is-resizable dv-dynamic-width" scope="col" style="width:90px;" title="Column 1">
+                                <div class="slds-cell-fixed" style="width:90px;">
+                                    <a class="slds-th__action slds-text-link--reset ">
+                                        <span class="slds-truncate">Catégorie</span>
+                                    </a>
+                                    <div class="slds-resizable">
+                                        <span class="slds-resizable__handle" onmousedown={handlemousedown}>
+                                            <span class="slds-resizable__divider"></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </th>
+                            <th class="slds-is-resizable dv-dynamic-width" scope="col" style="width:150px;" title="Column 1">
+                                <div class="slds-cell-fixed" style="width:150px;">
+                                    <a class="slds-th__action slds-text-link--reset ">
+                                        <span class="slds-truncate">Souscription concernée</span>
+                                    </a>
+                                    <div class="slds-resizable">
+                                        <span class="slds-resizable__handle" onmousedown={handlemousedown}>
+                                            <span class="slds-resizable__divider"></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </th>
+                            <th class="slds-is-resizable dv-dynamic-width" scope="col" style="width:100px;" title="Column 1">
+                                <div class="slds-cell-fixed" style="width:100px;">
+                                    <a class="slds-th__action slds-text-link--reset ">
+                                        <span class="slds-truncate">Date de création</span>
+                                    </a>
+                                    <div class="slds-resizable">
+                                        <span class="slds-resizable__handle" onmousedown={handlemousedown}>
+                                            <span class="slds-resizable__divider"></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </th>
+                            <th class="slds-is-resizable dv-dynamic-width" scope="col" style="width:80px;" title="Column 1">
+                                <div class="slds-cell-fixed" style="width:80px;">
+                                    <a class="slds-th__action slds-text-link--reset ">
+                                        <span class="slds-truncate">Statut</span>
+                                    </a>
+                                    <div class="slds-resizable">
+                                        <span class="slds-resizable__handle" onmousedown={handlemousedown}>
+                                            <span class="slds-resizable__divider"></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </th>
+                            <th class="slds-is-resizable dv-dynamic-width" scope="col" style="width:100px;" title="Column 1">
+                                <div class="slds-cell-fixed" style="width:100px;">
+                                    <a class="slds-th__action slds-text-link--reset ">
+                                        <span class="slds-truncate">Action</span>
+                                    </a>
+                                    <div class="slds-resizable">
+                                        <span class="slds-resizable__handle" onmousedown={handlemousedown}>
+                                            <span class="slds-resizable__divider"></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </th>
+                            
+                          </tr>
+                        </thead>
+                        <tbody>
+                            <template for:each={opencases} for:item="ligne" >
+                                <tr key ={ligne.IdCase} >
+                                    <td class="slds-cell-wrap" > <div class="slds-line-clamp">{ligne.caseNumber}</div> </td>
+                                    <td class="slds-cell-wrap" > <div class="slds-line-clamp">{ligne.Recapitulatif}</div> </td>
+                                    <td class="slds-cell-wrap" > <div class="slds-line-clamp">{ligne.Categorie}</div> </td>
+                                    <td class="slds-cell-wrap" > <div class="slds-line-clamp">{ligne.NumLigne}</div> </td>
+                                    <td class="slds-cell-wrap" > <div class="slds-line-clamp">{ligne.CreactedDate}</div> </td>
+                                    <td class="slds-cell-wrap" > <div class="slds-line-clamp">{ligne.Status}</div> </td>
+                                    <td class="slds-cell-wrap" >
+                                        <lightning-button-icon 
+                                            icon-name="utility:new_direct_message"    
+                                            alternative-text="ajouter un commentaire"
+                                            class="slds-m-left_xx-small"
+                                            title="ajouter un commentaire"
+
+                                            onclick={handleCaseSelection} 
+                                            id={ligne.IdCase}
+                                            data-idsel={ligne.IdCase} 
+                                            data-recap={ligne.Recapitulatif} 
+                                            data-categ={ligne.Categorie} 
+                                            data-numligne={ligne.NumLigne} 
+                                            data-credate={ligne.CreactedDate} 
+                                            data-stat={ligne.Status} 
+                                            >
+                                        </lightning-button-icon>
+                                     <!--   <lightning-button variant="brand-outline" 
+                                        label="Ouvrire la requete" 
+                                        title="Ouvrire la requete" 
+                                        class="slds-m-left_x-small"
+                                        
+                                        onclick={openCaseSelection} 
+                                        id={ligne.IdCase}
+                                        data-idsel={ligne.IdCase} 
+
+                                        ></lightning-button>
+-->
+                                            <lightning-button-icon 
+                                            icon-name="utility:expand_alt"    
+                                            alternative-text="Ouvrir la requête"
+                                            class="slds-m-left_xx-small"
+                                            title="Ouvrir la requête"
+
+                                            onclick={openCaseSelection} 
+                                            id={ligne.IdCase}
+                                            data-idsel={ligne.IdCase} 
+                                            >
+                                        </lightning-button-icon>
+                                       <!-- <div class="slds-line-clamp">
+                                        <lightning-button 
+                                        label="Selectionner"  
+                                        onclick={handleCaseSelection} 
+                                        id={ligne.IdCase}
+                                        name={ligne}
+                                         ></lightning-button>
+                                        
+                                    </div>-->
+                                    </td>
+                                </tr>
+                            </template>
+
+                        </tbody>
+                      </table>
+
+                    </div>
+                </div>
+            </div>
+
+
+            </template>
+            
+        <template if:false={numberofcases}  >
+                    
+            <div  class="nocard-case slds-col slds-size--1-of-1 slds-text-align_center ">
+                Ce compte n'a pas de requêtes
+            </div>
+        </template>
+        
+
+
+
+
+</template>
+
+
+                
+                  <!--       
+                    <div  key={card.IdCase} class=" slds-col slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-3">
+                        <div  class="my-card-case" >
+                            <lightning-card title={card.caseNumber}>
+                                <table class="inside-table-case">
+                                    <tr><td style="width : 150px;font-weight:bold;">Récapitulatif</td><td>{card.Recapitulatif}</td></tr>
+                                    <tr><td style="font-weight:bold;">Catégorie</td><td>{card.Categorie}</td></tr>
+                                    <tr><td style="font-weight:bold;" >Souscription</td><td><a href="#" >{card.NumLigne}</td></tr>
+                                    <tr><td style="font-weight:bold;">Date de création</td><td>{card.CreactedDate}</td></tr>
+                                    <tr><td style="font-weight:bold;">Statut</td><td>{card.Status}</td></tr>
+                                </table>
+                                <lightning-button label="Selectionner" slot="footer" onclick={handleCaseSelection}  id={card.IdCase} name={card} ></lightning-button>
+                    
+                            </lightning-card>
+                        </div>
+                    </div>
+                    -->
+
+<!--
+    <br />
+    <br />
+    <br />
+
+    <div class="slds-p-bottom--small">
+        <div class="slds-m-bottom_xx-large overflowVisible ">
+            <div >                    
+                <div class="wraperClass ">
+                    <lightning-datatable
+                        class="tab-style slds-table_col-bordered" 
+                        key-field="Id"
+                        columns={columnsCases}
+                        data={opencases} 
+                        draft-values={draftValues}
+                        onrowaction={handleRowAction}
+                        hide-checkbox-column= true>
+                    </lightning-datatable>
+                </div>
+            </div>
+        </div>
+    </div>
+    -->

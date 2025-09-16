@@ -1,0 +1,269 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 05-02-2025
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+
+    <template if:true={loaded}>
+
+        <template if:true={isLoading}>
+            <div class="exampleHolder">
+                <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+            </div>
+        </template>
+        <template if:false={isLoading}>
+            <lightning-card>
+                <a style="text-decoration: none;font-weight: bold" data-optionid={offreData.offreId} 
+                    onclick={handleClick} data-parent="true" >{offreData.offreName} </a>
+                <template if:false={isParentHasErrors}>
+                    <lightning-icon icon-name="utility:success" alternative-text="Configurable" variant="success"
+                        data-optionid={offreData.value} style="cursor: pointer;" title="Configurable" size="x-small"
+                        onclick={handleClick} data-parent="true" >
+                    </lightning-icon>
+                </template>
+                <template if:true={isParentHasErrors}>
+                    <lightning-icon icon-name="utility:warning" alternative-text="besoin de configuration"
+                        variant="error" data-optionid={offreData.value} style="cursor: pointer;"
+                        title="besoin de configuration" size="x-small" onclick={handleClick}></lightning-icon>
+                </template>
+                <!-- <template if:true={offreData.message}>
+                    <template if:false={offreData.hasRequiredAttributes}>
+                        <lightning-icon icon-name="utility:success" alternative-text="Configurable" variant="success"
+                            data-optionid={offreData.value} style="cursor: pointer;" title="Configurable" size="x-small"
+                            onclick={handleClick}>
+                        </lightning-icon>
+                    </template>
+                    <template if:true={offreData.hasRequiredAttributes}>
+                        <lightning-icon icon-name="utility:warning" alternative-text="besoin de configuration"
+                            variant="error" data-optionid={offreData.value} style="cursor: pointer;"
+                            title="besoin de configuration" size="x-small" onclick={handleClick}></lightning-icon>
+                    </template>
+                </template> -->
+
+                <div class="slds-grid slds-gutters">
+                    <div class="slds-col slds-size_1-of-3" style="border-right: 1px solid rgb(217, 219, 221);">
+                        <fieldset class="slds-form-element">
+                            <legend class="slds-form-element__legend slds-form-element__label">Options</legend>
+                            <div class="slds-form-element__control">
+
+                                <template for:each={StructuredOffre.children} for:item="option" for:index="index">
+                                    <template if:true={option.isVisible}>
+                                        <div class="slds-checkbox" key={option.value} data-optionid={option.value}>
+                                
+                                            <template if:true={option.isOptional}>
+                                                <input type="checkbox" name="mandatoryOptionss" id={option.value}
+                                                    value={option.value} data-optionid={option.value}
+                                                    data-theitem={option} data-index={index}
+                                                    checked={option.isRemovable} disabled={option.isOptional} />
+                                                <label class="slds-checkbox__label" style="white-space: pre-wrap;"
+                                                    for={option.value} data-optionid={option.value}
+                                                    data-name={option.optionType}
+                                                    onclick={handleClick}>
+                                                    <a style="text-decoration: none" class="slds-form-element__label"
+                                                        data-optionid={option.value} data-index={index}>{option.label} </a>
+                                                </label>
+                                      
+                                          </template>
+
+                                            <template if:false={option.isOptional}>
+                                                <input type="checkbox" name="mandatoryOptionss" id={option.value}
+                                                    value={option.value} onchange={handleChange}
+                                                    data-optionid={option.value} data-theitem={option}
+                                                    data-index={index} checked={option.isRemovable}
+                                                    disabled={option.isOptional} />
+                                                <label class="slds-checkbox__label" style="white-space: pre-wrap;"
+                                                    for={option.value} data-optionid={option.value}>
+                                                    <span class="slds-checkbox_faux"></span>
+                                                    <a style="text-decoration: none" class="slds-form-element__label"
+                                                  bn      data-optionid={option.value} data-index={index}>{option.label} </a>
+                                                </label>
+                                            </template>
+
+                                            <template if:true={option.message}>
+
+                                                <template if:false={option.hasRequiredAttributes}>
+                                                    <lightning-icon icon-name="utility:success"
+                                                        alternative-text="Configurable" variant="success"
+                                                        data-optionid={option.value} style="cursor: pointer;"
+                                                        title="Configurable" size="x-small" data-index={index} onclick={handleClick}>
+                                                    </lightning-icon>
+                                                </template>
+
+                                                <template if:true={option.hasRequiredAttributes}>
+                                                    <lightning-icon icon-name="utility:warning"
+                                                        alternative-text="besoin de configuration" variant="error"
+                                                        data-optionid={option.value} style="cursor: pointer;" data-index={index}
+                                                        title="besoin de configuration" size="x-small"
+                                                        onclick={handleClick}></lightning-icon>
+
+                                                </template>
+
+                                            </template>
+
+                                        </div>
+                                    </template>
+
+                                    <template if:true={option.children}>
+                                        <template for:each={option.children} for:item="child" for:index="childindex">
+                                            <template if:true={child.isVisible}>
+                                                <div style="margin-right: 25px;margin-left: 25px; display: flex;" class="slds-checkbox"
+                                                    key={child.value} data-optionid={child.value}>
+                                                    <template if:true={child.isOptional}>
+                                                        <div style="display: flex;">                                                       
+                                                            <input type="checkbox" name="children" id={child.value}
+                                                            value={child.value} data-optionid={child.value}
+                                                            data-theitem={child} data-childindex={childindex}
+                                                            data-index={index} checked={child.isRemovable}
+                                                            disabled={child.isOptional} />
+                                                        <label class="slds-checkbox__label"
+                                                            style="white-space: pre-wrap;" for={child.value}
+                                                            data-optionid={child.value} data-index={index} onclick={handleClick}>
+                                                            <span class="slds-checkbox_faux"></span>
+                                                            <a style="text-decoration: none"
+                                                                class="slds-form-element__label"
+                                                                data-optionid={child.value}></a>
+                                                        </label>            
+                                                        <p><a style="text-decoration: none"
+                                                            class="slds-form-element__label"
+                                                            data-optionid={child.value} data-index={index} onclick={handleClick}>{child.label} </a></p>
+                                                    </div>
+                                                    </template>
+
+                                                    <template if:false={child.isOptional}>
+                                                        <div style="display: flex;">
+                                                        <input type="checkbox" name="children" id={child.value}
+                                                            value={child.value} onchange={handleChange}
+                                                            data-optionid={child.value} data-theitem={child}
+                                                            data-childindex={childindex} data-index={index}
+                                                            checked={child.isRemovable} disabled={child.isOptional} />
+                                                        <label class="slds-checkbox__label"
+                                                            style="white-space: pre-wrap;" for={child.value}
+                                                            data-optionid={child.value}>
+                                                            <span class="slds-checkbox_faux"></span>
+                                                            <a style="text-decoration: none"
+                                                                class="slds-form-element__label"
+                                                                data-optionid={child.value}
+                                                                onclick={handleChangeDetail}> </a>
+                                                        </label>
+                                                        <p><a style="text-decoration: none"
+                                                            class="slds-form-element__label"
+                                                            data-optionid={child.value}
+                                                            onclick={handleChangeDetail} >{child.label} </a></p>
+                                                        </div>
+
+                                                    </template>
+
+                                                    <template if:true={child.message}>
+                                                        <template if:false={child.hasRequiredAttributes}>
+                                                            <lightning-icon icon-name="utility:success"
+                                                                alternative-text="Configurable" variant="success"
+                                                                data-optionid={child.value} style="cursor: pointer; margin-top: 3px"
+                                                                title="Configurable" size="x-small" data-index={index}
+                                                                onclick={handleClick}>
+                                                            </lightning-icon>
+                                                        </template>
+                                                        <template if:true={child.hasRequiredAttributes}>
+                                                            <lightning-icon icon-name="utility:warning"
+                                                                alternative-text="besoin de configuration"
+                                                                variant="error" data-optionid={child.value}
+                                                                style="cursor: pointer; margin-top: 3px" title="besoin de configuration"
+                                                                size="x-small" data-index={index}  onclick={handleClick}></lightning-icon>
+                                                        </template>
+                                                    </template>
+                                                </div>
+                                            </template>
+                                        </template>
+                                    </template>
+                                </template>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="slds-col slds-size_2-of-3">
+                        <div data-theid={offreData.offreId} key={offreData.offreId}>
+                            <template if:true={offreData.message}>
+                                <c-inwi-b2-c_-display-item-attributes_v2 item={offreData.theItem}
+                                    action-type={actionType} user-profile={userProfile} operateur={__operateur} isftthvula={__isftthvula}  displayimeiftth={__displayimeiftth} disabledinputimei={__disabledinputimei} cin={__cin} product={offreData.product}
+                                    accountid={__accountid} username={__username} typepos={__typepos} typeparcour={__typeparcour} modelivraison={__modelivraison} nameagencelivraison={__nameagencelivraison} codeagencelivraison={__codeagencelivraison} provider={__provider}  isrepriseeshop={__isrepriseeshop} reprisesuitelivraison={__reprisesuitelivraison} modepaiment={__modepaiment}
+                                    oncustomvalidatecodearticle={handleCustomValidateCodeArticle}
+                                    oncustomdeviceaccessvalidated={handleCustomimeivalidated}
+                                    onitemattributesvaluechange={hanldeItemAttributesValueChange}
+                                    onitemattributeswithoutimei={handleItemAttributesWithoutImei}
+                                    onitemattributesvalidationerror={handleitemattributesvalidationerror}
+                                    oncustomitemattribvaluechangewithnext={handlecustomitemattribvaluechangewithnext}
+                                    onchangelignetype={handleChangeLigneType}>
+                                </c-inwi-b2-c_-display-item-attributes_v2>
+                            </template>
+                            <template if:false={offreData.message}>
+                                <span>{offreData.offreName} </span>
+                            </template>
+                        </div>
+                        <template for:each={StructuredOffre.children} for:item="option" for:index="index">
+                            <div data-theid={option.value} style="display: none;" key={option.value}>
+                                <template if:true={option.message}>
+                                    <c-inwi-b2-c_-display-item-attributes_v2 item={option.theitem}
+                                        action-type={actionType} user-profile={userProfile} operateur={__operateur} isftthvula={__isftthvula}  displayimeiftth={__displayimeiftth}  disabledinputimei={__disabledinputimei} product={offreData.product} typeparcour={__typeparcour} paiement={__paiement} modelivraison={__modelivraison} nameagencelivraison={__nameagencelivraison} codeagencelivraison={__codeagencelivraison} selectedmodel={__selectedmodel} provider={__provider}  isrepriseeshop={__isrepriseeshop} reprisesuitelivraison={__reprisesuitelivraison} modepaiment={__modepaiment}
+                                        oncustomvalidatecodearticle={handleCustomValidateCodeArticle}
+                                        oncustomdeviceaccessvalidated={handleCustomimeivalidated}
+                                        onitemattributesvaluechange={hanldeItemAttributesValueChange}
+                                        onitemattributeswithoutimei={handleItemAttributesWithoutImei}
+                                        onitemattributesvalidationerror={handleitemattributesvalidationerror}
+                                        oncustomitemattribvaluechangewithnext={handlecustomitemattribvaluechangewithnext}>
+                                    </c-inwi-b2-c_-display-item-attributes_v2>
+                                </template>
+                                <template if:false={option.message}>
+                                    <span></span>
+                                </template>
+                            </div>
+                            <template for:each={option.children} for:item="child" for:index="index">
+                                <div data-theid={child.value} style="display: none;" key={child.value}>
+                                    <template if:true={child.message}>
+                                        <c-inwi-b2-c_-display-item-attributes_v2 item={child.theitem}
+                                            action-type={actionType} user-profile={userProfile} provider={__provider} operateur={__operateur} isftthvula={__isftthvula}   isrepriseeshop={__isrepriseeshop}  displayimeiftth={__displayimeiftth}  disabledinputimei={__disabledinputimei}
+																						product={offreData.product}  typeparcour={__typeparcour} paiement={__paiement} modelivraison={__modelivraison} nameagencelivraison={__nameagencelivraison} codeagencelivraison={__codeagencelivraison} selectedmodel={__selectedmodel} reprisesuitelivraison={__reprisesuitelivraison} modepaiment={__modepaiment}
+                                            
+                                            oncustomvalidatecodearticle={handleCustomValidateCodeArticle}                                            
+                                            oncustomdeviceaccessvalidated={handleCustomimeivalidated}
+                                            onitemattributesvaluechange={hanldeItemAttributesValueChange}
+                                            onitemattributeswithoutimei={handleItemAttributesWithoutImei}
+                                            onitemattributesvalidationerror={handleitemattributesvalidationerror}
+                                            oncustomitemattribvaluechangewithnext={handlecustomitemattribvaluechangewithnext}>
+                                        </c-inwi-b2-c_-display-item-attributes_v2>
+                                    </template>
+                                    <template if:false={child.message}>
+                                        <span></span>
+                                    </template>
+                                </div>
+                            </template>
+                        </template>
+                    </div>
+                </div>
+            </lightning-card>
+            <br>
+            <span style="border-bottom: 1px solid rgb(217, 219, 221); width: 100%; display:block"></span>
+            <br>
+
+            <div style="position: relative;padding:20px;">
+                <!-- <lightning-button variant="brand-outline" label="Précédent" title="Précédent" onclick={gotopreviousStep}
+                    class="slds-m-left_x-small" style=" position: absolute;  right: 90px; top: 5px;"></lightning-button> -->
+                    <template if:false={ShowButton}>
+                        <lightning-button variant="brand" label="Suivant" title="Suivant" disabled={isStepForwardEnabled}
+                           onclick={stepForward} class="slds-m-left_x-small"
+                           style=" position: absolute; right: 10px; top: 5px;">
+                       </lightning-button> 
+                        </template>
+                        <template if:true={ShowButton}>
+                           <lightning-button variant="brand" label="Suivant" title="Check Code Article SAP"
+                           onclick={CheckArticleCodeAvailabilityInSAP} class="slds-m-left_x-small"
+                           style=" position: absolute; right: 10px; top: 5px;" disabled={isStepForwardEnabled} >
+                       </lightning-button>
+                        </template>
+
+            </div>
+
+        </template>
+
+    </template>
+</template>

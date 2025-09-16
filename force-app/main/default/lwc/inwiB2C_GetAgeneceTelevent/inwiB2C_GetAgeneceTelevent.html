@@ -1,0 +1,43 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 11-16-2023
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+  <div class="slds-grid slds-wrap">
+      <div class="slds-col slds-size_4-of-12 slds-m-bottom--medium">
+          <lightning-input type="search" placeholder={name} label="Agence de livraison" value={value} class="agenceName" onchange={handleChanged} required=true>
+          </lightning-input>
+
+          <!-- Affichage conditionnel du message d'erreur -->
+          <!-- <div if:true={errorMessage} class="slds-m-top_small slds-m-bottom_small">
+              <lightning-icon icon-name="utility:error" size="small" class="slds-m-right_x-small"></lightning-icon>
+              {errorMessage}
+          </div> -->
+
+          <template if:true={show}>
+              <div class="slds-col slds-size_12-of-12 slds-m-bottom--medium slds-box">
+                  <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+                      <template for:each={optionsArray} for:item="item">
+                          <li key={item.AgenceId} class="slds-listbox__item">
+                              <a>
+                                  <p data-idacc={item.AgenceId} data-name={item.Name} data-codeagence={item.CodeAgence} onclick={handleSelect}>
+                                      {item.CodeAgence}, {item.Name}
+                                  </p>
+                              </a>
+                          </li>
+                      </template>
+                  </ul>
+              </div>
+          </template>
+      </div>
+
+    
+    </div>
+      <div style="position: relative; padding: 20px;">
+       <lightning-button variant="brand-outline" label="Précédent" title="Précédent" onclick={handlePrevious} class="slds-m-left_x-small" style="position: absolute; right: 120px; bottom: 20px;"></lightning-button>
+        <lightning-button variant="brand" label="Suivant" title="Suivant" onclick={handleNext} class="slds-m-left_x-small" style="position: absolute; right: 20px; bottom: 20px;"></lightning-button>
+   </div>
+</template>

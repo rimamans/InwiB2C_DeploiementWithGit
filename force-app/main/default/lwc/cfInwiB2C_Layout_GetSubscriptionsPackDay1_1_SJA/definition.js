@@ -1,0 +1,3 @@
+let definition = 
+                {"Cards":["InwiB2C_Card_GetSubscriptionsPackDepDay1"],"dataSource":{"type":null},"enableLwc":true,"repeatCards":false,"lwc":{"MasterLabel":"cardCanvas1x","DeveloperName":"cardCanvas1x","Id":"0Rb4K000000kQXbSAM","name":"cardCanvas1x","NamespacePrefix":"vlocity_cmt"},"previewType":"designTime","workspace":["InwiB2C_Card_GetSubscriptionsPackDepDay1/LBI/1/1694422912941"],"componentName":"cfInwiB2C_Layout_GetSubscriptionsPackDay1_1_SJA","GlobalKey__c":"InwiB2C_Layout_GetSubscriptionsPackDay1/1/SJA/1695901321495"}; 
+            export default definition

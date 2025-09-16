@@ -1,0 +1,85 @@
+<!--
+  @description       : 
+  @author            : BCH@settings.com
+  @group             : 
+  @last modified on  : 13-02-2023
+  @last modified by  : BCH@settings.com
+-->
+<apex:page standardController="InwiB2C_Demande_de_resiliation__c" extensions="inwiB2C_ChangeQualificationResil" tabStyle="Order" lightningStylesheets="true" sidebar="false" id="acPage" docType="html-5.0">
+     <apex:form >
+        <div style="height:auto">
+            <apex:pageBlock mode="maindetail">
+            <apex:pageBlockSection title="Informations de la Demande de résiliation" >      
+                <apex:outputField value="{!InwiB2C_Demande_de_resiliation__c.Name}" label="Nom de Demande" />
+                <apex:outputField value="{!InwiB2C_Demande_de_resiliation__c.InwiB2C_Subscription__c}" label="Numéro de la ligne" />
+                <apex:outputField value="{!InwiB2C_Demande_de_resiliation__c.InwiB2C_Account__c}" label="Compte" />
+                <apex:outputField value="{!InwiB2C_Demande_de_resiliation__c.OwnerId}" label="Propriétaire"/>
+                <apex:outputField value="{!InwiB2C_Demande_de_resiliation__c.CreatedById}" label="Créé par" />
+                <apex:outputField value="{!InwiB2C_Demande_de_resiliation__c.CreatedDate}" label="Crée" />       
+                <apex:outputField value="{!InwiB2C_Demande_de_resiliation__c.InwiB2C_Statut_Resil__c}" label="Statut de la demande" />
+                <apex:outputField value="{!InwiB2C_Demande_de_resiliation__c.InwiB2C_Type_Profil__c }" label="Type d'offre" />
+                <apex:outputField value="{!InwiB2C_Demande_de_resiliation__c.inwiB2C_Canal__c}" label="Canal" />
+                <apex:outputField value="{!InwiB2C_Demande_de_resiliation__c.inwiB2C_Motif_d_annulation__c}" label="Motif d'annulation" /> 
+                <apex:outputField value="{!InwiB2C_Demande_de_resiliation__c.Type__c}" rendered="{! (InwiB2C_Demande_de_resiliation__c.InwiB2C_Type_Profil__c ='FTTH' || InwiB2C_Demande_de_resiliation__c.InwiB2C_Type_Profil__c ='ADSL') }" label="Type"/>
+                <apex:outputField value="{!InwiB2C_Demande_de_resiliation__c.Motif__c}" rendered="{! (InwiB2C_Demande_de_resiliation__c.InwiB2C_Type_Profil__c ='FTTH' || InwiB2C_Demande_de_resiliation__c.InwiB2C_Type_Profil__c ='ADSL') && InwiB2C_Demande_de_resiliation__c.Type__c = 'Cas spécial'}" label="Motif"/>
+                <apex:outputField value="{!InwiB2C_Demande_de_resiliation__c.InwiB2C_motif__c}" rendered="{! InwiB2C_Demande_de_resiliation__c.InwiB2C_Dossier_complet__c = 'Non'}" label="Motif de dossier"/>
+                
+                <apex:outputField value="{!InwiB2C_Demande_de_resiliation__c.InwiB2C_Qualification__c}" rendered="{!( (InwiB2C_Demande_de_resiliation__c.InwiB2C_Type_Profil__c ='FTTH' || InwiB2C_Demande_de_resiliation__c.InwiB2C_Type_Profil__c ='ADSL')   && InwiB2C_Demande_de_resiliation__c.Type__c != 'Suite demande client' && !checkOwner) }" label="Qualification" />
+                <apex:outputField value="{!InwiB2C_Demande_de_resiliation__c.InwiB2C_Dossier_complet__c}"  label="Dossier Complet" />
+                <apex:variable var="restitutionValue" value="{!IF(InwiB2C_Demande_de_resiliation__c.inwib2c_equipement_restitue__c=='true', 'Oui', 'Non')}" />
+                <apex:outputText value="{!restitutionValue}" label="Restitution d'équipement" />
+
+                <apex:outputField value="{!InwiB2C_Demande_de_resiliation__c.InwiB2C_Date_de_signature__c}" label="Date de signature" />
+                <apex:outputField value="{!InwiB2C_Demande_de_resiliation__c.inwiB2C_expectedDisconnectDate__c}" label="Date prévu de résiliation" />
+                <apex:outputField value="{!InwiB2C_Demande_de_resiliation__c.inwiB2C_expectedSuspendDate__c}" label="Date prévue de Suspension" rendered="{!InwiB2C_Demande_de_resiliation__c.InwiB2C_Type_Profil__c != 'Postpaye'  }"/>
+                <apex:outputField value="{!InwiB2C_Demande_de_resiliation__c.InwiB2C_Date_de_suspension__c}" label="Date de suspension" rendered="{!InwiB2C_Demande_de_resiliation__c.InwiB2C_Type_Profil__c != 'Postpaye'  }" />
+                
+                <apex:inputField value="{!InwiB2C_Demande_de_resiliation__c.InwiB2C_Qualification__c}"  rendered="{!( (InwiB2C_Demande_de_resiliation__c.InwiB2C_Type_Profil__c ='FTTH' || InwiB2C_Demande_de_resiliation__c.InwiB2C_Type_Profil__c ='ADSL') && InwiB2C_Demande_de_resiliation__c.InwiB2C_Statut_Resil__c = 'En cours de validation BO'  && InwiB2C_Demande_de_resiliation__c.Type__c != 'Suite demande client' && checkOwner) }" />
+                <apex:actionStatus id="SaveStatus">
+                    <apex:facet name="stop">
+                        <apex:outputPanel >
+                            <apex:commandButton value="Enregistrer" action="{!submit}"  rendered="{!( (InwiB2C_Demande_de_resiliation__c.InwiB2C_Type_Profil__c ='FTTH' || InwiB2C_Demande_de_resiliation__c.InwiB2C_Type_Profil__c ='ADSL') && InwiB2C_Demande_de_resiliation__c.InwiB2C_Statut_Resil__c = 'En cours de validation BO'  && InwiB2C_Demande_de_resiliation__c.Type__c != 'Suite demande client' && checkOwner)}" status="SaveStatus"  reRender="mainpagemessages"/>
+                        </apex:outputPanel>
+                    </apex:facet>
+                    <apex:facet name="start">
+                        <apex:outputPanel >
+                            <apex:commandButton value="Loading..." rendered="{!!isLocked}" disabled="true"/>
+                            <apex:commandButton value="Loading..." disabled="true"/>
+                        </apex:outputPanel>
+                    </apex:facet>
+                </apex:actionStatus>
+                  
+            </apex:pageBlockSection>   
+
+            <apex:pageBlockSection title="Informations de retention" rendered="{!InwiB2C_Demande_de_resiliation__c.InwiB2C_Type_Profil__c != 'Prepaye'}"> 
+                <apex:outputField value="{!InwiB2C_Demande_de_resiliation__c.InwiB2C_Statut_R_tention__c}" label="Statut rétention"/>
+                <apex:outputField value="{!InwiB2C_Demande_de_resiliation__c.inwiB2C_offer_de_r_tention_appliqu_e__c}" label="Offre rétention"/>
+            </apex:pageBlockSection>     
+
+            <apex:pageBlockSection title="Informations de la demande d'approbation" > 
+                <apex:outputField value="{!InwiB2C_Demande_de_resiliation__c.inwiB2C_Validateur_BO__c}" label="Validateur BO" />
+                <apex:outputField value="{!InwiB2C_Demande_de_resiliation__c.inwiB2C_date_validation_bo__c}" label="Date de validation BO"/>  
+            </apex:pageBlockSection>  
+              
+            <apex:pageBlockSection title="Informations OTP" >
+                <apex:outputField value="{!InwiB2C_Demande_de_resiliation__c.InwiB2C_Subscription__c}" label="Contact" />
+                <apex:outputField value="{!InwiB2C_Demande_de_resiliation__c.InwiB2C_OTP__r.InwiB2C_Otp__c}" label="Code envoyé" />
+                <apex:outputField value="{!InwiB2C_Demande_de_resiliation__c.inwiB2C_Canal__c}" label="Canal" />
+            </apex:pageBlockSection>
+
+
+            <apex:pageBlockSection title="Informations de Frais"  rendered="{!InwiB2C_Demande_de_resiliation__c.InwiB2C_Type_Profil__c ='FTTH' || InwiB2C_Demande_de_resiliation__c.InwiB2C_Type_Profil__c ='ADSL' }">
+                <apex:outputField value="{!InwiB2C_Demande_de_resiliation__c.inwiB2C_Frais_de_resiliation__c}" rendered="{!InwiB2C_Demande_de_resiliation__c.InwiB2C_Type_Profil__c ='FTTH' || InwiB2C_Demande_de_resiliation__c.InwiB2C_Type_Profil__c ='ADSL' }"  label="Frais de resiliation" />
+              <!--  <apex:outputField value="{!InwiB2C_Demande_de_resiliation__c.inwiB2C_Frais_Non_restitution__c}" rendered="{!InwiB2C_Demande_de_resiliation__c.InwiB2C_Type_Profil__c ='FTTH' || InwiB2C_Demande_de_resiliation__c.InwiB2C_Type_Profil__c ='ADSL' }" label="Frais de non restitution" />-->
+            </apex:pageBlockSection>
+            
+
+            <apex:pageBlockSection title="Informations Commande">
+                <apex:outputField value="{!InwiB2C_Demande_de_resiliation__c.inwiB2C_Commande_SuspFactReseau__c}" rendered="{!InwiB2C_Demande_de_resiliation__c.InwiB2C_Type_Profil__c !='Postpaye' }"  label="Commande de Suspension Fact/Reseau" />
+                <apex:outputField value="{!InwiB2C_Demande_de_resiliation__c.inwiB2C_Commande_de_resiliation__c}"  label="Commande de résiliation" />
+            </apex:pageBlockSection>
+            </apex:pageBlock>
+           
+        </div>
+    </apex:form>
+</apex:page>

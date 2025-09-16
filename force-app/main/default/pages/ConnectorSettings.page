@@ -1,0 +1,331 @@
+<apex:page sidebar="true" lightningStyleSheets="true" showHeader="true" controller="ConnectorSettingsController" tabStyle="Account" id="the_page" docType="html-5.0">
+  <apex:form id="the_form">
+    <apex:pageMessages />
+    <apex:pageBlock title="Softphone Connector Settings">
+      <apex:outputPanel >
+        <apex:pageBlockSection columns="2" title="General Settings" collapsible="false">
+          <apex:pageBlockSectionItem >
+            <apex:outputText value="Integration Type" />
+            <apex:outputPanel >
+              <div class="requiredInput">
+                <div class="requiredBlock"></div>
+                <apex:selectList size="1" value="{!GEN_INTEGRATION_TYPE}">
+                  <apex:selectOptions value="{!integrationTypeOptions}" />
+                  <apex:actionSupport event="onchange" reRender="the_sections" />
+                </apex:selectList>
+              </div>
+            </apex:outputPanel>
+          </apex:pageBlockSectionItem>
+          <apex:pageBlockSectionItem />
+          <apex:pageBlockSectionItem >
+            <apex:outputText value="Salesforce UI" />
+            <apex:outputPanel >
+              <div class="requiredInput">
+                <div class="requiredBlock"></div>
+                <apex:selectList size="1" value="{!GEN_SF_EXPERIENCE}">
+                  <apex:selectOptions value="{!sfExperienceOptions}" />
+                </apex:selectList>
+              </div>
+            </apex:outputPanel>
+          </apex:pageBlockSectionItem>
+          <apex:pageBlockSectionItem >
+            <apex:outputText value="Log Level" />
+            <apex:outputPanel >
+              <div class="requiredInput">
+                <div class="requiredBlock"></div>
+                <apex:selectList size="1" value="{!GEN_LOG_LEVEL}">
+                  <apex:selectOptions value="{!logLevelOptions}" />
+                </apex:selectList>
+              </div>
+            </apex:outputPanel>
+          </apex:pageBlockSectionItem>
+          <apex:pageBlockSectionItem >
+            <apex:outputText value="External Routing"  title="Check to enable the external routing and the presence sync feature"/>
+            <apex:inputCheckbox value="{!GEN_EXTERNAL_ROUTING}">
+              <apex:actionSupport event="onchange" reRender="the_sections" />
+            </apex:inputCheckbox>
+          </apex:pageBlockSectionItem>
+        </apex:pageBlockSection>
+      </apex:outputPanel>
+      <apex:outputPanel id="the_sections">
+        <apex:outputPanel rendered="{!GEN_INTEGRATION_TYPE='WDE'}">
+          <apex:pageBlockSection title="WDE Settings" collapsible="false">
+            <apex:pageBlockSectionItem >
+              <apex:outputText value="Host" title="The WDE host address" />
+              <apex:outputPanel >
+                <div class="requiredInput">
+                  <div class="requiredBlock"></div>
+                  <apex:inputText value="{!WDE_HOST}" />
+                </div>
+              </apex:outputPanel>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem />
+            <apex:pageBlockSectionItem >
+              <apex:outputText value="Port" title="The WDE port for the connector, defined in the CME application" />
+              <apex:outputPanel >
+                <div class="requiredInput">
+                  <div class="requiredBlock"></div>
+                  <apex:input value="{!WDE_PORT}" type="number" />
+                </div>
+              </apex:outputPanel>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem />
+            <apex:pageBlockSectionItem >
+              <apex:outputText value="Protocol" title="The WDE Connector communication protocol, defined in the CME application" />
+              <apex:outputPanel >
+                <div class="requiredInput">
+                  <div class="requiredBlock"></div>
+                  <apex:selectList size="1" value="{!WDE_PROTOCOL}">
+                    <apex:selectOptions value="{!protocolOptions}" />
+                  </apex:selectList>
+                </div>
+              </apex:outputPanel>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem />
+            <apex:pageBlockSectionItem >
+              <apex:outputText value="IXN MGR URL" title="The address of the interaction manager web application" />
+              <apex:outputPanel >
+                <div class="requiredInput">
+                  <div class="requiredBlock"></div>
+                  <apex:inputText value="{!WDE_IXN_MGR_URL}" />
+                </div>
+              </apex:outputPanel>
+            </apex:pageBlockSectionItem>
+          </apex:pageBlockSection>
+        </apex:outputPanel>
+
+        <apex:outputPanel rendered="{!GEN_INTEGRATION_TYPE='PURECLOUD'}">
+          <apex:pageBlockSection title="Genesys Cloud Settings" collapsible="false">
+            <apex:pageBlockSectionItem >
+              <apex:outputText value="Environment" title="The Genesys Cloud region" />
+              <apex:outputPanel >
+                <div class="requiredInput">
+                  <div class="requiredBlock"></div>
+                  <apex:selectList size="1" value="{!PEF_GC_ENVIRONMENT}">
+                    <apex:selectOptions value="{!environmentOptions}" />
+                  </apex:selectList>
+                </div>
+              </apex:outputPanel>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem />
+            <apex:pageBlockSectionItem >
+              <apex:outputText value="Not Ready Presence ID" title="The id of the gc presence status" />
+              <apex:inputText value="{!PEF_NOT_READY_ID}" />
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem />
+            <apex:pageBlockSectionItem >
+              <apex:outputText value="On Queue Presence ID" title="The id of the gc presence status" />
+              <apex:inputText value="{!PEF_ON_QUEUE_ID}" />
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem />
+            <apex:pageBlockSectionItem />
+            <apex:pageBlockSectionItem />
+
+            <apex:pageBlockSectionItem >
+              <apex:outputText value="Hide Web RT PopUp Option" />
+              <apex:inputCheckbox value="{!PEF_HIDE_WEB_RTC_POP_UP_OPTION}" />
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+              <apex:outputText value="Enable Call Logs" />
+              <apex:inputCheckbox value="{!PEF_ENABLE_CALL_LOGS}" />
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+              <apex:outputText value="Hide Call Log Subject" />
+              <apex:inputCheckbox value="{!PEF_HIDE_CALL_LOG_SUBJECT}" />
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+              <apex:outputText value="Hide Call Log Contact" />
+              <apex:inputCheckbox value="{!PEF_HIDE_CALL_LOG_CONTACT}" />
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+              <apex:outputText value="Hide Call Log Relation" />
+              <apex:inputCheckbox value="{!PEF_HIDE_CALL_LOG_RELATION}" />
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+              <apex:outputText value="Dedicated Login Window" />
+              <apex:inputCheckbox value="{!PEF_DEDICATED_LOGIN_WINDOW}" />
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+              <apex:outputText value="Embed WebRTC by default" />
+              <apex:inputCheckbox value="{!PEF_EMBED_WEB_RTC_BY_DEFAULT}" />
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+              <apex:outputText value="Enable Transfer Context" />
+              <apex:inputCheckbox value="{!PEF_ENABLE_TRANSFER_CONTEXT}" />
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+              <apex:outputText value="Embedded Interaction Window" />
+              <apex:inputCheckbox value="{!PEF_EMBEDDED_INTERACTION_WINDOW}" />
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+              <apex:outputText value="Enable Configurable Caller Id" />
+              <apex:inputCheckbox value="{!PEF_ENABLE_CONFIGURABLE_CALLER_ID}" />
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+              <apex:outputText value="Enable Server Side Logging" />
+              <apex:inputCheckbox value="{!PEF_ENABLE_SERVER_SIDE_LOGGING}" />
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+              <apex:outputText value="Enable Call History" />
+              <apex:inputCheckbox value="{!PEF_ENABLE_CALL_HISTORY}" />
+            </apex:pageBlockSectionItem>
+
+          </apex:pageBlockSection>
+        </apex:outputPanel>
+
+        <apex:outputPanel rendered="{!GEN_INTEGRATION_TYPE='WWE'}">
+          <apex:pageBlockSection title="WWE Settings" collapsible="false">
+            <apex:pageBlockSectionItem >
+              <apex:outputText value="WWE URL" />
+              <apex:outputPanel >
+                <div class="requiredInput">
+                  <div class="requiredBlock"></div>
+                  <apex:inputText value="{!WWE_URL}" />
+                </div>
+              </apex:outputPanel>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem />
+            <apex:pageBlockSectionItem >
+              <apex:outputText value="IXN MGR URL" />
+              <apex:outputPanel >
+                <div class="requiredInput">
+                  <div class="requiredBlock"></div>
+                  <apex:inputText value="{!WDE_IXN_MGR_URL}" />
+                </div>
+              </apex:outputPanel>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem />
+          </apex:pageBlockSection>
+        </apex:outputPanel>
+
+
+        <apex:outputPanel rendered="{!GEN_EXTERNAL_ROUTING==true}">
+          <apex:pageBlockSection title="Presence Synchronization Settings" collapsible="false">
+            <apex:pageBlockSectionItem >
+              <apex:outputText value="Omni Ready" title="The omni status ready" />
+              <apex:outputPanel >
+                <div class="requiredInput">
+                  <div class="requiredBlock"></div>
+                  <apex:selectList size="1" value="{!ER_OMNI_READY_ID}">
+                    <apex:selectOptions value="{!PresenceStatusOptions}" />
+                    <apex:actionSupport event="onchange" reRender="the_sections" />
+                  </apex:selectList>
+                </div>
+              </apex:outputPanel>
+            </apex:pageBlockSectionItem>
+            
+          <apex:pageBlockSectionItem rendered="{!GEN_INTEGRATION_TYPE='PURECLOUD'}" />
+          <apex:pageBlockSectionItem rendered="{!GEN_INTEGRATION_TYPE='WWE'}" />
+
+            <apex:pageBlockSectionItem rendered="{!GEN_INTEGRATION_TYPE='WDE'}">
+              <apex:outputText value="WDE channels to synch" title="The WDE channels to sync, can be more then one separated by comma" />
+              <apex:outputPanel >
+                <div class="requiredInput">
+                  <div class="requiredBlock"></div>
+                  <apex:inputText value="{!ER_WDE_CHANNELS_TO_SYNC}" />
+                </div>
+              </apex:outputPanel>
+            </apex:pageBlockSectionItem> 
+
+            <apex:pageBlockSectionItem >
+              <apex:outputText value="Omni Not Ready" title="The omni not ready status, if blank the widget will be set to offline" />
+              <apex:outputPanel >
+                <apex:selectList size="1" value="{!ER_OMNI_NOT_READY_ID}">
+                  <apex:selectOptions value="{!PresenceStatusOptions}" />
+                  <apex:actionSupport event="onchange" reRender="the_sections" />
+                </apex:selectList>
+              </apex:outputPanel>
+            </apex:pageBlockSectionItem>   
+            
+            <apex:pageBlockSectionItem >
+              <apex:outputText value="Sync from Genesys to Omni" title="Propagates the status change from Genesys to Omni" />
+              <apex:inputCheckbox value="{!ER_SYNC_WDE_TO_OMNI}">
+                <apex:actionSupport event="onchange" reRender="the_sections" />
+              </apex:inputCheckbox>
+            </apex:pageBlockSectionItem>
+
+              <apex:pageBlockSectionItem >
+                <apex:outputText value="Omni No Sync" title="If selected, no sync will occure. If blank is ignored" />
+                <apex:outputPanel >
+                  <apex:selectList size="1" value="{!ER_OMNI_NO_SYNC_ID}">
+                    <apex:selectOptions value="{!PresenceStatusOptions}" />
+                    <apex:actionSupport event="onchange" reRender="the_sections" />
+                  </apex:selectList>
+                </apex:outputPanel>
+              </apex:pageBlockSectionItem>
+              
+            <apex:pageBlockSectionItem >
+              <apex:outputText value="Sync from Omni to Genesys" title="Propagates the status change from Omni to Genesys" />
+              <apex:inputCheckbox value="{!ER_SYNC_OMNI_TO_WDE}">
+                <apex:actionSupport event="onchange" reRender="the_sections" />
+              </apex:inputCheckbox>
+            </apex:pageBlockSectionItem>
+            
+            <apex:pageBlockSectionItem >
+              <apex:outputText value="Set Omni Busy on event estabilished" title="If checked, the omni status below is set on inbound/outbound voice interactions" />
+              <apex:inputCheckbox value="{!ER_OMNI_BUSY_ON_VOICE_ESTABLISHED}">
+                <apex:actionSupport event="onchange" reRender="the_sections" />
+              </apex:inputCheckbox>
+            </apex:pageBlockSectionItem>
+
+            <apex:pageBlockSectionItem >
+              <apex:outputText value="Enable capacity rule sync" title="If checked, if the threshold below is reached, the WDE not ready status below is set. Both parameters are mandatory" />
+              <apex:inputCheckbox value="{!ER_ENABLE_SYNC_ON_OMNI_CAPACITY}">
+                <apex:actionSupport event="onchange" reRender="the_sections" />
+              </apex:inputCheckbox>
+            </apex:pageBlockSectionItem>
+
+            <apex:pageBlockSectionItem rendered="{!ER_OMNI_BUSY_ON_VOICE_ESTABLISHED==false}" />
+
+            <apex:pageBlockSectionItem rendered="{!ER_OMNI_BUSY_ON_VOICE_ESTABLISHED==true}" >
+              <apex:outputText value="Omni Busy" />
+              <apex:outputPanel >
+                <div class="requiredInput">
+                  <div class="requiredBlock"></div>
+                  <apex:selectList size="1" value="{!ER_OMNI_BUSY_ID}">
+                  <apex:selectOptions value="{!PresenceStatusOptions}" />
+                  <apex:actionSupport event="onchange" reRender="the_sections" />
+                  </apex:selectList>
+                </div>
+              </apex:outputPanel>
+            </apex:pageBlockSectionItem>
+
+            <apex:pageBlockSectionItem rendered="{!ER_ENABLE_SYNC_ON_OMNI_CAPACITY==false}" />
+
+            <apex:pageBlockSectionItem rendered="{!ER_ENABLE_SYNC_ON_OMNI_CAPACITY==true}">
+              <apex:outputText value="Capacity percentage not ready" />
+              <apex:outputPanel >
+                <div class="requiredInput">
+                  <div class="requiredBlock"></div>
+                  <apex:input value="{!ER_CAPACITY_THRESHOLD}" type="number" />
+                </div>
+              </apex:outputPanel>
+            </apex:pageBlockSectionItem>
+
+            <apex:pageBlockSectionItem rendered="{!ER_OMNI_BUSY_ON_VOICE_ESTABLISHED==false}" />
+            <apex:pageBlockSectionItem />
+
+            <apex:pageBlockSectionItem rendered="{!ER_ENABLE_SYNC_ON_OMNI_CAPACITY==true}">
+              <apex:outputText value="WDE Busy Reason for Omni chat" />
+              <apex:outputPanel >
+                <div class="requiredInput">
+                  <div class="requiredBlock"></div>
+                  <apex:input value="{!ER_WDE_BUSY_ID}" />
+                </div>
+              </apex:outputPanel>
+            </apex:pageBlockSectionItem>
+
+            <apex:pageBlockSectionItem />
+          </apex:pageBlockSection>
+        </apex:outputPanel>
+
+      </apex:outputPanel>
+      <br/>
+      <br/>
+      <br/>
+      <apex:pageBlockButtons >
+        <apex:commandButton value="Save" action="{!saveSettings}" reRender="the_form" />
+      </apex:pageBlockButtons>
+    </apex:pageBlock>
+  </apex:form>
+</apex:page>

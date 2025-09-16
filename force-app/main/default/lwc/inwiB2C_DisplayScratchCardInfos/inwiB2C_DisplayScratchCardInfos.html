@@ -1,0 +1,80 @@
+<template>
+    <div class="slds-p-bottom--small">
+        <div class="slds-m-bottom_xx-large overflowVisible ">
+            
+            <h2 class="header">Informations de la Scratch card</h2>
+
+                    <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered">
+                        <thead>
+                          <tr class="slds-line-height_reset">
+                            <th class="" scope="col">
+                              <div class="slds-truncate" title="Statut">Statut</div>
+                            </th>
+                            <th class="" scope="col">
+                                <div class="slds-truncate" title="Valeur">valeur</div>
+                              </th>
+                            <th class="" scope="col">
+                              <div class="slds-truncate" title="Date début">Date début</div>
+                            </th>
+                            <th class="" scope="col">
+                              <div class="slds-truncate" title="Date fin"> Date fin </div>
+                            </th>
+                            <th class="" scope="col">
+                              <div class="slds-truncate" title="Date de l’utilisation"> Date de l’utilisation </div>
+                            </th>
+                              <th class="" scope="col">
+                                <div class="slds-truncate" title="N° téléphone associé"> N° téléphone associé </div>
+                              </th>
+                              <th class="" scope="col">
+                                <div class="slds-truncate" title="Cohérence Code PIN">Cohérence Code PIN</div>
+                              </th>
+                              <th class="" scope="col">
+                                <div class="slds-truncate" title="Reason">Reason</div>
+                              </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr >
+
+                                <td>{scratchcardstatus}</td>
+                                <td>{scratchcardamount}</td>
+                                <td>{scratchcarddatedebut}</td>
+                                <td>{scratchcarddatefin}</td>
+                                <td>{scratchcardactivationdate}</td>
+                                <td>{scratchcardmdn}</td>
+                                <td>{scratchcardpincodestatus}</td>
+                                <td>{operationreason}</td>
+                            </tr>
+
+                      
+                        </tbody>
+                      </table>
+
+                      <br>
+                      <br>
+                      <template if:true={isBlocked} >                        
+                        <lightning-button class="UnblockButton" label="Débloquer la recharge" onclick={UnblockRecharge}></lightning-button>                        
+                      </template>
+                      <br>
+                      <br>
+                  <template if:true={isHidden}>
+                <button class="NextStepButton"  onclick={handleNext} > Recharger </button>
+            </template>
+            <br/>
+            <br/>
+            
+
+
+            <br>
+            <template if:true={UnblockedSuccess} >    
+            <span class="TextUnblockSuccess">     Le déblocage de la méthode de recharge s'est bien effectué       </span>
+          </template>
+          <template if:true={UnblockedError} >   
+            <span class="TextUnblockError">      Erreur. le déblocage de la méthode de recharge s'est mal éffectué      </span>
+          </template>
+
+
+        </div>
+    </div>
+</template>

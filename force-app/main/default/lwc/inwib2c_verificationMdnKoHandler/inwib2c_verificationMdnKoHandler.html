@@ -1,0 +1,24 @@
+<!--* Sujet: MGEN3727B Besoin Identification MDM_TRE_Data_Reporting_V1.0
+ * author : khaoula kanboua
+ * last modify by : Khaoula kanboua  19/06/2025--> 
+
+<template>
+    <lightning-input 
+        type="text"
+        label="Numéro MDN" 
+        value={mdn} 
+        onchange={handleInputChange} 
+        placeholder="Saisissez le numéro MDN"
+        class="slds-col slds-size_1-of-2"
+    ></lightning-input>
+
+    <div style="display: flex; justify-content: flex-end;bottom: 0;">
+        <lightning-button 
+            label="Traiter" 
+            onclick={handleVerify} 
+            class="slds-m-top_medium"
+            variant="neutral"
+        ></lightning-button>
+    </div>
+
+</template>

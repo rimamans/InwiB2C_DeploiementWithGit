@@ -1,0 +1,39 @@
+<template>
+   
+    <div class="slds-grid slds-wrap slds-grid_vertical-stretch slds-grid_align-end">
+        <div class="slds-col slds-size_1-of-2">
+            <lightning-button 
+                label="Actualiser" 
+                variant="brand" 
+                onclick={actualise} 
+                class="elementMargin2">
+            </lightning-button>
+        </div>
+        <div class="slds-col slds-size_1-of-2">
+            <lightning-button 
+                label="Suivant" 
+                variant="brand" 
+                onclick={handlePublishButtonClick} 
+                class="elementMargin2">
+            </lightning-button>
+        </div>
+    </div>
+
+    <lightning-card title="Compte de Facturation">
+        <template if:true={isLoading}>
+            <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+        </template>
+        <template if:false={isLoading}>
+            <lightning-datatable
+                key-field="Id"
+                columns={columns}
+                data={allsubscriptions}
+                show-row-number-column="true"
+                onrowaction={handleRowAction}
+                onrowselection={handleRowSelection}>
+            </lightning-datatable>
+          
+        </template>
+    </lightning-card>
+   
+</template>

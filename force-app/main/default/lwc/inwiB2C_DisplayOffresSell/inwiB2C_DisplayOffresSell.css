@@ -1,0 +1,63 @@
+.wrapperClassCiblee{
+    position: relative !important;
+    z-index: 3;
+    border: 1px solid #000;
+    margin: 2px;
+
+}
+
+.wrapperClassEligible{
+    position: relative !important;
+    z-index: 2;
+    border: 1px solid #000;
+    margin: 2px;
+
+}
+
+.wrapperClassGeneric{
+    position: relative !important;
+    z-index: 1;
+    border: 1px solid #000;
+    margin: 2px;
+}
+
+
+
+.warpertable{
+    border: 0px solid #F00;
+}
+.warpertablehead{
+    border: 0px solid #0F0;
+}
+
+.warpertableheadtr{
+    border: 0px solid #0ff;
+}
+
+
+.retourclientth{
+    width:80px;
+}
+
+.motifth{
+    width:100px;
+}
+
+.wraperlightningcomboboxcib{
+    background-color: transparent;
+  /*  position: initial  !important;
+    z-index: 1 !important;*/
+}
+
+
+.wraperlightningcomboboxeli{
+    background-color: transparent;
+  /*  position: initial  !important;
+    z-index: 1 !important;*/
+}
+
+.wraperlightningcomboboxgen{
+    background-color: transparent;
+  /*  position: initial  !important;
+    z-index: 1 !important;*/
+}

@@ -1,0 +1,34 @@
+.stytimeexp {
+  padding: 0.75rem;
+  padding-top: 0.2rem;
+  padding-right: 0.2rem;
+  padding-bottom: 0.75rem;
+  padding-left: 0.2rem;
+}
+
+.datetxt {
+  font-size: 0.75rem;
+
+  color: #54698d;
+  text-transform: uppercase;
+  letter-spacing: 0.0625rem;
+  display: block;
+
+  content: attr(data-label);
+  float: left;
+
+  text-align: left;
+}
+
+.datenum {
+  font-size: 0.75rem;
+
+  color: black;
+  text-transform: uppercase;
+  letter-spacing: 0.0625rem;
+
+  content: attr(data-label);
+  float: right;
+
+  text-align: right;
+}

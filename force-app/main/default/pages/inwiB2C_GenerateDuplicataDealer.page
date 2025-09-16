@@ -1,0 +1,80 @@
+<apex:page sidebar="false" showHeader="false" applyBodyTag="false" renderAs="pdf" controller="inwiB2C_DuplicataDealerController">
+    <head>
+        <style>
+            body {
+                font-family: 'Arial Unicode MS';
+                font-size: 12px;
+            }
+
+            @page: first {
+                size: A4;
+                margin-top: 0px margin-right:0px;
+                margin-left: 0px;
+                margin-bottom: 0cm;
+            }
+
+            @page {
+                size: A4;
+                margin-top: 0px;
+                margin-right: 0px;
+                margin-left: 0px;
+                margin-bottom: 0cm;
+            }
+        </style>
+    </head>
+    <body>
+        <script>
+            $(document).attr("title", "New Title");
+        </script>
+        <apex:repeat value="{!loopList}" var="loopItem" id="theRepeat">
+            <apex:variable value="{!IF(loopItem > 1,0,0)}" var="added" />
+
+            <div style="display:block">
+                <img style="width:100%;" src="{!$Resource.inwiB2C_CONTRAT_DEALER}" />
+            </div>
+
+            <div style="position: absolute;top: {! 180 + (loopItem *789)}px;left: 28%;max-width: 450px;">{!IF(contains(keys,'contractNumber'),ipOutput['contractNumber'], '')}</div>
+            <div style="position: absolute;top: {! 180 + (loopItem *789)}px;left: 75%;">{!IF(contains(keys,'billingAccountNumber'),ipOutput['billingAccountNumber'], '')}</div>
+            <div style="position: absolute;top: {! 200 + (loopItem *789) + added}px;left: 28%;">{!IF(contains(keys,'contractType'),ipOutput['contractType'], '')}</div>
+            <!-- client -->
+            <div style="position: absolute;top: {! 250 + (loopItem *789) + added}px;left: 35%;">{!IF(contains(keys,'custumerFullName'),ipOutput['custumerFullName'], '')}</div>
+            <div style="position: absolute;top: {! 270 + (loopItem *789)}px;left: 73%; font-size:10px;">{!IF(contains(keys,'firstName'),ipOutput['firstName'], '')}</div>
+            <div style="position: absolute;top: {! 270 + (loopItem *789) + added}px;left: 34%;">{!IF(contains(keys,'lastName'),ipOutput['lastName'], '')}</div>
+            <div style="position: absolute;top: {! 290 + (loopItem *789)}px;left: 70%; font-size:10px;">{!IF(contains(keys,'identificationType'),ipOutput['identificationType'], '')}</div>
+            <div style="position: absolute;top: {! 290 + (loopItem *789) + added}px;left: 28%;">{!IF(contains(keys,'identificationNumber'),ipOutput['identificationNumber'], '')}</div>
+            <div style="position: absolute;top: {! 310 + (loopItem *789) + added}px;left: 35%;">{!IF(contains(keys,'adress'),ipOutput['adress'], '')}</div>
+            <div style="position: absolute;top: {! 349 + (loopItem *789)}px;left: 70%;;">{!IF(contains(keys,'postalCode'),ipOutput['postalCode'], '')}</div>
+            <div style="position: absolute;top: {! 349 + (loopItem *789) + added}px;left: 28%;">{!IF(contains(keys,'city'),ipOutput['city'], '')}</div>
+            <div style="position: absolute;top: {! 368 + (loopItem *789) + added}px;left: 35%;">{!IF(contains(keys,'birthDay'),ipOutput['birthDay'], '')}</div>
+            <div style="position: absolute;top: {! 385 + (loopItem *789)}px;left: 73%;">{!IF(contains(keys,'contactNumber'),ipOutput['contactNumber'], '')}</div>
+            <div style="position: absolute;top: {! 385 + (loopItem *789) + added}px;left: 28%;">{!IF(contains(keys,'email'),ipOutput['email'], '')}</div>
+            <!-- sim -->
+            <div style="position: absolute;top: {! 530 + (loopItem *789) + added}px;left: 20%;">{!IF(contains(keys,'msisdn'),ipOutput['msisdn'], '')}</div>
+            <div style="position: absolute;top: {! 530 + (loopItem *789) + added}px;left: 45%;">{!IF(contains(keys,'iccId'),ipOutput['iccId'], '')}</div>
+            <div style="position: absolute;top: {! 530 + (loopItem *789) + added}px;left: 73%;">{!IF(contains(keys,'offerType'),ipOutput['offerType'], '')}</div>
+            <!-- equipements -->
+            <div style="position: absolute;top: {! 637 + (loopItem *789) + added}px;left: 16.5%;">{!IF(contains(keys,'equipmentType'),ipOutput['equipmentType'], '')}</div>
+            <div style="position: absolute;top: {! 637 + (loopItem *789) + added}px;left: 30%;">{!IF(contains(keys,'equipmentLabel'),ipOutput['equipmentLabel'], '')}</div>
+            <div style="position: absolute;top: {! 637 + (loopItem *789) + added}px;left: 45%;">{!IF(contains(keys,'equipmentSerialNumber'),ipOutput['equipmentSerialNumber'], '')}</div>
+            <div style="position: absolute;top: {! 637 + (loopItem *789) + added}px;left: 75%;">{!IF(contains(keys,'equipmentEngagement'),ipOutput['equipmentEngagement'], '')}</div>
+            <div style="position: absolute;top: {! 637 + (loopItem *789) + added}px;left: 85%;">{!IF(contains(keys,'equipmentPrice'),ipOutput['equipmentPrice'], '')}</div>
+            <div style="position: absolute;top: {! 651 + (loopItem *789) + added}px;left: 16.5%;">{!IF(contains(keys,'equipmentType2'),ipOutput['equipmentType2'], '')}</div>
+            <div style="position: absolute;top: {! 651 + (loopItem *789) + added}px;left: 30%;">{!IF(contains(keys,'equipmentLabel2'),ipOutput['equipmentLabel2'], '')}</div>
+            <div style="position: absolute;top: {! 651 + (loopItem *789) + added}px;left: 45%;">{!IF(contains(keys,'equipmentSerialNumber2'),ipOutput['equipmentSerialNumber2'], '')}</div>
+            <div style="position: absolute;top: {! 651 + (loopItem *789) + added}px;left: 75%;">{!IF(contains(keys,'equipmentEngagement2'),ipOutput['equipmentEngagement2'], '')}</div>
+            <div style="position: absolute;top: {! 651 + (loopItem *789) + added}px;left: 85%;">{!IF(contains(keys,'equipmentPrice2'),ipOutput['equipmentPrice2'], '')}</div>
+            <div style="position: absolute;top: {! 669 + (loopItem *789) + added}px;left: 85%;">{!IF(contains(keys,'globalEquipmentPrice'),ipOutput['globalEquipmentPrice'], '')}</div>
+            <div style="position: absolute;top: {! 669 + (loopItem *789) + added}px;left: 43%;">{!IF(contains(keys,'globalEquipmentPrice'),ipOutput['globalEquipmentPrice'], '')}</div>
+            <!-- paiement -->
+            <div style="position: absolute;top: {! 735 + (loopItem *789) + added}px;left: 43%;">{!IF(contains(keys,'fmd'),ipOutput['fmd'], '')}</div>
+            <div style="position: absolute;top: {! 752 + (loopItem *789) + added}px;left: 43%;">{!IF(contains(keys,'simPrice'),ipOutput['simPrice'], '')}</div>
+            <div style="position: absolute;top: {! 772 + (loopItem *789) + added}px;left: 43%;">{!IF(contains(keys,'asf'),ipOutput['asf'], '')}</div>
+            <div style="position: absolute;top: {! 790 + (loopItem *789) + added}px;left: 43%;">{!IF(contains(keys,'paymentReference'),ipOutput['paymentReference'], '')}</div>
+            <div style="position: absolute;top: {! 809 + (loopItem *789) + added}px;left: 43%;">{!IF(contains(keys,'paymentMode'),ipOutput['paymentMode'], '')}</div>
+
+            <div style="display:block">
+                <img style="width:100%;" src="{!$Resource.inwiB2C_CGV_CONTRAT_DEALER}" />
+            </div>
+        </apex:repeat>
+    </body>
+</apex:page>

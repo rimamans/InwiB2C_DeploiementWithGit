@@ -1,0 +1,550 @@
+<template>
+  <template if:true={isLoading}>
+    <div class="exampleHolder">
+      <lightning-spinner
+        alternative-text="Loading"
+        size="small"
+      ></lightning-spinner>
+    </div>
+  </template>
+  <template if:false={isLoading}>
+    <div
+      style="
+        border-style: solid;
+        border-color: #92107f;
+        padding: 10px;
+        border-radius: 10px;
+      "
+    >
+      <!-- <div class="slds-grid slds-wrap slds-grid_vertical-stretch">-->
+      <div class="slds-text-heading_medium">Informations demande Partage</div>
+      <br />
+      <div class="slds-grid">
+        <div class="slds-col slds-size_1-of-2">
+          <div class="slds-border_bottom">
+            <lightning-input
+              type="text"
+              data-id="nom"
+              name="InwiB2C_LastName__c"
+              label="Nom"
+              value={_demande.InwiB2C_LastName__c}
+              onchange={handleSelection}
+            ></lightning-input>
+          </div>
+        </div>
+        &ensp;
+        <div class="slds-col slds-size_1-of-2">
+          <div class="slds-border_bottom">
+            <lightning-input
+              type="text"
+              data-id="prenom"
+              name="InwiB2C_FirstName__c"
+              value={_demande.InwiB2C_FirstName__c}
+              label="Prénom"
+              onchange={handleSelection}
+            ></lightning-input>
+          </div>
+        </div>
+      </div>
+      <br />
+      <div class="slds-grid">
+        <div class="slds-col slds-size_1-of-2">
+          <div class="slds-border_bottom">
+            <lightning-input
+              type="text"
+              label="N° identification"
+              data-id="cin"
+              name="InwiB2C_Nationalid__c"
+              value={_demande.InwiB2C_Nationalid__c}
+              onchange={handleSelection}
+            ></lightning-input>
+          </div>
+        </div>
+        &ensp;
+        <div class="slds-col slds-size_1-of-2">
+          <div class="slds-border_bottom">
+            <lightning-input
+              type="text"
+              label="Commentaire"
+              data-id="comment"
+              name="InwiB2C_Commentaire__c"
+              value={_demande.InwiB2C_Commentaire__c}
+              onchange={handleSelection}
+            ></lightning-input>
+          </div>
+        </div>
+      </div>
+      <br />
+      <div class="slds-grid">
+        <div class="slds-col slds-size_1-of-2">
+          <div class="slds-border_bottom">
+            <!--chb 25/09/2024 B-20681 -->
+            <lightning-input
+              type="text"
+              data-id="contact"
+              label="Numéro de contact"
+              name="InwiB2C_numeroContact__c"
+              value={_demande.InwiB2C_numeroContact__c}
+              onchange={handleSelection}
+              maxlength="12"
+              onkeydown={handleKeyDown}
+            >
+              ></lightning-input
+            >
+          </div>
+        </div>
+        &ensp;
+        <div class="slds-col slds-size_1-of-2">
+          <div class="slds-border_bottom">
+            <lightning-combobox
+              data-id="routage"
+              label="Code de routage"
+              name="InwiB2C_codeRoutage__c"
+              value={_demande.InwiB2C_codeRoutage__c}
+              onchange={handleSelection}
+              options={codeRoutageList}
+            ></lightning-combobox>
+          </div>
+        </div>
+      </div>
+      <br />
+
+      <div class="slds-grid">
+        <div class="slds-col slds-size_1-of-2">
+          <div class="slds-border_bottom">
+            <lightning-input
+              type="datetime-local"
+              data-id="rendezVous"
+              name="InwiB2C_rendezvous__c"
+              label="Rendez-vous d'installation"
+              onchange={handleRendezVous}
+              class="selector"
+              min={__minDateRecyclage}
+              value={__minDateRecyclage}
+              max={__maxDateRecyclage}
+              disabled={disabled}
+            ></lightning-input>
+          </div>
+        </div>
+        &ensp; &ensp;
+      </div>
+      <br />
+      <!-- <div class="slds-grid">
+                
+                 <div class="slds-col slds-size_1-of-2">
+                    <label for="add" class="slds-form-element__label">Adresse IAM du site</label>
+                    <span  style="cursor: pointer;"  onclick={showaddsite} >&#128269;</span><br>
+                    <lightning-textarea id="add" value={_demande.address} readonly="true"></lightning-textarea> 
+                </div>           
+                &ensp;
+           
+                     <br><br>
+              </div> -->
+    </div>
+    <br />
+    <br />
+
+   <!--  <template if:true={isIamAdress}>
+      <lightning-card title="Adresse Maroc Telecom du Site">
+    <div class="slds-p-around-medium">
+      <lightning-combobox
+        class="combo"
+        label="Province/Ville"
+        placeholder="Entrer votre province/ville"
+        required
+        value={selectedProVille}
+        options={proVilleOptions}
+        onchange={handleProvinceChange}
+      >
+      </lightning-combobox>
+
+       <lightning-combobox
+        class="combo"
+        label="Province/Ville"
+        placeholder="Entrer votre province/ville"
+        required
+        value={selectedCommuneLibelle}
+        options={communesOptions}
+        onchange={handleCommuneChange}
+      >
+      </lightning-combobox>
+      
+      <lightning-combobox
+        class="combo"
+        label="Quartier"
+        placeholder="Entrer votre quartier"
+        required
+        value={selectedQuartier}
+        options={quartierOptions}
+        onchange={handleQuartierChange}
+      >
+      </lightning-combobox>
+      <lightning-combobox
+        class="combo"
+        label="Voie"
+        placeholder="Entrer votre voie"
+        required
+        value={selectedVoie}
+        options={voieOptions}
+        onchange={handleVoieChange}
+      >
+      </lightning-combobox>
+      <lightning-combobox
+        class="combo"
+        label="Numéro dans la voie"
+        placeholder="Entrer votre numéro dans la voie "
+        required
+        value={selectedNumeroVoie}
+        options={numeroVoieOptions}
+        onchange={handleNumVoieChange}
+      >
+      </lightning-combobox>
+    </div>
+  </lightning-card>
+
+    </template> -->
+     <template if:true={isIamAdress}>
+      <div
+        style="
+          border-style: solid;
+          border-color: #92107f;
+          padding: 10px;
+          border-radius: 10px;
+        "
+      >
+        <div class="slds-text-heading_medium">Adresse IAM du site</div>
+        <br />
+        <div class="slds-grid">
+          <div class="slds-col slds-size_1-of-2">
+            <div class="slds-border_bottom">
+              <label class="slds-form-element__label"
+                >Province/Ville<span class="slds-required">*</span></label
+              >
+              <lightning-input
+                placeholder="Province/Ville"
+                onchange={GetProvince}
+                type="search"
+                onfocus={showPicklistOptionsProvince}
+                value={labelProvince}
+              >
+              </lightning-input>
+              <div
+                if:true={searchResultsProvince}
+                class="slds-dropdown slds-dropdown_length-5 slds-dropdown_fluid"
+                role="listbox"
+              >
+                <ul
+                  class="slds-listbox slds-listbox_vertical"
+                  role="presentation"
+                >
+                  <template
+                    for:each={searchResultsProvince}
+                    for:item="searchResultsProvince"
+                  >
+                    <li
+                      key={searchResultsProvince.value}
+                      data-value={searchResultsProvince.value}
+                      role="presentation"
+                      onclick={selectSearchResultProv}
+                      class="slds-listbox__item"
+                    >
+                      <div
+                        class="slds-media slds-listbox__option slds-listbox__option_plain slds-media_small"
+                        role="option"
+                      >
+                        <span class="slds-media__body">
+                          <span
+                            class="slds-truncate"
+                            title={searchResultsProvince.label}
+                          >
+                            {searchResultsProvince.label}
+                          </span>
+                        </span>
+                      </div>
+                    </li>
+                  </template>
+                </ul>
+              </div>
+            </div>
+          </div>
+          &ensp;
+
+          <!-- <div class="slds-col slds-size_1-of-2">
+            <div class="slds-border_bottom">
+              <label class="slds-form-element__label"
+                >Commune<span class="slds-required">*</span></label
+              >
+              <lightning-input
+                placeholder="Commune"
+                onchange={GetCommune}
+                value={labelCommune}
+                type="search"
+                onfocus={showPicklistOptionsCommune}
+                disabled={disableCommune}
+              >
+              </lightning-input>
+              <div
+                if:true={searchResultsCommune}
+                class="slds-dropdown slds-dropdown_length-5 slds-dropdown_fluid"
+                role="listbox"
+              >
+                <ul
+                  class="slds-listbox slds-listbox_vertical"
+                  role="presentation"
+                >
+                  <template
+                    for:each={searchResultsCommune}
+                    for:item="searchResultsCommune"
+                  >
+                    <li
+                      key={searchResultsCommune.value}
+                      data-value={searchResultsCommune.value}
+                      role="presentation"
+                      onclick={selectSearchResultCommune}
+                      class="slds-listbox__item"
+                    >
+                      <div
+                        class="slds-media slds-listbox__option slds-listbox__option_plain slds-media_small"
+                        role="option"
+                      >
+                        <span class="slds-media__body">
+                          <span
+                            class="slds-truncate"
+                            title={searchResultsCommune.label}
+                          >
+                            {searchResultsCommune.label}
+                          </span>
+                        </span>
+                      </div>
+                    </li>
+                  </template>
+                </ul>
+              </div>
+            </div>
+          </div> -->
+        
+                  <div class="slds-col slds-size_1-of-2">
+            <div class="slds-border_bottom">
+              <label class="slds-form-element__label"
+                >Quartier<span class="slds-required">*</span></label
+              >
+              <lightning-input
+                placeholder="Quartier"
+                onchange={GetQuartier}
+                value={labelQuartier}
+                type="search"
+                onfocus={showPicklistOptionsQuartierIAM}
+                disabled={disableQuartierIAM}
+              >
+              </lightning-input>
+              <div
+                if:true={searchResultsQuartierIAM}
+                class="slds-dropdown slds-dropdown_length-5 slds-dropdown_fluid"
+                role="listbox"
+              >
+                <ul
+                  class="slds-listbox slds-listbox_vertical"
+                  role="presentation"
+                >
+                  <template
+                    for:each={searchResultsQuartierIAM}
+                    for:item="searchResultsQuartierIAM"
+                  >
+                    <li
+                      key={searchResultsQuartierIAM.value}
+                      data-value={searchResultsQuartierIAM.value}
+                      role="presentation"
+                      onclick={selectSearchResultQuartierIAM}
+                      class="slds-listbox__item"
+                    >
+                      <div
+                        class="slds-media slds-listbox__option slds-listbox__option_plain slds-media_small"
+                        role="option"
+                      >
+                        <span class="slds-media__body">
+                          <span
+                            class="slds-truncate"
+                            title={searchResultsQuartierIAM.label}
+                          >
+                            {searchResultsQuartierIAM.label}
+                          </span>
+                        </span>
+                      </div>
+                    </li>
+                  </template>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br />
+
+        <div class="slds-grid">
+
+           <div class="slds-col slds-size_1-of-2">
+            <div class="slds-border_bottom">
+              <label class="slds-form-element__label"
+                >Voie<span class="slds-required">*</span></label
+              >
+              <lightning-input
+                placeholder="Voie"
+                onchange={getVoies}
+                value={labelVoie}
+                type="search"
+                onfocus={showPicklistOptionsVoie}
+                disabled={disableVoie}
+              >
+              </lightning-input>
+              <div
+                if:true={searchResultsVoie}
+                class="slds-dropdown slds-dropdown_length-5 slds-dropdown_fluid"
+                role="listbox"
+              >
+                <ul
+                  class="slds-listbox slds-listbox_vertical"
+                  role="presentation"
+                >
+                  <template
+                    for:each={searchResultsVoie}
+                    for:item="searchResultsVoie"
+                  >
+                    <li
+                      key={searchResultsVoie.value}
+                      data-value={searchResultsVoie.value}
+                      role="presentation"
+                      onclick={selectSearchResultVoie}
+                      class="slds-listbox__item"
+                    >
+                      <div
+                        class="slds-media slds-listbox__option slds-listbox__option_plain slds-media_small"
+                        role="option"
+                      >
+                        <span class="slds-media__body">
+                          <span
+                            class="slds-truncate"
+                            title={searchResultsVoie.label}
+                          >
+                            {searchResultsVoie.label}
+                          </span>
+                        </span>
+                      </div>
+                    </li>
+                  </template>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="slds-col slds-size_1-of-2">
+            <div class="slds-border_bottom">
+              <label class="slds-form-element__label">Numéro de la voie<span class="slds-required">*</span></label>
+              <lightning-input
+                placeholder="Numéro de la voie"
+                value={labelNumVoie}
+                type="text"
+                disabled={disableNumVoie}
+                data-id="NumeroDeVoie"
+                name="InwiB2C_Numero_de_la_voie__c"
+                onchange={handleSelection}
+              >
+              </lightning-input>
+             <!--  <lightning-input
+                placeholder="Numéro de la voie"
+                onchange={getNumVoies}
+                value={labelNumVoie}
+                type="search"
+                onfocus={showPicklistOptionsNumVoies}
+                onkeydown={handleKeyPress}
+                disabled={disableNumVoie}
+              >
+              </lightning-input> -->
+              <!-- <div
+                if:true={searchResultsNumVoies}
+                class="slds-dropdown slds-dropdown_length-5 slds-dropdown_fluid"
+                role="listbox"
+              >
+                <ul
+                  class="slds-listbox slds-listbox_vertical"
+                  role="presentation"
+                >
+                  <template
+                    for:each={searchResultsNumVoies}
+                    for:item="searchResultsNumVoies"
+                  >
+                    <li
+                      key={searchResultsNumVoies.value}
+                      data-value={searchResultsNumVoies.value}
+                      role="presentation"
+                      onclick={selectSearchResultNumVoies}
+                      class="slds-listbox__item"
+                    >
+                      <div
+                        class="slds-media slds-listbox__option slds-listbox__option_plain slds-media_small"
+                        role="option"
+                      >
+                        <span class="slds-media__body">
+                          <span
+                            class="slds-truncate"
+                            title={searchResultsNumVoies.label}
+                          >
+                            {searchResultsNumVoies.label}
+                          </span>
+                        </span>
+                      </div>
+                    </li>
+                  </template>
+                </ul>
+              </div> -->
+            </div>
+          </div>
+          &ensp;        
+        </div>
+
+        <br />
+
+      </div>
+    </template> 
+
+    <template if:true={isOrangeAddress}>
+      <div>
+        <!-- LH - 16/01/2025 -->
+        <div class="slds-text-heading_medium">Adresse Orange du site</div>
+        <br />
+        </div>
+        <div class="button-container">
+          <lightning-button
+            variant="brand"
+            class="btn-eligible"
+            label="Rechercher une adresse orange"
+            onclick={checkEligibilityFTTH}
+            if:true={isSearchDone}
+          ></lightning-button>
+          <br />
+          <br />
+        </div>
+        <iframe
+          src="/apex/GoogleMapOrange"
+          style="width: 100%; height: 800px; border: none"
+        ></iframe>
+      <!-- - -->
+    </template>
+
+    <div class="slds-col slds-text-align_right">
+      <lightning-button
+        variant="brand"
+        label="Valider"
+        onclick={valider}
+        class="slds-float_right"
+        style="padding: 10px"
+        disabled={flagValider}
+      ></lightning-button>
+
+      <lightning-button
+        variant="brand"
+        label="Annuler"
+        onclick={annuler}
+        class="slds-float_right"
+        style="padding: 10px"
+      ></lightning-button>
+    </div>
+  </template>
+</template>

@@ -1,0 +1,129 @@
+<template>
+    <h3>Veuillez sélectionner le terminal TPE</h3>
+    <div style="height:200px" class="slds-size_1-of-2">
+        <lightning-datatable key-field="terminal_id" data={tpeList} columns={tpeColumns} max-row-selection=1
+            onrowselection={handleChangeTPE}>
+        </lightning-datatable>
+    </div>
+
+    <lightning-input value={transactionNumber} name={transactionNumber} label="Référence de paiement" type="text"
+        disabled={disabledTransactionNumber} class="slds-size_1-of-2" onchange={hanldle__transactionNumber}>
+    </lightning-input>
+
+    <template if:true={DisplayFields}>
+
+    <!--   B-32051 Meryem Yahya -->
+       <!--  <lightning-input value={cardType} name="cardType" label="Type de carte" type="text"
+            class="slds-size_1-of-2" onchange={handleCardTypeChange}>
+        </lightning-input> -->
+
+        <lightning-combobox name="cardType"
+                  label="Type de carte"
+                  value={cardType}
+                  options={cardOptions}
+                  class="slds-size_1-of-2"
+                  onchange={handleCardTypeChange}>
+        </lightning-combobox>
+        
+        <!--   B-32051 Meryem Yahya -->
+        <lightning-input value={bankName} name="bankName" label="Nom de la banque" type="text"
+            class="slds-size_1-of-2" onchange={handleBankNameChange}>
+        </lightning-input>
+    </template>
+
+    <br>
+
+    <template if:true={displayInitPayment}>
+        <lightning-button variant="brand" label="Payer" title="Payer" onclick={initializePayment}
+            class="slds-m-left_x-large slds-m-top_x-large"></lightning-button>
+    </template>
+
+    <template if:true={displayCheckPayment}>
+        <lightning-button variant="brand" label="Vérifier le Paiement" title="Vérifier" onclick={checkPayment}
+            disabled={displayDuplicate} class="slds-m-left_x-large slds-m-top_x-large"></lightning-button>
+    </template>
+
+    <template if:true={displayDuplicate}>
+        <lightning-button variant="brand" label="Duplicata TPE" title="Duplicate" onclick={duplicateReceipt}
+            class="slds-m-left_x-large slds-m-top_x-large"></lightning-button>
+    </template>
+
+    <div class="slds-grid slds-wrap slds-grid_align-end omniscript-button-position">
+        <template if:true={displayPrevious}>
+            <lightning-button style="margin:6px;" variant="brand" label="Précédent" title="Précédent"
+                onclick={gotopreviousStep} class=""></lightning-button>
+        </template>
+  
+        <template if:true={displayNext}>
+            <lightning-button variant="brand" label="Suivant" title="Suivant" onclick={next}
+                style="float:right; margin:6px;" class="slds-m-left_x-large slds-m-top_x-large" disabled={disableSave}>
+            </lightning-button>
+        </template>
+    </div>
+
+
+
+
+    <template if:true={updateOngoing}>
+
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-02" aria-modal="true"
+            aria-describedby="modal-content-id-2" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-2">
+                    <div class="wraperClass ">
+
+                        <div style="text-align:center">Veuillez attendre quelques instants</div>
+                        <div class="demo-only" style="height:6rem;position:relative">
+                            <div class="slds-spinner_container">
+                                <div role="status" class="slds-spinner slds-spinner_medium slds-spinner_brand">
+                                    <span class="slds-assistive-text">Loading</span>
+                                    <div class="slds-spinner__dot-a"></div>
+                                    <div class="slds-spinner__dot-b"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+    <template if:true={isModalOpenDuplicate}>
+
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+            aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                        title="Close" onclick={closeModal}>
+                        <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse"
+                            size="small"></lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Informations du duplicata
+                    </h2>
+                </header>
+
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+
+                    <p>Merci de vérifier la conformité de l’opération avec le reçu édité sur le TPE.</p>
+
+
+                </div>
+
+                <div class="slds-modal__footer slds-modal__footer_directional">
+                    <button class="slds-button slds-button_neutral" onclick={conformHandle}
+                        title="Conforme">Conforme</button>
+                    <button class="slds-button slds-button_brand" onclick={notconformHandle} title="Nonconforme">Non
+                        conforme</button>
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+
+</template>

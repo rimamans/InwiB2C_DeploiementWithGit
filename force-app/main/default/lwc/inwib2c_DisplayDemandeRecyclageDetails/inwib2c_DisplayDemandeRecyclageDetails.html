@@ -1,0 +1,120 @@
+<template>
+    <div style="border-style: solid; border-color: #92107F; padding: 10px; border-radius: 6px;">
+
+
+        <div class="slds-grid">
+            <div class="slds-col slds-size_1-of-2">
+                <div class="slds-border_bottom">
+                    <label for="orderLabel">Numéro de la commande</label><br>
+                    <lightning-formatted-url value={urlOrder} label={__OrderNumber} target="_blank" id="orderLabel" readonly="true"></lightning-formatted-url>
+                </div>
+            </div>&ensp;
+            <div class="slds-col slds-size_1-of-2">
+                <div class="slds-border_bottom">
+                    <lightning-input type="text" label="Motif d'échec de raccordement" id="motifEchec" value={__MotifEchec} readonly="true"></lightning-input>
+                </div>
+            </div>
+        </div>
+
+        <div class="slds-grid">
+            <div class="slds-col slds-size_1-of-2">
+                <div class="slds-border_bottom">
+                    <label for="CompteLabel">Client</label>
+                    <br><lightning-formatted-url label={__AccountName} id="CompteLabel" value={urlCompte}  target="_blank" readonly="true"></lightning-formatted-url>
+                </div>
+            </div>&ensp;
+            <div class="slds-col slds-size_1-of-2">
+                <div class="slds-border_bottom">
+                    <lightning-input type="text" label="Numéro carte d'identité" id="NumCIN" value={__NumCIN} readonly="true"></lightning-input>
+                </div>
+            </div>
+        </div>
+
+        <div class="slds-grid">
+            <div class="slds-col slds-size_1-of-2">
+                <div class="slds-border_bottom">
+                    <lightning-input type="text" id="numContact" label="Numéro de contact" value={__NumContact} readonly="true"></lightning-input>
+                </div>
+            </div>&ensp;
+            <div class="slds-col slds-size_1-of-2">
+                <div class="slds-border_bottom">
+                    <lightning-input type="text" label="Statut de la demande" id="statutLigne" value={__statutLigne} readonly="true"></lightning-input>
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="slds-grid">
+            <div class="slds-col slds-size_1-of-2">
+                <div class="slds-border_bottom">
+                    <lightning-input type="text" label="Compteur de repéchage" id="cptRepechage" value={__cptRepechage} readonly="true"></lightning-input>
+                </div>
+            </div>&ensp;
+            <div class="slds-col slds-size_1-of-2">
+                <div class="slds-border_bottom">
+                    <lightning-input type="text" label="Numéro de la ligne FTTH" id="numLigneFTTH" value={__numLigneFTTH} readonly="true"></lightning-input>
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="slds-grid">
+            <div class="slds-col slds-size_1-of-2">
+                <div class="slds-border_bottom">
+                    <lightning-input type="text" id="rdv" label="Date de rendez-vous" value={__rdv} readonly="true"></lightning-input>
+                </div>
+            </div>
+            &ensp;
+            <div class="slds-col slds-size_1-of-2"> 
+                <div class="slds-border_bottom">
+                    <lightning-input type="text" label=" Date début planifiée" id="DateDebut"  value={__DateDP} readonly="true"></lightning-input>
+                </div> </div>
+        </div>
+        
+
+        <div class="slds-grid">
+            <div class="slds-col slds-size_1-of-2">
+                <div class="slds-border_bottom">
+                    <lightning-input type="text" label="Workorder Id" id="workOrder"  value={__workOrder} readonly="true"></lightning-input>
+                </div>
+            </div>&ensp;
+            <div class="slds-col slds-size_1-of-2">
+                <div class="slds-border_bottom">
+                    <lightning-input type="text" label="Workordertask Id" id="workOrderTask" value={__workOrderTask} readonly="true"></lightning-input>
+                </div>
+            </div>
+        </div>
+
+  
+
+        <div class="slds-grid">
+            <div class="slds-col slds-size_1-of-2">
+                <div class="slds-border_bottom">
+                    <br><label for="createdByLabel">Créer par</label><br><br>
+                  <lightning-formatted-url value={urlCreatedBy} label={__CreatedBy} target="_blank" id="createdByLabel" readonly="true"></lightning-formatted-url>
+                </div>
+               
+            </div>&ensp;
+            <div class="slds-col slds-size_1-of-2">
+              
+                <div class="slds-border_bottom">
+                    <br><label for="modifiedByLabel">Modifié par</label><br><br>
+                    <lightning-formatted-url value={urlModifiedBy} label={__LastModifiedBy} target="_blank" id="modifiedByLabel" readonly="true"></lightning-formatted-url>
+                </div>
+            </div>
+
+        </div>
+
+       
+
+    </div>
+
+    <template if:false={__comefromdemande}>
+    <lightning-button variant="brand" label="Précédent" onclick={handlePrevious}  class="slds-float_right" style="padding: 10px;"></lightning-button>
+</template>
+    <template if:true={__comefromdemande}>
+        <lightning-button variant="brand" label="Recycler" onclick={handleRecycle}  class="slds-float_right" style="padding: 10px;" disabled={__RecycleDisabled}></lightning-button>
+        <lightning-button variant="brand" label="Annuler" onclick={handleCancel}  class="slds-float_right" style="padding: 10px;" disabled={__CancelDisabled}></lightning-button>
+    </template>
+
+</template>

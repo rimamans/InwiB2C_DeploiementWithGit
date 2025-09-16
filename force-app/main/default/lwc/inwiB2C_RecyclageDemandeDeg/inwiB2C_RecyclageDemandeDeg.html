@@ -1,0 +1,404 @@
+<template>
+    <template if:true={isLoadinginModal}>
+        <div class="exampleHolder">
+            <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+        </div>
+    </template>
+    <template if:false={isLoadinginModal}>
+    <div style="border-style: solid; border-color: #92107F; padding: 10px; border-radius: 10px;">
+        <!-- <div class="slds-grid slds-wrap slds-grid_vertical-stretch">-->
+            <div class="slds-text-heading_medium">Informations demande dégroupage</div><br>
+            <div class="slds-grid">
+                <div class="slds-col slds-size_1-of-2">
+                    <div class="slds-border_bottom">
+                    <lightning-input type="text" data-id="nom" label="Nom" value={__demande.InwiB2C_LastName__c} disabled={isCT}></lightning-input> 
+                </div></div>&ensp;
+                <div class="slds-col slds-size_1-of-2 "> 
+                    <div class="slds-border_bottom">
+                    <lightning-input type="text" data-id="prenom" value={__demande.InwiB2C_FirstName__c} disabled={isCT} label="Prénom"></lightning-input>
+                     </div></div>
+              </div>
+              <br>
+              <div class="slds-grid">
+                <div class="slds-col slds-size_1-of-2">
+                    <div class="slds-border_bottom">
+                    <lightning-input type="text"  label="N° identification" data-id="cin" disabled={isCT} value={__demande.InwiB2C_Nationalid__c}></lightning-input> 
+                </div></div>&ensp;
+                <div class="slds-col slds-size_1-of-2 "> 
+                    <div class="slds-border_bottom">
+                    <lightning-input type="text" label="Commentaire" data-id="comment" disabled={isCT} value={__demande.InwiB2C_Commentaire__c}></lightning-input>
+                     </div></div>
+              </div>
+              <br>
+              <div class="slds-grid">
+                <div class="slds-col slds-size_1-of-2">
+                    <div class="slds-border_bottom">
+                <!--chb 25/09/2024 B-20681 -->
+                    <lightning-input type="text" data-id="contact" label="Numéro de contact" disabled={isCT} value={__demande.InwiB2C_numeroContact__c}  maxlength="12" onkeydown={handleKeyDown}> ></lightning-input> 
+                </div></div>&ensp;
+                <div class="slds-col slds-size_1-of-2 "> 
+                    <div class="slds-border_bottom">
+                        <lightning-combobox data-id="routage" label="Code de routage" disabled={isCT} value={codeRoutage} onchange={handleSelection} options={codeRoutageList}></lightning-combobox> 
+                     </div></div>
+              </div>
+              <br>
+              <div class="slds-grid">
+                <div class="slds-col slds-size_1-of-2">
+                    <div class="slds-border_bottom">
+                        <lightning-input type="text" data-id="NumRecyclage" value={__demande.InwiB2C_Compteur_recyclage__c} label="Numéro de recyclage" readonly></lightning-input>
+                    </div></div>&ensp;
+              &ensp;
+              <div class="slds-col slds-size_1-of-2 "> 
+                  <div class="slds-border_bottom">
+                  <lightning-input type="text" data-id="NumRelance" value={__demande.InwiB2C_Compteur_relance__c} label="Numéro de relance" readonly></lightning-input>
+                   </div></div>
+            </div>
+            <br>
+            <div class="slds-grid">
+              <div class="slds-col slds-size_1-of-2">
+                  <div class="slds-border_bottom">
+                  <lightning-input type="datetime" data-id="rendezVous" label="Rendez-vous d'installation" onchange={handleRendezVous} class="selector" min={__minDateRecyclage} value={__minDateRecyclage} max={__maxDateRecyclage} disabled={disabled} ></lightning-input> 
+              </div></div>&ensp;
+            &ensp;
+          </div>
+              <br>
+              <div class="slds-grid">
+                
+                <div class="slds-col slds-size_1-of-2">
+                    <label for="add" class="slds-form-element__label">Adresse IAM du site</label>
+                    <template if:false={isCT}>
+                    <span  style="cursor: pointer;"  onclick={showaddsite} >&#128269;</span><br>
+                    </template>
+                    <lightning-textarea id="add" value={__demande.InwiB2C_ADRESSE__c} readonly="true"></lightning-textarea> 
+                </div>
+            
+                &ensp;
+                <template if:true={addIAMEmpty}>
+                <div class="slds-col slds-size_1-of-2 "> 
+                    <label for="addProp" class="slds-form-element__label">Adresse IAM proposée</label>
+                    <template if:false={isCT}>
+                    <span  style="cursor: pointer;"  onclick={showaddIAM} >&#128269;</span>
+                </template>
+                    <lightning-textarea id="addProp" value={__demande.InwiB2C_AdresseIAMProposee__c} readonly="true" >
+                    </lightning-textarea>
+                </div></template>
+                     <br><br>
+              </div>
+ </div>
+ <br> <br>
+ <template if:true={showAddPropose}>
+ <div style="border-style: solid; border-color: #92107F; padding: 10px; border-radius: 10px;">
+    <!-- <div class="slds-grid slds-wrap slds-grid_vertical-stretch">-->
+        <div class="slds-text-heading_medium">Adresse IAM proposée</div><br>
+        <div class="slds-grid">
+            <div class="slds-col slds-size_1-of-2">
+                <div class="slds-border_bottom">
+                <lightning-input type="text"  label="Province/Ville" value={adresseSplitee.valABVR_PERS} readonly="true"></lightning-input> 
+            </div></div>&ensp;
+            <div class="slds-col slds-size_1-of-2 "> 
+                <div class="slds-border_bottom">
+                <lightning-input type="text"  label="Commune" value={adresseSplitee.valCCOM} readonly="true" ></lightning-input>
+                 </div></div>
+          </div>
+          <br>
+          <div class="slds-grid">
+            <div class="slds-col slds-size_1-of-2">
+                <div class="slds-border_bottom">
+                <lightning-input type="text"  label="Quartier" value={adresseSplitee.valQUARTIER} readonly="true"></lightning-input> 
+            </div></div>&ensp;
+            <div class="slds-col slds-size_1-of-2 "> 
+                <div class="slds-border_bottom">
+                <lightning-input type="text"  label="Voie" value={adresseSplitee.valVOIE} readonly="true" ></lightning-input>
+                 </div></div>
+          </div>
+          <br>
+          <div class="slds-grid">
+            <div class="slds-col slds-size_1-of-2">
+                <div class="slds-border_bottom">
+                <lightning-input type="text"  label="Numéro dans la voie" value={adresseSplitee.valNVOIE}  readonly="true"></lightning-input> 
+            </div></div>&ensp;
+            <div class="slds-col slds-size_1-of-2 "> 
+                <div class="slds-border_bottom">
+                <lightning-input type="text"  label="Bâtiment" value={adresseSplitee.valBAT} readonly="true" ></lightning-input>
+                 </div></div>
+          </div>
+          <br>
+          <div class="slds-grid">
+            <div class="slds-col slds-size_1-of-2">
+                <div class="slds-border_bottom">
+                <lightning-input type="text" label="Etage" value={adresseSplitee.valETAGE}  readonly="true"></lightning-input> 
+            </div></div>&ensp;
+            <div class="slds-col slds-size_1-of-2 "> 
+                <div class="slds-border_bottom">
+                <lightning-input type="text"  label="Escalier" value={adresseSplitee.valESC}  readonly="true" ></lightning-input>
+                 </div></div>
+          </div>
+          <br> 
+          <div class="slds-grid">
+            <div class="slds-col slds-size_1-of-2">
+                <div class="slds-border_bottom">
+                <lightning-input type="text" label="Porte" value={adresseSplitee.valPORTE}  readonly="true"></lightning-input> 
+            </div></div>
+          </div>
+          <br> <br>
+          
+</div>
+</template>
+
+                  
+<template if:true={showAddIAM}>
+    <div style="border-style: solid; border-color: #92107F; padding: 10px; border-radius: 10px;">
+            <div class="slds-text-heading_medium">Adresse du site au format IAM</div><br>
+            <div class="slds-grid">
+                <div class="slds-col slds-size_1-of-2">
+                    <div class="slds-border_bottom">
+                        <!--lightning-combobox placeholder="Province/Ville" onchange={GetProvince}  label="Province/Ville" required
+                        value={ProvinceVille} class="slds-col slds-size_1-of-2 elementMargin2"  options={provinceValues}   style="padding: 10px;"> 
+                        </lightning-combobox-->
+                        <label class="slds-form-element__label">Province/Ville<span class="slds-required">*</span></label>
+                            <lightning-input placeholder="Province/Ville"
+                                onchange={GetProvince} 
+                                type="search" onfocus={showPicklistOptionsProvince}
+                                value={labelProvince}>
+                            </lightning-input>
+                            <div if:true={searchResultsProvince} class="slds-dropdown slds-dropdown_length-5 slds-dropdown_fluid" role="listbox">
+                                <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+                                    <template for:each={searchResultsProvince} for:item="searchResultsProvince">
+                                        <li key={searchResultsProvince.value}
+                                            data-value={searchResultsProvince.value}
+                                            role="presentation"
+                                            onclick={selectSearchResultProv}
+                                            class="slds-listbox__item">
+                                            <div class="slds-media slds-listbox__option slds-listbox__option_plain slds-media_small " role="option">
+                                                <span class="slds-media__body">
+                                                    <span class="slds-truncate" title={searchResultsProvince.label}>
+                                                        {searchResultsProvince.label}
+                                                    </span>
+                                                </span>
+                                            </div>
+                                        </li>
+                                    </template>
+                            </ul>
+                            </div>
+                </div></div>&ensp;
+
+                <div class="slds-col slds-size_1-of-2 "> 
+                    <div class="slds-border_bottom">
+                        <!--lightning-combobox placeholder="Commune" onchange={GetCommune}  label="Commune" required
+                        value={CommuneV} class="slds-col slds-size_1-of-2 elementMargin2"  options={communeValues}  style="padding: 10px;"> 
+                        </lightning-combobox-->
+                        <label class="slds-form-element__label">Commune<span class="slds-required">*</span></label>
+                            <lightning-input placeholder="Commune" onchange={GetCommune}
+                                 value={labelCommune} type="search"
+                                onfocus={showPicklistOptionsCommune}
+                                disabled={disableCommune}>
+                            </lightning-input>
+                            <div if:true={searchResultsCommune}
+                                class="slds-dropdown slds-dropdown_length-5 slds-dropdown_fluid"
+                                role="listbox">
+                                <ul class="slds-listbox slds-listbox_vertical"
+                                    role="presentation">
+                                    <template for:each={searchResultsCommune}
+                                        for:item="searchResultsCommune">
+                                        <li key={searchResultsCommune.value}
+                                            data-value={searchResultsCommune.value}
+                                            role="presentation"
+                                            onclick={selectSearchResultCommune}
+                                            class="slds-listbox__item">
+                                            <div class="slds-media slds-listbox__option slds-listbox__option_plain slds-media_small "
+                                                role="option">
+                                                <span class="slds-media__body">
+                                                    <span class="slds-truncate"
+                                                        title={searchResultsCommune.label}>
+                                                        {searchResultsCommune.label}
+                                                    </span>
+                                                </span>
+                                            </div>
+                                        </li>
+                                    </template>
+                                </ul>
+                            </div>
+                    </div>
+                     </div></div>
+              <br>
+
+              <div class="slds-grid">
+                <div class="slds-col slds-size_1-of-2">
+                    <div class="slds-border_bottom">
+                        <!--lightning-combobox placeholder="Quartier" onchange={GetQuartier}  label="Quartier" required
+                        value={QuartierIAM} class="slds-col slds-size_1-of-2 elementMargin2"  options={QuartierValuesIAM} style="padding: 10px;"> 
+                        </lightning-combobox-->
+                        <label class="slds-form-element__label">Quartier<span class="slds-required">*</span></label>
+                            <lightning-input placeholder="Quartier"
+                                onchange={GetQuartier} 
+                                value={labelQuartier} type="search"
+                                onfocus={showPicklistOptionsQuartierIAM}
+                                disabled={disableQuartierIAM}>
+                            </lightning-input>
+                            <div if:true={searchResultsQuartierIAM}
+                                class="slds-dropdown slds-dropdown_length-5 slds-dropdown_fluid"
+                                role="listbox">
+                                <ul class="slds-listbox slds-listbox_vertical"
+                                    role="presentation">
+                                    <template for:each={searchResultsQuartierIAM}
+                                        for:item="searchResultsQuartierIAM">
+                                        <li key={searchResultsQuartierIAM.value}
+                                            data-value={searchResultsQuartierIAM.value}
+                                            role="presentation"
+                                            onclick={selectSearchResultQuartierIAM}
+                                            class="slds-listbox__item">
+                                            <div class="slds-media slds-listbox__option slds-listbox__option_plain slds-media_small "
+                                                role="option">
+                                                <span class="slds-media__body">
+                                                    <span class="slds-truncate"
+                                                        title={searchResultsQuartierIAM.label}>
+                                                        {searchResultsQuartierIAM.label}
+                                                    </span>
+                                                </span>
+                                            </div>
+                                        </li>
+                                    </template>
+                                </ul>
+                            </div>
+
+                </div></div>&ensp;
+                <div class="slds-col slds-size_1-of-2 "> 
+                    <div class="slds-border_bottom">
+                        <!--lightning-combobox placeholder="Voie" onchange={getVoies}  label="Voie" required
+                        value={Voie} class="slds-col slds-size_1-of-2 elementMargin2"  options={VoieValues}   style="padding: 10px;"> 
+                        </lightning-combobox-->
+                        <label class="slds-form-element__label">Voie<span class="slds-required">*</span></label>
+                            <lightning-input placeholder="Voie" onchange={getVoies}
+                                value={labelVoie} type="search"
+                                onfocus={showPicklistOptionsVoie}
+                                disabled={disableVoie}>
+                            </lightning-input>
+                            <div if:true={searchResultsVoie}
+                                class="slds-dropdown slds-dropdown_length-5 slds-dropdown_fluid"
+                                role="listbox">
+                                <ul class="slds-listbox slds-listbox_vertical"
+                                    role="presentation">
+                                    <template for:each={searchResultsVoie}
+                                        for:item="searchResultsVoie">
+                                        <li key={searchResultsVoie.value}
+                                            data-value={searchResultsVoie.value}
+                                            role="presentation"
+                                            onclick={selectSearchResultVoie}
+                                            class="slds-listbox__item">
+                                            <div class="slds-media slds-listbox__option slds-listbox__option_plain slds-media_small "
+                                                role="option">
+                                                <span class="slds-media__body">
+                                                    <span class="slds-truncate"
+                                                        title={searchResultsVoie.label}>
+                                                        {searchResultsVoie.label}
+                                                    </span>
+                                                </span>
+                                            </div>
+                                        </li>
+                                    </template>
+                                </ul>
+                            </div>
+                   
+                     </div></div>
+              </div>
+              <br>
+
+              <div class="slds-grid">
+                <div class="slds-col slds-size_1-of-2">
+                    <div class="slds-border_bottom">
+                        <!--lightning-combobox placeholder="Numéro de la voie" onchange={getNumVoies}  label="Numéro de la voie" required
+                        value={Numerovoie} class="slds-col slds-size_1-of-2 elementMargin2"  options={NumerovoieValues}  style="padding: 10px;"> 
+                        </lightning-combobox-->
+                        <label class="slds-form-element__label">Numéro de la voie</label>  
+                            <lightning-input placeholder="Numéro de la voie"
+                                onchange={getNumVoies}
+                                value={labelNumVoie} type="search"
+                                onfocus={showPicklistOptionsNumVoies}
+                                onkeydown={handleKeyPress} disabled={disableNumVoie}>
+                            </lightning-input>
+                            <div if:true={searchResultsNumVoies}
+                                class="slds-dropdown slds-dropdown_length-5 slds-dropdown_fluid"
+                                role="listbox">
+                                <ul class="slds-listbox slds-listbox_vertical"
+                                    role="presentation">
+                                    <template for:each={searchResultsNumVoies}
+                                        for:item="searchResultsNumVoies">
+                                        <li key={searchResultsNumVoies.value}
+                                            data-value={searchResultsNumVoies.value}
+                                            role="presentation"
+                                            onclick={selectSearchResultNumVoies}
+                                            class="slds-listbox__item">
+                                            <div class="slds-media slds-listbox__option slds-listbox__option_plain slds-media_small "
+                                                role="option">
+                                                <span class="slds-media__body">
+                                                    <span class="slds-truncate"
+                                                        title={searchResultsNumVoies.label}>
+                                                        {searchResultsNumVoies.label}
+                                                    </span>
+                                                </span>
+                                            </div>
+                                        </li>
+                                    </template>
+                                </ul>
+                            </div>
+                    
+                </div></div>&ensp;
+                <div class="slds-col slds-size_1-of-2 "> 
+                    <div class="slds-border_bottom">
+                        <label class="slds-form-element__label">Bâtiment</label>
+                        <lightning-input type="text"  name="batiment" onchange={handleinputIAM}
+                             placeholder="Saisir le Bâtiment" value={batiment} 
+                            maxlength="5"  message-when-pattern-mismatch="batiment doit contenir que 5 Chiffres">
+        </lightning-input>
+                     </div></div>
+              </div>
+              <br>
+
+              <div class="slds-grid">
+                <div class="slds-col slds-size_1-of-2">
+                    <div class="slds-border_bottom">
+                        <label class="slds-form-element__label">Escalier</label> 
+                        <lightning-input type="text" name="escalier" onchange={handleinputIAM}
+                         placeholder="Saisir l'Escalier" value={escalier} 
+                        maxlength="3"  message-when-pattern-mismatch="Escalier doit contenir que 3 Chiffres">
+                        </lightning-input>
+                </div></div>&ensp;
+                <div class="slds-col slds-size_1-of-2 "> 
+                    <div class="slds-border_bottom">
+                        <label class="slds-form-element__label">Etage</label>  
+                        <lightning-input type="text"  name="etage" onchange={handleinputIAM}
+                        placeholder="Saisir l'Etage" value={etage} 
+                        maxlength="2"  message-when-pattern-mismatch="Etage doit contenir que 2 Chiffres">
+                        </lightning-input>
+                     </div></div>
+              </div>
+              <br>
+
+              <div class="slds-grid">
+                <div class="slds-col slds-size_1-of-2">
+                    <div class="slds-border_bottom">
+                        <label class="slds-form-element__label">Porte</label> 
+                        <lightning-input type="text" name="porte" onchange={handleinputIAM}
+                         placeholder="Saisir la Porte" value={porte} 
+                        maxlength="5"  message-when-pattern-mismatch="Porte doit contenir que 5 Chiffres">
+                        </lightning-input>
+                </div></div>
+              </div>
+              <br>
+    </div>
+  </template>
+
+<div class="slds-col slds-text-align_right">
+    <lightning-button variant="brand" label="Valider" onclick={valider} class="slds-float_right" style="padding: 10px;" disabled={flagValider}></lightning-button>
+    <template if:true={showButtons}>
+    <lightning-button variant="brand" label="Synchroniser" onclick={Synchronise} class="slds-float_right" style="padding: 10px;" disabled={flagSynchro}></lightning-button>
+    <lightning-button variant="brand" label="Rechercher" onclick={Search} class="slds-float_right" style="padding: 10px;" disabled={flagSearch}></lightning-button> 
+    </template>
+    <lightning-button variant="brand" label="Annuler" onclick={annuler} class="slds-float_right" style="padding: 10px;"></lightning-button>   
+</div>
+</template>
+
+
+
+
+</template>

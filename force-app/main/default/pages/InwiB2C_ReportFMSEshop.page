@@ -1,0 +1,3 @@
+<apex:page standardController="Report"  tabStyle="Report"  lightningStylesheets="true">
+    <apex:iframe src="/lightning/r/Report/00OAd000003xsyjMAA/view" width="100%" height="600px" scrolling="yes"/>
+</apex:page>

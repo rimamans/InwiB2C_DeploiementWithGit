@@ -1,0 +1,96 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 07-18-2025
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+    <div class="via-slds riders-list-canvas container-table-canvas">
+        <div class="slds-card slds-p-around--small np-card">
+            <div class="slds-p-bottom--small">
+                <div class="slds-m-bottom_xx-large overflowVisible">
+                    <template if:true={__loading}>
+
+                        <div style="margin-top: 30px; text-align: center;">
+                            <strong>Chargement en cours....</strong>
+                        </div>
+
+                    </template>
+                    <template if:false={__loading}>
+                        <div class="slds-grid slds-gutters">
+                            <div class="slds-col">
+                                <lightning-combobox placeholder="Choisir une option" onchange={handleChangeStatus}
+                                    value={status_value} label="Filtre par statut" options={pickListvalues2}
+                                    data-dataname="pickListvalues2">
+                                </lightning-combobox>
+                            </div>
+                            <div class="slds-col">
+                                <lightning-input type="date" name="startdate" class="startdate" label="Start Date"
+                                    value={start_date} onchange={handleDateChange} required></lightning-input>
+                            </div>
+                            <div class="slds-col">
+                                <lightning-input type="date" name="enddate" class="enddate" label="End Date"
+                                    value={end_date} onchange={handleDateChange} required></lightning-input>
+                            </div>
+                        </div>
+
+
+                        <div class="slds-grid slds-gutters" style="margin-top: 20px;">
+                            <div class="slds-col">
+                                <lightning-datatable class="style-table" key-field="Id" columns={columns2}
+                                    data={filterdrecords} draft-values={draftValues} onrowaction={handleRowAction}
+                                    sorted-direction={sortDirection} sorted-by={sortedBy} onsort={onHandleSort}
+                                    onrowselection={getSelectedRecord}>
+                                </lightning-datatable>
+                            </div>
+                        </div>
+                    </template>
+
+
+                    <template if:true={__send}>
+
+                        <lightning-icon icon-name="utility:success" alternative-text="Configurable" variant="success"
+                            data-optionid={option.value} style="cursor: pointer;" title="Configurable" size="x-small"
+                            onclick={handleClick}>
+                        </lightning-icon>
+
+                    </template>
+
+
+
+
+                    <template if:true={showButtons}>
+                        <div style="margin-top: 10px;">
+                            <div style="float: right;">
+
+                                <template if:true={canShowReceiptButton}>
+                                <lightning-button label="Generer recu paiement" title="generer recu"
+                                    onclick={navigateToVFPage} disabled={__saving} class="slds-m-left_x-small">
+                                </lightning-button>
+                               </template>
+                               
+                                <lightning-button label="Envoie Email" title="Envoyer Email" onclick={handleSendEmail}
+                                    disabled={__saving} class="slds-m-left_x-small">
+                                </lightning-button>
+                                <template if:true={showlitige}>
+
+                                <lightning-button label="Facture en litige" title="Facture en litige"
+                                    onclick={handleFactureEnLitige} disabled={__saving} class="slds-m-left_x-small">
+                                </lightning-button>
+                                <lightning-button label="Sortie de litige" title="Sortie de litige"
+                                    onclick={handleSortieLitige} disabled={__saving} class="slds-m-left_x-small">
+
+                                </lightning-button>
+                                </template>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+</template>

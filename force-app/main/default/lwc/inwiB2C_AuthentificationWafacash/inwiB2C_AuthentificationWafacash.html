@@ -1,0 +1,27 @@
+<template>
+    <lightning-card title="Vérification CIN">
+        <div class="slds-p-around_medium">
+            <!-- Champ de saisie CIN -->
+            <lightning-input 
+                label="Saisir CIN"
+                name="cinInput"
+                value={cinSaisi}
+                onchange={handleInputChange}
+                placeholder="Entrer votre CIN">
+            </lightning-input>
+
+           
+            <lightning-button 
+                label="Vérifier" 
+                variant="brand"
+                class="slds-m-top_small"
+                onclick={handleVerify}>
+            </lightning-button>
+
+            <!-- Message d'erreur -->
+            <template if:true={message}>
+                <p class="slds-m-top_medium" style="color:red">{message}</p>
+            </template>
+        </div>
+    </lightning-card>
+</template>

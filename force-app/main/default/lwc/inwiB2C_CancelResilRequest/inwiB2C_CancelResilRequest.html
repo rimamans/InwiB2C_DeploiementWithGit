@@ -1,0 +1,46 @@
+<template>
+   <!-- <br />
+    <br />
+    <br />
+    <br />
+    <div>  
+         <lightning-button variant="brand" label="Sauvegarder" title="Sauvegarder" 
+            onclick={gotonextStep} class="slds-m-left_x-large slds-m-top_x-large">
+        </lightning-button>
+    </div>
+
+        <br />
+        <br />
+        <br />
+        <br />
+
+-->
+
+<div class ="slds-p-right_small slds-m-bottom_xx-small slds-show_inline-block slds-size_12-of-12 slds-medium-size_5-of-12">
+    <lightning-record-edit-form object-api-name="InwiB2C_Demande_de_resiliation__c" >
+        <lightning-messages></lightning-messages>
+        <lightning-input-field field-name="inwiB2C_Motif_d_annulation__c" onchange={handleMotifAnnul} required="true" > </lightning-input-field>
+    </lightning-record-edit-form>
+</div>
+<br />
+<br />
+
+
+  <c-inwi-b2-c_-otp-service record-id={subscriptionid} message={message} resiliation={resiliation} numeromdn={numeromdn} requestresilid={idrequesttocancel} onoptvalidation={getotpfromchildtoResilRequest}>
+
+  </c-inwi-b2-c_-otp-service> 
+
+
+ <div class="slds-grid slds-wrap slds-grid_align-end omniscript-button-position">
+
+    <lightning-button style="margin:6px;" variant="brand" label="Précédent" title="Précédent" onclick={gotopreviousStep}
+    class=""></lightning-button>
+
+    
+    <lightning-button variant="brand" label="Sauvegarder" title="Sauvegarder" 
+            onclick={gotonextStep}  style="float:right; margin:6px;" class="" disabled={verifDisabled}>
+    </lightning-button>
+
+
+</div>
+</template>

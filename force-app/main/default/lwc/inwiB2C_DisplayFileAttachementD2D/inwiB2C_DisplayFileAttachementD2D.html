@@ -1,0 +1,90 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 01-08-2025
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+    <!-- Input pour sélectionner un document -->
+    <div class="file-upload-container">
+        <label class="custom-file-upload-button">
+            Ajouter un document
+            <lightning-input type="file" class="hidden-file-input" onchange={handleFileChange}></lightning-input>
+        </label>
+    </div>
+    <!-- Datatable pour afficher les documents existants -->
+    <template if:true={__existingDocuments}>
+        <br><br>
+        <lightning-datatable
+            key-field="documentId"
+            columns={columnsFilesDisplay}
+            data={__existingDocuments}
+            hide-checkbox-column
+            onrowaction={handleRowAction}
+        >
+        </lightning-datatable>
+    </template>
+
+    <!-- Modal pour sélectionner le type de document -->
+    <template if:true={showModal}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <!-- Modal header -->
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={hideModal}>
+                        <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse" size="small"></lightning-icon>
+                        <span class="slds-assistive-text">Fermer</span>
+                    </button>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Sélectionner le type de document</h2>
+                </header>
+    
+                <!-- Modal body -->
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <div class="button-grid">
+                        <template for:each={documentTypeLabels} for:item="docType">
+                            <div key={docType.documentType} class="button-list-item">
+                                <lightning-button class="document-type-button" label={docType.docTypeLabel} data-doc-type-id={docType.documentType} data-doc-type-label={docType.docTypeLabel} onclick={handleDocumentTypeSelection}></lightning-button>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+    
+                <!-- Modal footer -->
+                <footer class="slds-modal__footer">
+                    <button class="slds-button slds-button_neutral" onclick={hideModal}>Annuler</button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+        
+
+    </template>
+    
+    <div class="button-container">
+        <!-- Bouton pour passer à l'étape précédente -->
+        <lightning-button 
+            variant="neutral" 
+            label="Précédent" 
+            title="Précédent" 
+            onclick={gotopreviousStep} 
+            class="button-large" 
+            slot="actions">
+        </lightning-button>
+
+        <!-- Bouton pour passer à l'étape suivante -->
+        <lightning-button 
+            variant="brand" 
+            label="Suivant" 
+            title="Suivant" 
+            onclick={gotonextStep} 
+            class="button-large" 
+            slot="actions">
+        </lightning-button>
+    </div>
+
+       
+ 
+    
+    
+</template>

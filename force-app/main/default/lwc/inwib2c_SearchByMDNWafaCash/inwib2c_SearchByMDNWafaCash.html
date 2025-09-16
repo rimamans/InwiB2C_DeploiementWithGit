@@ -1,0 +1,16 @@
+<template>
+     <div class="slds-grid slds-wrap slds-grid_vertical-stretch">
+        <lightning-input type="number" onchange={handleMDNChange} data-theid="MDN"  
+            label="MDN" value={m}
+            pattern="212[0-9]{9}"
+            message-when-pattern-mismatch="l'MDN doit avoir 12 chiffre."
+            class="slds-col slds-size_1-of-1 elementMargin1"></lightning-input>
+    </div>
+     <br>
+    <br>
+    <br>
+
+    <lightning-button variant="brand" label="Recherche" data-theid="searche" title="Recherche"
+    onclick={handleSearch} class="slds-m-left_x-small" style="display:none"></lightning-button>
+
+</template>

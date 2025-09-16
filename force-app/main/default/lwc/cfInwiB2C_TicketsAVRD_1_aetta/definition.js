@@ -1,0 +1,3 @@
+let definition = 
+                {"GlobalKey__c":"inwiB2C_TicketsAVRD/aetta/1/1694696920054","dataSource":{"type":null,"value":{"resultVar":""}},"enableLwc":true,"filter":{},"states":[{"conditions":{"group":[{"field":"$scope.data.status","operator":"===","type":"system","value":"'active'"}]},"customLwc":true,"customLwcAttributes":[{"name":"records","val":"$scope.records"}],"customLwcRepeat":false,"definedActions":{"actions":[]},"fields":[],"flyoutAttributes":[],"isSmartAction":false,"lwc":{"DeveloperName":"inwiB2C_TicketAVRD","Id":"0Rb3L000000L8i4SAC","MasterLabel":"InwiB2C TicketAVRD","name":"inwiB2C_TicketAVRD"},"name":"Active","smartAction":{}}],"title":"Ticket AVRD"}; 
+            export default definition

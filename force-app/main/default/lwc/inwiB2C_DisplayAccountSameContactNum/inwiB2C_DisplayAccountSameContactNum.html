@@ -1,0 +1,26 @@
+<template>
+    <div class="slds-p-bottom--small">
+        <div class="slds-m-bottom_xx-large overflowVisible">
+            <div class="slds-text-align_center">
+                    
+                <h1 class="slds-text-color_error"  >
+                    Le nombre de fiche client B2C contenant le numéro de téléphone est dépassé
+                </h1>
+            </div>
+            <div if:true={listaccount}>                    
+                <lightning-datatable
+                    class="style-table" 
+                    key-field="Id"
+                    columns={columns}
+                    data={listaccount} 
+                    hide-checkbox-column= true
+                    >
+                </lightning-datatable>
+            </div>
+            <div if:false={listaccount}>                    
+                Aucune Compte à afficher
+            </div>
+           
+        </div>
+    </div>
+</template>

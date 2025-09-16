@@ -1,0 +1,22 @@
+<template>
+    <div class="slds-grid slds-wrap">
+        <div class="slds-col slds-size_4-of-12 slds-m-bottom--medium">
+        
+            <lightning-Input type="search" placeholder="Chercher une case"  label="Numéro de case" value={value} name="accountName" class="accountName" onchange={handleChanged}  >  </lightning-input>
+                <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+                    <template for:each={optionsArray} for:item="item">
+                        <li key={item.id} class="slds-listbox__item">
+
+                          <a >  <p data-id={item.id}
+                            data-number={item.number} onclick={handleSelect} key={item.id}>{item.number}</p> </a>
+                             
+                         
+                            </li>
+                            
+                        </template>
+                    </ul>
+                         
+            </div>
+
+    </div>
+</template>

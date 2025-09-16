@@ -1,0 +1,50 @@
+<apex:page sidebar="false" renderAs="pdf" controller="inwiB2C_FideliteDocumentController" showHeader="false" applyBodyTag="false">
+
+    <head>
+        <style>
+            body {
+                font-family: 'Arial Unicode MS';
+                font-size: 12px;
+            }
+
+            @page: first {
+                size: A4;
+                margin-top: 0px margin-right:0px;
+                margin-left: 0px;
+                margin-bottom: 0cm;
+            }
+
+            @page {
+                size: A4;
+                margin-top: 0px;
+                margin-right: 0px;
+                margin-left: 0px;
+                margin-bottom: 0cm;
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <div style="page-break-after:always;">
+            <img style="width:100%;" src="{!$Resource.parcours_fidelisation_page_2}" />
+            <p style="position: absolute;top:147px;left: 37%;">{! nom} {! prenom}</p>
+            <p style="position: absolute;top:177px;left: 30%;">{!cardid}</p>
+            <p style="position: absolute;top:208px;left: 28%;">{!adresse}</p>
+
+        </div>
+
+        <div>
+            <img style="width:100%;" src="{!$Resource.parcours_fidelisation_page_1}" />
+            <p style="position: absolute;top:1309px;left: 30%;">{! nom} {! prenom}</p>
+            <p style="position: absolute;top:1327px;left: 23%;">{!datenaissance}</p>
+            <p style="position: absolute;top:1345px;left: 27%;">{!adresse}</p>
+            <p style="position: absolute;top:1362px;left: 34%;">{!cardid}</p>
+            <p style="position: absolute;top:1993px;left: 38%;">03/08/2021</p>
+
+        </div>
+
+    </body>
+
+
+</apex:page>

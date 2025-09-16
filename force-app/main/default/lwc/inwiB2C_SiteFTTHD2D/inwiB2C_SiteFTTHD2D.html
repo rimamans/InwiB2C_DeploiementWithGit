@@ -1,0 +1,304 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 04-04-2025
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+  
+   <!-- <div style="border-style: solid; border-color: #92107F; padding: 10px; border-radius: 10px;"> -->
+     <!-- <div class="slds-grid slds-wrap slds-grid_vertical-stretch">-->  
+           <!--   <div class="slds-grid slds-wrap">
+            <lightning-radio-group name="radioGroup" label="Choix d'adresse" options={options} type="radio"
+                value={optionadresse} onchange={handleChange1} style="padding: 10px;">
+            </lightning-radio-group>
+            <br />
+            <br />
+        </div>
+        <template if:false={newsite}>
+            <lightning-input style="padding: 10px;" type="text" label="Nom de site" value={nomsite}
+            name="nomsite" placeholder="Saisir le nom" required
+            class="slds-col slds-size_1-of-2 elementMargin2" onchange={handleChangeInput}>
+        </lightning-input>
+            </template>
+        -->
+
+
+  <!--  <template if:true={step12}> -->
+       
+        <div class="slds-grid slds-wrap slds-grid_vertical-stretch">
+            <div class="slds-grid slds-wrap" style="color: red">
+             Adresse du site initialisée avec l'adresse client, veuillez modifier ou corriger si nécessaire.
+            </div>
+            <!-- Added plaque label
+            <div class="slds-grid slds-wrap">Nom de la plaque: {plaque}</div> -->
+      </div> 
+
+      <template if:true={DisplayD2D}>
+        <lightning-input style="padding: 10px;" type="text" label="Nom de la plaque" value={plaque}
+        name="addressInstallation"  disabled
+        class="slds-col slds-size_1-of-1 elementMargin2" >
+        </lightning-input>
+      </template>
+   
+      <template if:true={DisplayD2D}>
+        <lightning-input style="padding: 10px;" type="text" label="Adresse d'installation" value={addressInstallation}
+        name="addressInstallation"  disabled
+        class="slds-col slds-size_1-of-1 elementMargin2" >
+        </lightning-input>
+      </template>
+
+
+        <div class="slds-grid slds-wrap">
+            <lightning-input style="padding: 10px;" type="text" label="Nom de site" value={nomsite}
+            name="nomsite" placeholder="Saisir le nom" required
+            class="slds-col slds-size_1-of-2 elementMargin2" onchange={handleChangeInput}>
+            </lightning-input> 
+            
+            <lightning-combobox placeholder="Pays" onchange={ChangePays} data-theid="Pays" label="Pays" required
+            value={valuePays} class="slds-col slds-size_1-of-2 elementMargin2"  options={PaysValues}  style="padding: 10px;" disabled="" > 
+        </lightning-combobox>
+           
+    
+    <!-- 
+        <div class="slds-col slds-size_6-of-12">     </div>
+    </div> <div class="slds-grid slds-wrap slds-grid_vertical-stretch">-->
+    
+    <lightning-combobox placeholder="sélectionnez une ville" onchange={ChangeVille} data-theid="Ville" value={v}
+    label="Ville" required class="slds-col slds-size_1-of-2 elementMargin2" options={VilleValues}  style="padding: 10px;">
+    </lightning-combobox>
+    
+    <lightning-input  type="text" disabled="" data-theid="Region" label="Region" value={r} required onchange={ChangeRegion} 
+    placeholder="sélectionnez une région" class="slds-col slds-size_1-of-2 elementMargin2"  options={RegionValues}  style="padding: 10px;">
+</lightning-input>
+
+    <template if:false={isToSpecify}>
+        <lightning-combobox placeholder="sélectionnez une quartier" onchange={ChangeQuartier} data-theid="Quartier" required  style="padding: 10px;"
+            value={q} label="Quartier" class="slds-col slds-size_1-of-2 elementMargin2" options={QuartierValues} >
+        </lightning-combobox>
+    </template>
+
+    <template if:true={isToSpecify}>
+        <lightning-input type="text" onchange={ChangePrecisionQuartier} data-theid="PrecisionQuartier"
+            label="Précision Quartier" placeholder="Précisez le quartier" value={pq} required style="padding: 10px;"
+            class="slds-col slds-size_1-of-2 elementMargin2" >
+        </lightning-input>
+    </template>
+   
+<!--</div>-->
+<template if:true={showother}>
+   <!-- <div class="slds-grid slds-wrap slds-grid_vertical-stretch">-->
+              
+    <lightning-input style="padding: 10px;" type="number" label="Code Postal" value={codepostal} name="codepostal"
+    placeholder="Saisir code postal" pattern="[0-9]{5,5}" maxlength="5" minlength="5"   message-when-pattern-mismatch="Code postal doit contenir que 5 Chiffres" class="slds-col slds-size_1-of-2 elementMargin2"
+    onchange={handleChangeInput}>
+</lightning-input>
+<!--05/08/2024 CHB  ANO B-18866 BEGIN -->
+<template if:false={DisplayD2D}>
+    <lightning-input style="padding: 10px;" type="text" label="Complément d'adresse" value={complementaddress}
+        name="complementaddress" placeholder="Saisir Complément d'adresse" pattern="[A-Za-z0-9,–'’\- ]{1,}"  
+        class="slds-col slds-size_1-of-2 elementMargin2" required onchange={handleChangeInput}  onkeydown={handleKeyDown}>
+    </lightning-input>
+</template>
+<!--05/08/2024 CHB  ANO B-18866 BEGIN -->
+
+<!--H-M Rendre le champ « Complément d’adresse » facultatif le cas de canal D2D suite ou MGEN3670SF  BEGIN-->
+<template if:true={DisplayD2D}>
+<lightning-input style="padding: 10px;" type="text" label="Complément d'adresse" value={complementaddress}
+    name="complementaddress" placeholder="Saisir Complément d'adresse" pattern="[A-Za-z0-9,–'’\- ]{1,}"  
+    class="slds-col slds-size_1-of-2 elementMargin2" onchange={handleChangeInput}  onkeydown={handleKeyDown}>
+</lightning-input>
+</template>
+<!--H-M Rendre le champ « Complément d’adresse » facultatif le cas de canal D2D suite ou MGEN3670SF  END-->
+
+<!--</div>-->
+</template></div>
+
+
+
+<!--</template>-->
+<template if:true={create}>
+    <div style="position: relative;padding:20px; text-align: right;">
+        <lightning-button label="Liste des plaques"  class="slds-m-right_small"
+        variant="brand"  title="Open popup" onclick={checkField} >
+        </lightning-button>
+        <template if:true={showed}>
+        <lightning-button variant="brand" label="Suivant" title="Suivant" onclick={gotonextStep} class="slds-m-right_small"></lightning-button> 
+        </template>
+     <!--   disabled={checkrequiredfield} < lightning-button label="test d'éligibilité" variant="brand" onclick={createAccount} class="slds-float_right"    style=" position: absolute; right: 10px; "></lightning-button>
+     --></div>
+    </template>
+
+
+   <!-- <template if:true={eligible}>
+    <br>
+    <strong class="slds-align_absolute-center" style="height:5rem"> Liste des adresses</strong>
+    <br>
+    <div class="wraperClass">
+        <table class="slds-table slds-table_cell-buffer  slds-table_col-bordered"
+        style="border-style: solid; border-color: #92107F; padding: 10px; border-radius: 10px;">
+           <thead>
+            <tr class="slds-line-height_reset"  style="border-style: solid; border-color: #92107F; padding: 10px; border-radius: 10px;">
+                <th scope="col">
+                    <div class="slds-truncate" title="radios">choix</div>
+                </th>
+                <th class="" scope="col">
+                    <div class="slds-truncate">Adresse</div>
+                </th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <template for:each={__dataEligible} for:item="itemE">
+                      <tr key={itemE.index}  style="border-style: solid; border-color: #92107F; padding: 10px; border-radius: 10px;">
+                      
+                          <td><input type="radio" name="choixAd" 
+                              onchange={handleSelectAdress} id={itemE.adressId} data-idline={itemE.adressId}
+                            
+                               data-city={itemE.city} 
+                               data-region={itemE.region} 
+                               data-sroid={itemE.sroId} 
+                               data-nroid={itemE.nroId}  />
+                              </td>
+                          <td class="slds-cell-wrap">
+                            
+                              {itemE.building},{itemE.street}, {itemE.postalCode},{itemE.city},{itemE.district},{itemE.region},{itemE.countryCode},{itemE.sroId},{itemE.nroId}
+                     
+                          </td>
+                         
+                      </tr>
+                  </template>
+              </tbody>
+          </table>
+          
+
+     
+  </div>
+ </template>-->
+  <br><template if:true={eligible}>
+    <strong class="slds-align_absolute-center" style="height:5rem"> Liste des plaques</strong>
+
+    <br><!--//CHB B-10015 ano 21/06/2023 ajout search-->
+    <div class="slds-grid slds-gutters">
+        <div class="slds-col slds-size_1-of-4" style="border-right: 1px solid rgb(217, 219, 221);">
+            <div>
+                <lightning-input type="text" value={search} onchange={handleChangeSearch} label="Rechercher par nom"></lightning-input>
+            </div>
+           
+        </div>
+        <div class="slds-col slds-size_3-of-4">
+            <div class="wraperClass " style="min-height: 250px;">
+
+                <table class="sty-table-case slds-table slds-table_bordered slds-table_fixed-layout">
+                    <thead>
+                        <tr class="">
+                            <th class="" scope="col">
+                    <div class="slds-truncate" title="radios">choix</div>
+                </th>
+                <th class="" scope="col">
+                    <div class="slds-truncate">Ville</div>
+                </th>
+                <th class="" scope="col">
+                    <div class="slds-truncate">Reférence</div>
+                </th>
+                <th class="" scope="col">
+                    <div class="slds-truncate">Nom</div>
+                </th>
+                <th class="" scope="col">
+                    <div class="slds-truncate">Vendeur</div>
+                </th>
+                     
+            
+            </tr>
+              </thead>
+              <tbody>
+                  <template  for:each={__dataplaque} for:item="item">
+                      <tr key={item.index}  style="border-style: solid; border-color: #92107F; padding: 10px; border-radius: 10px;">
+                      
+                          <td><input type="radio" name="item.Id" onclick={handleSelectPlaque}
+                               id={item.Id} data-idline={item.Id}
+                               data-city={item.place.city} 
+                               data-referredtype={item.referredType} 
+                               data-name={item.name} 
+                               data-vendor={item.vendor} 
+                               data-statut={item.statut}
+                               
+
+                               />
+                              </td>
+                          <td class="slds-cell-wrap">
+                              {item.place.city}
+                          </td>
+                          <td class="slds-cell-wrap">
+                              {item.referredType}
+                          </td>
+                          <td class="slds-cell-wrap">
+                              {item.name}
+                          </td>
+                          <td class="slds-cell-wrap">
+                            {item.vendor}
+                        </td>
+                      </tr>
+                  </template>
+              </tbody>
+          </table>
+          
+
+     </div></div>
+  </div>
+  
+</template>
+
+<!--</div>-->
+<template if:true={step}>
+    <template if:true={stepAd}>
+    <div style="position: relative;padding:20px;">
+       
+        <lightning-button label="Suivant" variant="brand" onclick={next} class="slds-float_right"    style=" position: absolute; right: 10px; "></lightning-button>
+        
+    </div>
+</template>
+
+    </template><!--
+    <lightning-button style="margin-right: 5px; " variant="brand" label="Annuler la commande" onclick={handleCancel}>
+    </lightning-button>-->
+
+    <template if:true={stepEligible}>
+       <!-- modal start -->      
+       <template if:true={isShowModal}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+           <div class="slds-modal__container">
+            <!-- modal header start -->
+              <header class="slds-modal__header">
+                 <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={hideModalBox}>
+                    <lightning-icon icon-name="utility:close"
+                       alternative-text="close"
+                       variant="inverse"
+                       size="small" ></lightning-icon>
+                    <span class="slds-assistive-text">Confirmer</span>
+                 </button>
+                 
+                 <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Confirmation des informations</h2>
+              </header>
+          
+              <!-- modal body start -->
+              <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+
+                    <p>Adresse : {optionadresseShow} </p>
+              </div>
+    
+              <!-- modal footer start-->
+              <footer class="slds-modal__footer">
+                <button class="slds-button slds-button_neutral" onclick={hideModalBox}>Annuler</button>
+                <button class="slds-button slds-button_neutral" onclick={appelAPIPlaque}>Confirmer</button>
+           
+              </footer>
+           
+           </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+     </template>
+     <!-- modal end -->
+    
+    </template>
+</template>

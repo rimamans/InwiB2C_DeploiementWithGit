@@ -1,0 +1,104 @@
+<template>
+
+        <lightning-card  variant="Narrow"  title="Choix numéro" icon-name="utility:number_input">
+            <template if:true={displayMDNChoice}>
+
+
+             <template if:true={hideRecuBtnRadio}>
+                <lightning-radio-group name="radioGroup" label="" options={options} type="radio" onchange={handleSelectedRecoverOption}>
+                </lightning-radio-group>
+             <br>
+            </template>
+
+            <lightning-combobox
+                name="progress"
+                label="Type MDN"
+                value={mdnTypeAttributeValue}
+                placeholder="Select Type MDN"
+                options={mdntyperecords}
+                style="width: 50%;"
+                disabled={disableMDNType}
+                onchange={handleTypeMdnChange} >
+            </lightning-combobox>
+            <template if:false={isFTTHs}>
+                <lightning-input value={__PriceNumber} name="PriceNumber" style="width: 50%;"  label="Prix du changement" type="text" disabled></lightning-input>
+            </template>
+           
+               
+
+            <lightning-input type="text" label="Mdn filtre" style="width: 50%;" maxlength="10" value={mdnFilterAttributeValue} onchange={handleMdnFilterChange} ></lightning-input>
+
+            <br>
+            <lightning-button variant="brand" label="Recherche" title="recherche MDN" onclick={getMdnList} class="slds-m-left_x-small"></lightning-button>
+            
+
+            <template if:true={records}>
+                <lightning-combobox
+                    name="progress"
+                    label="Liste MDN"
+                    value={selectedmdn}
+                    placeholder="Select MDN"
+                    options={records}
+                    style="width: 50%;"
+                    onchange={handleMdnSelection} ></lightning-combobox>
+
+                    <br>
+
+                    <template if:true={__selectedmdnListItem}>
+                        <lightning-button variant="brand"  label="Sélectionner le MDN" title="Selection MDN" onclick={lockMDN} class="MDNChangeButton"></lightning-button>
+
+                        <br><br>
+                    </template>
+
+                
+            </template>
+        <br>
+        </template>
+
+        <template if:false={isRecoverMdnOption}>
+            <template if:false={displayMDNChoice}>
+              <!--   <template if:false={isCameleon}>
+                <lightning-combobox
+                name="progress"
+                label="Type MDN"
+                value={mdnTypeAttributeValue}
+                placeholder="Select Type MDN"
+                options={mdntyperecords}
+                style="width: 50%;"
+                disabled={disableMDNType}
+                onchange={handleTypeMdnChange} >
+            </lightning-combobox>
+            </template> -->
+
+                    <lightning-input type="text" style="width: 50%;" label="MDN" value={mdnAttributeValue}  disabled>
+
+                    </lightning-input>
+
+            </template>
+        </template>
+
+
+
+        <template if:true={isRecoverMdnOption}>
+            <lightning-input type="text" style="width: 50%;" label='Numéro à récupérer' value={__mdnRecoveredValue}
+                class="MDNRecoveredInput" onchange={handleMdnRecoveredChange} disabled={isRecovered}>
+            </lightning-input>
+            
+            <br>
+            <lightning-button variant="brand" label="Récupérer" title="Récupérer" onclick={RecoverMdn}
+                class="slds-m-top_x-large"></lightning-button>
+        </template>
+        
+        <template if:true={isRecovered}>
+
+            <lightning-input type="text" style="width: 50%;" label="Numéro récupéré" value={mdnAttributeValue} disabled>
+            </lightning-input>
+            <br>
+            <lightning-input value={__PriceNumber} style="width: 50%;" name="PriceNumber" label="Prix du changement"
+            type="text" disabled></lightning-input>
+
+        </template>
+ 
+        </lightning-card>        
+
+</template>

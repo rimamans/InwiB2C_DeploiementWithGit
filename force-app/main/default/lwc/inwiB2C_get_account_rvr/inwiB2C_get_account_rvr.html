@@ -1,0 +1,47 @@
+<template>
+    <div class="slds-grid slds-wrap">
+      
+        
+        <div class="slds-col slds-size_4-of-12 slds-m-bottom--medium"> 
+         
+           
+            <lightning-Input type="search" placeholder="Chercher un utilisateur"  label="RVR" value={value}   onchange={handleChanged}  >  </lightning-input>
+              
+                <ul class="slds-listbox slds-listbox_vertical" >
+                    <template for:each={optionsArray} for:item="item">
+                        
+                        <li key={item.userId} class="slds-listbox__item">
+                         
+                          <a >  <p data-iduser={item.userId}
+                            data-name={item.Name}  onclick={handleSelect} >{item.Name}</p> </a>
+                             
+                       
+                            </li>
+                        
+                        </template>
+                    </ul>
+               
+                <lightning-Input type="search" placeholder="Chercher un utilisateur"  label="Regional" value={valueReg}   onchange={handleChangedRegional}  >  </lightning-input>
+                   
+                    <ul class="slds-listbox slds-listbox_vertical" >
+                        <template for:each={optionsArrayReg} for:item="itemR">
+                            
+                            <li key={itemR.userId} class="slds-listbox__item">
+                             
+                              <a >  <p data-iduser={itemR.userId}
+                                data-name={itemR.Name}  onclick={handleSelectReg} >{itemR.Name}</p> </a>
+                                 
+                           
+                                </li>
+                            
+                            </template>
+                        </ul>
+                  
+             
+                             
+            
+    
+</div>
+</div>
+    
+</template>

@@ -1,0 +1,51 @@
+<template>
+    
+    <template if:false={isHidden}> 
+<!-- <template if:true={showservice}>  -->
+
+            <template if:true={inInputTypeDropDown}>
+                
+
+                    <lightning-combobox
+                    name={attribute.label}
+                    label={attribute.label}
+                    value={value}
+                    options={options}
+                    disabled={attribute.disabled}
+                    required={attribute.required}
+                    onchange={handleChangeDropDown}></lightning-combobox>
+
+                
+
+                
+
+            </template>
+    <!-- </template> -->
+
+            <template if:true={inInputTypeRadio}>
+
+                <lightning-radio-group name={attribute.label}
+                    label={attribute.label}
+                    options={options}
+                    value={value}
+                    disabled={attribute.disabled}
+                    required={attribute.required}
+                    type="radio" onchange={handleChangeDropDown}></lightning-radio-group>
+
+                
+
+            </template>
+            
+        <div onfocusout={handleFocusOut}>
+            <template if:true={inOtherInputType}>
+
+                <lightning-input type="text" label={attribute.label} value={attribute.userValues} disabled={attribute.disabled}
+                required={attribute.required} onchange={handleChange}></lightning-input>
+
+
+            </template>
+        </div>
+    </template>
+
+    
+</template>

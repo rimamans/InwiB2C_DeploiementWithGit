@@ -1,0 +1,8 @@
+.bold-text {
+    font-weight: bold;
+}
+
+.thin-italic-text {
+    font-weight: lighter;
+    font-style: italic;
+}

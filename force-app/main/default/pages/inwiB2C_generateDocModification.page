@@ -1,0 +1,53 @@
+<apex:page renderAs="pdf" controller="inwiB2C_documentModificationController" applyHtmlTag="false" showHeader="false">
+
+    <head>
+        <style>
+            body {
+                font-family: 'Arial Unicode MS';
+                font-size: 12px;
+
+            }
+
+            @page {
+                size: A4;
+                margin: 0px
+            }
+        </style>
+    </head>
+
+    <body>
+        <div  style="page-break-after:avoid ; height: 1100px ">
+            <img style="width: 100%; height: 100%" src="{!$Resource.inwiB2C_ContratModification}" />
+           
+            <!--  -->
+            <div style="position:absolute;top:1.03in;left:4.05in;">{!IF(contains(keys,'Name'),ipOutput['Name'], '')}</div>
+             <div style="position:absolute;top:1.28in;left:4.05in;">{!IF(contains(keys,'numCIN'),ipOutput['numCIN'], '')}</div>
+           <div style="position:absolute;top:1.55in;left:4.05in;">{!IF(contains(keys,'numLigne'),ipOutput['numLigne'], '')}</div>
+       <div style="position:absolute;top:1.81in;left:4.05in;">{!IF(contains(keys,'Offre'),ipOutput['Offre'], '')}</div>
+         <div style="position:absolute;top:2.10in;left:4.05in;">{!IF(contains(keys,'DateCreation'),ipOutput['DateCreation'], '')}</div>
+         <div style="position:absolute;top:2.35in;left:4.05in;">{!IF(contains(keys,'CodeAgence'),ipOutput['CodeAgence'], '')}</div>
+          <div style="position:absolute;top:2.66in;left:4.05in;">{!IF(contains(keys,'numcmd'),ipOutput['numcmd'], '')}</div>
+        <div style="position:absolute;top:2.95in;left:4.05in;">{!IF(contains(keys,'DescriptifCMD'),ipOutput['DescriptifCMD'], '')}</div>
+       <div style="position:absolute;top:3.20in;left:4.05in;">{!IF(contains(keys,'Motif'),ipOutput['Motif'], '')}</div>
+        <!--  
+        <div style="position:absolute;top:4.49in;left:5.20in;">{!IF(contains(keys,'fraisAct'),ipOutput['fraisAct'], '')}</div>
+       <div style="position:absolute;top:4.69in;left:5.20in;">{!IF(contains(keys,'PrixTerminal'),ipOutput['PrixTerminal'], '')}</div>
+         <div style="position:absolute;top:4.89in;left:5.20in;">{!IF(contains(keys,'PrixTerminal'),ipOutput['PrixTerminal'], '')}</div>
+       -->
+
+
+        <div style="position:absolute;top:4.10in;left:2.65in;">{!IF(contains(keys,'oldmodel1'),ipOutput['oldmodel1'], '')}</div>
+        <div style="position:absolute;top:4.30in;left:2.65in;">{!IF(contains(keys,'oldmodel2'),ipOutput['oldmodel2'], '')}</div>
+         
+        <div style="position:absolute;top:4.60in;left:2.65in;">{!IF(contains(keys,'oldmac'),ipOutput['oldmac'], '')}</div>
+        <div style="position:absolute;top:4.10in;left:5.93in;">{!IF(contains(keys,'newmodel1'),ipOutput['newmodel1'], '')}</div>
+        <div style="position:absolute;top:4.30in;left:5.92in;">{!IF(contains(keys,'newmodel2'),ipOutput['newmodel2'], '')}</div>
+        <div style="position:absolute;top:4.60in;left:5.80in;">{!IF(contains(keys,'newmac'),ipOutput['newmac'], '')}</div>
+        
+
+
+          <div style="position:absolute;top:8.50in;left:5.75in;">{!IF(contains(keys,'Today'),ipOutput['Today'], '')}</div>
+        
+        </div>
+    </body>
+</apex:page>

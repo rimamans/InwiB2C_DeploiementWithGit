@@ -1,0 +1,142 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 02-13-2023
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 02-13-2023
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<apex:page sidebar="false" renderAs="pdf" controller="inwiB2C_ContractControllerPhase4" showHeader="false" applyBodyTag="false">
+
+    <head>
+        <style>
+            body {
+                font-family: 'Arial Unicode MS';
+                font-size: 12px;
+            }
+
+            @page: first {
+                size: A4;
+                margin-top: 0px margin-right:0px;
+                margin-left: 0px;
+                margin-bottom: 0cm;
+            }
+
+            @page {
+                size: A4;
+                margin-top: 0px;
+                margin-right: 0px;
+                margin-left: 0px;
+                margin-bottom: 0cm;
+            }
+        </style>
+
+    </head>
+
+    <body>
+        <script>
+            $(document).attr("title", "New Title");
+        </script>
+        <apex:repeat value="{!loopList}" var="loopItem" id="theRepeat">
+            <apex:variable value="{!IF(loopItem > 1,12, 0)}" var="added" />
+            <div style="page-break-after:always; height: 1122px">
+                <img style="width:100%;" src="{!$Resource.inwiB2C_contract_idar_duo_1}" />
+                <div style="position: absolute;top: {! 88 + (loopItem *3357)+ added}px;left: 21%;max-width: 450px;">{!IF(contains(keys,'NumContrat'),ipOutput['NumContrat'], '')}</div>
+                <div style="position: absolute;top: {! 88 + (loopItem *3357)+ added}px;left: 70%;">{!IF(contains(keys,'CptFac'),ipOutput['CptFac'], '')}</div>
+                <div style="position: absolute;top: {! 110 + (loopItem *3357) + added}px;left: 23%;">{!IF(contains(keys,'TypeContrat'),ipOutput['TypeContrat'], '')}</div>
+                <p style="position: absolute;top: {! 103 + (loopItem *3357) + added}px;left: 60%;font-size: 9px">{!IF(contains(keys,'POS'),ipOutput['POS'], '')}</p>
+
+                <div style="position: absolute;top: {! 155 + (loopItem *3357) + added}px;left: 25%;">{!IF(contains(keys,'TitulaireCompte'),ipOutput['TitulaireCompte'], '')}</div>
+                <div style="position: absolute;top: {! 176 + (loopItem *3357) + added}px;left: 27%;">{!IF(contains(keys,'NomTitulaire'),ipOutput['NomTitulaire'], '')}</div>
+                <div style="position: absolute;top: {! 176 + (loopItem *3357) + added}px;left: 68%;">{!IF(contains(keys,'PrenomTitulaire'),ipOutput['PrenomTitulaire'], '')}</div>
+                <div style="position: absolute;top: {! 194 + (loopItem *3357) + added}px;left: 23%;">{!IF(contains(keys,'NumIdentifiant'),ipOutput['NumIdentifiant'], '')}</div>
+                <div style="position: absolute;top: {! 194 + (loopItem *3357) + added}px;left: 65%;">{!IF(contains(keys,'TypeIdent'),ipOutput['TypeIdent'], '')}</div>
+                <div style="position: absolute;top: {! 225 + (loopItem *3357) + added}px;left: 18%;">{!IF(contains(keys,'getFullAddress'),ipOutput['getFullAddress'], '')}</div>
+                <!-- <div style="position: absolute;top: {! 275 + (loopItem *3357) + added}px;left: 13%;">{!IF(contains(keys,'getFullAddress'),ipOutput['getFullAddress'], '')}</div> -->
+                <div style="position: absolute;top: {! 248 + (loopItem *3357) + added}px;left: 21%;">{!IF(contains(keys,'Ville'),ipOutput['Ville'], '')}</div>
+                <div style="position: absolute;top: {! 248 + (loopItem *3357) + added}px;left: 70%;">{!IF(contains(keys,'CodePostal'),ipOutput['CodePostal'], '')}</div>
+                <div style="position: absolute;top: {! 265 + (loopItem *3357) + added}px;left: 25%;">{!IF(contains(keys,'dateNaissance'),ipOutput['dateNaissance'], '')}</div>
+                <div style="position: absolute;top: {! 280 + (loopItem *3357) + added}px;left: 13%;">{!IF(contains(keys,'Email'),ipOutput['Email'], '')}</div>
+                <div style="position: absolute;top: {! 282 + (loopItem *3357) + added}px;left: 70%;">{!IF(contains(keys,'NumContact'),ipOutput['NumContact'], '')}</div>
+
+
+                 <div style="position: absolute;top: {! 326 + (loopItem *3357) + added}px;left: 23%;">{!IF(AND(ipOutput['isAcquiPostpaid'] = true, ipOutput['isPorta'] = false),'X', '')}</div>
+                <div style="position: absolute;top: {! 326 + (loopItem *3357) + added}px;left: 23%;">{!IF(AND(ipOutput['isAcquiIdar'] = true, ipOutput['isPorta'] = false),'X', '')}</div>
+                <div style="position: absolute;top: {! 326 + (loopItem *3357) + added}px;left: 48.5%;">{!IF(AND(ipOutput['isAcqui'] = true, ipOutput['isPorta'] = false),'X', '')}</div>
+                <div style="position: absolute;top: {! 326 + (loopItem *3357) + added}px;left: 59%;">{!IF(ipOutput['isPorta'] = true,'X', '')}</div>
+                <div style="position: absolute;top: {! 326 + (loopItem *3357) + added}px;left: 84.5%;">{!IF(ipOutput['ismigration'] = true,'X', '')}</div>
+                <div style="position: absolute;top: {! 326 + (loopItem *3357) + added}px;left: 93%;">{!IF(ipOutput['isSAV'] = true,'X', '')}</div>
+ 
+
+
+                <!-- Offres -->
+                <apex:variable var="index" value="{!0}" />
+                <apex:repeat rendered="{!IF(AND(contains(keys,'offre'), typeActeDecision != 'inwiB2C_ChangementDeTerminalModem'),true, false)}"
+                    value="{!ipOutput['offre']}" var="item">
+                    <p style="position: absolute;top: {! 395 + (index *20) + (loopItem *3357) + added}px;left: 9%;font-size: 9px">{!IF(contains(keysOffers,'NumLigne'),item['NumLigne'], '')}</p>
+                    <p style="position: absolute;top: {! 395 + (index *20) + (loopItem *3357) + added}px;left: 18%;font-size: 9px">{!IF(contains(keysOffers,'ICCSIM'),item['ICCSIM'], '')}</p>
+                    <p style="position: absolute;top: {! 398 + (index *20) + (loopItem *3357) + added}px;left: 44%;font-size: 7px">{!IF(contains(keysOffers,'TypeOffe'),item['TypeOffe'], '')}</p>
+                    <p style="position: absolute;top: {! 399 + (index *20) + (loopItem *3357) + added}px;left: 32%;font-size: 7px">{!IF(contains(keysOffers,'FormuleChoisie'),item['FormuleChoisie'], '')}</p>
+                    <p style="position: absolute;top: {! 395 + (index *20) + (loopItem *3357) + added}px;left: 58%;font-size: 8px">{!IF(contains(keysOffers,'duree_engagement'),item['duree_engagement'], '')}</p>
+                    <p style="position: absolute;top: {! 395 + (index *20) + (loopItem *3357) + added}px;left: 70%;font-size: 9px">{!IF(contains(keysOffers,'TypeLigne'),item['TypeLigne'], '')}</p>
+                    <apex:variable var="index" value="{!index + 1}" />
+                </apex:repeat>
+
+                <!-- Equipements -->
+                <apex:variable var="index2" value="{!0}" />
+                <apex:repeat rendered="{!IF(AND(contains(keys,'Terminal'), typeActeDecision != 'inwiB2C_ChangementDeCarteSIM'),true, false)}"
+                    value="{!ipOutput['Terminal']}" var="item">
+                    <p style="position: absolute;top: {! 530 + (index2 *20) + (loopItem *3357) + added}px;left: 8%;font-size: 9px">{!IF(contains(keysTerminal,'TypeTerminal'),item['TypeTerminal'], '')}</p>
+                    <p style="position: absolute;top: {! 538 + (index2 *20) + (loopItem *3357) + added}px;left: 18%;font-size: 6px">{!IF(contains(keysTerminal,'ModeleTerminal_new'),item['ModeleTerminal_new'], '')}</p>
+                    <p style="position: absolute;top: {! 532 + (index2 *20) + (loopItem *3357) + added}px;left: 37%;font-size: 8px">{!IF(contains(keysTerminal,'NumSerieTerminal'),item['NumSerieTerminal'], '')}</p>
+                    <p style="position: absolute;top: {! 530 + (index2 *20) + (loopItem *3357) + added}px;left: 68%;font-size: 9px">{!IF(contains(keysTerminal,'TypeMiseDispo'),item['TypeMiseDispo'], '')}</p>
+                    <p style="position: absolute;top: {! 530 + (index2 *20) + (loopItem *3357) + added}px;left: 88%;font-size: 9px">{!IF(contains(keysTerminal,'prixTerminal'),item['prixTerminal'], '')}</p>
+                    <apex:variable var="index2" value="{!index2 + 1}" />
+                </apex:repeat>
+                <!-- <p style="position: absolute;top: {! 558 + (loopItem *3357) + added}px;left: 21%;font-size: 5px">HANDSET GSM DIS SAMSUNG GALAXY A6 DARK</p> -->
+             
+                <!-- <div style="position: absolute;top: {! 610 + (loopItem *3357) + added}px;left: 55%;">{!IF(AND(contains(keys,'totalTTC'), ipOutput['totalTTC']>0),ipOutput['totalTTC'], '')}</div> -->
+              
+              
+                <div style="position: absolute;top: {! 615 + (loopItem *3357) + added}px;left: 55%;">{!PrixTerminalRP + prixSIMHome}</div>
+                <!--  -->
+                <!-- Paiement -->
+                <div rendered="{!IF((typeActeDecision != 'inwiB2C_ChangementDeCarteSIM'),true, false)}" style="position: absolute;top: {! 665 + (loopItem *3357) + added}px;left: 51%;">{!IF(AND(RecurringListPrice>0,typeActeDecision != 'inwiB2C_ChangementDeCarteSIM'),RecurringListPrice, '')}</div>
+                <div rendered="{!IF((typeActeDecision != 'inwiB2C_ChangementDeCarteSIM'),true, false)}" style="position: absolute;top: {! 681 + (loopItem *3357) + added}px;left: 51%;">{!IF(AND(typeActeDecision != 'inwiB2C_ChangementDeCarteSIM'),FMS, '')}</div>
+
+
+                <div rendered="{!IF((typeActeDecision == 'inwiB2C_ChangementDeCarteSIM'),true, false)}" style="position: absolute;top: {! 699 + (loopItem *3357) + added}px;left: 51%;">{!IF((typeActeDecision != 'inwiB2C_ChangementDeCarteSIM'),FMD, '')}</div>
+                <div rendered="{!IF((typeActeDecision != 'inwiB2C_ChangementDeCarteSIM'),true, false)}" style="position: absolute;top: {! 718 + (loopItem *3357) + added}px;left: 51%;">{!IF((typeActeDecision != 'inwiB2C_ChangementDeCarteSIM'),'0.0', '')}</div>
+                <div rendered="{!IF((typeActeDecision != 'inwiB2C_ChangementDeCarteSIM'),true, false)}" style="position: absolute;top: {! 735 + (loopItem *3357) + added}px;left: 51%;">{!IF((typeActeDecision != 'inwiB2C_ChangementDeCarteSIM'),'0.0', '')}</div>
+                <div rendered="{!IF((typeActeDecision != 'inwiB2C_ChangementDeCarteSIM'),true, false)}" style="position: absolute;top: {! 772 + (loopItem *3357) + added}px;left: 51%;">{!IF((typeActeDecision != 'inwiB2C_ChangementDeCarteSIM'),'0.0', '')}</div>
+                <div rendered="{!IF((typeActeDecision != 'inwiB2C_ChangementDeCarteSIM'),true, false)}" style="position: absolute;top: {! 790 + (loopItem *3357) + added}px;left: 51%;">{!IF((typeActeDecision != 'inwiB2C_ChangementDeCarteSIM'),'0.0', '')}</div>
+
+                <div style="position: absolute;top: {! 755 + (loopItem *3357) + added}px;left: 51%;">{!IF(PrixSIM>0,PrixSIM, '0.0')}</div>
+
+                <div style="position: absolute;top: {! 808 + (loopItem *3357) + added}px;left: 50%;">{!referencePaiement}</div>
+                <div style="position: absolute;top: {! 826 + (loopItem *3357) + added}px;left: 50%;">{!ModeDePaiement}</div>
+
+                <!-- Date -->
+                <!-- <div style="position: absolute;top: {! 935 + (loopItem *3357) + added}px;left: 75%;">{!contractDate}</div> -->
+                <div style="position: absolute;top: {! 977 + (loopItem *3357) + added}px;left: 75%;">{!IF(contains(keys,'dateContract'),ipOutput['dateContract'], contractDate)}</div>
+
+
+            </div>
+            <div style="page-break-after">
+                <img style="width:100%;" src="{!$Resource.inwiB2C_contract_idar_duo_2}" />
+            </div>
+            <div >
+                <img style="width:100%;" src="{!$Resource.inwiB2C_contract_idar_duo_3}" />
+            </div>
+
+        </apex:repeat>
+    </body>
+
+
+</apex:page>

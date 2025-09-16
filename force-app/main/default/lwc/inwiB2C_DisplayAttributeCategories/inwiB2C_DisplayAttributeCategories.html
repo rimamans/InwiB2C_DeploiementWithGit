@@ -1,0 +1,19 @@
+<template>
+
+    <template if:true={attributeCategories}>
+
+
+        <template for:each={attributeCategories.records} for:item="currentAttributeCategory" >
+                <span key ={currentAttributeCategory.Id} >
+
+
+                    <c-inwi-b2-c_-display-attribute-category attribute-category={currentAttributeCategory} onattributecategoryvaluechange={hanldeAttributeCategroryValueChange}  showservice={__showservice} > </c-inwi-b2-c_-display-attribute-category>
+
+                    
+
+
+                </span>
+        </template>
+    </template>
+    
+</template>

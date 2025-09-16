@@ -1,0 +1,24 @@
+<aura:component implements="force:lightningQuickAction,force:hasRecordId" >
+        <aura:html tag="style">
+        .slds-modal__container{
+        height : auto;
+        width: 70%;
+        max-width: 70rem;
+        }
+        .modal-body{
+        height : 500px !important;
+        max-height: 500px !important;
+        }
+        
+        .customFooter{
+        display: inline !important;
+        }
+    </aura:html> 
+      
+    <c:inwi360AssignCaseFrench recordId = "{!v.recordId}" layout="lightning"  />
+
+
+  
+
+    
+</aura:component>

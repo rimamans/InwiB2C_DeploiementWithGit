@@ -1,0 +1,51 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 03-09-2022
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+
+
+
+    <!-- <lightning-input type="text" label="ICC" value={iccAttributeValue} onchange={hanldleIccEntry}></lightning-input>
+
+            <lightning-button variant="brand" label="Recherche" title="recherche" onclick={handleClick} class="slds-m-left_x-small"></lightning-button>
+
+            -->
+
+    <div onkeyup={handleKeyUp}>
+        <lightning-input value={iccAttributeValue} name="ICC" label="ICC" type="text" onchange={hanldleIccEntry}
+            class="iccInput" disabled={iccDisabled}></lightning-input>
+    </div>
+
+    <br>
+
+    <template if:false={iccDisabled}>
+        <template if:true={showbutton}>
+            <lightning-button variant="brand" label="Valider l'ICC" title="Valider" onclick={handleSearchICCbtn}
+                class="slds-m-left_x-large slds-m-top_x-large"  disabled={disableValiderIcc} ></lightning-button>
+
+        </template>
+    </template>
+
+    <template if:true={showbutton}>
+        <lightning-input type="text" label="MDN par défaut" value={mdnAttributeValue} read-only></lightning-input>
+    </template>
+
+    <!--
+
+            <lightning-input type="text" label="IMSI" value={imsiAttributeValue}  class="slds-hidden"></lightning-input>
+
+            <lightning-input type="text" label="KI" value={kiAttributeValue} class="slds-hidden"></lightning-input>
+
+            <lightning-input type="text" label="puk" value={pukAttributeValue} class="slds-hidden"></lightning-input>
+
+            -->
+
+
+
+
+
+</template>

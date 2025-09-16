@@ -1,0 +1,92 @@
+<template>
+    <div class="slds-grid slds-gutters">
+        <div class="slds-col slds-size_1-of-4" style="border-right: 1px solid rgb(217, 219, 221);">
+            <div>
+                <lightning-input type="text" value={search} onchange={handleChange} label="CIN"></lightning-input>
+            </div>
+            <div style="margin-top: 10px;">
+                <lightning-button variant="brand" label="Rechercher" title="Rechercher" onclick={handleSearch}>
+                </lightning-button>
+            </div>
+        </div>
+        <div class="slds-col slds-size_3-of-4">
+            <div class="wraperClass" style="min-height: 250px;">
+                <table class="sty-table-case slds-table slds-table_bordered slds-table_fixed-layout">
+                    <thead>
+                        <tr>
+                            <th scope="col">Sélectionnée</th>
+                            <th style="word-wrap: break-word;">Nom</th>
+                            <th style="word-wrap: break-word;">Prénom</th>
+                            <th style="word-wrap: break-word;">Type CIN</th>
+                            <th style="word-wrap: break-word;">CIN</th>
+                            <th style="word-wrap: break-word;">Id Client</th>
+                            <th style="word-wrap: break-word;">Code Client</th>
+                            <template if:true={isCessionPREPAYE}>
+                            <th style="word-wrap: break-word;"> Action</th>
+                        </template>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template for:each={__data} for:item="item">
+                            <tr key={item.index}>
+                                <td class="slds-cell-wrap">
+                                    <input type="checkbox" name={item.index} status={item.checked} onclick={selectItem} checked={item.checked} />
+                                </td>
+                                <td class="slds-cell-wrap">{item.lastname}</td>
+                                <td class="slds-cell-wrap">{item.firstname}</td>
+                                <td class="slds-cell-wrap">{item.typecin}</td>
+                                <td class="slds-cell-wrap">{item.cin}</td>
+                                <td class="slds-cell-wrap">{item.idclient}</td>
+                                <td class="slds-cell-wrap">
+                                    <a onclick={handleclick} data-codeclient={item.idclient}>{item.codeclient}</a>
+                                </td>
+                                <template if:true={isCessionPREPAYE}>
+                                    <td class="slds-cell-wrap">
+                                            <lightning-button label="Souscriptions" onclick={handleSubSelection} 
+                                                id={item.idclient} name={item}></lightning-button>
+                                    </td>
+                                  
+                   
+                                </template>
+                              
+                            </tr>
+                         
+
+                                
+                        </template>
+                       
+                    </tbody>
+                </table>
+                
+                <template if:true={__showAddAccount}>
+                    <div style="text-align: center; margin-top: 30px;">
+                        <div>
+                            <p>Aucun compte trouvé</p>
+                        </div>
+                        <div>
+                            <div style="margin-top: 10px;">
+                                <lightning-button variant="brand" label="Créer un compte client" title="Créer un compte client"
+                                    onclick={handleAddAccount}>
+                                </lightning-button>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+    
+    <div>
+        <template if:false={__showAddAccount}>
+            <div style="margin-top: 10px; text-align: right;">
+                <lightning-button label="Suivant" disabled={saving} variant="brand" onclick={SaveAndNext}
+                    slot="actions">
+                </lightning-button>
+                <template if:true={__hasError}>
+                    <p style="color: red;">Veuillez sélectionner un compte....</p>
+                </template>
+            </div>
+        </template>
+    </div>
+</template>

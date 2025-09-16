@@ -1,0 +1,542 @@
+<template>
+    <!-- NEW CODE -->
+
+    <template if:true={thecontract}>
+
+        <!--
+      
+        <lightning-button variant="brand" label="_change profile" title="Primary action" onclick={_Testing_changePro}
+            class="slds-m-left_x-small"></lightning-button>
+
+        <br><br> Simulation Profile : {usedprofile} <br><br>
+ -->
+
+        <div class="wrapperSection">
+            <div class="slds-m-top_medium slds-m-bottom_x-large">
+                <h2 class="slds-text-heading_medium slds-m-bottom_medium">
+                    DONNEES CRM
+                </h2>
+
+                <div class="slds-grid slds-wrap slds-grid_vertical-stretch">
+                    <lightning-combobox placeholder="Choisir une option" disabled={type0field}
+                        onchange={changeStatutContrat} data-theid="StatusContract" label="Statut contrat"
+                        class="slds-col slds-size_1-of-2 elementMargin2" value={thecontract.statusContract}
+                        options={picklistvalues.statut_contrat}></lightning-combobox>
+                    <lightning-combobox placeholder="Choisir une option" disabled={type0field} onchange={addToSave}
+                        data-theid="Motifnonconformite" label="Motif de non conformité"
+                        class="slds-col slds-size_1-of-2 elementMargin2" value={thecontract.MotifNonConfirmitee}
+                        options={picklistvalues.Motif_de_non_conformit}>
+                    </lightning-combobox>
+                </div>
+                <template if:true={thecontract.subscriptions}>
+                    <br><br>
+                    <div style="-webkit-box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.66); 
+                box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.66);">
+                        <lightning-datatable class="style-table" key-field="Id" columns={columnsSubscriprtion}
+                            data={thecontract.subscriptions} hide-checkbox-column>
+                        </lightning-datatable>
+                    </div>
+                </template>
+            </div>
+        </div>
+
+        <div class="wrapperSection">
+
+
+            <h2 class="slds-text-heading_medium slds-m-bottom_medium">
+                VALIDATION DU CONTRAT
+            </h2>
+
+            <div class="slds-grid slds-wrap slds-grid_vertical-stretch">
+                <lightning-textarea onchange={addToSave} data-theid="Commentaire" name="Commentaire" label="Commentaire"
+                    disabled={alwaysEditable} value={thecontract.commentaires}
+                    class="slds-col slds-size_1-of-1 elementMargin1">
+                </lightning-textarea>
+            </div>
+
+            <div class="slds-grid slds-wrap slds-grid_vertical-stretch">
+                <lightning-combobox placeholder="Choisir une option" disabled onchange={addToSave}
+                    data-theid="StatutContratNumerique" label="Statut Contrat Numérique"
+                    class="slds-col slds-size_1-of-2 elementMargin2" value={thecontract.StatutContratNumerique}
+                    options={picklistvalues.Statut_Contrat_Num_rique}></lightning-combobox>
+
+                <lightning-combobox placeholder="Choisir une option" disabled onchange={addToSave}
+                    data-theid="StatutDossier" label="Statut Dossier" class="slds-col slds-size_1-of-2 elementMargin2"
+                    value={thecontract.StatutDossier} options={picklistvalues.Statut_Dossier}></lightning-combobox>
+            </div>
+
+            <div class="slds-grid slds-wrap slds-grid_vertical-stretch">
+                <lightning-input type="date" date-style="short" disabled onchange={addToSave}
+                    data-theid="DateChangementStatutNumerique" label="Date changement statut Numérique"
+                    value={thecontract.DateChangementStatutNumerique} class="slds-col slds-size_1-of-2 elementMargin2">
+                </lightning-input>
+                <lightning-input type="date" date-style="short" disabled onchange={addToSave}
+                    data-theid="DateChangementStatutPhysique" label="Date changement statut Physique"
+                    value={thecontract.DateChangementStatutPhysique} class="slds-col slds-size_1-of-2 elementMargin2">
+                </lightning-input>
+            </div>
+
+
+            <div class="slds-grid slds-wrap slds-grid_vertical-stretch">
+                <lightning-combobox placeholder="Choisir une option" disabled onchange={addToSave}
+                    data-theid="MotfIncompletudeNumerique" label="Motif d'incomplétude du Dossier Numérique"
+                    class="slds-col slds-size_1-of-2 elementMargin2" value={thecontract.MotifIncompletudeNumerique}
+                    options={picklistvalues.Motif_incompletude_Numeriqu}>
+                </lightning-combobox>
+                <lightning-combobox placeholder="Choisir une option" disabled onchange={addToSave}
+                    data-theid="MotfIncompletudePhysique" label="Motif d'incomplétude du Dossier Physique"
+                    class="slds-col slds-size_1-of-2 elementMargin2" value={thecontract.MotifIncompletudePhysique}
+                    options={picklistvalues.Motif_incompletude_Physique}>
+                </lightning-combobox>
+            </div>
+
+
+            <div class="slds-grid slds-wrap slds-grid_vertical-stretch">
+                <lightning-input type="date" date-style="short" disabled={type0field} onchange={addToSave}
+                    data-theid="DateReceptionDossier" label="Date de réception de dossier"
+                    value={thecontract.DateReceptionDossier} class="slds-col slds-size_1-of-2 elementMargin2"
+                    message-when-value-missing="Le champ est obligatoire"></lightning-input>
+                <lightning-combobox placeholder="Choisir une option" disabled={type1field} onchange={addToSave}
+                    data-theid="SourceReception" label="Source de réception"
+                    class="slds-col slds-size_1-of-2 elementMargin2" value={thecontract.sourceDeReception}
+                    options={picklistvalues.Source_de_reception}></lightning-combobox>
+            </div>
+        </div>
+
+        <div class="wrapperSection">
+
+            <h2 class="slds-text-heading_medium slds-m-bottom_medium">
+                INFORMATIONS SUR LE CONTRAT
+            </h2>
+
+
+            <div class="slds-grid slds-wrap slds-grid_vertical-stretch">
+                <lightning-input type="text" disabled data-theid="LastModifiedByName" label="Dernière modification par"
+                    value={thecontract.LastModifiedByName} class="slds-col slds-size_1-of-2 elementMargin2">
+                </lightning-input>
+                <lightning-input type="text" disabled data-theid="LastModifiedDate"
+                    label="Date de dernière modification" value={thecontract.LastModifiedDate}
+                    class="slds-col slds-size_1-of-2 elementMargin2">
+                </lightning-input>
+            </div>
+
+
+            <div class="slds-grid slds-wrap slds-grid_vertical-stretch">
+                <lightning-input type="text" disabled onchange={addToSave} data-theid="NumContract"
+                    label="Numéro de contrat" value={thecontract.NumeroDeContrat}
+                    class="slds-col slds-size_1-of-2 elementMargin2" required
+                    message-when-value-missing="Le champ est obligatoire">
+                </lightning-input>
+                <lightning-input type="text" disabled onchange={addToSave} data-theid="DateSouscription"
+                    label="Date de souscription" value={thecontract.DateDeSouscription}
+                    class="slds-col slds-size_1-of-2 elementMargin2"></lightning-input>
+            </div>
+
+
+            <div class="slds-grid slds-wrap slds-grid_vertical-stretch">
+                <lightning-combobox placeholder="Choisir une option" disabled={type1field} onchange={addToSave}
+                    data-theid="ProfilGratuit" label="Profil Gratuit" class="slds-col slds-size_1-of-2 elementMargin2"
+                    value={thecontract.ProfilGratuit} options={picklistvalues.Profil_Gratuit}>
+                </lightning-combobox>
+                <lightning-input type="text" disabled onchange={addToSave} data-theid="PrixVente" label="Prix de Vente"
+                    value={thecontract.PrixdeVente} class="slds-col slds-size_1-of-2 elementMargin2"></lightning-input>
+            </div>
+
+
+            <div class="slds-grid slds-wrap slds-grid_vertical-stretch">
+                <lightning-input type="text" disabled onchange={addToSave} data-theid="ICC2" label="ICC2"
+                    value={thecontract.ICC2} class="slds-col slds-size_1-of-2 elementMargin2"></lightning-input>
+            </div>
+
+
+        </div>
+
+
+        <div class="wrapperSection">
+            <h2 class="slds-text-heading_medium slds-m-bottom_medium">
+                INFORMATIONS SUR LE CLIENT SOUSCRIPTEUR
+            </h2>
+
+            <div class="slds-grid slds-wrap slds-grid_vertical-stretch">
+                <lightning-input type="text" disabled={type1field} onchange={addToSave} data-theid="Nom" label="Nom"
+                    value={thecontract.Nom} class="slds-col slds-size_1-of-2 elementMargin2" required
+                    message-when-value-missing="Le champ est obligatoire"></lightning-input>
+
+                <lightning-input type="text" disabled={type1field} onchange={addToSave} data-theid="Prenom"
+                    label="Prénom" value={thecontract.prenom} class="slds-col slds-size_1-of-2 elementMargin2" required
+                    message-when-value-missing="Le champ est obligatoire"></lightning-input>
+            </div>
+
+
+            <div class="slds-grid slds-wrap slds-grid_vertical-stretch">
+                <lightning-combobox placeholder="Choisir une option" disabled={type1field} onchange={addToSave}
+                    data-theid="Sexe" label="Sexe" class="slds-col slds-size_1-of-2 elementMargin2" required
+                    message-when-value-missing="obligatoire" value={thecontract.sexe} options={picklistvalues.Sexe}>
+                </lightning-combobox>
+
+                <lightning-radio-group name="FigureannuaireWANA" disabled={type1field}
+                    label="Figure dans l'annuaire WANA" options={optionsYesNo} value={thecontract.FigureannuaireWANA}
+                    class="slds-col slds-size_1-of-2 elementMargin2" onchange={addToSave}
+                    data-theid="FigureannuaireWANA" variant="label-inline" type="radio"></lightning-radio-group>
+
+            </div>
+
+
+
+            <div class="slds-grid slds-wrap slds-grid_vertical-stretch">
+                <lightning-combobox placeholder="Choisir une option" disabled={type1field} onchange={addToSave}
+                    data-theid="TypeCIN" label="Type Pièce d'identité" class="slds-col slds-size_1-of-2 elementMargin2"
+                    value={thecontract.typeCIN} options={picklistvalues.Type_CIN} required
+                    message-when-value-missing="Le champ est obligatoire"></lightning-combobox>
+                <lightning-input type="text" disabled={type1field} onchange={addToSave} data-theid="NumCIN"
+                    label="Numéro de pièce d'identité" value={thecontract.numCIN}
+                    class="slds-col slds-size_1-of-2 elementMargin2" required
+                    message-when-value-missing="Le champ est obligatoire"></lightning-input>
+            </div>
+
+            <div class="slds-grid slds-wrap slds-grid_vertical-stretch">
+                <lightning-input type="text" disabled={type1field} onchange={addToSave} data-theid="Patente"
+                    label="Patente" value={thecontract.Patente} class="slds-col slds-size_1-of-2 elementMargin2">
+                </lightning-input>
+                <lightning-input type="text" disabled={type1field} onchange={addToSave} data-theid="RegistreCommerce"
+                    label="Registre de commerce" value={thecontract.RegistreCommerce}
+                    class="slds-col slds-size_1-of-2 elementMargin2">
+                </lightning-input>
+            </div>
+
+            <div class="slds-grid slds-wrap slds-grid_vertical-stretch">
+                <lightning-input type="date" date-style="short" disabled={type1field} onchange={addToSave}
+                    data-theid="DateDeNaissance" label="Date de naissance" value={thecontract.dateDeNaissance_lwc}
+                    class="slds-col slds-size_1-of-2 elementMargin2" required
+                    message-when-value-missing="Le champ est obligatoire">
+                </lightning-input>
+                <lightning-input type="text" disabled={type1field} onchange={addToSave} data-theid="Entreprise"
+                    label="Entreprise" value={thecontract.Entreprise} class="slds-col slds-size_1-of-2 elementMargin2">
+                </lightning-input>
+            </div>
+
+            <div class="slds-grid slds-wrap slds-grid_vertical-stretch">
+                <lightning-combobox placeholder="Choisir une option" disabled={type1field} onchange={addToSave}
+                    data-theid="CategorieClient" label="Catégorie client"
+                    class="slds-col slds-size_1-of-2 elementMargin2" value={thecontract.CategorieClient}
+                    options={picklistvalues.Categorie_client}></lightning-combobox>
+            </div>
+
+
+            <div class="slds-grid slds-wrap slds-grid_vertical-stretch">
+                <lightning-input type="text" disabled={type1field} onchange={addToSave} data-theid="Profession"
+                    label="Profession" value={thecontract.Profession} class="slds-col slds-size_1-of-2 elementMargin2">
+                </lightning-input>
+                <lightning-input type="text" disabled={type1field} onchange={addToSave} data-theid="TelephoneContact"
+                    label="Téléphone contact" value={thecontract.TelephoneContact}
+                    class="slds-col slds-size_1-of-2 elementMargin2"></lightning-input>
+            </div>
+
+            <div class="slds-grid slds-wrap slds-grid_vertical-stretch">
+                <lightning-combobox placeholder="Choisir une option" disabled onchange={addToSave}
+                    data-theid="Segmentation1" label="Segmentation 1" class="slds-col slds-size_1-of-2 elementMargin2"
+                    value={thecontract.Segmentation} options={picklistvalues.Segmentation} required
+                    message-when-value-missing="Le champ est obligatoire"></lightning-combobox>
+                <lightning-combobox placeholder="Choisir une option" disabled onchange={addToSave}
+                    data-theid="Segmentation2" label="Segmentation 2" class="slds-col slds-size_1-of-2 elementMargin2"
+                    value={thecontract.segmentation2} options={picklistvalues.Segmentation2} required
+                    message-when-value-missing="Le champ est obligatoire"></lightning-combobox>
+            </div>
+
+
+            <div class="slds-grid slds-wrap slds-grid_vertical-stretch">
+                <lightning-input type="text" disabled={type1field} onchange={addToSave} data-theid="Email" label="Email"
+                    value={thecontract.email} class="slds-col slds-size_1-of-2 elementMargin2"></lightning-input>
+                <lightning-input type="text" disabled={type1field} onchange={addToSave} data-theid="NLigne"
+                    label="N° Ligne" value={thecontract.NLigne} class="slds-col slds-size_1-of-2 elementMargin2">
+                </lightning-input>
+            </div>
+
+            <div class="slds-grid slds-wrap slds-grid_vertical-stretch">
+                <lightning-radio-group name="EchangeExpress" disabled={type1field} label="Echange express"
+                    options={optionsYesNo} value={thecontract.EchangeExpress}
+                    class="slds-col slds-size_1-of-2 elementMargin2" onchange={addToSave} data-theid="EchangeExpress"
+                    variant="label-inline" type="radio"></lightning-radio-group>
+
+                <lightning-input type="text" disabled={type1field} onchange={addToSave} data-theid="AncienNligne"
+                    label="Ancien n° de ligne" value={thecontract.AncienNligne}
+                    class="slds-col slds-size_1-of-2 elementMargin2"></lightning-input>
+            </div>
+
+            <div class="slds-grid slds-wrap slds-grid_vertical-stretch">
+                <lightning-combobox placeholder="Choisir une option" disabled={type1field} onchange={addToSave}
+                    data-theid="PossessionMobile" label="Possession Mobile(principal) avant wana"
+                    class="slds-col slds-size_1-of-2 elementMargin2" value={thecontract.possessionMobile}
+                    options={picklistvalues.Possession_Mobile}>
+                </lightning-combobox>
+                <lightning-combobox placeholder="Choisir une option" disabled={type1field} onchange={addToSave}
+                    data-theid="PossessionFixe" label="Possession Fixe" class="slds-col slds-size_1-of-2 elementMargin2"
+                    value={thecontract.possessionFixe} options={picklistvalues.Possession_Fixe}></lightning-combobox>
+            </div>
+
+
+            <div class="slds-grid slds-wrap slds-grid_vertical-stretch">
+                <lightning-radio-group name="UsageInternet" disabled={type1field} label="Usage internet"
+                    options={optionsYesNo} value={thecontract.UsageInternet}
+                    class="slds-col slds-size_1-of-2 elementMargin2" onchange={addToSave} data-theid="UsageInternet"
+                    variant="label-inline" type="radio"></lightning-radio-group>
+
+                <lightning-combobox placeholder="Choisir une option" disabled={type1field} onchange={addToSave}
+                    data-theid="PossessionInternet" label="Possession Internet"
+                    class="slds-col slds-size_1-of-2 elementMargin2" value={thecontract.PosessionInternet}
+                    options={picklistvalues.Possession_Internet}></lightning-combobox>
+            </div>
+
+
+            <div class="slds-grid slds-wrap slds-grid_vertical-stretch">
+                <lightning-combobox placeholder="Choisir une option" disabled={type1field} onchange={addToSave}
+                    data-theid="Choixprincipaloperateur" label="Choix principal opérateur"
+                    class="slds-col slds-size_1-of-2 elementMargin2" value={thecontract.Choixprincipaloperateur}
+                    options={picklistvalues.Choixprincipaloperateur}></lightning-combobox>
+            </div>
+
+
+
+        </div>
+
+
+        <div class="wrapperSection">
+            <template if:true={hasAddress}>
+
+                <h2 class="slds-text-heading_medium slds-m-bottom_medium">
+                    INFORMATIONS ADRESSES
+                </h2>
+
+
+                <!--<lightning-messages> </lightning-messages>-->
+
+
+                <div class="slds-grid slds-wrap slds-grid_vertical-stretch">
+
+                    <lightning-combobox placeholder="Choisir une option" disabled={type1field} onchange={addToSave}
+                        data-theid="TypeAdresse" label="Type d'adresse" class="slds-col slds-size_1-of-3 elementMargin3"
+                        value={thecontract.address.TypeAdresse} options={picklistvalues.Type_d_adresse} required
+                        message-when-value-missing="Le champ est obligatoire">
+                    </lightning-combobox>
+
+                    <lightning-input type="text" disabled={type1field} onchange={addToSave} data-theid="address"
+                        label="Adresse" value={thecontract.address.addressField} required
+                        message-when-value-missing="obligatoire" class="slds-col slds-size_2-of-3 ">
+                    </lightning-input>
+
+                </div>
+                <!--
+                        <template if:true={isProcheck}>
+                            <lightning-input type="text" disabled data-theid="Pays" label="Pays"
+                                value={thecontract.address.PaysName} class="slds-col slds-size_1-of-2 elementMargin2">
+                            </lightning-input>
+                        </template>
+
+                        <template if:false={isProcheck}>
+                            <lightning-input-field field-name="InwiB2C_Pays__c" data-theid="Pays" onchange={addToSave}
+                                class="slds-col slds-size_1-of-2 elementMargin2">
+                            </lightning-input-field>
+                        </template>
+
+                        
+                <lightning-combobox placeholder="Choisir une option" disabled={type1field} onchange={addToSave}
+                    data-theid="Pays" label="Pays" class="slds-col slds-size_1-of-2 elementMargin2" value={Pays}
+                    options={payPicklist} required message-when-value-missing="obligatoire"  message-when-value-missing="Le champ est obligatoire">
+                </lightning-combobox>-->
+
+
+                <div class="slds-grid slds-wrap slds-grid_vertical-stretch">
+                    <lightning-combobox placeholder="Pays" onchange={ChangePays} data-theid="Pays" label="Pays" required
+                        message-when-value-missing="obligatoire" disabled={isProcheck} value={valuePays}
+                        class="slds-col slds-size_1-of-2 elementMargin2" options={PaysValues}>
+                    </lightning-combobox>
+                    <lightning-input type="text" disabled data-theid="Region" label="Region" value={r}
+                        placeholder="sélectionnez une ville" class="slds-col slds-size_1-of-2 elementMargin2">
+                    </lightning-input>
+                </div>
+
+                <div class="slds-grid slds-wrap slds-grid_vertical-stretch">
+                    <lightning-combobox placeholder="sélectionnez une ville" onchange={ChangeVille} data-theid="Ville"
+                        value={v} label="Ville" required message-when-value-missing="obligatoire"
+                        class="slds-col slds-size_1-of-2 elementMargin2" options={VilleValues}>
+                    </lightning-combobox>
+                    <template if:false={isToSpecify}>
+                        <lightning-combobox placeholder="sélectionnez une ville" onchange={ChangeQuartier}
+                            data-theid="Quartier" disabled={isProcheck} value={q} label="Quartier"
+                            class="slds-col slds-size_1-of-2 elementMargin2" options={QuartierValues}>
+                        </lightning-combobox>
+                    </template>
+                    <template if:true={isToSpecify}>
+                        <lightning-input type="text" onchange={ChangePrecisionQuartier} data-theid="PrecisionQuartier"
+                            disabled={isProcheck} label="Précision Quartier" placeholder="Précisez le quartier"
+                            class="slds-col slds-size_1-of-2 elementMargin2">
+                        </lightning-input>
+                    </template>
+                </div>
+
+
+                <div class="slds-grid slds-wrap slds-grid_vertical-stretch">
+                    <lightning-input type="text" disabled={type1field} onchange={addToSave} data-theid="CodePostale"
+                        label="Code Postal" value={thecontract.address.CodePostale}
+                        class="slds-col slds-size_1-of-2 elementMargin2">
+                    </lightning-input>
+                </div>
+            </template>
+            <template if:false={hasAddress}>
+                <h2 class="slds-text-heading_medium slds-m-bottom_medium">
+                    CE CONTRAT N'A PAS D'ADRESSE
+                </h2>
+            </template>
+
+        </div>
+
+
+
+        <div class="wrapperSection">
+            <h2 class="slds-text-heading_medium slds-m-bottom_medium">
+                INFORMATIONS SUR LE POINT DE VENTE PRISE DE COMMANDE
+            </h2>
+
+            <div class="slds-grid slds-wrap slds-grid_vertical-stretch">
+                <!-- <lightning-combobox placeholder="Choisir une option" disabled  onchange={addToSave} data-theid="Distributeur" label="Distributeur"  class="slds-col slds-size_1-of-2 elementMargin2"
+    value={thecontract.Distributeur} options={picklistvalues.Distributeur} ></lightning-combobox>   
+-->
+                <lightning-input type="text" disabled onchange={addToSave} data-theid="Distributeur"
+                    label="Distributeur" value={thecontract.Distributeur_CMD_Name}
+                    class="slds-col slds-size_1-of-2 elementMargin2"></lightning-input>
+
+
+                <lightning-combobox placeholder="Choisir une option" disabled={alwaysEditable} onchange={addToSave}
+                    data-theid="PointVente" label="Point de vente" class="slds-col slds-size_1-of-2 elementMargin2"
+                    value={thecontract.PointDeVente_CMD} options={Point_de_vente_Options}
+                    message-when-value-missing="Le champ est obligatoire"></lightning-combobox>
+
+            </div>
+
+            <div class="slds-grid slds-wrap slds-grid_vertical-stretch">
+                <lightning-input type="text" disabled={type1field} onchange={addToSave} data-theid="CodeBaynShop"
+                    label="Code shop" value={thecontract.codeBaynShop} class="slds-col slds-size_1-of-2 elementMargin2">
+                </lightning-input>
+
+                <lightning-radio-group name="SignaturePDV" disabled={type1field} label="Signature PDV"
+                    options={optionsYesNo} value={thecontract.SignaturePDV}
+                    class="slds-col slds-size_1-of-2 elementMargin2" onchange={addToSave} data-theid="SignaturePDV"
+                    variant="label-inline" type="radio">
+                </lightning-radio-group>
+
+
+            </div>
+        </div>
+
+
+
+        <div class="wrapperSection">
+            <h2 class="slds-text-heading_medium slds-m-bottom_medium">
+                INFORMATIONS SUR LE POINT DE VENTE D'IDENTIFICATION
+            </h2>
+
+            <div class="slds-grid slds-wrap slds-grid_vertical-stretch">
+
+                <lightning-input type="text" disabled label="Distributeur"
+                    value={thecontract.Distributeur_Identification} data-theid="Distributeur_Identification"
+                    class="slds-col slds-size_1-of-2 elementMargin2">
+                </lightning-input>
+
+
+                <lightning-input type="text" disabled label="Point de vente" data-theid="PointVente_Identification"
+                    value={thecontract.PointVente_Identification} class="slds-col slds-size_1-of-2 elementMargin2">
+                </lightning-input>
+
+            </div>
+        </div>
+
+
+        <div class="wrapperSection">
+
+            <h2 class="slds-text-heading_medium slds-m-bottom_medium">
+                INFORMATIONS SUR LES NOTES
+            </h2>
+            <template if:false={isProcheck}>
+                <div class="slds-p-around_medium " style="-webkit-box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.66); 
+                            box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.66);">
+                    <lightning-input type="text" label="Titre" data-theid="titreNote"></lightning-input>
+                    <lightning-textarea name="bodyNote" label="Description" data-theid="bodyNote"></lightning-textarea>
+                    <br>
+                    <lightning-button variant="brand" label="Ajouter la note" title="Primary action" onclick={addNote}
+                        class="slds-m-left_x-small"></lightning-button>
+                </div>
+                <br>
+            </template>
+            <template if:true={NotesToDisplay.length}>
+                <div style="-webkit-box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.66); 
+                box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.66);">
+                    <lightning-datatable key-field="Id" columns={columnsNotesDisplay} data={NotesToDisplay}
+                        hide-checkbox-column onrowaction={handleRowAction}>
+                    </lightning-datatable>
+                </div>
+                <br>
+                <br>
+            </template>
+            <template if:false={NotesToDisplay.length}>
+
+                <h3 style="text-align: center;" class="slds-text-heading_medium slds-m-bottom_medium">
+                    Aucune note !
+                </h3>
+
+                <br>
+
+                <br>
+            </template>
+
+        </div>
+
+        <template if:true={isReadOnly}>
+
+            <lightning-button variant="brand" label='Précédent' title="Précédent" onclick={gotopreviewsStep}
+                class="slds-m-left_x-small"></lightning-button>
+        </template>
+
+        <template if:false={isReadOnly}>
+            <template if:true={isProcheck}>
+                <br>
+                <br>
+                <lightning-button variant="brand" label='Précédent' title="Précédent" onclick={gotopreviewsStep}
+                    class="slds-m-left_x-small"></lightning-button>
+
+                <lightning-button variant="brand" label="Sauvegarder" data-theid="save" title="Sauvegarder"
+                    onclick={savecontract} class="slds-m-left_x-small"></lightning-button>
+
+            </template>
+
+            <template if:false={isProcheck}>
+                <br>
+                <br>
+                <lightning-button variant="brand" label='Précédent' title="Précédent" onclick={gotopreviewsStep}
+                    class="slds-m-left_x-small"></lightning-button>
+
+                <lightning-button variant="brand" label="Sauvegarder" title="Sauvegarder" data-theid="save"
+                    onclick={savecontract} class="slds-m-left_x-small"></lightning-button>
+
+                <lightning-button variant="brand" label='Sauvegarder & générer contrat'
+                    title='Sauvegarder & générer contrat' data-theid="saveandgenerate" onclick={savecontract}
+                    class="slds-m-left_x-small">
+                </lightning-button>
+
+
+            </template>
+
+        </template>
+
+
+    </template>
+
+    <template if:false={thecontract}>
+        <div class="nocard-case slds-col slds-size--1-of-1 slds-text-align_center">
+            <br />
+            <br />
+            Aucun contrat n'existant
+        </div>
+    </template>
+
+
+</template>

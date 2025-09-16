@@ -1,0 +1,28 @@
+<template>
+  <div>
+  <!-- class="slds-tree_container"  -->
+  
+    <h4 class="slds-tree__group-header" id="treeheading">Assigner une demande de visite</h4>
+    <ul aria-labelledby="treeheading" class="slds-tree" role="tree">
+      <li aria-expanded="true" role="treeitem" tabindex="0" aria-level="1">
+        <div class="slds-tree__item vertical-layout"> 
+          <h3 class="slds-tree__item-label" title={ownerRole}>{ownerRole}</h3>
+        </div>
+            <c-inwi-c-g-c_-demande-de-visite-tree-view oninputchange={handleNodeUpdateEvent} apidata={internalTreeData}></c-inwi-c-g-c_-demande-de-visite-tree-view>
+      </li>
+    </ul>
+  </div>
+  <div class="slds-m-top_medium">
+        <lightning-button label="Assigner" variant="brand" onclick={handleSaveClick} disabled={isDisabled}></lightning-button>
+        <template if:true={isLoading}>
+      <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+    </template>
+    </div>
+    <div if:true={saveMessage} class="">{saveMessage}</div>
+    <div if:true={errorMessages} class="">
+      <template for:each={errorMessages} for:item="errorMessage">
+        <p key={errorMessage}>{errorMessage}</p>
+    </template>
+    </div>
+    
+</template>

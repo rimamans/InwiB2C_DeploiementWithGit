@@ -1,0 +1,23 @@
+.THIS.radioid  .slds-form-element__label{
+    font-size:20px;
+    font-weight: bold;
+    }
+  
+    .THIS.radioid  .slds-form-element__legend{
+      font-size:28pt;
+    }
+  
+  .radioid {
+    color:black;
+    font-size: 22px;
+    font-weight:bold;
+  }
+  
+  .radioid input:checked ~ .checkmark {
+    background-color: #862A88;
+  }
+  
+  /* On mouse-over, add a grey background color */
+  .radioid:hover input ~ .checkmark {
+    background-color: #ccc;
+  }

@@ -1,0 +1,88 @@
+<apex:page sidebar="false" renderAs="pdf" controller="inwiB2C_MandatDegroupageFTTHController" showHeader="false" applyBodyTag="false">
+
+    <head>
+        <style>
+            body {
+                font-family: 'Arial Unicode MS';
+                font-size: 12px;
+            }
+
+            @page: first {
+                size: A4;
+                margin-top: 0px margin-right:0px;
+                margin-left: 0px;
+                margin-bottom: 0cm;
+            }
+
+            @page {
+                size: A4;
+                margin-top: 0px;
+                margin-right: 0px;
+                margin-left: 0px;
+                margin-bottom: 0cm;
+            }
+        </style>
+
+    </head>
+
+    <body>
+    
+      
+                
+            <div style="page-break-after:auto;">         
+            <img style="width:100%;" src="{!$Resource.MandatDegroupageFTTHPage1}" />
+
+            <div style="position: absolute; top: 144px; left: 27%; max-width: 450px;">{!IF(contains(keys,'Nom'),output['Nom'], '')}</div>
+            <div style="position: absolute; top: 163px; left: 27%; max-width: 450px;">{!IF(contains(keys,'Prenom'),output['Prenom'], '')}</div>
+            <div style="position: absolute; top: 180px; left: 27%; max-width: 450px;">{!IF(contains(keys,'TypeCIN'),output['TypeCIN'], '')}</div>
+            <div style="position: absolute; top: 200px; left: 27%; max-width: 450px;">{!IF(contains(keys,'CIN'),output['CIN'], '')}</div>
+            <div style="position: absolute; top: 217px; left: 27%; max-width: 450px;">{!IF(contains(keys,'Email'),output['Email'], '')}</div>
+            
+            <div style="position: absolute; top: 277px; left: 35%; max-width: 450px;">{!IF(contains(keys,'NumeroDesignation'),output['NumeroDesignation'], '')}</div>
+            <div style="position: absolute; top: 295px; left: 35%; max-width: 450px;">{!IF(contains(keys,'AdresseLigneFTTH'),output['AdresseLigneFTTH'], '')}</div>
+
+
+            <div style="position: absolute; top: 409px; left: 22.5%; max-width: 450px;">{!IF(output['IsIAM'] = true,'X', '')}</div>
+            <div style="position: absolute; top: 409px; left: 16.6%; max-width: 450px;">{!IF(output['IsOrange'] = true,'X', '')}</div>
+            
+            <div style="position: absolute; top: 868px; left: 13.5%; max-width: 600px;">
+                {!IF(contains(keys, 'jour'), MID((output['jour']), 1, 1), '')}
+            </div>
+            
+            <div style="position: absolute; top: 868px; left: 15.5%; max-width: 600px;">
+                {!IF(contains(keys, 'jour'), MID((output['jour']), 2, 1), '')}
+            </div>
+            
+            <div style="position: absolute; top: 868px; left: 20%; max-width: 600px;">
+                {!IF(contains(keys, 'mois'), MID((output['mois']), 1, 1), '')}
+            </div>
+            
+            <div style="position: absolute; top: 868px; left: 22%; max-width: 600px;">
+                {!IF(contains(keys, 'mois'), MID((output['mois']), 2, 1), '')}
+            </div>
+            
+            <div style="position: absolute; top: 868px; left: 26.5%; max-width: 700px;">
+                {!IF(contains(keys, 'annee'), MID((output['annee']), 1, 1), '')}
+            </div>
+            
+            <div style="position: absolute; top: 868px; left: 28.5%; max-width: 700px;">
+                {!IF(contains(keys, 'annee'), MID((output['annee']), 2, 1), '')}
+            </div>
+            
+            <div style="position: absolute; top: 868px; left: 30.5%; max-width: 700px;">
+                {!IF(contains(keys, 'annee'), MID((output['annee']), 3, 1), '')}
+            </div>
+            
+            <div style="position: absolute; top: 868px; left: 33%; max-width: 700px;">
+                {!IF(contains(keys, 'annee'), MID((output['annee']), 4, 1), '')}
+            </div>
+ 
+
+            </div> 
+
+            
+            
+    </body>
+
+
+</apex:page>

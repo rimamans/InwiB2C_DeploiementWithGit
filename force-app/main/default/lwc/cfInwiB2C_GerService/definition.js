@@ -1,0 +1,3 @@
+let definition = 
+                {"GlobalKey__c":"InwiB2C_GerService/RMA/1/1695113558540","dataSource":{"type":null,"value":{}},"enableLwc":true,"filter":{},"states":[{"conditions":{"group":[{"field":"$scope.data.status","operator":"===","type":"system","value":"'active'"}]},"customLwc":true,"customLwcAttributes":[{"name":"records","val":"$scope.records"}],"customLwcRepeat":false,"definedActions":{"actions":[]},"fields":[],"flyout":{"lwc":""},"isSmartAction":false,"lwc":{"DeveloperName":"inwiB2C_CreateServiceInfoFromSuB","Id":"0Rb0C000000iiSwSAI","MasterLabel":"Create Service Info fRom Sub","name":"inwiB2C_CreateServiceInfoFromSuB"},"name":"Active","smartAction":{}}],"title":"Service From Sub"}; 
+            export default definition

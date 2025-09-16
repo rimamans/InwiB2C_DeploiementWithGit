@@ -1,0 +1,61 @@
+<template>
+    <!-- <template if:true={showTypeVente}>
+        <lightning-combobox disabled={__loading} name="" label="Type de vente" value={valueTypeVente}
+            options={optionsTypeVente} onchange={handleChangeDropDownTypeVente}>
+        </lightning-combobox>
+    </template> -->
+
+    <template if:true={showEngagementCombobox}>
+        <lightning-combobox disabled={showEngagement} name="" label="Durée d'engagement" value={valueDureeEngagement}
+            options={optionsDureeEngagement} onchange={handleChangeDropDownDureeEngagement}>
+        </lightning-combobox>
+    </template>
+<template if:true={__showTypeDeLigne}>
+   
+<!--R-SL 03/09/2025 MGEN3688-B2C Vente Wafacash_v1.5 start-->
+    <lightning-combobox disabled={ShowtypeLigneDisable} name="" label="Type de ligne" value={value} options={filteredOptions}
+        onchange={handleChangeDropDown}>
+    </lightning-combobox>
+    <template if:true={__showStatutFar}>
+        <lightning-combobox label="Statut FAR" value={valueStatutFar} options={optionsStatutFar}
+        onchange={handleChangeStatFar}></lightning-combobox>
+    </template>
+</template>
+
+<!--R-SL 03/09/2025 MGEN3688-B2C Vente Wafacash_v1.5 end-->
+
+<br>
+<br>
+<template if:true={ODSLB2CTA}>
+    <template if:false={__selectedDSLAM}>
+    <lightning-button variant="brand" label="Enregistrer le Port DSLAM" title="Enregistrer le Port DSLAM"
+    onclick={PORTDSLAM} class="slds-m-left_x-small"></lightning-button></template>
+    <template if:true={__selectedDSLAM}>
+        <lightning-input type="text" label="Port DSLAM" value={DSLAM} disabled></lightning-input>
+    </template>
+
+    
+</template>
+
+    <template if:true={__showinputs}>
+        <lightning-input type="text" data-theid="numadherant" label="Numéro de l'adhérent"></lightning-input>
+        <div style="margin-top: 15px;">
+            <lightning-button disabled={__loading} variant="brand" label="Vérifier" title="Vérifier l'éligibilité"
+                onclick={checkEligibilityNafida} class="slds-m-left_x-small"></lightning-button>
+        </div>
+    </template>
+    <div style="margin-top: 15px;">
+        <p style="color: red; font-weight: bold;">{__message}</p>
+    </div>
+    <template if:true={__loading}>
+        <p style="color: green; font-weight: bold;">Vérification en cours....</p>
+    </template>
+    <template if:true={__showTypeDeLigne}>
+    <div style="margin-top: 15px; float: right">
+        <lightning-button disabled={__disabled} variant="brand" label="Valider" onclick={handleClick}
+            class="slds-m-left_x-small"></lightning-button>
+    </div>
+</template>
+
+
+</template>

@@ -1,0 +1,20 @@
+<template>
+
+    <div class="slds-grid slds-wrap slds-grid_vertical-stretch">
+
+        <lightning-combobox placeholder="ville" onchange={ChangeVilles} data-theid="Pays" label="Ville" required
+            value={valueville} class="slds-col slds-size_1-of-2 elementMargin2" options={VilleValeur} message-when-value-missing="obligatoire">
+        </lightning-combobox>
+ 
+        <lightning-combobox placeholder="Agence" onchange={ChangeAgence} data-theid="Agence" label="Agence" required
+        value={a} class="slds-col slds-size_1-of-2 elementMargin2" options={AgenceValues} message-when-value-missing="obligatoire">
+    </lightning-combobox>
+
+
+
+    </div>
+
+
+   
+
+</template>

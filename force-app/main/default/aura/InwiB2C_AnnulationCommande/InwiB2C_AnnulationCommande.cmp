@@ -1,0 +1,28 @@
+<aura:component implements="force:lightningQuickAction,force:hasRecordId" controller="InwiB2C_AnnulationCommandeDAO">
+        <aura:html tag="style">
+        .slds-modal__container{
+        height : auto;
+        width: 70%;
+        max-width: 70rem;
+        }
+        .modal-body{
+        height : 500px !important;
+        max-height: 500px !important;
+        }
+        
+        .customFooter{
+        display: inline !important;
+        }
+    </aura:html> 
+    <aura:attribute name="orderState" type="Boolean"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+
+
+        <aura:if isTrue="{! v.orderState }">
+            <c:inwib2cInwiB2CAnnulationDOAFrench recordId = "{!v.recordId}" layout="lightning"  />
+        <aura:set attribute="else">
+            <c:inwi360AnnulationCommandeFrench recordId = "{!v.recordId}" layout="lightning"  />
+        </aura:set>
+      </aura:if> 
+
+</aura:component>

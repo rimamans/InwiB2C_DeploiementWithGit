@@ -1,0 +1,27 @@
+<aura:component access="global" implements="lightning:utilityItem" controller="inwiB2C_getUserProfileForAura">
+    <aura:attribute name="ctiIteractionNumber" type="String"/>
+    <aura:attribute name="ctiSource" type="String"/>
+    <aura:attribute name="ctiEmailSource" type="String"/>
+    <aura:attribute name="ctiFacebookId" type="String"/>
+    <aura:attribute name="ctiTwitterId" type="String"/>
+    <aura:attribute name="vlocityInteractionId" type="String"/>
+    <aura:attribute name="ctiMDN" type="String"/>
+
+    
+
+    <lightning:messageChannel type="CTIMessageChannel__c"
+            onMessage="{!c.handleCTIMessage}" scope="APPLICATION"/>
+
+            
+    <aura:handler name="init" value="{!this}" action="{!c.handleInit}" />
+    
+    <lightning:workspaceAPI aura:id="workspace" />
+
+    <lightning:utilityBarAPI aura:id="utilityBarAPI" />
+
+    <c:inwiAuraPubsub oninteractionChange="{!c.updateInteraction}" interaction="{!v.vlocityInteractionId}" ctiIteractionNumber="{!v.ctiIteractionNumber}" ctiSource="{!v.ctiSource}" ctiEmailSource="{!v.ctiEmailSource}" ctiFacebookId="{!v.ctiFacebookId}" ctiTwitterId="{!v.ctiTwitterId}" ctiMDN="{!v.ctiMDN}"/>
+
+    
+
+    
+</aura:component>

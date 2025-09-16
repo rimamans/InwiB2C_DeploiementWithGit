@@ -1,0 +1,34 @@
+<template>
+        <div>
+            <lightning-combobox  style="width: 50%;" name="" label="Type de ligne" disabled={isNafida} value={value}  options={selection}
+                onchange={handleChangeDropDown}>
+            </lightning-combobox>
+            <template if:true={__showStatutFar}>
+                <lightning-combobox  style="width: 50%;" label="Statut FAR" value={valueStatutFar} options={optionsStatutFar}
+                onchange={handleChangeStatFar}></lightning-combobox>
+            </template>
+        </div>
+        <template if:true={__showinputs}>
+            <lightning-input style="width: 50%;" type="text" data-theid="numadherant" label="Numéro de l'adhérent" value={numAd}></lightning-input>
+            <div style="margin-top: 15px;">
+                <lightning-button disabled={__loading} variant="brand" label="Vérifier"
+                    title="Vérifier l'éligibilité" onclick={checkEligibilityNafida} class="slds-m-left_x-small">
+                </lightning-button>
+            </div>
+        </template>
+        <template if:true={__showUniversite}>
+            <lightning-combobox style="width: 50%;" data-id="universite" id="universite" label="Université/établissement" placeholder="Selectionner un établissement" value={universiteValue} onchange={handleSelection} options={universites}></lightning-combobox> 
+        </template>
+        <div style="margin-top: 15px;">
+            <p style="color: red; font-weight: bold;">{__message}</p>
+        </div>
+        <template if:true={__next}>
+
+            <div style="margin-top: 15px; float: right;">
+                <lightning-button  style="width: 50%;color:#A846A9 ;" variant="brand" onclick={handleSuivant} label="Suivant">
+
+                </lightning-button>
+            </div>
+        </template>
+ 
+</template>

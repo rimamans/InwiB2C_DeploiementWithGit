@@ -1,0 +1,3 @@
+let definition = 
+                {"Cards":["inwiB2C_TicketsAVRD"],"dataSource":{"type":"IntegrationProcedures","value":{"ipMethod":"","optionsMap":{"vlcClass":"vlocity_cmt.IntegrationProcedureService"},"inputMap":{},"resultVar":""},"contextVariables":[]},"enableLwc":true,"repeatCards":false,"lwc":{"MasterLabel":"cardCanvas1x","DeveloperName":"cardCanvas1x","Id":"0Rb4K000000kQXbSAM","name":"cardCanvas1x","NamespacePrefix":"vlocity_cmt"},"previewType":"designTime","componentName":"cfInwiB2C_TicketsAVRD_1_AmineE","workspace":["inwiB2C_TicketsAVRD/AmineE/1/1694691533166"],"GlobalKey__c":"InwiB2C_TicketsAVRD/1/AmineE/1694689342517"}; 
+            export default definition

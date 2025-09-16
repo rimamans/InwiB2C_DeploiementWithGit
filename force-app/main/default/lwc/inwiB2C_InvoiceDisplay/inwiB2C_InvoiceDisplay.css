@@ -1,0 +1,263 @@
+/*** STYLES ***/
+
+
+.titleInwi{
+    background-color:rgb(244,177,131); 
+    text-align: center;
+    padding:5px;
+    color:beige;
+    
+}
+
+/*** STYLES ***/
+.via-slds.container-table-canvas .slds-grid .slds-form-element__control {
+    display: inline-block;
+  }
+  .via-slds.container-table-canvas .overflowVisible {
+    overflow: visible;
+    position: relative;
+    z-index: 1;
+  
+  }
+  .via-slds.container-table-canvas .overflowAuto {
+    overflow: auto;
+  }
+  
+  .via-slds p {
+    margin: 0px !important;
+  }
+  
+  .via-slds .slds-text-link--reset, .via-slds .slds-text-link--reset:active, .via-slds .slds-text-link--reset:focus, .via-slds .slds-text-link--reset:hover {
+    text-decoration: underline;
+    color: #0070d2;
+  }
+  
+  /*Added to fix height issue*/
+  body {
+    position: relative;
+  }
+  
+  .cfp-hotkeys, .cfp-hotkeys-container {
+    width: auto;
+    height: auto;
+  }
+  
+  .cfp-hotkeys-container {
+    display: block !important;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    color: #333;
+    font-size: 1em;
+    background-color: rgba(255, 255, 255, 0.9);
+  }
+  
+  .cfp-content, .cfp-hotkeys {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+  }
+  .titleAsset{
+    background-color:rgb(244,177,131); 
+    text-align: center;
+    padding:5px;
+    color:beige;
+    
+}
+
+.blueTitle{
+  background-color:#458AF2; 
+  text-align: center;
+  padding:0px;
+  color:beige;
+}
+.redTitle{
+
+  background-color:#c00000; 
+  text-align: center;
+  padding:0px;
+  padding-top:3px;
+
+  font-size: 10px;
+  color:beige;
+}
+
+
+
+
+/*Added BY AAR 02/03/2020  */
+
+.greenTitle{
+  background-color:#92d050; 
+  text-align: center;
+  padding:0px;
+  color:beige;
+}
+
+.purpleTitle{
+  background-color:#de52c0; 
+  text-align: center;
+  padding:0px;
+  color:beige;
+}
+
+.greyTitle{
+  background-color: #a6a6a6; 
+  text-align: center;
+  padding:0px;
+  color:beige;
+}
+
+
+.softOrangeTitle{
+  background-color: #f4b183; 
+  text-align: center;
+  padding:0px;
+  color:beige;
+}
+
+.softGreenTitle{
+  background-color: #c5e0b4; 
+  text-align: center;
+  padding:0px;
+  color:beige;
+}
+
+
+.brouwnTitle{
+  background-color: #bf9000; 
+  text-align: center;
+  padding:0px;
+  color:beige;
+}
+
+
+
+  /* Styling of Tables */
+
+  .style-table  {
+    zoom: 70%;
+}
+
+
+/*END OF AAR's ADDITION 02/10/2020  */
+
+
+/*Added BY AAR 05/10/2020  */
+
+.level-1-main-color-title{
+  background-color: #322755; 
+  text-align: center;
+  padding:0px;
+  color:beige;
+}
+
+.level-2-main-color-title{
+  background-color: #5A245A; 
+  text-align: center;
+  padding:0px;
+  color:beige;
+}
+
+
+.level-3-main-color-title{
+  background-color: #F04D98; 
+  text-align: center;
+  padding:0px;
+  color:beige;
+}
+
+
+
+.level-4-main-color-title{
+  background-color: #EB67B9; 
+  text-align: center;
+  padding:0px;
+  color:beige;
+}
+
+.black-title{
+  background-color: #000000; 
+  text-align: center;
+  padding:0px;
+  color:beige;
+}
+
+
+.white-title{
+  background-color: #FFFFFF; 
+  text-align: center;
+  padding:0px;
+  color:#000000;
+}
+
+.level-7-main-color-title{
+  background-color: #952D98; 
+  text-align: center;
+  padding:0px;
+  color:beige;
+}
+
+
+
+
+
+.level-1-secondary-color-title{
+  background-color: #97999B; 
+  text-align: center;
+  padding:0px;
+  color:beige;
+}
+
+.level-2-secondary-color-title{
+  background-color: #009FDF; 
+  text-align: center;
+  padding:0px;
+  color:beige;
+}
+
+
+.level-3-secondary-color-title{
+  background-color: #F2A900; 
+  text-align: center;
+  padding:0px;
+  color:beige;
+}
+
+
+.level-4-secondary-color-title{
+  background-color: #C98BDB; 
+  text-align: center;
+  padding:0px;
+  color:beige;
+}
+
+
+.level-5-secondary-color-title{
+  background-color: #00A376; 
+  text-align: center;
+  padding:0px;
+  color:beige;
+}
+
+
+.level-6-secondary-color-title{
+  background-color: #BF9474; 
+  text-align: center;
+  padding:0px;
+  color:beige;
+}
+
+
+.level-7-secondary-color-title{
+  background-color: #952D98; 
+  text-align: center;
+  padding:0px;
+  color:beige;
+}
+
+
+/*END OF AAR's ADDITION  05/10/2020 */

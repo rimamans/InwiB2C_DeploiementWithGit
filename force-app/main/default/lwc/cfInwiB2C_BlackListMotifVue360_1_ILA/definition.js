@@ -1,0 +1,3 @@
+let definition = 
+                {"Cards":["inwiB2C_blackListVue360"],"dataSource":{"type":"DataRaptor","value":{"bundle":"InwiB2C_getBlackListStatutForCard","inputMap":{"accountId":"{{params.id}}"}}},"enableLwc":true,"repeatCards":false,"lwc":{"MasterLabel":"cardCanvas1x","DeveloperName":"cardCanvas1x","Id":"0Rb4K000000kQXbSAM","name":"cardCanvas1x","NamespacePrefix":"vlocity_cmt"},"previewType":"designTime","componentName":"cfInwiB2C_BlackListMotifVue360_1_ILA","workspace":["inwiB2C_blackListVue360/ILA/1/1723754147928"],"GlobalKey__c":"InwiB2C_BlackListMotifVue360/1/ILA/1723754106935"}; 
+            export default definition

@@ -1,0 +1,59 @@
+<!--
+  @description       :  Parcours recherche adresse IAM introuvable (TTM VULA )
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 01-20-2025
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+  <!--  15/01/2025 A-TA -->
+      <div class="slds-grid slds-wrap slds-grid_vertical-stretch">
+         <lightning-Input type="search" placeholder="Entrer une province/ville"  label="Province/ville" value={searchProvince}   onchange={handleSearchChange} required message-when-value-missing="Ce champ est obligatoire" >  </lightning-input>
+          <template if:true={showOptions} > 
+            <div style="max-width: 400px; margin-top: 55px; border: 1px solid #ccc; border-radius: 4px; max-height: 150px; overflow-y: auto; position: absolute; background: white; z-index: 1000;" >
+          <ul style="max-width: 400px; margin-left: 20px;" class="slds-listbox slds-listbox_vertical slds-m-top_small">
+            <template for:each={filteredProvinceVilleOptions} for:item="option"> 
+              <li key={option.value} class="slds-listbox__item">
+                <button 
+                
+                style="width: 100%; background: none; border: none; text-align: left; padding: 10px; font-size: 14px; color: #ad08ba; cursor: pointer;"
+                onclick={handleOptionSelect} 
+                data-value={option.value}>
+                {option.label}
+              </button>  
+              </li>
+            </template>
+          </ul> 
+        </div>
+        </template>
+          <br>
+          <br>
+          <lightning-input  type="String"  data-theid="AdresseClient"  
+          label="Adresse client" value={Adressevalue} required message-when-value-missing="Ce champ est obligatoire" 
+          class="slds-col slds-size_1-of-1 elementMargin1" onchange={handleAdresseChange}>
+          </lightning-input>
+      </div>
+          <br>
+          <br>
+          <br>
+         
+            <template if:true={isButtonsVisible}>
+              <div class="slds-grid slds-grid_align-center slds-m-around_medium">
+          <lightning-button variant="brand" label="Envoyer" data-theid="envoyer" title="Envoyer"
+          onclick={handleEnvoyer} class="slds-m-left_x-small" ></lightning-button>
+         </div>
+      </template>
+        <div class="slds-grid slds-grid_align-center slds-m-around_medium">
+            <lightning-button 
+                variant="brand" 
+                label="Annuler" 
+                data-theid="annuler" 
+                title="Annuler"
+                onclick={handleAnnuler} 
+                class="slds-m-left_x-small">
+            </lightning-button>
+        </div>
+  
+    
+        
+  </template>

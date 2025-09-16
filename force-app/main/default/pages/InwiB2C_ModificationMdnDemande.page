@@ -1,0 +1,56 @@
+<apex:page sidebar="false" renderAs="pdf" controller="InwiB2C_ModificationMdn_Controller" showHeader="false" applyBodyTag="false">
+
+    <head>
+        <style>
+            body {
+                font-family: 'Arial Unicode MS';
+                font-size: 12px;
+            }
+
+            @page: first {
+                size: A4;
+                margin-top: 0px margin-right:0px;
+                margin-left: 0px;
+                margin-bottom: 0cm;
+            }
+
+            @page {
+                size: A4;
+                margin-top: 0px;
+                margin-right: 0px;
+                margin-left: 0px;
+                margin-bottom: 0cm;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div style="page-break-after:avoid ; height: 1100px ">
+            <img style="width:100%;" src="{!$Resource.InwiB2C_FormulaireChangementMdn}" />
+            <!--  -->
+                <p style="position: absolute;top:80px;left: 385px;font-size: 14px">{!name}</p>
+                <p style="position: absolute;top:105px;left: 385px;font-size: 14px">{!cin}</p>
+                <p style="position: absolute;top:130px;left: 385px;font-size: 14px">{!mdn}</p>
+                <p style="position: absolute;top:159px;left: 385px;font-size: 14px">{!Offre}</p>
+                <p style="position: absolute;top:186px;left: 385px;font-size: 14px">{!datedefacturation}</p>
+                <p style="position: absolute;top:210px;left: 385px;font-size: 14px">{!poscode}</p>
+                <p style="position: absolute;top:235px;left: 385px;font-size: 14px">{!numcomm}</p>  
+                <p style="position: absolute;top:264PX;left: 385px;font-size: 14px">{!typeModification}</p>
+                <p style="position: absolute;top:290PX;left: 385px;font-size: 14px">{!detailModification}</p>
+                <p style="position: absolute;top:412px;left: 520px;font-size: 14px">0 DH</p>
+                <p style="position: absolute;top:432px;left: 520px;font-size: 14px">{!IF(AND( fraischgtmdn != 'null'),fraischgtmdn, '0')} DH</p>
+                <!-- <p style="position: absolute;top:432px;left: 520px;font-size: 14px">{!fraischgtmdn} DH</p> -->
+                <!-- <p style="position: absolute;top:450px;left: 520px;font-size: 14px">{!fraischgtmdn} DH</p> -->
+                <p style="position: absolute;top:450px;left: 520px;font-size: 14px">{!IF(AND( fraischgtmdn != 'null'),fraischgtmdn, '0')} DH</p>
+                <p style="position: absolute;top:483px;left: 260px;font-size: 14px">{!oldmdn}</p>
+                <p style="position: absolute;top:483px;left: 570px;font-size: 14px">{!newmdn}</p>
+                <p style="position: absolute;top:510px;left: 520px;font-size: 14px">{!categoriemdn}</p>
+                <p style="position: absolute;top:802px;left: 560px;font-size: 14px">{!datedefacturation}</p>
+                
+
+        </div>
+
+    </body>
+
+
+</apex:page>

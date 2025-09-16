@@ -1,0 +1,158 @@
+<template>
+    <template if:true={isLoadinginModal}>
+        <div class="exampleHolder">
+            <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+        </div>
+    </template>
+    <template if:false={isLoadinginModal}>
+        <div class="slds-col">
+            <lightning-input type="text" lwc:ref="NumParatge" label="N° Partage" 
+                class="slds-col slds-size_1-of-2 elementMargin1" >
+            </lightning-input>
+        </div>
+
+        <div class="slds-col">
+            <lightning-input type="text" lwc:ref="lineId" label="Id de ligne" 
+            class="slds-col slds-size_1-of-2 elementMargin1">
+            </lightning-input>
+        </div>
+
+        <div class="slds-col">    
+            <lightning-combobox label="Statut de la demande"  class="slds-col slds-size_1-of-2 elementMargin1" placeholder="Selectionner un statut" options={statutDemandePicklist} lwc:ref="statutDemande">
+           </lightning-combobox>
+        </div>  
+
+        <div class="slds-col ">
+                <lightning-input type="text" lwc:ref="numDesignation" 
+                label="Numéro de désignation" class="slds-col slds-size_1-of-2 elementMargin1" >
+                </lightning-input>
+        </div>
+
+        <div class="slds-col">
+            <lightning-input type="text" lwc:ref="nomClient" 
+            label="Nom du client" class="slds-col slds-size_1-of-2 elementMargin1" >
+            </lightning-input>
+        </div>
+
+        <div class="slds-col">
+            <lightning-input type="text" lwc:ref="numContact" 
+            label="Numéro de contact" class="slds-col slds-size_1-of-2 elementMargin1" >
+            </lightning-input>
+        </div>
+
+        <div class="slds-col">
+            <lightning-combobox lwc:ref="statutLigne" label="Statut de la ligne"  options={statutLignePicklist} placeholder="Selectionner un statut"
+            class="slds-col slds-size_1-of-2 elementMargin1" ></lightning-combobox>
+        </div>
+
+        <div class="slds-col">
+            <lightning-input type="date" lwc:ref="Createddate" label="Date de création" class="slds-col slds-size_1-of-2 elementMargin1"  ></lightning-input>
+        </div>
+    
+        <div class="slds-col">
+            <lightning-input type="date" lwc:ref="startDate" label="Date de début" class="slds-col slds-size_1-of-2 elementMargin1"  ></lightning-input>
+        </div>
+    
+        <div class="slds-col">
+            <lightning-input type="date" lwc:ref="endDate" label="Date de fin" class="slds-col slds-size_1-of-2 elementMargin1"  ></lightning-input>
+        </div> 
+
+   <!-- Acyl 19-05-2025 - B-28591 BEGIN -->
+   <div class="slds-col">
+    <lightning-input 
+        type="search" 
+        placeholder="Chercher un client" 
+        name="Client" 
+        label="Client" 
+        value={valueAccount} 
+        onchange={getObjectsRecords} 
+        class="slds-col slds-size_1-of-2 elementMargin1">
+    </lightning-input>
+
+    <template if:true={optionsArrayAccount.length}>
+        <div class="slds-col slds-size_12-of-12 slds-m-bottom--medium slds-box">
+            <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+                <template for:each={optionsArrayAccount} for:item="item">
+                    <li key={item.Id} class="slds-listbox__item">
+                        <a>
+                            <p data-id={item.Id} data-number={item.name} onclick={handleSelectAccount}>
+                                {item.name}
+                            </p>
+                        </a>
+                    </li>
+                </template>
+            </ul>
+        </div>
+    </template>
+</div>
+
+<!-- Recherche Commande -->
+<div class="slds-col">
+    <lightning-input 
+        type="search" 
+        placeholder="Chercher une commande" 
+        name="Commande" 
+        label="Commande" 
+        value={valueOrder} 
+        onchange={getObjectsRecords} 
+        class="slds-col slds-size_1-of-2 elementMargin1">
+    </lightning-input>
+
+    <template if:true={optionsArrayOrder.length}>
+        <div class="slds-col slds-size_12-of-12 slds-m-bottom--medium slds-box">
+            <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+                <template for:each={optionsArrayOrder} for:item="item">
+                    <li key={item.Id} class="slds-listbox__item">
+                        <a>
+                            <p data-id={item.Id} data-number={item.number} onclick={handleSelectOrder}>
+                                {item.number}
+                            </p>
+                        </a>
+                    </li>
+                </template>
+            </ul>
+        </div>
+    </template>
+</div>
+
+   <!-- Acyl 19-05-2025 - B-28591 END -->
+    
+<!-- Recherche Agence -->
+   <!-- K-KA 16-06-2025 - B-29805 START -->
+<div class="slds-col">
+    <lightning-input 
+        type="search" 
+        placeholder="Chercher une agence" 
+        name="Agence" 
+        label="Agence" 
+        value={valueAgence} 
+        onchange={getObjectsRecords} 
+        class="slds-col slds-size_1-of-2 elementMargin1">
+    </lightning-input>
+
+    <template if:true={optionsArrayAgence.length}>
+        <div class="slds-col slds-size_12-of-12 slds-m-bottom--medium slds-box">
+            <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+                <template for:each={optionsArrayAgence} for:item="item">
+                    <li key={item.Id} class="slds-listbox__item">
+                        <a>
+                            <p data-id={item.Id} data-number={item.name} onclick={handleSelectAgence}>
+                                {item.name}
+                            </p>
+                        </a>
+                    </li>
+                </template>
+            </ul>
+        </div>
+    </template>
+</div>
+   <!-- K-KA 16-06-2025 - B-29805 END -->
+
+        <br/><br/>
+        <lightning-button variant="brand" label="Rechercher" data-theid="search" title="Rechercher"
+            onclick={Search} class="slds-float_right"></lightning-button>
+    </template>
+   
+
+
+</template>

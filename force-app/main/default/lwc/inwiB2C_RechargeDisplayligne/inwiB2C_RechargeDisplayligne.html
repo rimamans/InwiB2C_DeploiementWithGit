@@ -1,0 +1,62 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 11-08-2021
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+
+    <div class="via-slds riders-list-canvas container-table-canvas" if:true={records}>
+
+       <h1>Historique de recharge temps réel</h1>
+        <div class="slds-card slds-p-around--small np-card">
+            
+            <div class={titleStyle}>
+                
+                <h3 class="slds-p-bottom--small slds-text-heading--small slds-truncate " >
+                   
+                </h3>
+            </div>
+
+           
+           <div class="slds-p-bottom--small">
+                <div class="slds-m-bottom_xx-large overflowVisible ">
+                    <div >                    
+                        <div class="wraperClass ">
+
+                        <!--    <lightning-input type="search" label="Search" onchange={updateSearch}>
+                            </lightning-input>
+                            -->
+                            <lightning-combobox placeholder="Choisir une option" onchange={updateSearch}
+                            label="Filtre par prix" 
+                             options={pickListvalues} 
+                            >
+                        </lightning-combobox>
+
+                        <lightning-combobox placeholder="Choisir une option" onchange={updateSearch2}
+                        label="Filtre par type " 
+                         options={pickListvalues2} 
+                        >
+                    </lightning-combobox>
+
+                        
+                            <lightning-datatable
+                                class="tab-style slds-table_col-bordered" 
+                                key-field="Id"
+                                columns={columns}
+                                data={records} 
+                                draft-values={draftValues}
+                                onrowaction={handleRowAction}
+                                hide-checkbox-column= true>
+                            </lightning-datatable>
+                        </div>
+                    </div>
+            </div>
+                
+            </div>
+        </div>
+
+    </div>
+    
+</template>

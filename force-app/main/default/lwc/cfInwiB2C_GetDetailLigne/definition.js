@@ -1,0 +1,3 @@
+let definition = 
+                {"Cards":["GetDetailLigne"],"dataSource":{"type":null},"enableLwc":true,"repeatCards":false,"lwc":{"MasterLabel":"Profile LWC Layout","DeveloperName":"profileLayoutLWC","Id":"0Rb4K000000cpKxSAI","name":"profileLayoutLWC"},"previewType":"designTime","componentName":"cfInwiB2C_GetDetailLigne","workspace":["GetDetailLigne/LBI/1/1695158111295"],"GlobalKey__c":"InwiB2C_GetDetailLigne/1/LBI/1695200802339"}; 
+            export default definition

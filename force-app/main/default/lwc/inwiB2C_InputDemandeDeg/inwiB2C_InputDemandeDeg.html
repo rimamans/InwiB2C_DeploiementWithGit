@@ -1,0 +1,93 @@
+<template>
+
+    <div class="slds-col">
+        <lightning-input type="text" data-id="numOrder" label="N° Ordre" 
+            class="slds-col slds-size_1-of-2 elementMargin1" 
+            pattern="[0-9]{8}"  message-when-pattern-mismatch="N° Order doit avoir 8 chiffres." >
+        </lightning-input>
+    </div>
+
+    <div class="slds-col">    
+        <lightning-combobox data-id="statutDemande" label="Statut de la demande" 
+        placeholder="Selectionner un statut" options={statutDemandePicklist} class="slds-col slds-size_1-of-2 elementMargin1" >
+        </lightning-combobox>
+    </div>    
+
+    <div class="slds-col ">
+        <lightning-input type="text" data-id="numDesignation" 
+        label="Numéro de désignation" class="slds-col slds-size_1-of-2 elementMargin1" >
+        </lightning-input>
+    </div>
+
+    <div class="slds-col">
+        <lightning-input type="text" data-id="nomClient" 
+        label="Nom du client" class="slds-col slds-size_1-of-2 elementMargin1" >
+        </lightning-input>
+    </div>
+
+    <div class="slds-col">
+        <lightning-input type="text" data-id="numContact" 
+        label="Numéro de contact" class="slds-col slds-size_1-of-2 elementMargin1" >
+        </lightning-input>
+    </div>
+
+    <div class="slds-col">
+        <lightning-combobox data-id="statutLigne" label="Statut de la ligne" 
+        placeholder="Selectionner un statut" options={statutLignePicklist} class="slds-col slds-size_1-of-2 elementMargin1" ></lightning-combobox>
+    </div>
+
+    <div class="slds-col">
+        <lightning-input type="date" data-id="date" label="Date de création" class="slds-col slds-size_1-of-2 elementMargin1"  ></lightning-input>
+    </div>
+
+    <div class="slds-col">
+        <lightning-input type="date" data-id="startDate" label="Date de début" class="slds-col slds-size_1-of-2 elementMargin1"  ></lightning-input>
+    </div>
+
+    <div class="slds-col">
+        <lightning-input type="date" data-id="endDate" label="Date de fin" class="slds-col slds-size_1-of-2 elementMargin1"  ></lightning-input>
+    </div>
+
+    <div class="slds-col">
+        <lightning-Input type="search" placeholder="Chercher un client"  label="Client" value={valueAccount} onchange={handleChangedAccount} data-id="account" class="slds-col slds-size_1-of-2 elementMargin1" >  </lightning-input>
+            <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+                <template for:each={optionsArrayAccount} for:item="item">
+                    <li key={item.Id} class="slds-listbox__item">
+                      <a >  <p data-id={item.Id}
+                        data-number={item.name} onclick={handleSelectAccount} key={item.Id}>{item.name}</p> </a>
+                        </li>                        
+                    </template>
+                </ul>
+    </div>
+
+    <div class="slds-col">
+        <lightning-Input type="search" placeholder="Chercher une commande"  label="Commande" value={valueOrder} onchange={handleChangedOrder} data-id="order" class="slds-col slds-size_1-of-2 elementMargin1"  >  </lightning-input>
+            <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+                <template for:each={optionsArrayOrder} for:item="item">
+                    <li key={item.Id} class="slds-listbox__item">
+                      <a >  <p data-id={item.Id}
+                        data-number={item.number} onclick={handleSelectOrder} key={item.Id}>{item.number}</p> </a>
+                        </li>                        
+                    </template>
+                </ul>
+    </div>
+
+    <div class="slds-col">
+        <lightning-Input type="search" placeholder="Chercher une agence"  label="Agence" value={valueAgence}  onchange={handleChangedAgence} data-id="agence" class="slds-col slds-size_1-of-2 elementMargin1"  >  </lightning-input>
+            <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+                <template for:each={optionsArrayAgence} for:item="item">
+                    <li key={item.Id} class="slds-listbox__item">
+                      <a >  <p data-id={item.Id}
+                        data-number={item.name} onclick={handleSelectAgence} key={item.Id}>{item.name}</p> </a>
+                        </li>                        
+                    </template>
+                </ul>
+    </div>
+
+
+    <br/><br/>
+        <lightning-button variant="brand" label="Rechercher" data-theid="searche" title="Rechercher"
+            onclick={handleSearch} class="slds-float_right"></lightning-button>
+
+
+</template>

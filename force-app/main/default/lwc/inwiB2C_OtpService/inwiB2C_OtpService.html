@@ -1,0 +1,102 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 11-07-2023
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+  
+  <div>
+    <template if:true={isacquisition}>
+      <template if:true={displayradiobutton}>
+        <template if:false={displayemail}>
+          <lightning-radio-group name="radioGroup"
+            label="Sélectionnez le mode d'envoi du code"
+            options={options}
+            value={value}
+            onchange={handleRadioChange}
+            type="radio"
+            required="true">
+          </lightning-radio-group>
+        </template>
+        <template if:true={displayemail}>
+          <lightning-radio-group name="radioGroup"
+            label="Sélectionnez le mode d'envoi du code"
+            options={OneOptions}
+            value={value}
+            onchange={handleRadioChange}
+            type="radio"
+            required="true">
+          </lightning-radio-group>
+        </template>
+      </template>
+   
+      
+    
+    <template if:true={displayPhone}>  
+      <lightning-input  type="text" label="numéro de téléphone existant"  value={numeromdn} disabled></lightning-input>  
+    </template>
+    
+    <template if:true={displayEmail}>
+      <lightning-input if:true={displayEmail} type="text" label="E-mail existant"  value={email} disabled></lightning-input>
+    </template>
+
+    <br>
+  
+      <lightning-button variant="brand" label="Rafraichir données" title="Rafraichir données" onclick={synchronizeDataOTP}></lightning-button>
+  
+    
+
+    <template if:true={displayPhoneDuplicateError}>
+      <br><br>
+      <h1 style="color:red;"><strong>Le nombre de fiche client B2C contenant le numéro de téléphone est dépassé.</strong></h1>
+    </template>
+    <template if:true={displayEmailDuplicateError}>
+      <br><br>
+      <h1 style="color:red;"><strong>Le nombre de fiche client B2C contenant l'adresse email est dépassé.</strong></h1>
+    </template>
+
+    <template if:true={displayEmailError}>
+      <br><br>
+      <h1 style="color:red;"><strong>Merci de renseigner l’adresse mail du client au niveau de la fiche client.</strong></h1>
+    </template>
+    <template if:true={displayPhoneError}>
+      <br><br>
+      <h1 style="color:red;"><strong>Merci de renseigner le numéro du client au niveau de la fiche client.</strong></h1>
+    </template>
+  </template>
+  
+
+  <template if:true={displayOTP}>
+    <lightning-card title={title} icon-name="attach">
+      <!-- <lightning-button variant="brand" label="Envoyer le code OTP" title="Envoyer le code OTP" onclick={generateOTP} class="slds-var-m-left_x-small" disabled={disabled}></lightning-button> -->
+      <lightning-button variant="brand" label="Envoyer le code OTP" title="Envoyer le code OTP" onclick={generateOTP} disabled={disabled}></lightning-button>
+      <div class="slds-var-m-around_medium" if:false={loading}>
+        <div if:true={displayRingCounter}>
+          <p class="slds-text-heading_medium">
+            <lightning-progress-ring
+              value={ringCounter}
+              variant={ringVariant}
+              class="slds-var-m-left_small"
+            ></lightning-progress-ring>
+          </p>
+          <!-- <p>Refreshing in {refreshCounter} second(s)</p> -->
+        </div>
+        <div if:false={disabled}>
+          <!--<p>Appuyez Envoyer le code OTP pour generer et envoyer le code</p>-->
+        </div>
+      </div>
+    </lightning-card>
+    <lightning-card>
+      <lightning-input type="text" label="Saisir le code OTP" onchange={handleotpinput} value={otpsaisi} disabled={verifDisabled}></lightning-input>
+      <br />
+      <!-- <lightning-button variant="brand" label="Valider OTP" title="Valider OTP" onclick={verifyOTP} class="slds-var-m-left_x-small" disabled={verifDisabled}></lightning-button> -->
+      <lightning-button variant="brand" label="Valider OTP" title="Valider OTP" onclick={verifyOTP}  disabled={verifDisabled}></lightning-button>
+    </lightning-card>
+  <template if:false={showed}>
+    <c-inwi-b2-c_-next-Prev-o-t-p-step otpok={OTPOk} resiliation={resiliation}></c-inwi-b2-c_-next-Prev-o-t-p-step>
+  </template>
+  </template>
+</div>
+</template>

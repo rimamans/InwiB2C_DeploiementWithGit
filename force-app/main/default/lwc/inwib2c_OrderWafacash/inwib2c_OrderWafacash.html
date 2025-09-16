@@ -1,0 +1,26 @@
+<template>
+    <lightning-card title="Commandes Wafacash">
+        <!-- Erreur -->
+        <template if:true={error}>
+            <p class="slds-text-color_error slds-p-around_small">
+                Une erreur est survenue lors du chargement des commandes.
+            </p>
+        </template>
+
+        <!-- Tableau des commandes -->
+        <template if:true={orders}>
+            <template if:true={orders.length}>
+                <lightning-datatable
+                    key-field="OrderNumber"
+                    data={orders}
+                    columns={columns}
+                    hide-checkbox-column="true"
+                >
+                </lightning-datatable>
+            </template>
+            <template if:false={orders.length}>
+                <p class="slds-p-around_small">Aucune commande trouvée.</p>
+            </template>
+        </template>
+    </lightning-card>
+</template>

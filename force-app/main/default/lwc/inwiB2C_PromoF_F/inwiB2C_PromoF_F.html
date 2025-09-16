@@ -1,0 +1,59 @@
+<template>
+    <lightning-card>
+            <div style="font-weight: 300;" class="slds-page-header__title slds-p-horizontal_medium slds-text-heading--medium slds-m-top_medium os-step-label">Gestion des numéros F&F</div>
+            <template if:true={errorMsg}>
+                <div class="slds-text-color_error slds-p-horizontal_medium slds-m-top_small">
+                    <p>{errorMsg}</p>
+                    <lightning-button label="Fermer" onclick={closeError} variant="destructive-text"></lightning-button>
+                </div>
+            </template>
+                <!-- <p>Date début de promotion : {startDate}</p> -->
+                <p class="slds-p-horizontal_medium slds-m-vertical_small">Date fin de promotion : {endDate}</p>
+
+
+            <lightning-button class="slds-p-horizontal_medium slds-m-top_small" label="Nouveau Numéro F&F" onclick={handleAddFFNumber} if:true={showAddButton}></lightning-button>
+
+          <div class="slds-p-horizontal_medium slds-m-top_small">
+            <table class="slds-table slds-table_bordered slds-table_col-bordered slds-m-top_medium">
+                <thead>
+                    <tr>
+                        <th>Numéro F&F</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template for:each={ffNumbers} for:item="ff" for:index="index">
+                        <tr key={ff.id}>
+                            <td>
+                                <template if:true={ff.isEditing}>
+                                    <lightning-input type="tel" placeholder="2126xxxxxxxx" data-index={index} value={ff.number} onchange={handleChangeFFNumber}></lightning-input>
+                                </template>
+                                <template if:false={ff.isEditing}>
+                                    <template lwc:if={ff.isAdding}>
+                                        <lightning-input type="tel" placeholder="2126xxxxxxxx" data-index={index} onchange={handleChangeFFNumber}></lightning-input>
+                                    </template>
+                                    <template lwc:else>
+                                        {ff.number}
+                                    </template>                               
+                                </template>
+                            </td>
+                            <td>
+                                <template if:false={ff.isEditing}>
+                                    <template lwc:if={ff.isAdding}>
+                                        <lightning-button label="Enregistrer" data-index={index} onclick={handleNewFFNumber}></lightning-button>
+                                    </template>
+                                    <template lwc:else>
+                                        <lightning-button label="Modifier" data-index={index} onclick={handleModifyFFNumber}></lightning-button>
+                                    </template>  
+                                </template>
+                                <template if:true={ff.isEditing}>
+                                    <lightning-button label="Enregistrer" data-index={index} onclick={handleSaveFFNumber}></lightning-button>
+                                </template>
+                            </td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+        </div>
+    </lightning-card>
+</template>

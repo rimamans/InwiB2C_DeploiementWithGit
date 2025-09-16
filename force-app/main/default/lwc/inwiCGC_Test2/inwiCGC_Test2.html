@@ -1,0 +1,10 @@
+<template>
+    <lightning-button variant="brand" label="Assigner Visite" title="Primary action" onclick={Open} class="slds-m-left_x-small"></lightning-button>
+    <template if:true={Show}>
+        <lightning-modal-header label="Users"></lightning-modal-header>
+        <lightning-modal-body> <p>TEST</p> </lightning-modal-body>
+        <lightning-modal-footer>
+            <lightning-button label="OK" onclick={handleOkay}></lightning-button>
+        </lightning-modal-footer>
+    </template>
+</template>

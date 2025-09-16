@@ -1,0 +1,3 @@
+let definition = 
+                {"Cards":["GetSoubscriptionsPackDepDay1"],"dataSource":{"type":null,"value":{"ipMethod":"inwib2c_GetInfoDay1Depanage","optionsMap":{"vlcClass":"vlocity_cmt.IntegrationProcedureService"},"inputMap":{"SubsId":"{{params.id}}"},"resultVar":""},"contextVariables":[]},"enableLwc":true,"repeatCards":false,"lwc":{"MasterLabel":"cardCanvas1x","DeveloperName":"cardCanvas1x","Id":"0Rb4K000000kQXbSAM","name":"cardCanvas1x","NamespacePrefix":"vlocity_cmt"},"previewType":"runTime","componentName":"cfInwiB2C_GetSoubscriptionsPackDepDay","workspace":["GetSoubscriptionsPackDepDay1/LBI/1/1694183793521"],"GlobalKey__c":"InwiB2C_GetSoubscriptionsPackDepDay/1/SJ/1694196868589"}; 
+            export default definition

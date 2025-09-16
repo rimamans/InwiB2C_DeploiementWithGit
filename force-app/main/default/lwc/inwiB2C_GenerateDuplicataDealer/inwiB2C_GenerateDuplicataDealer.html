@@ -1,0 +1,14 @@
+<template>
+    <template if:false={isLoading}>
+        <template if:true={__showButton}>
+            <lightning-button 
+                variant="brand" 
+                label="Generer Duplicata Dealer" 
+                title="Primary action" 
+                onclick={GenerateContract} 
+                class="slds-m-left_x-small"
+            >
+            </lightning-button>
+        </template>
+    </template>
+</template>

@@ -1,0 +1,26 @@
+<template>
+    <template if:false={islistEmpty}>
+        <div>
+            <!--Tableau pour affichage des demandes-->
+            <lightning-datatable
+                    key-field="id"
+                    hide-checkbox-column="true"
+                    columns={columns}
+                    data={_records}
+                    onrowaction={handleClick}
+                    sort-by={sortBy}
+                    sorted-direction={sortedList}
+                    onsort={handleSort}>
+            </lightning-datatable>
+        </div>
+    </template>
+
+    <template if:true={islistEmpty}>
+         <!--affichage d'un message si aucune demande n'est trouvé-->
+        <br><br>
+        <br><br>
+        <div style="text-align: center;"> Aucun résultat trouvé </div>
+        <br><br>
+        <br><br>
+    </template>
+</template>

@@ -1,0 +1,85 @@
+<template>
+    <strong>Detail Commande: </strong>
+    <template if:false={loadingProduct}>
+       <!-- <div class="wraperClass ">
+            <lightning-datatable key-field="documentId" columns={columns} data={dataProducts}
+                onrowselection={handleOpenModal}>
+            </lightning-datatable>
+        </div>-->
+        <div style="border-style: solid; border-color: #92107F; padding: 10px; border-radius: 10px;">
+            <p><span style="font-weight: bold;">Numero de la commande :</span> {transactionid}</p>
+            <p><span style="font-weight: bold;">Nom du produit : </span> {offerName}</p>
+            <p><span style="font-weight: bold;">Code Article : </span> {codearticle}</p>
+            <p><span style="font-weight: bold;">Numero de la ligne : </span> {msisdn}</p>
+        </div>
+
+
+
+<!--
+        <lightning-input type="text"  name="idtransaction" disabled
+                        label="Numero de la commande"  value={transactionid} 
+                        class="slds-col slds-size_1-of-2 elementMargin2" style="padding: 10px;" >
+                        </lightning-input>
+        <lightning-input type="text"  name="offerName" disabled
+                        label="Nom du produit"  value={offerName} 
+                        class="slds-col slds-size_1-of-2 elementMargin2" style="padding: 10px;" >
+        </lightning-input>   
+        <lightning-input type="text"  name="CodeArticle" disabled
+                        label="Code Article"  value={codearticle} 
+                        class="slds-col slds-size_1-of-2 elementMargin2" style="padding: 10px;" >
+        </lightning-input>
+        <lightning-input type="text"  name="Numero de ligne" disabled
+                        label="Numero de ligne"  value={msisdn} 
+                        class="slds-col slds-size_1-of-2 elementMargin2" style="padding: 10px;" >
+        </lightning-input> -->             
+    </template>
+    <div class="exampleHolder" if:true={loadingProduct}>
+        <lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+    </div>
+    <div class="slds-p-bottom--small">
+        <div class="slds-grid slds-gutters">
+            <div class="slds-col" if:true={showIMEI}>
+                <lightning-input  type="text" data-theid="imei" label="IMEI"
+                maxlength="15" minlength="15"  placeholder="Veuillez saisir l’IMEI" class="slds-col"  message-when-pattern-mismatch="IMEI doit contenir que 15 Chiffres"></lightning-input>
+            </div>
+        </div><!--
+        <div class="slds-grid slds-gutters">
+            <div class="slds-col">
+                <lightning-input if:true={showESN} type="text" data-theid="esn" label="ESN"
+                    placeholder="Veuillez saisir l'ESN" class="slds-col"></lightning-input>
+            </div>
+        </div>
+        <div class="slds-grid slds-gutters">
+            <div class="slds-col">
+                <lightning-input if:true={showIMSI} type="text" data-theid="imsi" label="IMSI"
+                    placeholder="Veuillez saisir l'IMSI" class="slds-col slds"></lightning-input>
+            </div>
+        </div>
+        
+        <div class="slds-grid slds-gutters">
+            <div class="slds-col">
+                <lightning-input type="text" data-theid="code" label="Code" placeholder="Veuillez saisir le code secret"
+                    class="slds-col"></lightning-input>
+            </div>
+        </div>-->
+        <div class="slds-grid slds-gutters">
+            <div class="slds-col" style="margin-top: 23px;"  if:true={showIMEI}>
+                <lightning-button  variant="brand" label="Vérifier le code"
+                    data-theid="checkCode" title="Vérifier l'IMEI" onclick={checkCode}
+                    class="slds-col"></lightning-button>
+            </div>
+        </div>
+    </div>
+  <!--<div style="text-align: center;">
+        <p if:false={noorder} style="color: red; font-size: 14px; font-weight: bold;margin-bottom: 20px;">Ce MDN n'est pas des commandes en cours
+            INWI</p>
+            
+    </div>-->  
+    <lightning-button if:false={showIMEI} style="padding: 10px;" variant="brand" label="Suivant" title="Suivant"
+        onclick={NextStep} class="slds-float_right"  >
+    </lightning-button>
+
+    <lightning-button style="padding: 10px;" variant="brand" label="Précédent" title="Précédent"
+        onclick={gotopreviousStep} class="slds-float_right"  >
+    </lightning-button>
+</template>

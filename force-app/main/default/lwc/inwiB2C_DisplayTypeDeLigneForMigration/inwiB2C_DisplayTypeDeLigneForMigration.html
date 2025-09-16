@@ -1,0 +1,57 @@
+<template>
+    <template if:true={isLoading}>
+        <div class="exampleHolder">
+            <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+        </div>
+    </template>
+    <template if:false={isLoading}>
+    <template if:false={eligibility}>
+        <div style="text-align: center;">
+            <p style="color:red">Vous n'êtes pas autorisé à migrer vers cette offre, Veuillez annuler la commande.</p>
+        </div>
+    </template>
+    <template if:true={eligibility}>
+        <div>
+            <div><template if:true={__FreeMig}>
+                <lightning-input type="checkbox" label="Migration gratuite" value ={migGratuite} onchange={changeFreeMig} name="freeMig" checked={isFreeMigChecked} disabled={isFreeMigChecked} ></lightning-input>
+            </template></div>
+            <br/>
+
+            <lightning-combobox name="" label="Type de ligne" disabled={isNafida} value={value}  options={selection}
+                onchange={handleChangeDropDown}>
+            </lightning-combobox>
+            <template if:true={__showinputs}>
+                <lightning-input type="text" data-theid="numadherant" label="Numéro de l'adhérent" value={numAd}></lightning-input>
+                <div style="margin-top: 15px;">
+                    <lightning-button disabled={__loading} variant="brand" label="Vérifier"
+                        title="Vérifier l'éligibilité" onclick={checkEligibilityNafida} class="slds-m-left_x-small">
+                    </lightning-button>
+                </div>
+             
+            </template>
+            <template if:true={__showStatutFar}>
+                <lightning-combobox  style="width: 50%;" label="Statut FAR" value={valueStatutFar} options={optionsStatutFar}
+                onchange={handleChangeStatFar}></lightning-combobox>
+            </template>
+            <div style="margin-top: 15px;">
+                <p style="color: red; font-weight: bold;">{__message}</p>
+            </div>
+        </div>
+        <div style="margin-top: 20px">
+        <div class="slds-grid slds-wrap slds-gutters slds-p-horizontal_medium">
+            <div class="slds-col slds-order_1 slds-medium-order_2 slds-size_12-of-12 slds-medium-size_6-of-12">
+
+            </div>
+            <div class="slds-col slds-order_1 slds-medium-order_2 slds-size_12-of-12 slds-medium-size_6-of-12">
+                <div class="slds-grid slds-wrap slds-grid_align-end omniscript-button-position">
+                    <lightning-button disabled={__disabled} variant="brand" label="Valider" onclick={handleClick}
+                        class="omniscript-btn-next slds-size_12-of-12 slds-m-bottom_xx-small slds-medium-size_2-of-12">
+                    </lightning-button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    </template>
+</template>
+</template>

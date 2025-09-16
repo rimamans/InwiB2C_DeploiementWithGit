@@ -1,0 +1,16 @@
+<template>
+    <div style="height: 80px;">
+        <!-- B-18616 M-Dj 01/11/24 ajouter header pour le tableau des demande degroupage -->
+        <h1 
+            class="slds-p-around_xxx-small" 
+            style="background-color: #f3f3f3; border-radius: 5px 5px 0 0"
+        ><strong>Demandes degroupages ({data.length})</strong></h1>
+        <!-- B-18616 M-Dj 01/11/24 ajouter header pour le tableau des demande degroupage -->
+        <lightning-datatable
+                key-field="Id"
+                data={data}
+                columns={columns}
+                hide-checkbox-column="true">
+        </lightning-datatable>
+    </div>
+</template>

@@ -1,0 +1,3 @@
+let definition = 
+                {"GlobalKey__c":"InwiB2C_card_AffichageInfoWorkOrder/aetta/1/1698922236887","dataSource":{"type":null,"value":{}},"enableLwc":true,"filter":{},"states":[{"conditions":{"group":[{"field":"$scope.data.status","operator":"===","type":"system","value":"'active'"}]},"customLwc":true,"customLwcAttributes":[{"name":"records","val":"$scope.records"}],"customLwcRepeat":false,"definedActions":{"actions":[]},"fields":[],"flyout":{"lwc":""},"isSmartAction":false,"lwc":{"DeveloperName":"inwiB2C_InfosWorkOrder","Id":"0Rb3L000000LexDSAS","MasterLabel":"InfosWordOrder","name":"inwiB2C_InfosWorkOrder"},"name":"Active","smartAction":{}}],"title":"InformationWorkOrder"}; 
+            export default definition

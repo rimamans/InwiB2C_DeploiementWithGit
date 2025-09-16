@@ -1,0 +1,84 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 04-03-2023
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<apex:page sidebar="false" renderAs="pdf" controller="inwiB2C_Controller_ModificationMdn" showHeader="false" applyBodyTag="false">
+
+    <head>
+        <style>
+            body {
+                font-family: 'Arial Unicode MS';
+                font-size: 12px;
+            }
+
+            @page: first {
+                size: A4;
+                margin-top: 0px margin-right:0px;
+                margin-left: 0px;
+                margin-bottom: 0cm;
+            }
+
+            @page {
+                size: A4;
+                margin-top: 0px;
+                margin-right: 0px;
+                margin-left: 0px;
+                margin-bottom: 0cm;
+            }
+        </style>
+    </head>
+
+    <body>
+        <apex:variable var="index" value="{!0}" />
+        <apex:repeat value="{!data}" var="loopItem" id="theRepeat">
+        <div style="page-break-after:avoid ; height: 1100px ">
+            <img style="width:100%;" src="{!$Resource.InwiB2C_Invoices_Doc}" />
+            <!--   -->
+            	<p style="position: absolute;top:125px;left: 250px;font-size: 14px"> {!IF(contains(keys,'CreatedDate'),loopItem['CreatedDate'], '')}</p>
+                <p style="position: absolute;top:146px;left: 220px;font-size: 14px">{!IF(contains(keys,'NumeroDeRecu'),loopItem['NumeroDeRecu'], '')}</p>
+                <p style="position: absolute;top:167px;left: 250px;font-size: 14px">{!IF(contains(keys,'NumeroDeRecu'),loopItem['NumeroDeRecu'], '')}</p>
+                <p style="position: absolute;top:187px;left: 250px;font-size: 14px">{!IF(contains(keys,'NumeroDeRecu'),loopItem['NumeroDeRecu'], '')}</p>
+            
+                <p style="position: absolute;top:130px;left: 630px;font-size: 12px">{!IF(contains(keys,'CodePdv'),loopItem['CodePdv'], '')}</p>
+                <p style="position: absolute;top:150px;left: 580px;font-size: 12px">{!IF(contains(keys,'CodeAgent'),loopItem['CodeAgent'], '')}</p>
+            
+            <apex:variable var="index" value="{!0}" />
+            <apex:repeat value="{!data}" var="loopItem" id="theRepeat">
+                  <p style="position: absolute;top: {! 322 + (index *41)}px;left: 8%;font-size: 14px;">{!IF(contains(keys,'Id'),loopItem['Id'], '')}</p>
+                  <p style="position: absolute;top: {! 322 + (index *41)}px;left: 25%;font-size: 14px;">{!IF(contains(keys,'InvoiceDate'),loopItem['InvoiceDate'], '')}</p>
+                  <p style="position: absolute;top: {! 322 + (index *41)}px;left: 38%;font-size: 14px;">{!IF(contains(keys,'invoicePaymentDueDate'),loopItem['invoicePaymentDueDate'], '')}</p>
+                  <p style="position: absolute;top: {! 322 + (index *41)}px;left: 55%;font-size: 14px;">{!IF(contains(keys,'invoiceAmount'),loopItem['invoiceAmount'], '')}</p>
+                  <p style="position: absolute;top: {! 322 + (index *41)}px;left: 70%;font-size: 14px;">{!IF(contains(keys,'invoiceAmount'),loopItem['invoiceAmount'], '')}</p>
+                  <p style="position: absolute;top: {! 320 + (index *41)}px;left: 84%;font-size: 14px;">0.00</p>
+            <apex:variable var="index" value="{!index + 1}" />
+            </apex:repeat>
+
+                <p style="position: absolute;top: {! 425 + (index *41)}px;left: 35%;font-size: 14px;">0.00</p>
+                <p style="position: absolute;top:535px;left: 620px;font-size: 12px">{!IF(contains(keys,'FullName'),loopItem['FullName'], '')}</p>
+                <!-- <p style="position: absolute;top:540px;left: 660px;font-size: 10px">{!IF(contains(keys,'Prenom'),loopItem['Prenom'], '')}</p> -->
+                <p style="position: absolute;top:555px;left: 625px;font-size: 12px">{!IF(contains(keys,'BillingAccount'),loopItem['BillingAccount'], '')}</p> 
+                
+            
+                <p style="position: absolute;top:533px;left: 220px;font-size: 14px">{!IF(contains(keys,'FraisTimbre'),loopItem['FraisTimbre'], '')} Dhs</p>
+                <p style="position: absolute;top:554px;left: 220px;font-size: 14px">{!IF(contains(keys,'invoiceAmount'),loopItem['invoiceAmount'], '')} Dhs</p>
+                <p style="position: absolute;top:574px;left: 220px;font-size: 14px">{!IF(contains(keys,'ModeDePaiement'),loopItem['ModeDePaiement'], '')}</p>
+          
+            
+                <p style="position: absolute;top:907px;left: 215px;font-size: 12px">{!IF(contains(keys,'CodePdv'),loopItem['CodePdv'], '')}</p>
+                <p style="position: absolute;top:925px;left: 170px;font-size: 12px">{!IF(contains(keys,'CodeAgent'),loopItem['CodeAgent'], '')}</p>
+                <p style="position: absolute;top:943px;left: 220px;font-size: 14px">{!IF(contains(keys,'CreatedDate'),loopItem['CreatedDate'], '')}</p>
+                <p style="position: absolute;top:963px;left: 190px;font-size: 14px">{!IF(contains(keys,'NumeroDeRecu'),loopItem['NumeroDeRecu'], '')}</p>
+                <p style="position: absolute;top:985px;left: 243px;font-size: 14px">{!IF(contains(keys,'NumeroDeRecu'),loopItem['NumeroDeRecu'], '')}</p>
+                <p style="position: absolute;top:1005px;left: 243px;font-size: 14px">{!IF(contains(keys,'NumeroDeRecu'),loopItem['NumeroDeRecu'], '')}</p>
+         </div>
+     <apex:variable var="index" value="{!index + 1}" />
+    
+    </apex:repeat>
+
+    </body>
+
+
+</apex:page>

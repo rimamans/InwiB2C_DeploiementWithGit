@@ -1,0 +1,13 @@
+<template>
+    <!-- <div class="slds-p-around_medium"> -->
+        <lightning-textarea
+           required="true"
+            label ="Recapitulatif"
+            value={recap}
+            onchange={handleTextareaChange}>
+        </lightning-textarea>
+        <template if:true={isError}>
+            <p class="slds-text-color_error">Le champ récapitulatif doit avoir au maximum 100 carractères</p>
+        </template>
+    <!-- </div> -->
+</template>

@@ -1,0 +1,3 @@
+let definition = 
+                {"states":[{"fields":[],"conditions":{"group":[{"field":"$scope.data.status","operator":"===","value":"'active'","type":"system"}]},"definedActions":{"actions":[]},"name":"Active","lwc":{"attributes":{"type":"LightningComponentBundle","url":"/services/data/v46.0/tooling/sobjects/LightningComponentBundle/0Rb4K000000kQXaSAM"},"MasterLabel":"cardActiveState","Id":"0Rb4K000000kQXaSAM","NamespacePrefix":"vlocity_cmt","ManageableState":"installed","DeveloperName":"cardActiveState"},"isSmartAction":false,"smartAction":{}}],"filter":{},"dataSource":{"type":null,"value":{}},"enableLwc":true,"GlobalKey__c":"GetSoubscriptionsPackDepDay1/inwiB2C/1/1694183165691"}; 
+            export default definition

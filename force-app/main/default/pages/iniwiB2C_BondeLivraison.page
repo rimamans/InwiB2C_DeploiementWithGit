@@ -1,0 +1,84 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 02-21-2024
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<apex:page sidebar="false" renderAs="pdf" controller="inwiB2C_ControllerBondeLivraison" showHeader="false" applyBodyTag="false">
+
+    <head>
+        <style>
+            body {
+                font-family: 'Arial Unicode MS';
+                font-size: 12px;
+            }
+
+            @page: first {
+                size: A4;
+                margin-top: 0px margin-right:0px;
+                margin-left: 0px;
+                margin-bottom: 0cm;
+            }
+
+            @page {
+                size: A4;
+                margin-top: 0px;
+                margin-right: 0px;
+                margin-left: 0px;
+                margin-bottom: 0cm;
+            }
+        </style>
+    </head>
+
+    <body>
+        <apex:repeat value="{!loopList}" var="loopItem" id="theRepeat">
+        <apex:variable value="{!IF(loopItem <> 1,0, -5)}" var="added" />
+        <div  >
+           <img style="width:100%;" src="{!$Resource.inwib2c_bon_livraisonNew}" />
+           <div  style="position: absolute;top: {! 112 + (loopItem *1119) + added}px;left: 32%;" >{!IF(contains(keys,'IdPanier'),ipOutput['IdPanier'], '')}</div>
+           <!-- <div style="{!IF((ipOutput['Canal'] !='inwiB2C_Eshop'),'display:block', 'display:none')}" >
+            <p style="position: absolute;top: {! 97 + (loopItem *1119) + added}px;left: 32%;">{!IF(contains(keys,'OrderNumber'),ipOutput['OrderNumber'], '')}</p>
+           </div> -->
+
+
+           
+          <!-- <div rendered="{!IF((Canal != 'inwiB2C_Eshop'),true, false)}"  style="position: absolute;top: {! 110 + (loopItem *1119) + added}px;left: 32%;">{!IF(contains(keys,'OrderNumber'),ipOutput['OrderNumber'], '')}</div> -->
+
+            <div style="position: absolute;top: {! 198 + (loopItem *1119) + added}px;left: 32%;">{!IF(contains(keys,'NomTitulaire'),ipOutput['NomTitulaire'], '')}</div>
+            <div style="position: absolute;top: {! 221 + (loopItem *1119) + added}px;left: 32%;">{!IF(contains(keys,'TypeIdent'),ipOutput['TypeIdent'], '')}</div>
+            <div style="position: absolute;top: {! 241 + (loopItem *1119) + added}px;left: 32%;">{!IF(contains(keys,'NumIdentifiant'),ipOutput['NumIdentifiant'], '')}</div>
+            <div style="position: absolute;top: {! 264 + (loopItem *1119) + added}px;left: 32%;">{!IF(contains(keys,'NumContact'),ipOutput['NumContact'], '')}</div>
+
+         
+        <apex:variable var="index2" value="{!0}" />
+        <apex:repeat rendered="{!IF(AND(contains(keys,'Terminal'), typeActeDecision != 'inwiB2C_ChangementDeCarteSIM'),true, false)}"
+         value="{!ipOutput['Terminal']}" var="item">
+        <!-- <p style="position: absolute;top: {! 475 + (index2 *30) + (loopItem *1119) + added}px;left: 12%;font-size: 10px">{!IF(contains(keysTerminal, 'NumLigne') && item['NumLigne'] != null, item['NumLigne'], '')}</p> -->
+       <p style="position: absolute;top: {! 469 + (index2 *30) + (loopItem *1119) + added}px;left: 25%;font-size: 9px; width: 130px; word-wrap: break-word;">{!IF(contains(keysTerminal, 'TypeTerminal') && item['TypeTerminal'] != null, item['TypeTerminal'], '')}</p>
+       <!-- <p style="position: absolute;top: {! 475 + (index2 *30) + (loopItem *1119) + added}px;left: 43%;font-size: 10px">{!IF(contains(keysTerminal, 'ICCSIM') && item['ICCSIM'] != null, item['ICCSIM'], '')}</p> -->
+       <div style="position: absolute; top: {! 478 + (index2 *30) + (loopItem *1119) + added}px; left: 57%; font-size: 6px; width: 100px; word-wrap: break-word;">{!IF(contains(keysTerminal, 'ModeleTerminal_new') && item['ModeleTerminal_new'] != null, item['ModeleTerminal_new'], '')}</div>
+       <p style="position: absolute;top: {! 478 + (index2 *30) + (loopItem *1119) + added}px;left: 74%;font-size: 9px">{!IF(contains(keysTerminal, 'NumSerieTerminal') && item['NumSerieTerminal'] != null, item['NumSerieTerminal'], '')}</p>
+
+ 
+       <apex:variable var="index2" value="{!index2 +1}" />
+       </apex:repeat>
+           <apex:variable var="index3" value="{!0}" />
+        <apex:repeat rendered="{!IF(AND(contains(keys,'offre'), typeActeDecision != 'inwiB2C_ChangementDeCarteSIM'),true, false)}"
+         value="{!ipOutput['offre']}" var="item">
+        <p style="position: absolute;top: {! 500 + (index3 *30) + (loopItem *1119) + added}px;left: 12%;font-size: 10px">{!IF(contains(keysOffers, 'NumLigne') && item['NumLigne'] != null, item['NumLigne'], '')}</p>
+       <p style="position: absolute;top: {! 500 + (index3 *30) + (loopItem *1119) + added}px;left: 25%;font-size: 9px; width: 130px; word-wrap: break-word;">{!IF(contains(keysOffers, 'TypeOffe') && item['TypeOffe'] != null, item['TypeOffe'], '')}</p>
+       <p style="position: absolute;top: {! 500 + (index3 *30) + (loopItem *1119) + added}px;left: 43%;font-size: 10px">{!IF(contains(keysOffers, 'ICCSIM') && item['ICCSIM'] != null, item['ICCSIM'], '')}</p>
+
+ 
+       <apex:variable var="index3" value="{!index3 +1}" />
+       </apex:repeat>
+              
+              
+        </div>
+
+        </apex:repeat>
+    </body>
+
+
+</apex:page>

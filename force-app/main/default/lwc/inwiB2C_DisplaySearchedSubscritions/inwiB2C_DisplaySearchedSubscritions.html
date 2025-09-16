@@ -1,0 +1,63 @@
+<template>
+    
+    <template if:true={subscriptiontodispaly}  >
+
+        <div class="wraperClass ">
+            <table class="sty-table-case slds-table slds-table_bordered slds-table_fixed-layout">
+                <thead>
+                  <tr class="">
+                    <th class="" scope="col">
+                      <div class="slds-truncate" title="Nom">Nom</div>
+                    </th>
+                    <th class="" scope="col">
+                      <div class="slds-truncate" title="Prénom">Prénom</div>
+                    </th>
+                    <th class="" scope="col">
+                      <div class="slds-truncate" title="CIN">CIN</div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="CIN">NumLigne</div>
+                      </th>
+  
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Action">Actions</div>
+                      </th>  
+                  </tr>
+                </thead>
+                <tbody>
+                <template for:each={subscriptiontodispaly} for:item="ligne" >
+                    <tr key ={ligne.IdCase} >
+                        <td class="slds-cell-wrap" > <div class="slds-line-clamp">{ligne.LastName}</div> </td>
+                        <td class="slds-cell-wrap" > <div class="slds-line-clamp">{ligne.FirstName}</div> </td>
+                        <td class="slds-cell-wrap" > <div class="slds-line-clamp">{ligne.CIN}</div> </td>
+                        <td class="slds-cell-wrap" > <div class="slds-line-clamp">{ligne.NumLigne}</div> </td>
+
+                        <td class="slds-cell-wrap" >
+                            <div class="slds-line-clamp">
+                                <lightning-button label="Vue 360° Souscription"  onclick={handleSubSelected} 
+                                    id={ligne.AccountId} name={ligne} ></lightning-button>
+                            </div>      
+                        </td>
+
+                    </tr>
+                </template>
+              
+                </tbody>
+              </table>
+
+        </div>
+
+
+    </template>
+
+
+    <template if:false={subscriptiontodispaly}  >
+      <div class="nocard-case slds-col slds-size--1-of-1 slds-text-align_center">
+        <br />
+        <br />
+        Aucune Souscription
+    </div>
+
+
+    </template>
+</template>

@@ -1,0 +1,40 @@
+<apex:page sidebar="false" renderAs="pdf" controller="Inwib2c_cessionlignePrepaye_controller" showHeader="false" applyBodyTag="false">
+    <head>
+        <style>
+            body {
+                font-family: 'Arial Unicode MS';
+                font-size: 12px;
+            }
+
+            @page {
+                size: A4;
+                margin: 0px;
+                width: 210mm;
+                height: 297mm;
+            }
+        </style>
+    </head>
+
+    <body>
+        <img style="width:100%; height: auto;" src="{!$Resource.formulaire_cessionLignePrepaye}" />
+
+        <div>
+            <p style="position: absolute; top: 150px; left: 160px; font-size: 11px;">{!cessionDate}</p>
+            <p style="position: absolute; top: 170px; left: 220px; font-size: 11px;">{!clientAccountNumber}</p>
+            <p style="position: absolute; top: 190px; left: 450px; font-size: 11px;">{!lineNumber}</p>
+            <p style="position: absolute; top: 205px; left: 345px; font-size: 11px;">{!subscribedOffer}</p>
+            <p style="position: absolute; top: 220px; left: 290px; font-size: 11px;">{!serviceContractNumber}</p>
+
+            <p style="position: absolute; top: 280px; left: 200px; font-size: 11px;">{!cedantFullName}</p>
+            <p style="position: absolute; top: 295px; left: 220px; font-size: 11px;">{!cedantIdType}</p>
+            <p style="position: absolute; top: 315px; left: 275px; font-size: 11px;">{!cedantIdNumber}</p>
+            <p style="position: absolute; top: 330px; left: 175px; font-size: 11px;">{!cedantAddress}</p>
+            <p style="position: absolute; top: 350px; left: 240px; font-size: 11px;">{!cedantPhoneNumber}</p>
+
+            <p style="position: absolute; top: 410px; left: 200px; font-size: 11px;">{!cessionnaireFullName}</p>
+            <p style="position: absolute; top: 425px; left: 220px; font-size: 11px;">{!cessionnaireIdType}</p>
+            <p style="position: absolute; top: 450px; left: 270px; font-size: 11px;">{!cessionnaireIdNumber}</p>
+            <p style="position: absolute; top: 465px; left: 200px; font-size: 11px;">{!cessionnaireAddress}</p>
+        </div>
+    </body>
+</apex:page>

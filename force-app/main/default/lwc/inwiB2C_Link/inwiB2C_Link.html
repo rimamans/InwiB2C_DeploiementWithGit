@@ -1,0 +1,70 @@
+<template>
+    <div class="via-slds riders-list-canvas container-table-canvas">
+        <div class="slds-card slds-p-around--small">
+            <h3 class="slds-p-bottom--small slds-text-heading--small slds-truncate titleLinkModif">
+                <b>Boite à outils</b>
+            </h3>
+            <br>
+            
+            <lightning-tile  label="Power Card" onclick={viewPower}  type="media">
+                
+                <lightning-icon slot="media" icon-name="standard:hierarchy"></lightning-icon>
+
+            </lightning-tile>
+
+           
+            <lightning-tile label="Portabilité SPN"  href="https://spn.extranet.inwi.ma/Portability/login.xhtml" type="media">
+                <lightning-icon slot="media" icon-name="standard:hierarchy"></lightning-icon>
+
+            </lightning-tile>
+
+         
+            <lightning-tile label="Portabilité Numlex" href="https://extranet.inwi.ma/selfregistering/ssologin.jsp?application=NUMLEX&url=https%3A%2F%2Fbdcpn.extranet.inwi.ma%2Floginsso" type="media">
+                <lightning-icon slot="media" icon-name="standard:people"></lightning-icon>
+                
+            </lightning-tile>
+
+           
+            <lightning-tile label="Configuration Internet Mobile" href="https://dmc2.extranet.inwi.ma/inwicc/loginsso" type="media">
+                <lightning-icon slot="media" icon-name="standard:invocable_action"></lightning-icon>
+
+            </lightning-tile>
+
+          
+            <lightning-tile label="Facturation AX" href="https://extranet.inwi.ma/selfregistering/ssologin.jsp?application=AX&url=http%3A%2F%2Fax.extranet.inwi.ma%3A16000%2Fax%2Flogin" type="media">
+                <lightning-icon slot="media" icon-name="standard:procedure_detail"></lightning-icon>
+            </lightning-tile>
+
+            
+            <lightning-tile label="Fidelité LM" href="https://fide.extranet.inwi.ma/webgui-0.1/loginsso" type="media">
+                <lightning-icon slot="media" icon-name="standard:partners"></lightning-icon>
+
+            </lightning-tile>
+
+
+            
+            <lightning-tile label="Base de connaissance" href="https://coinwi.extranet.inwi.ma/bdc/bco/index.php/component/users/" type="media">
+                <lightning-icon slot="media" icon-name="standard:solution"></lightning-icon>
+
+            </lightning-tile>
+
+
+            <lightning-tile label="Eligibilité ADSL" onclick={handleOpenLinkEligibiliteADSL} type="media">
+                <lightning-icon slot="media" icon-name="standard:address"></lightning-icon>
+            </lightning-tile>
+
+            <!-- sob 6/18/2025 MGEN3729 start-->
+            <lightning-tile label="Recherche Addresse Introuvable" onclick={handleOpenLinkRechercheAddress} type="media">
+                <lightning-icon slot="media" icon-name="standard:address"></lightning-icon>
+            </lightning-tile>
+            <!-- sob 6/18/2025 MGEN3729 end-->
+
+            <!-- sob 6/11/2025 MGEN3729 start-->
+            <lightning-tile label="Affichage des Demandes Address IAM" onclick={handleOpenLinkDisplayAddressIAM} type="media">
+                <lightning-icon slot="media" icon-name="standard:address"></lightning-icon>
+            </lightning-tile>
+            <!-- sob 6/11/2025 MGEN3729 end-->
+
+        </div>
+    </div>
+</template>

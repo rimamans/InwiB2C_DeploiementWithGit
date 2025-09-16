@@ -1,0 +1,3 @@
+<apex:page standardController="Account" extensions="inwiB2C_AccountEditController" 
+           action="{!nullValue(redir.url, urlFor($Action.Account.Edit, account.id, null, true))}">
+</apex:page>

@@ -1,0 +1,3 @@
+let definition = 
+                {"GlobalKey__c":"InwiB2C_LinkTransSolde/MANS/1/1649339603982","dataSource":{"type":null,"value":{}},"enableLwc":true,"filter":{},"states":[{"conditions":{"group":[{"field":"$scope.data.status","operator":"===","type":"system","value":"'active'"}]},"customLwc":true,"customLwcAttributes":[{"name":"records","val":"$scope.records"}],"customLwcRepeat":true,"definedActions":{"actions":[]},"fields":[],"flyoutAttributes":[],"isSmartAction":false,"lwc":{"DeveloperName":"inwib2c_home_links","Id":"0Rb3M0000004fuhSAA","MasterLabel":"Inwi home links","name":"inwib2c_home_links"},"name":"Active","smartAction":{}}],"title":"Transfert de solde"}; 
+            export default definition

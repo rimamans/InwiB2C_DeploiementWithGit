@@ -1,0 +1,90 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 12-21-2023
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<apex:page sidebar="false" renderAs="pdf" controller="inwiB2C_Controller_ModificationMdn" showHeader="false" applyBodyTag="false">
+
+    <head>
+        <style>
+            body {
+                font-family: 'Arial Unicode MS';
+                font-size: 12px;
+            }
+
+            @page: first {
+                size: A4;
+                margin-top: 0px margin-right:0px;
+                margin-left: 0px;
+                margin-bottom: 0cm;
+            }
+
+            @page {
+                size: A4;
+                margin-top: 0px;
+                margin-right: 0px;
+                margin-left: 0px;
+                margin-bottom: 0cm;
+            }
+        </style>
+    </head>
+
+    <body>
+        <apex:variable var="index" value="{!0}" />
+        <apex:repeat value="{!data}" var="loopItem" id="theRepeat">
+        <div style="page-break-after:avoid ; height: 1100px ">
+
+
+            <!-- <div style="{!IF(loopItem['TypeModification'] == 'Changement de numéro' ,'display:block','display:none')}">
+            <img style="width:100%;" src="{!$Resource.InwiB2C_FormulaireChangementMdn}" />
+
+            	<p style="position: absolute;top:80px;left: 385px;font-size: 14px">{!IF(contains(keys,'name'),loopItem['name'], '')}</p>
+                <p style="position: absolute;top:105px;left: 385px;font-size: 14px"> {!IF(contains(keys,'cin'),loopItem['cin'], '')}</p>
+                <p style="position: absolute;top:130px;left: 385px;font-size: 14px"> {!IF(contains(keys,'OldMdn'),loopItem['OldMdn'], '')}</p>
+                <p style="position: absolute;top:159px;left: 385px;font-size: 14px">{!IF(contains(keys,'Offre'),loopItem['Offre'], '')}</p>
+                <p style="position: absolute;top:186px;left: 385px;font-size: 14px">{!IF(contains(keys,'DateDeFacturation'),loopItem['DateDeFacturation'], '')}</p>
+                <p style="position: absolute;top:210px;left: 385px;font-size: 14px">{!IF(contains(keys,'POSCode'),loopItem['POSCode'], '')}</p>
+                <p style="position: absolute;top:235px;left: 385px;font-size: 14px"> {!IF(contains(keys,'OrderNumber'),loopItem['OrderNumber'], '')}</p>  
+                <p style="position: absolute;top:264PX;left: 385px;font-size: 14px"> {!IF(contains(keys,'TypeModification'),loopItem['TypeModification'], '')}</p>
+                <p style="position: absolute;top:264PX;left: 385px;font-size: 14px"> {!IF(contains(keys,'MotifModification'),loopItem['MotifModification'], '')}</p>
+                <p style="position: absolute;top:412px;left: 520px;font-size: 14px">0 DH</p>
+                <p style="position: absolute;top:432px;left: 520px;font-size: 14px">{!IF(contains(keys,'FraisChangmentMdn'),loopItem['FraisChangmentMdn'], '0')} </p>
+                <p style="position: absolute;top:450px;left: 520px;font-size: 14px">{!IF(contains(keys,'FraisChangmentMdn'),loopItem['FraisChangmentMdn'], '0')} </p>
+                <p style="position: absolute;top:483px;left: 260px;font-size: 14px"> {!IF(contains(keys,'OldMdn'),loopItem['OldMdn'], '')}</p>
+                <p style="position: absolute;top:483px;left: 570px;font-size: 14px"> {!IF(contains(keys,'NewMdn'),loopItem['NewMdn'], '')}</p>
+                <p style="position: absolute;top:510px;left: 520px;font-size: 14px">{!IF(contains(keys,'CategorieMdn'),loopItem['CategorieMdn'], '')}</p>
+                <p style="position: absolute;top:802px;left: 560px;font-size: 14px"> {!IF(contains(keys,'DateDeFacturation'),loopItem['DateDeFacturation'], '')}
+                </p>
+            </div>     -->
+             <!-- <div style="{!IF(loopItem['TypeModification'] == 'Modification de forfait' ,'display:block','display:none')}"> -->
+
+                <img style="width:100%;" src="{!$Resource.InwiB2C_Document_Modification_Migration}" />
+                <p style="position: absolute;top:80px;left: 385px;font-size: 14px">{!IF(contains(keys,'name'),loopItem['name'], '')}</p>
+                <p style="position: absolute;top:105px;left: 385px;font-size: 14px">{!IF(contains(keys,'cin'),loopItem['cin'], '')}</p>
+                <p style="position: absolute;top:130px;left: 385px;font-size: 14px">{!IF(contains(keys,'OldMdn'),loopItem['OldMdn'], '')}</p>
+                <p style="position: absolute;top:159px;left: 385px;font-size: 14px">{!IF(contains(keys,'Offre'),loopItem['Offre'], '')}</p>
+                <p style="position: absolute;top:186px;left: 385px;font-size: 14px">{!IF(contains(keys,'DateDeFacturation'),loopItem['DateDeFacturation'], '')}</p>
+                <p style="position: absolute;top:210px;left: 385px;font-size: 14px">{!IF(contains(keys,'POSCode'),loopItem['POSCode'], '')}</p>
+                <p style="position: absolute;top:235px;left: 385px;font-size: 14px">{!IF(contains(keys,'OrderNumber'),loopItem['OrderNumber'], '')}</p>  
+                <p style="position: absolute;top:264PX;left: 385px;font-size: 14px">{!IF(contains(keys,'TypeModification'),loopItem['TypeModification'], '')}</p>
+                <p style="position: absolute;top:290PX;left: 385px;font-size: 14px">{!IF(contains(keys,'MotifModification'),loopItem['MotifModification'], '')}</p>
+                <p style="position: absolute;top:413px;left: 515px;font-size: 14px">{!IF(contains(keys,'FraisAmount'),loopItem['FraisAmount'], '0')} DH </p>
+                <p style="position: absolute;top:435px;left: 515px;font-size: 14px">{!IF(contains(keys,'FraisAmount'),loopItem['FraisAmount'], '0')} DH </p>
+                <p style="position: absolute;top:470px;left: 515px;font-size: 12px">{!IF(contains(keys,'Offre'),loopItem['Offre'], '')}</p>
+                <p style="position: absolute;top:495px;left: 549px;font-size: 14px">{!IF(contains(keys,'NewMontant'),loopItem['NewMontant'], '')} Dh/mois</p>
+            	<p style="position: absolute;top:472px;left: 210px;font-size: 12px">{!IF(contains(keys,'AncienneValeur'),loopItem['AncienneValeur'], '')}</p>
+                <p style="position: absolute;top:495px;left: 235px;font-size: 14px">{!IF(contains(keys,'OldMontant'),loopItem['OldMontant'], '')} Dh/mois</p>
+
+                <p style="position: absolute;top:72%;left: 560px;font-size: 14px"> {!IF(contains(keys,'DateDeFacturation'),loopItem['DateDeFacturation'], '')}</p>
+<!-- 
+             </div>        -->
+        </div>
+        <apex:variable var="index" value="{!index + 1}" />
+
+        </apex:repeat>
+    </body>
+
+
+</apex:page>

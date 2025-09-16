@@ -1,0 +1,114 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 03-06-2025
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<apex:page renderAs="pdf" controller="InwiB2C_FormRembClient" applyHtmlTag="false" showHeader="false">
+
+    <head>
+        <style>
+            body {
+                font-family: 'Arial Unicode MS';
+                font-size: 12px;
+
+            }
+
+            @page {
+                size: A4;
+                margin: 0px
+            }
+        </style>
+    </head>
+
+    <body>
+        <div>
+
+            <div style="{!IF(output['MontantFtth'] != 'Null' && output['MontantFtth'] != '', 'display:block', 'display:none')}">
+
+            <img style="width: 100%; height: 100%" src="{!$Resource.InwiB2C_Bon_Retour}" />
+            <p style="position: absolute;top: 81px;left:  400px;font-size: 12px">{!IF(contains(keys,'Name'),output['Name'], '')}</p>
+            <p style="position: absolute;top: 110px;left: 400px;font-size: 12px">{!IF(contains(keys,'cin'),output['cin'], '')}</p>
+            <p style="position: absolute;top: 135px;left: 400px;font-size: 12px">{!IF(contains(keys,'NumLigneBase'),output['NumLigneBase'], '')}</p>
+            <p style="position: absolute;top: 160px;left: 400px;font-size: 12px">{!IF(contains(keys,'Offre'),output['Offre'], '')}</p>
+            <p style="position: absolute;top: 185px;left: 400px;font-size: 12px">{!IF(contains(keys,'createdDate'),output['createdDate'], '')}</p>
+            <p style="position: absolute;top: 215px;left: 400px;font-size: 12px">{!IF(contains(keys,'pdv'),output['pdv'], '')}</p>
+            <p style="position: absolute;top: 243px;left: 400px;font-size: 12px">{!IF(contains(keys,'DemandeNumber'),output['DemandeNumber'], '')}</p>  
+            <!-- <p style="position: absolute;top: 240px;left: 400px;font-size: 12px">{!IF(contains(keys,'OrderNumber'),output['OrderNumber'], '')}</p> -->
+            <p style="position: absolute;top: 270px;left: 400px;font-size: 12px">{!IF(contains(keys,'DescriptifDeDemande'),output['DescriptifDeDemande'], '')}</p>
+            <p style="position: absolute;top: 295px;left: 400px;font-size: 12px">{!IF(contains(keys,'MotifDeDemande'),output['MotifDeDemande'], '')}</p>
+            <p style="position: absolute;top: 325px;left: 400px;font-size: 12px">{!IF(contains(keys,'MontantFtth'),output['MontantFtth'], '')} </p>
+            <p style="position: absolute;top: 420px;left: 300px;font-size: 11x">{!IF(contains(keys,'CodeArticleFtth'),output['CodeArticleFtth'], '')}</p>
+            <p style="position: absolute;top: 420px;left: 370px;font-size: 11px">{!IF(contains(keys,'NomArticleFtth'),output['NomArticleFtth'], '')}</p>
+            <p style="position: absolute;top: 441px;left: 270px;font-size: 11px">{!IF(contains(keys,'NumeroSerieTerminalFtth'),output['NumeroSerieTerminalFtth'], '')}</p>
+            <p style="position: absolute;top: 805px;left: 600px;font-size: 12px">{!IF(contains(keys,'today'),output['today'], '')}</p>
+           </div>
+
+           <div style="{!IF(output['ISExisteConnectDay1'] == true && output['NoRefund'] == 'false' && output['MontantFtth'] != '0.0 DH' ,'display:block','display:none')}">
+
+                <img style="width: 100%; height: 100%" src="{!$Resource.InwiB2C_Bon_Retour}" />
+                <p style="position: absolute;top: 53.5%;left:  400px;font-size: 12px">{!IF(contains(keys,'Name'),output['Name'], '')}</p>
+                <p style="position: absolute;top: 54.70%;left: 400px;font-size: 12px">{!IF(contains(keys,'cin'),output['cin'], '')}</p>
+                <p style="position: absolute;top: 56%;left: 400px;font-size: 12px">{!IF(contains(keys,'SubscriptionNumber'),output['SubscriptionNumber'], '')}</p>
+                <p style="position: absolute;top: 57%;left: 400px;font-size: 12px">{!IF(contains(keys,'OffreDay1'),output['OffreDay1'], '')}</p>
+                <p style="position: absolute;top: 58.30%;left: 400px;font-size: 12px">{!IF(contains(keys,'createdDate'),output['createdDate'], '')}</p>
+                <p style="position: absolute;top: 59.50%;left: 400px;font-size: 12px">{!IF(contains(keys,'pdv'),output['pdv'], '')}</p>
+                <p style="position: absolute;top: 60.8%;left: 400px;font-size: 12px">{!IF(contains(keys,'DemandeNumber'),output['DemandeNumber'], '')}</p>  
+                <!-- <p style="position: absolute;top: 60.5%;left: 400px;font-size: 12px">{!IF(contains(keys,'OrderNumberDay1'),output['OrderNumberDay1'], '')}</p> -->
+                <p style="position: absolute;top: 62%;left: 400px;font-size: 12px">{!IF(contains(keys,'DescriptifDeDemande'),output['DescriptifDeDemande'], '')}</p>
+                <p style="position: absolute;top: 63%;left: 400px;font-size: 12px">{!IF(contains(keys,'MotifDeDemande'),output['MotifDeDemande'], '')}</p>
+                <p style="position: absolute;top: 64.20%;left: 400px;font-size: 12px">{!IF(contains(keys,'MontantDay1'),output['MontantDay1'], '')} </p>
+                <p style="position: absolute;top: 68.75%;left: 300px;font-size: 11px">{!IF(contains(keys,'CodeArticleDay1'),output['CodeArticleDay1'], '')}</p>
+                <p style="position: absolute;top: 68.75%;left: 370px;font-size: 11px">{!IF(contains(keys,'NomArticleDay1'),output['NomArticleDay1'], '')}</p>
+                <p style="position: absolute;top: 69.75%;left: 270px;font-size: 11px">{!IF(contains(keys,'NumSerieTerminalDay1'),output['NumSerieTerminalDay1'], '')}</p>
+                <p style="position: absolute;top: 86%;left: 600px;font-size: 12px">{!IF(contains(keys,'today'),output['today'], '')}</p>
+    
+           
+           </div>
+           
+           <div style="{!IF(output['ISExisteConnectDay1'] == true && output['NoRefund'] == 'false' && output['MontantFtth'] == '0.0 DH' ,'display:block','display:none')}">
+
+            <img style="width: 100%; height: 100%" src="{!$Resource.InwiB2C_Bon_Retour}" />
+            <p style="position: absolute;top: 81px;left:  400px;font-size: 12px">{!IF(contains(keys,'Name'),output['Name'], '')}</p>
+            <p style="position: absolute;top: 110px;left: 400px;font-size: 12px">{!IF(contains(keys,'cin'),output['cin'], '')}</p>
+            <p style="position: absolute;top: 135px;left: 400px;font-size: 12px">{!IF(contains(keys,'SubscriptionNumber'),output['SubscriptionNumber'], '')}</p>
+            <p style="position: absolute;top: 160px;left: 400px;font-size: 12px">{!IF(contains(keys,'OffreDay1'),output['OffreDay1'], '')}</p>
+            <p style="position: absolute;top: 185px;left: 400px;font-size: 12px">{!IF(contains(keys,'createdDate'),output['createdDate'], '')}</p>
+            <p style="position: absolute;top: 215px;left: 400px;font-size: 12px">{!IF(contains(keys,'pdv'),output['pdv'], '')}</p>
+            <p style="position: absolute;top: 243px;left: 400px;font-size: 12px">{!IF(contains(keys,'DemandeNumber'),output['DemandeNumber'], '')}</p>  
+            <!-- <p style="position: absolute;top: 240px;left: 400px;font-size: 12px">{!IF(contains(keys,'OrderNumber'),output['OrderNumber'], '')}</p> -->
+            <p style="position: absolute;top: 270px;left: 400px;font-size: 12px">{!IF(contains(keys,'DescriptifDeDemande'),output['DescriptifDeDemande'], '')}</p>
+            <p style="position: absolute;top: 295px;left: 400px;font-size: 12px">{!IF(contains(keys,'MotifDeDemande'),output['MotifDeDemande'], '')}</p>
+            <p style="position: absolute;top: 325px;left: 400px;font-size: 12px">{!IF(contains(keys,'MontantDay1'),output['MontantDay1'], '')} </p>
+            <p style="position: absolute;top: 420px;left: 300px;font-size: 11x">{!IF(contains(keys,'CodeArticleDay1'),output['CodeArticleDay1'], '')}</p>
+            <p style="position: absolute;top: 420px;left: 370px;font-size: 11px">{!IF(contains(keys,'NomArticleDay1'),output['NomArticleDay1'], '')}</p>
+            <p style="position: absolute;top: 441px;left: 270px;font-size: 11px">{!IF(contains(keys,'NumSerieTerminalDay1'),output['NumSerieTerminalDay1'], '')}</p>
+            <p style="position: absolute;top: 805px;left: 600px;font-size: 12px">{!IF(contains(keys,'today'),output['today'], '')}</p>
+           </div>
+
+           <div style="{!IF((output['ISExisteConnectDay1'] == false  || output['ISExisteConnectDay1'] == true)  && output['NoRefund']  == 'true'  && output['MontantFtth']  == '0.0 DH' , 'display:block', 'display:none')}">
+    
+            <img style="width: 100%; height: 100%" src="{!$Resource.InwiB2C_Bon_Retour}" />
+            <p style="position: absolute;top: 81px;left:  400px;font-size: 12px">{!IF(contains(keys,'Name'),output['Name'], '')}</p>
+            <p style="position: absolute;top: 110px;left: 400px;font-size: 12px">{!IF(contains(keys,'cin'),output['cin'], '')}</p>
+            <p style="position: absolute;top: 135px;left: 400px;font-size: 12px">{!IF(contains(keys,'NumLigneBase'),output['NumLigneBase'], '')}</p>
+            <p style="position: absolute;top: 160px;left: 400px;font-size: 12px">{!IF(contains(keys,'Offre'),output['Offre'], '')}</p>
+            <p style="position: absolute;top: 185px;left: 400px;font-size: 12px">{!IF(contains(keys,'createdDate'),output['createdDate'], '')}</p>
+            <p style="position: absolute;top: 215px;left: 400px;font-size: 12px">{!IF(contains(keys,'pdv'),output['pdv'], '')}</p>
+            <p style="position: absolute;top: 243px;left: 400px;font-size: 12px">{!IF(contains(keys,'DemandeNumber'),output['DemandeNumber'], '')}</p>  
+            <p style="position: absolute;top: 270px;left: 400px;font-size: 12px">{!IF(contains(keys,'DescriptifDeDemande'),output['DescriptifDeDemande'], '')}</p>
+            <p style="position: absolute;top: 295px;left: 400px;font-size: 12px">{!IF(contains(keys,'MotifDeDemande'),output['MotifDeDemande'], '')}</p>
+            <p style="position: absolute;top: 325px;left: 400px;font-size: 12px">{!IF(contains(keys,'MontantFtth'),output['MontantFtth'], '')} </p>
+            <p style="position: absolute;top: 420px;left: 300px;font-size: 11x">{!IF(contains(keys,'CodeArticleFtth'),output['CodeArticleFtth'], '')}</p>
+            <p style="position: absolute;top: 420px;left: 370px;font-size: 11px">{!IF(contains(keys,'NomArticleFtth'),output['NomArticleFtth'], '')}</p>
+            <p style="position: absolute;top: 441px;left: 270px;font-size: 11px">{!IF(contains(keys,'NumeroSerieTerminalFtth'),output['NumeroSerieTerminalFtth'], '')}</p>
+            <p style="position: absolute;top: 805px;left: 600px;font-size: 12px">{!IF(contains(keys,'today'),output['today'], '')}</p>
+            
+           </div>
+
+           
+
+        </div>
+    </body>
+</apex:page>

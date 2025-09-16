@@ -1,0 +1,266 @@
+<template>
+    <div dir={_dir}>
+        <template if:true={hasErrors}>
+            <lightning-layout vertical-align="stretch">
+                <lightning-layout-item flexibility="auto" padding="around-small" class="slds-text-align_center slds-p-around_small" size="1">
+                    <lightning-icon icon-name="utility:error" alternative-text="Error!" variant="error" size="large">
+                    </lightning-icon>
+                </lightning-layout-item>
+                <lightning-layout-item flexibility="auto" padding="around-small" class="custom-box">
+                    <p class="slds-text-heading_medium">{allCustomLabelsUtil.OmniScriptError}</p>
+                    <p class="bold">{_errorMsg}</p>
+                    <dl class="slds-dl_inline" if:false={_isActiveOs}>
+                        <dt class="slds-dl_inline__label"><strong>{allCustomLabelsUtil.OmniScriptType}:</strong></dt>
+                        <dd class="slds-dl_inline__detail">inwib2c</dd>
+                        <dt class="slds-dl_inline__label"><strong>{allCustomLabelsUtil.OmniScriptSubType}:</strong></dt>
+                        <dd class="slds-dl_inline__detail">TeleventeAgence</dd>
+                        <dt class="slds-dl_inline__label"><strong>{allCustomLabelsUtil.OmniScriptLang}:</strong></dt>
+                        <dd class="slds-dl_inline__detail">English</dd>
+                    </dl>
+                    <p class="footer-message">{allCustomLabelsUtil.OmniScriptNotFound2}</p>
+                </lightning-layout-item>
+            </lightning-layout>
+        </template>
+        <template if:false={hasErrors}>
+            <div class="via-nds">
+                <template if:false={compLoaded}>
+                    <div class="omni-spinner-container_wrapper">
+                        <vlocity_cmt-spinner variant="brand"
+                                            alternative-text={allCustomLabelsUtil.OmniSpinnerTextLoading}
+                                            theme={_theme}
+                                            size="medium">
+                        </vlocity_cmt-spinner>
+                    </div>
+                </template>
+                <template if:true={bSflValid}>
+                    <template if:true={firstRender}>
+                        <template if:true={isLauncherVisible}>
+                            <vlocity_cmt-button label={inlineLabel}
+                                                variant={inlineVariant}
+                                                theme={_theme}
+                                                onclick={setScriptVisibility}
+                                                extraclass="nds-button_stretch">
+                            </vlocity_cmt-button>
+                        </template>
+                        <article class={containerClasses}>
+                            <div class="nds-card__body nds-card__body_inner nds-m-top_medium">
+                                <template if:true={bSflAuto}>
+                                    <vlocity_cmt-omniscript-save-for-later-acknowledge result={bSflResult}
+                                                    layout={layout}
+                                                    auto></vlocity_cmt-omniscript-save-for-later-acknowledge>
+                                </template>
+                                <vlocity_cmt-omniscript-step-chart json-def={jsonDef}
+                                            json-data={jsonDef.response}
+                                            if:false={jsonDef.propSetMap.hideStepChart}
+                                            data-omni-key='omniscriptStepChart'
+                                            props={stepChartProps}
+                                            layout={layout}
+                                            script-header-def={scriptHeaderDef}>
+                                </vlocity_cmt-omniscript-step-chart>                    
+                                <template if:true={isPageLoading}>
+                                    <vlocity_cmt-spinner variant="brand"
+                                                        alternative-text={allCustomLabelsUtil.OmniSpinnerTextLoading}
+                                                        extraclass="nds-theme_default"
+                                                        theme={_theme}
+                                                        message={spinnerMessage}
+                                                        size="medium">
+                                    </vlocity_cmt-spinner>
+                                </template>
+                                <template for:each={jsonDef.children} for:item="item" for:index="idx"><vlocity_cmt-omniscript-set-values if:true={item.bSetValues} key={item.lwcId} json-def={item} data-omni-key={item.name} json-data={jsonDef.response} json-data-str={jsonDataStr} layout={layout} resume={resume} script-header-def={scriptHeaderDef} run-mode={runMode}></vlocity_cmt-omniscript-set-values><vlocity_cmt-omniscript-dr-extract-action if:true={item.bDataRaptorExtractAction} key={item.lwcId} json-def={item} data-omni-key={item.name} json-data={jsonDef.response} json-data-str={jsonDataStr} layout={layout} resume={resume} script-header-def={scriptHeaderDef} run-mode={runMode}></vlocity_cmt-omniscript-dr-extract-action><vlocity_cmt-omniscript-step if:true={item.bStep} key={item.lwcId} json-def={item} data-omni-key={item.name} json-data={jsonDef.response} json-data-str={jsonDataStr} layout={layout} resume={resume} script-header-def={scriptHeaderDef} run-mode={runMode} seed-json={jsonDef.propSetMap.seedDataJSON}><template for:each={item.children} for:item="itemChild0" for:index="itemChild0Idx"><template for:each={itemChild0.eleArray} for:item="itemChild0Ele" for:index="itemChild0Idx"><vlocity_cmt-omniscript-text-block if:true={itemChild0Ele.bTextBlock} key={itemChild0Ele.lwcId} json-def={itemChild0Ele} data-omni-key={itemChild0Ele.name} json-data={jsonDef.response} json-data-str={jsonDataStr} layout={layout} resume={resume} script-header-def={scriptHeaderDef} run-mode={runMode}></vlocity_cmt-omniscript-text-block><vlocity_cmt-omniscript-navigate-action if:true={itemChild0Ele.bNavigate} key={itemChild0Ele.lwcId} json-def={itemChild0Ele} data-omni-key={itemChild0Ele.name} json-data={jsonDef.response} json-data-str={jsonDataStr} layout={layout} resume={resume} script-header-def={scriptHeaderDef} run-mode={runMode}></vlocity_cmt-omniscript-navigate-action><vlocity_cmt-omniscript-radio if:true={itemChild0Ele.bRadio} key={itemChild0Ele.lwcId} json-def={itemChild0Ele} data-omni-key={itemChild0Ele.name} json-data={jsonDef.response} json-data-str={jsonDataStr} layout={layout} resume={resume} script-header-def={scriptHeaderDef} run-mode={runMode} seed-json={jsonDef.propSetMap.seedDataJSON}></vlocity_cmt-omniscript-radio><vlocity_cmt-omniscript-custom-lwc if:true={itemChild0Ele.bcustomlightningwebcomponent1} key={itemChild0Ele.lwcId} json-def={itemChild0Ele} data-omni-key={itemChild0Ele.name} json-data={jsonDef.response} json-data-str={jsonDataStr} layout={layout} resume={resume} script-header-def={scriptHeaderDef} run-mode={runMode} seed-json={jsonDef.propSetMap.seedDataJSON}><c-inwib2c_-check-eligibility-adsl-g-p-s if:true={itemChild0Ele.bcustomlightningwebcomponent1} key={itemChild0Ele.lwcId} data-omni-key={itemChild0Ele.name} omni-resume={resume} data-omni-layout={layout} omni-json-def={itemChild0Ele} omni-json-data={jsonDef.response} omni-seed-json={jsonDef.propSetMap.seedDataJSON} omni-custom-state={jsonDef.customSaveState} omni-script-header-def={scriptHeaderDef} omni-json-data-str={jsonDataStr} data-omni-input=""></c-inwib2c_-check-eligibility-adsl-g-p-s></vlocity_cmt-omniscript-custom-lwc><vlocity_cmt-omniscript-custom-lwc if:true={itemChild0Ele.bcustomlightningwebcomponent2} key={itemChild0Ele.lwcId} json-def={itemChild0Ele} data-omni-key={itemChild0Ele.name} json-data={jsonDef.response} json-data-str={jsonDataStr} layout={layout} resume={resume} script-header-def={scriptHeaderDef} run-mode={runMode} seed-json={jsonDef.propSetMap.seedDataJSON}><c-inwi-b2-c_-cart-button if:true={itemChild0Ele.bcustomlightningwebcomponent2} key={itemChild0Ele.lwcId} data-omni-key={itemChild0Ele.name} omni-resume={resume} data-omni-layout={layout} omni-json-def={itemChild0Ele} omni-json-data={jsonDef.response} omni-seed-json={jsonDef.propSetMap.seedDataJSON} omni-custom-state={jsonDef.customSaveState} omni-script-header-def={scriptHeaderDef} omni-json-data-str={jsonDataStr} data-omni-input="" vlccart={jsonDef.response.vlcCart}></c-inwi-b2-c_-cart-button></vlocity_cmt-omniscript-custom-lwc><vlocity_cmt-omniscript-custom-lwc if:true={itemChild0Ele.bcustomlightningwebcomponent3} key={itemChild0Ele.lwcId} json-def={itemChild0Ele} data-omni-key={itemChild0Ele.name} json-data={jsonDef.response} json-data-str={jsonDataStr} layout={layout} resume={resume} script-header-def={scriptHeaderDef} run-mode={runMode} seed-json={jsonDef.propSetMap.seedDataJSON}><c-inwi-b2-c_-display-product-list_-v3 if:true={itemChild0Ele.bcustomlightningwebcomponent3} key={itemChild0Ele.lwcId} data-omni-key={itemChild0Ele.name} omni-resume={resume} data-omni-layout={layout} omni-json-def={itemChild0Ele} omni-json-data={jsonDef.response} omni-seed-json={jsonDef.propSetMap.seedDataJSON} omni-custom-state={jsonDef.customSaveState} omni-script-header-def={scriptHeaderDef} omni-json-data-str={jsonDataStr} data-omni-input="" products={jsonDef.response.offers} offrevacancier={jsonDef.response.OffreVacancier}></c-inwi-b2-c_-display-product-list_-v3></vlocity_cmt-omniscript-custom-lwc><vlocity_cmt-omniscript-select if:true={itemChild0Ele.bSelect} key={itemChild0Ele.lwcId} json-def={itemChild0Ele} data-omni-key={itemChild0Ele.name} json-data={jsonDef.response} json-data-str={jsonDataStr} layout={layout} resume={resume} script-header-def={scriptHeaderDef} run-mode={runMode} seed-json={jsonDef.propSetMap.seedDataJSON}></vlocity_cmt-omniscript-select><vlocity_cmt-omniscript-custom-lwc if:true={itemChild0Ele.bcustomlightningwebcomponent4} key={itemChild0Ele.lwcId} json-def={itemChild0Ele} data-omni-key={itemChild0Ele.name} json-data={jsonDef.response} json-data-str={jsonDataStr} layout={layout} resume={resume} script-header-def={scriptHeaderDef} run-mode={runMode} seed-json={jsonDef.propSetMap.seedDataJSON}><c-inwi-b2-c_-mode-livraison-address if:true={itemChild0Ele.bcustomlightningwebcomponent4} key={itemChild0Ele.lwcId} data-omni-key={itemChild0Ele.name} omni-resume={resume} data-omni-layout={layout} omni-json-def={itemChild0Ele} omni-json-data={jsonDef.response} omni-seed-json={jsonDef.propSetMap.seedDataJSON} omni-custom-state={jsonDef.customSaveState} omni-script-header-def={scriptHeaderDef} omni-json-data-str={jsonDataStr} data-omni-input=""></c-inwi-b2-c_-mode-livraison-address></vlocity_cmt-omniscript-custom-lwc><vlocity_cmt-omniscript-text if:true={itemChild0Ele.bText} key={itemChild0Ele.lwcId} json-def={itemChild0Ele} data-omni-key={itemChild0Ele.name} json-data={jsonDef.response} json-data-str={jsonDataStr} layout={layout} resume={resume} script-header-def={scriptHeaderDef} run-mode={runMode} seed-json={jsonDef.propSetMap.seedDataJSON}></vlocity_cmt-omniscript-text><vlocity_cmt-omniscript-custom-lwc if:true={itemChild0Ele.bcustomlightningwebcomponent5} key={itemChild0Ele.lwcId} json-def={itemChild0Ele} data-omni-key={itemChild0Ele.name} json-data={jsonDef.response} json-data-str={jsonDataStr} layout={layout} resume={resume} script-header-def={scriptHeaderDef} run-mode={runMode} seed-json={jsonDef.propSetMap.seedDataJSON}><c-inwi-b2-c_-get-agenece-televent if:true={itemChild0Ele.bcustomlightningwebcomponent5} key={itemChild0Ele.lwcId} data-omni-key={itemChild0Ele.name} omni-resume={resume} data-omni-layout={layout} omni-json-def={itemChild0Ele} omni-json-data={jsonDef.response} omni-seed-json={jsonDef.propSetMap.seedDataJSON} omni-custom-state={jsonDef.customSaveState} omni-script-header-def={scriptHeaderDef} omni-json-data-str={jsonDataStr} data-omni-input="" name={jsonDef.response.AgenceName} code={jsonDef.response.codeAgence}></c-inwi-b2-c_-get-agenece-televent></vlocity_cmt-omniscript-custom-lwc><vlocity_cmt-omniscript-custom-lwc if:true={itemChild0Ele.bcustomlightningwebcomponent6} key={itemChild0Ele.lwcId} json-def={itemChild0Ele} data-omni-key={itemChild0Ele.name} json-data={jsonDef.response} json-data-str={jsonDataStr} layout={layout} resume={resume} script-header-def={scriptHeaderDef} run-mode={runMode} seed-json={jsonDef.propSetMap.seedDataJSON}><c-inwi-b2-c_-otp-service if:true={itemChild0Ele.bcustomlightningwebcomponent6} key={itemChild0Ele.lwcId} data-omni-key={itemChild0Ele.name} omni-resume={resume} data-omni-layout={layout} omni-json-def={itemChild0Ele} omni-json-data={jsonDef.response} omni-seed-json={jsonDef.propSetMap.seedDataJSON} omni-custom-state={jsonDef.customSaveState} omni-script-header-def={scriptHeaderDef} omni-json-data-str={jsonDataStr} data-omni-input="" email={jsonDef.response.emailClient} numeromdn={jsonDef.response.NumeroContact} isacquisition="true" orderid={jsonDef.response.OrderId} countduplicate={jsonDef.response.countDuplicate} countduplicateemail={jsonDef.response.countDuplicateEmail} accountid={jsonDef.response.AccountId} offertype={jsonDef.response.offertype} typeparcour={jsonDef.response.typeparcour} canal="Televente"></c-inwi-b2-c_-otp-service></vlocity_cmt-omniscript-custom-lwc><vlocity_cmt-omniscript-custom-lwc if:true={itemChild0Ele.bcustomlightningwebcomponent7} key={itemChild0Ele.lwcId} json-def={itemChild0Ele} data-omni-key={itemChild0Ele.name} json-data={jsonDef.response} json-data-str={jsonDataStr} layout={layout} resume={resume} script-header-def={scriptHeaderDef} run-mode={runMode} seed-json={jsonDef.propSetMap.seedDataJSON}><c-inwi-b2-c_-navigation-buttons if:true={itemChild0Ele.bcustomlightningwebcomponent7} key={itemChild0Ele.lwcId} data-omni-key={itemChild0Ele.name} omni-resume={resume} data-omni-layout={layout} omni-json-def={itemChild0Ele} omni-json-data={jsonDef.response} omni-seed-json={jsonDef.propSetMap.seedDataJSON} omni-custom-state={jsonDef.customSaveState} omni-script-header-def={scriptHeaderDef} omni-json-data-str={jsonDataStr} data-omni-input=""></c-inwi-b2-c_-navigation-buttons></vlocity_cmt-omniscript-custom-lwc><vlocity_cmt-omniscript-custom-lwc if:true={itemChild0Ele.bcustomlightningwebcomponent8} key={itemChild0Ele.lwcId} json-def={itemChild0Ele} data-omni-key={itemChild0Ele.name} json-data={jsonDef.response} json-data-str={jsonDataStr} layout={layout} resume={resume} script-header-def={scriptHeaderDef} run-mode={runMode} seed-json={jsonDef.propSetMap.seedDataJSON}><c-inwi-b2-c_-display-service if:true={itemChild0Ele.bcustomlightningwebcomponent8} key={itemChild0Ele.lwcId} data-omni-key={itemChild0Ele.name} omni-resume={resume} data-omni-layout={layout} omni-json-def={itemChild0Ele} omni-json-data={jsonDef.response} omni-seed-json={jsonDef.propSetMap.seedDataJSON} omni-custom-state={jsonDef.customSaveState} omni-script-header-def={scriptHeaderDef} omni-json-data-str={jsonDataStr} data-omni-input="" accountid={jsonDef.response.accountid}></c-inwi-b2-c_-display-service></vlocity_cmt-omniscript-custom-lwc><vlocity_cmt-omniscript-custom-lwc if:true={itemChild0Ele.bcustomlightningwebcomponent9} key={itemChild0Ele.lwcId} json-def={itemChild0Ele} data-omni-key={itemChild0Ele.name} json-data={jsonDef.response} json-data-str={jsonDataStr} layout={layout} resume={resume} script-header-def={scriptHeaderDef} run-mode={runMode} seed-json={jsonDef.propSetMap.seedDataJSON}><c-inwi-b2-c_-create-service if:true={itemChild0Ele.bcustomlightningwebcomponent9} key={itemChild0Ele.lwcId} data-omni-key={itemChild0Ele.name} omni-resume={resume} data-omni-layout={layout} omni-json-def={itemChild0Ele} omni-json-data={jsonDef.response} omni-seed-json={jsonDef.propSetMap.seedDataJSON} omni-custom-state={jsonDef.customSaveState} omni-script-header-def={scriptHeaderDef} omni-json-data-str={jsonDataStr} data-omni-input="" accountid={jsonDef.response.accountid} addressclient={jsonDef.response.AdressComplete} list={jsonDef.response.List} villename={jsonDef.response.VilleName}></c-inwi-b2-c_-create-service></vlocity_cmt-omniscript-custom-lwc><vlocity_cmt-omniscript-custom-lwc if:true={itemChild0Ele.bcustomlightningwebcomponent10} key={itemChild0Ele.lwcId} json-def={itemChild0Ele} data-omni-key={itemChild0Ele.name} json-data={jsonDef.response} json-data-str={jsonDataStr} layout={layout} resume={resume} script-header-def={scriptHeaderDef} run-mode={runMode} seed-json={jsonDef.propSetMap.seedDataJSON}><c-inwi-b2-c_-create-site-a-d-s-l if:true={itemChild0Ele.bcustomlightningwebcomponent10} key={itemChild0Ele.lwcId} data-omni-key={itemChild0Ele.name} omni-resume={resume} data-omni-layout={layout} omni-json-def={itemChild0Ele} omni-json-data={jsonDef.response} omni-seed-json={jsonDef.propSetMap.seedDataJSON} omni-custom-state={jsonDef.customSaveState} omni-script-header-def={scriptHeaderDef} omni-json-data-str={jsonDataStr} data-omni-input="" accountid={jsonDef.response.accountid} orderid={jsonDef.response.OrderId} pos={jsonDef.response.POSCode} distrib={jsonDef.response.DistriCode} rootitemid={jsonDef.response.rootItemId} profile={jsonDef.response.profile} r={jsonDef.response.ListADSL.regionName} ville={jsonDef.response.VilleName} quartier={jsonDef.response.ListADSL.quartierName} pq={jsonDef.response.ListADSL.pq} complementaddress={jsonDef.response.ListADSL.complement} codepostal={jsonDef.response.ListADSL.codepostale} villeid={jsonDef.response.ListADSL.villeId}></c-inwi-b2-c_-create-site-a-d-s-l></vlocity_cmt-omniscript-custom-lwc><vlocity_cmt-omniscript-custom-lwc if:true={itemChild0Ele.bcustomlightningwebcomponent11} key={itemChild0Ele.lwcId} json-def={itemChild0Ele} data-omni-key={itemChild0Ele.name} json-data={jsonDef.response} json-data-str={jsonDataStr} layout={layout} resume={resume} script-header-def={scriptHeaderDef} run-mode={runMode} seed-json={jsonDef.propSetMap.seedDataJSON}><c-inwi-b2-c_-display-site-a-d-s-l if:true={itemChild0Ele.bcustomlightningwebcomponent11} key={itemChild0Ele.lwcId} data-omni-key={itemChild0Ele.name} omni-resume={resume} data-omni-layout={layout} omni-json-def={itemChild0Ele} omni-json-data={jsonDef.response} omni-seed-json={jsonDef.propSetMap.seedDataJSON} omni-custom-state={jsonDef.customSaveState} omni-script-header-def={scriptHeaderDef} omni-json-data-str={jsonDataStr} data-omni-input="" accountid={jsonDef.response.accountid} orderid={jsonDef.response.OrderId} rootitemid={jsonDef.response.rootItemId} pos={jsonDef.response.POSCode} distrib={jsonDef.response.DistriCode} profile={jsonDef.response.profile}></c-inwi-b2-c_-display-site-a-d-s-l></vlocity_cmt-omniscript-custom-lwc><vlocity_cmt-omniscript-custom-lwc if:true={itemChild0Ele.bcustomlightningwebcomponent12} key={itemChild0Ele.lwcId} json-def={itemChild0Ele} data-omni-key={itemChild0Ele.name} json-data={jsonDef.response} json-data-str={jsonDataStr} layout={layout} resume={resume} script-header-def={scriptHeaderDef} run-mode={runMode} seed-json={jsonDef.propSetMap.seedDataJSON}><c-inwi-b2-c_-cart-button if:true={itemChild0Ele.bcustomlightningwebcomponent12} key={itemChild0Ele.lwcId} data-omni-key={itemChild0Ele.name} omni-resume={resume} data-omni-layout={layout} omni-json-def={itemChild0Ele} omni-json-data={jsonDef.response} omni-seed-json={jsonDef.propSetMap.seedDataJSON} omni-custom-state={jsonDef.customSaveState} omni-script-header-def={scriptHeaderDef} omni-json-data-str={jsonDataStr} data-omni-input="" vlccart={jsonDef.response.vlcCart}></c-inwi-b2-c_-cart-button></vlocity_cmt-omniscript-custom-lwc><vlocity_cmt-omniscript-custom-lwc if:true={itemChild0Ele.bcustomlightningwebcomponent13} key={itemChild0Ele.lwcId} json-def={itemChild0Ele} data-omni-key={itemChild0Ele.name} json-data={jsonDef.response} json-data-str={jsonDataStr} layout={layout} resume={resume} script-header-def={scriptHeaderDef} run-mode={runMode} seed-json={jsonDef.propSetMap.seedDataJSON}><c-inwi-b2-c_-manage-option-for-televente if:true={itemChild0Ele.bcustomlightningwebcomponent13} key={itemChild0Ele.lwcId} data-omni-key={itemChild0Ele.name} omni-resume={resume} data-omni-layout={layout} omni-json-def={itemChild0Ele} omni-json-data={jsonDef.response} omni-seed-json={jsonDef.propSetMap.seedDataJSON} omni-custom-state={jsonDef.customSaveState} omni-script-header-def={scriptHeaderDef} omni-json-data-str={jsonDataStr} data-omni-input="" vlccart={jsonDef.response.currentItem} accountid={jsonDef.response.AccountId} cin={jsonDef.response.cinClient} username={jsonDef.response.userName} typepos={jsonDef.response.typePos} profileuser={jsonDef.response.userProfile} isnonvisibleoptionfree={jsonDef.response.NonVisibleAcq} typeparcour={jsonDef.response.typeparcour} selectedmodel={jsonDef.response.selectedModel} displayconfigurationanderror={jsonDef.response.displayconfigurationanderror} nameagencelivraison={jsonDef.response.nameagencelivraison} codeagencelivraison={jsonDef.response.codeagencelivraison} modelivraison={jsonDef.response.CheckModeLivraison} provider={jsonDef.response.Provider} displayimeiftth={jsonDef.response.DisplayImeiFtth} disabledinputimei={jsonDef.response.DisabledInputImei} haspermissionsetlastmile={jsonDef.response.HasPermissionSetLastMile} showservice={jsonDef.response.showservice}></c-inwi-b2-c_-manage-option-for-televente></vlocity_cmt-omniscript-custom-lwc><vlocity_cmt-omniscript-custom-lwc if:true={itemChild0Ele.bcustomlightningwebcomponent14} key={itemChild0Ele.lwcId} json-def={itemChild0Ele} data-omni-key={itemChild0Ele.name} json-data={jsonDef.response} json-data-str={jsonDataStr} layout={layout} resume={resume} script-header-def={scriptHeaderDef} run-mode={runMode} seed-json={jsonDef.propSetMap.seedDataJSON}><c-inwi-b2-c_-cart-button if:true={itemChild0Ele.bcustomlightningwebcomponent14} key={itemChild0Ele.lwcId} data-omni-key={itemChild0Ele.name} omni-resume={resume} data-omni-layout={layout} omni-json-def={itemChild0Ele} omni-json-data={jsonDef.response} omni-seed-json={jsonDef.propSetMap.seedDataJSON} omni-custom-state={jsonDef.customSaveState} omni-script-header-def={scriptHeaderDef} omni-json-data-str={jsonDataStr} data-omni-input="" vlccart={jsonDef.response.vlcCart}></c-inwi-b2-c_-cart-button></vlocity_cmt-omniscript-custom-lwc><vlocity_cmt-omniscript-custom-lwc if:true={itemChild0Ele.bcustomlightningwebcomponent15} key={itemChild0Ele.lwcId} json-def={itemChild0Ele} data-omni-key={itemChild0Ele.name} json-data={jsonDef.response} json-data-str={jsonDataStr} layout={layout} resume={resume} script-header-def={scriptHeaderDef} run-mode={runMode} seed-json={jsonDef.propSetMap.seedDataJSON}><c-inwi-b2-c_-manage-bundle-hierarchy-attributes if:true={itemChild0Ele.bcustomlightningwebcomponent15} key={itemChild0Ele.lwcId} data-omni-key={itemChild0Ele.name} omni-resume={resume} data-omni-layout={layout} omni-json-def={itemChild0Ele} omni-json-data={jsonDef.response} omni-seed-json={jsonDef.propSetMap.seedDataJSON} omni-custom-state={jsonDef.customSaveState} omni-script-header-def={scriptHeaderDef} omni-json-data-str={jsonDataStr} data-omni-input="" item={jsonDef.response.currentItem} livraison={jsonDef.response.ModLivraison} typeparcour={jsonDef.response.typeparcour} displayconfigurationanderror={jsonDef.response.displayconfigurationanderror} selectedmodel={jsonDef.response.selectedModel} nameagencelivraison={jsonDef.response.nameagencelivraison} codeagencelivraison={jsonDef.response.codeagencelivraison} modelivraison={jsonDef.response.CheckModeLivraison} isaccessoire={jsonDef.response.isaccessoire} disabledinputimei={jsonDef.response.DisabledInputImei} haspermissionsetlastmile={jsonDef.response.HasPermissionSetLastMile}></c-inwi-b2-c_-manage-bundle-hierarchy-attributes></vlocity_cmt-omniscript-custom-lwc><vlocity_cmt-omniscript-custom-lwc if:true={itemChild0Ele.bcustomlightningwebcomponent16} key={itemChild0Ele.lwcId} json-def={itemChild0Ele} data-omni-key={itemChild0Ele.name} json-data={jsonDef.response} json-data-str={jsonDataStr} layout={layout} resume={resume} script-header-def={scriptHeaderDef} run-mode={runMode} seed-json={jsonDef.propSetMap.seedDataJSON}><c-inwib2c_acquisition_promotions if:true={itemChild0Ele.bcustomlightningwebcomponent16} key={itemChild0Ele.lwcId} data-omni-key={itemChild0Ele.name} omni-resume={resume} data-omni-layout={layout} omni-json-def={itemChild0Ele} omni-json-data={jsonDef.response} omni-seed-json={jsonDef.propSetMap.seedDataJSON} omni-custom-state={jsonDef.customSaveState} omni-script-header-def={scriptHeaderDef} omni-json-data-str={jsonDataStr} data-omni-input="" currentitem={jsonDef.response.currentItem} promotions={jsonDef.response.promotions}></c-inwib2c_acquisition_promotions></vlocity_cmt-omniscript-custom-lwc><vlocity_cmt-omniscript-messaging if:true={itemChild0Ele.bMessaging} key={itemChild0Ele.lwcId} json-def={itemChild0Ele} data-omni-key={itemChild0Ele.name} json-data={jsonDef.response} json-data-str={jsonDataStr} layout={layout} resume={resume} script-header-def={scriptHeaderDef} run-mode={runMode}></vlocity_cmt-omniscript-messaging><vlocity_cmt-omniscript-custom-lwc if:true={itemChild0Ele.bcustomlightningwebcomponent17} key={itemChild0Ele.lwcId} json-def={itemChild0Ele} data-omni-key={itemChild0Ele.name} json-data={jsonDef.response} json-data-str={jsonDataStr} layout={layout} resume={resume} script-header-def={scriptHeaderDef} run-mode={runMode} seed-json={jsonDef.propSetMap.seedDataJSON}><c-inwi-b2-c_-display-billing-account-order if:true={itemChild0Ele.bcustomlightningwebcomponent17} key={itemChild0Ele.lwcId} data-omni-key={itemChild0Ele.name} omni-resume={resume} data-omni-layout={layout} omni-json-def={itemChild0Ele} omni-json-data={jsonDef.response} omni-seed-json={jsonDef.propSetMap.seedDataJSON} omni-custom-state={jsonDef.customSaveState} omni-script-header-def={scriptHeaderDef} omni-json-data-str={jsonDataStr} data-omni-input="" records={jsonDef.response.compte.List}></c-inwi-b2-c_-display-billing-account-order></vlocity_cmt-omniscript-custom-lwc><vlocity_cmt-omniscript-custom-lwc if:true={itemChild0Ele.bcustomlightningwebcomponent18} key={itemChild0Ele.lwcId} json-def={itemChild0Ele} data-omni-key={itemChild0Ele.name} json-data={jsonDef.response} json-data-str={jsonDataStr} layout={layout} resume={resume} script-header-def={scriptHeaderDef} run-mode={runMode} seed-json={jsonDef.propSetMap.seedDataJSON}><c-inwi-b2-c_create-billingaccount if:true={itemChild0Ele.bcustomlightningwebcomponent18} key={itemChild0Ele.lwcId} data-omni-key={itemChild0Ele.name} omni-resume={resume} data-omni-layout={layout} omni-json-def={itemChild0Ele} omni-json-data={jsonDef.response} omni-seed-json={jsonDef.propSetMap.seedDataJSON} omni-custom-state={jsonDef.customSaveState} omni-script-header-def={scriptHeaderDef} omni-json-data-str={jsonDataStr} data-omni-input="" compteclientid={jsonDef.response.AccountId} addressclient={jsonDef.response.AdressComplete} iscameleon={jsonDef.response.iscameleon}></c-inwi-b2-c_create-billingaccount></vlocity_cmt-omniscript-custom-lwc><vlocity_cmt-omniscript-custom-lwc if:true={itemChild0Ele.bcustomlightningwebcomponent19} key={itemChild0Ele.lwcId} json-def={itemChild0Ele} data-omni-key={itemChild0Ele.name} json-data={jsonDef.response} json-data-str={jsonDataStr} layout={layout} resume={resume} script-header-def={scriptHeaderDef} run-mode={runMode} seed-json={jsonDef.propSetMap.seedDataJSON}><c-inwib2c_postpaid_panier if:true={itemChild0Ele.bcustomlightningwebcomponent19} key={itemChild0Ele.lwcId} data-omni-key={itemChild0Ele.name} omni-resume={resume} data-omni-layout={layout} omni-json-def={itemChild0Ele} omni-json-data={jsonDef.response} omni-seed-json={jsonDef.propSetMap.seedDataJSON} omni-custom-state={jsonDef.customSaveState} omni-script-header-def={scriptHeaderDef} omni-json-data-str={jsonDataStr} data-omni-input="" vlccart={jsonDef.response.vlcCart} recap="true" orderid={jsonDef.response.OrderId} family={jsonDef.response.offertype} userprofile={jsonDef.response.userProfile} orderstep={jsonDef.response.OriginalOrderStep} typeoffre={jsonDef.response.TypeForfait} iscameleon={jsonDef.response.isCameleon} billingaccount={jsonDef.response.CheckBilling} ismodepdv={jsonDef.response.userprofiltelevente} isagence={jsonDef.response.recaplivraisonmod} typeparcour={jsonDef.response.nomparcours} isrestartorder={jsonDef.response.IsRestartOrder} idsaporder={jsonDef.response.CheckPreOrderSAP} displaybuttonaddprodcut={jsonDef.response.Displaybuttonaddprodcut}></c-inwib2c_postpaid_panier></vlocity_cmt-omniscript-custom-lwc><vlocity_cmt-omniscript-custom-lwc if:true={itemChild0Ele.bcustomlightningwebcomponent20} key={itemChild0Ele.lwcId} json-def={itemChild0Ele} data-omni-key={itemChild0Ele.name} json-data={jsonDef.response} json-data-str={jsonDataStr} layout={layout} resume={resume} script-header-def={scriptHeaderDef} run-mode={runMode} seed-json={jsonDef.propSetMap.seedDataJSON}><c-inwi-b2-c_-display-cart-errors if:true={itemChild0Ele.bcustomlightningwebcomponent20} key={itemChild0Ele.lwcId} data-omni-key={itemChild0Ele.name} omni-resume={resume} data-omni-layout={layout} omni-json-def={itemChild0Ele} omni-json-data={jsonDef.response} omni-seed-json={jsonDef.propSetMap.seedDataJSON} omni-custom-state={jsonDef.customSaveState} omni-script-header-def={scriptHeaderDef} omni-json-data-str={jsonDataStr} data-omni-input="" vlccart={jsonDef.response.vlcCart} recap="true" orderid={jsonDef.response.OrderId} family={jsonDef.response.inwiB2C_Segment_Offer} ismodepdv={jsonDef.response.userprofiltelevente} typeparcour={jsonDef.response.nomparcours} isagence={jsonDef.response.recaplivraisonmod} orderstep={jsonDef.response.OriginalOrderStep} idsaporder={jsonDef.response.CheckPreOrderSAP} displaybuttonaddprodcut={jsonDef.response.Displaybuttonaddprodcut}></c-inwi-b2-c_-display-cart-errors></vlocity_cmt-omniscript-custom-lwc><vlocity_cmt-omniscript-custom-lwc if:true={itemChild0Ele.bcustomlightningwebcomponent21} key={itemChild0Ele.lwcId} json-def={itemChild0Ele} data-omni-key={itemChild0Ele.name} json-data={jsonDef.response} json-data-str={jsonDataStr} layout={layout} resume={resume} script-header-def={scriptHeaderDef} run-mode={runMode} seed-json={jsonDef.propSetMap.seedDataJSON}><c-inwi-b2-c_-check-addresses-fiche-client if:true={itemChild0Ele.bcustomlightningwebcomponent21} key={itemChild0Ele.lwcId} data-omni-key={itemChild0Ele.name} omni-resume={resume} data-omni-layout={layout} omni-json-def={itemChild0Ele} omni-json-data={jsonDef.response} omni-seed-json={jsonDef.propSetMap.seedDataJSON} omni-custom-state={jsonDef.customSaveState} omni-script-header-def={scriptHeaderDef} omni-json-data-str={jsonDataStr} data-omni-input="" p={jsonDef.response.PaysName} v={jsonDef.response.Ville} q={jsonDef.response.Quartier} r={jsonDef.response.RegionName} pq={jsonDef.response.PrecisionQuartier} address2={jsonDef.response.address2}></c-inwi-b2-c_-check-addresses-fiche-client></vlocity_cmt-omniscript-custom-lwc><vlocity_cmt-omniscript-custom-lwc if:true={itemChild0Ele.bcustomlightningwebcomponent22} key={itemChild0Ele.lwcId} json-def={itemChild0Ele} data-omni-key={itemChild0Ele.name} json-data={jsonDef.response} json-data-str={jsonDataStr} layout={layout} resume={resume} script-header-def={scriptHeaderDef} run-mode={runMode} seed-json={jsonDef.propSetMap.seedDataJSON}><c-inwi-b2-c_-appointment-scheduler if:true={itemChild0Ele.bcustomlightningwebcomponent22} key={itemChild0Ele.lwcId} data-omni-key={itemChild0Ele.name} omni-resume={resume} data-omni-layout={layout} omni-json-def={itemChild0Ele} omni-json-data={jsonDef.response} omni-seed-json={jsonDef.propSetMap.seedDataJSON} omni-custom-state={jsonDef.customSaveState} omni-script-header-def={scriptHeaderDef} omni-json-data-str={jsonDataStr} data-omni-input="" iscreate="false" offer={jsonDef.response.OffreTypeOrder} orderid={jsonDef.response.OrderId} canal={jsonDef.response.Canal} avecporta={jsonDef.response.flagPorta} plaque={jsonDef.response.FournisseurNRA} ismodif="false"></c-inwi-b2-c_-appointment-scheduler></vlocity_cmt-omniscript-custom-lwc><vlocity_cmt-omniscript-custom-lwc if:true={itemChild0Ele.bcustomlightningwebcomponent23} key={itemChild0Ele.lwcId} json-def={itemChild0Ele} data-omni-key={itemChild0Ele.name} json-data={jsonDef.response} json-data-str={jsonDataStr} layout={layout} resume={resume} script-header-def={scriptHeaderDef} run-mode={runMode} seed-json={jsonDef.propSetMap.seedDataJSON}><c-inwib2c_-next-step-gestion-r-d-v if:true={itemChild0Ele.bcustomlightningwebcomponent23} key={itemChild0Ele.lwcId} data-omni-key={itemChild0Ele.name} omni-resume={resume} data-omni-layout={layout} omni-json-def={itemChild0Ele} omni-json-data={jsonDef.response} omni-seed-json={jsonDef.propSetMap.seedDataJSON} omni-custom-state={jsonDef.customSaveState} omni-script-header-def={scriptHeaderDef} omni-json-data-str={jsonDataStr} data-omni-input="" isok={jsonDef.response.isok} updaterdv={jsonDef.response.updaterdv}></c-inwib2c_-next-step-gestion-r-d-v></vlocity_cmt-omniscript-custom-lwc><vlocity_cmt-omniscript-line-break if:true={itemChild0Ele.bLineBreak} key={itemChild0Ele.lwcId} json-def={itemChild0Ele} data-omni-key={itemChild0Ele.name} json-data={jsonDef.response} json-data-str={jsonDataStr} layout={layout} resume={resume} script-header-def={scriptHeaderDef} run-mode={runMode}></vlocity_cmt-omniscript-line-break></template></template></vlocity_cmt-omniscript-step><vlocity_cmt-omniscript-remote-action if:true={item.bRemoteAction} key={item.lwcId} json-def={item} data-omni-key={item.name} json-data={jsonDef.response} json-data-str={jsonDataStr} layout={layout} resume={resume} script-header-def={scriptHeaderDef} run-mode={runMode}></vlocity_cmt-omniscript-remote-action><vlocity_cmt-omniscript-ip-action if:true={item.bIntegrationProcedureAction} key={item.lwcId} json-def={item} data-omni-key={item.name} json-data={jsonDef.response} json-data-str={jsonDataStr} layout={layout} resume={resume} script-header-def={scriptHeaderDef} run-mode={runMode}></vlocity_cmt-omniscript-ip-action><vlocity_cmt-omniscript-dr-post-action if:true={item.bDataRaptorPostAction} key={item.lwcId} json-def={item} data-omni-key={item.name} json-data={jsonDef.response} json-data-str={jsonDataStr} layout={layout} resume={resume} script-header-def={scriptHeaderDef} run-mode={runMode}></vlocity_cmt-omniscript-dr-post-action><vlocity_cmt-omniscript-navigate-action if:true={item.bNavigate} key={item.lwcId} json-def={item} data-omni-key={item.name} json-data={jsonDef.response} json-data-str={jsonDataStr} layout={layout} resume={resume} script-header-def={scriptHeaderDef} run-mode={runMode}></vlocity_cmt-omniscript-navigate-action></template>
+                                <template if:true={_isKbEnabledOnScript}>
+                                <vlocity_cmt-omniscript-knowledge-base knowledge-options={kbOptions}
+                                                             data-omni-key='omniscriptKnowledgeBase'
+                                                             layout={layout}
+                                                             data-stepchart-placement={_stepChartPlacement}
+                                                             omniscript-key={scriptHeaderDef.omniscriptKey}
+                                                             kb-label={knowledgeLabel}>
+                                </vlocity_cmt-omniscript-knowledge-base>
+                            </template>
+                            </div>
+                            <div class="nds-m-around_small">
+                                <div class="nds-grid nds-grid_align-center">
+                                    <div class="nds-grid nds-grid_align-center nds-wrap nds-button-group-row nds-size_1-of-1 nds-medium-size_8-of-12 nds-p-horizontal_medium">
+                                        <template if:true={hasNext}>
+                                            <vlocity_cmt-navigate-action
+                                                if:true={_isSeoEnabled}
+                                                target-type="Current Page"
+                                                class={navButton.next.classes}
+                                                use-href
+                                                target-params={navButton.next.targetParams}>
+                                                <vlocity_cmt-button
+                                                    type="button"
+                                                    label={navButton.next.label}
+                                                    aria-label={navButton.next.label}
+                                                    variant="brand"
+                                                    extraclass="slds-size_1-of-1 slds-p-horizontal_none slds-text-align_center"
+                                                    theme={_theme}>
+                                                </vlocity_cmt-button>
+                                            </vlocity_cmt-navigate-action>
+
+                                            <vlocity_cmt-button
+                                                if:false={_isSeoEnabled}
+                                                type="button"
+                                                variant="brand"
+                                                onclick={nextStep}
+                                                class={navButton.next.classes}
+                                                label={navButton.next.label}
+                                                aria-label={navButton.next.label}
+                                                extraclass="nds-button_stretch nds-p-around_xx-small nds-size_1-of-1"
+                                                theme={_theme}>
+                                            </vlocity_cmt-button>
+                                        </template>
+                                    </div>
+                                </div>
+                                <div class="nds-grid nds-grid_align-center">
+                                    <div class="nds-grid nds-grid_align-center nds-wrap nds-button-group-row nds-size_1-of-1 nds-medium-size_8-of-12 nds-p-horizontal_medium">
+                                        <template if:true={hasPrev}>
+                                            <vlocity_cmt-navigate-action
+                                                if:true={_isSeoEnabled}
+                                                target-type="Current Page"
+                                                use-href
+                                                class={navButton.previous.classes}
+                                                target-params={navButton.previous.targetParams}>
+                                                <vlocity_cmt-button
+                                                    type="button"
+                                                    variant="neutral"
+                                                    label={navButton.previous.label}
+                                                    aria-label={navButton.previous.label}
+                                                    extraclass="nds-button_stretch nds-p-around_xx-small nds-size_1-of-1"
+                                                    theme={_theme}>
+                                                </vlocity_cmt-button>
+                                            </vlocity_cmt-navigate-action>
+
+                                            <vlocity_cmt-button
+                                                if:false={_isSeoEnabled}
+                                                type="button"
+                                                variant="neutral"
+                                                onclick={prevStep}
+                                                label={navButton.previous.label}
+                                                aria-label={navButton.previous.label}
+                                                class={navButton.previous.classes}
+                                                extraclass="nds-button_stretch nds-p-around_xx-small nds-size_1-of-1"
+                                                theme={_theme}>
+                                            </vlocity_cmt-button>
+                                        </template>
+                                    </div>
+                                </div>
+                                <div class="nds-grid nds-grid_align-center">
+                                    <div class="nds-grid nds-grid_align-center nds-wrap nds-button-group-row nds-size_1-of-1 nds-medium-size_8-of-12 nds-p-horizontal_medium">
+
+                                        <template if:true={cancelAction}>
+                                            <vlocity_cmt-button type="button"
+                                                    label={cancelLabel}
+                                                    variant="base"
+                                                    class={navButton.save.classes}
+                                                    extraclass="nds-button_stretch nds-p-around_xx-small nds-size_1-of-1"
+                                                    onclick={cancel}
+                                                    theme={_theme}>
+                                            </vlocity_cmt-button>
+                                        </template>
+                                        <vlocity_cmt-navigate-action
+                                            data-omni-key="DEFAULT-CANCEL"
+                                            target-type={_defaultCancel.type}
+                                            target-params={_defaultCancel.params}>
+                                        </vlocity_cmt-navigate-action>
+
+                                        <template if:true={allowSfl}>
+                                            <vlocity_cmt-button type="button"
+                                                                variant="base"
+                                                                onclick={saveForLater}
+                                                                class={navButton.save.classes}
+                                                                label={navButton.save.label}
+                                                                extraclass="nds-button_stretch nds-p-around_xx-small nds-size_1-of-1"
+                                                                theme={_theme}>
+                                            </vlocity_cmt-button>
+                                        </template>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+
+                        <template if:true={bSflComplete}>
+                            <vlocity_cmt-omniscript-save-for-later-acknowledge result={bSflResult} layout={layout}></vlocity_cmt-omniscript-save-for-later-acknowledge>
+                        </template>
+                        <template for:each={modalEvents}
+                                for:item="modallvl1"
+                                for:index="indexlvl1">
+                            <vlocity_cmt-omniscript-modal data-omni-key='omnimodal'
+                                    key={modallvl1.modalHeader}
+                                    type={modallvl1.type}
+                                    layout={layout}
+                                    triggered-on-step={modallvl1.triggeredOnStep}
+                                    hide-footer={modallvl1.hideFooter}
+                                    hide-header={modallvl1.hideHeader}>
+                                <div slot="header">
+                                    <h1>{modallvl1.modalHeader}</h1>
+                                </div>
+                                <div slot="content">
+                                    <vlocity_cmt-omniscript-formatted-rich-text value={modallvl1.modalMessage} disable-linkify></vlocity_cmt-omniscript-formatted-rich-text>
+                                </div>
+                                <div slot="footer">
+                                    <ul class="slds-button-group-row">
+                                        <template for:each={modallvl1.buttons}
+                                                for:item="modalbutton"
+                                                for:index="modalbuttonindex">
+                                            <template if:true={modalbutton.label}>
+                                                <li class="slds-button-group-item"
+                                                    key={modalbutton.key}>
+                                                    <lightning-button label={modalbutton.label}
+                                                                    value={indexlvl1}
+                                                                    onclick={modalbutton.handleClick}>
+                                                    </lightning-button>
+                                                </li>
+                                            </template>
+                                        </template>
+                                    </ul>
+                                </div>
+                            </vlocity_cmt-omniscript-modal>
+                        </template>
+                    </template>
+                </template>
+                <template if:false={bSflValid}>
+                    <div class="nds-grid nds-wrap nds-gutters nds-p-horizontal_medium">
+                        <div class="nds-col nds-size_12-of-12 nds-medium-size_2-of-12"></div>
+                        <div class="nds-col nds-size_12-of-12 nds-medium-size_8-of-12">
+                            <div class='nds-card omniscript-save-for-later'>
+                                <div class="nds-card__header nds-grid">
+                                    <header class="nds-media nds-media_center nds-has-flexi-truncate">
+                                        <div class="nds-media__figure">
+                                            <lightning-icon icon-name="utility:warning"
+                                                            alternative-text="Ok"
+                                                            size="large"></lightning-icon>
+                                        </div>
+                                        <div class="nds-media__body">
+                                            <h2 class="nds-card__header-title">
+                                                <span class="nds-text-heading_large">{allCustomLabelsUtil.OmniInvalidLwcComponent}</span>
+                                            </h2>
+                                        </div>
+                                    </header>
+                                </div>
+                                <div class='nds-card__body nds-card__body_inner'>
+                                    <p class="bold">{allCustomLabelsUtil.OmniInvalidLwcComponentMessage}</p>
+                                    <p>&nbsp;</p>
+                                    <div class="nds-m-around_small">
+                                        <div class="nds-grid">
+                                            <div class="nds-grid nds-wrap nds-button-group-row nds-size_1-of-1 nds-medium-size_8-of-12 nds-p-horizontal_medium">
+                                                    <vlocity_cmt-button type="button"
+                                                                        variant="brand"
+                                                                        onclick={handleContinueInvalidSfl}
+                                                                        label={allCustomLabelsUtil.OmniContinue}
+                                                                        class="nds-m-left_x-small"
+                                                                        extraclass="nds-button_stretch nds-p-around_xx-small nds-size_1-of-1"
+                                                                        theme={_theme}>
+                                                    </vlocity_cmt-button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="nds-col nds-size_12-of-12 nds-medium-size_2-of-12"></div>
+                    </div>
+                </template>
+            </div>
+        </template>
+    </div>
+</template>

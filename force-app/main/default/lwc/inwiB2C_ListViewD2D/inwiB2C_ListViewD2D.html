@@ -1,0 +1,63 @@
+<template>
+    <div class="slds-m-around_medium">
+        <!-- Conteneur pour les champs de filtrage côte à côte -->
+           <!-- checkbox pour recuperer les commandes liée a la queue de l'agence connecté -->
+        <!--   <div class="slds-col slds-size_1-of-2 slds-p-left_small">
+            <lightning-input 
+            type="checkbox" 
+            label="Ma Queue"
+            checked={isChecked} 
+            onchange={handleCheckboxChange}>
+        </lightning-input>
+    </div>-->
+        <div class="slds-grid slds-grid_vertical-align-center slds-grid_align-spread">
+            <!-- Liste déroulante pour filtrer par statut -->
+            <div class="slds-col slds-size_1-of-2 slds-p-right_small">
+                <lightning-combobox
+                    name="statusFilter"
+                    label="Filtrer par statut"
+                    value={selectedStatus}
+                    placeholder="Sélectionnez un statut"
+                    options={statusOptions}
+                    onchange={handleFilterChange}
+               >
+                </lightning-combobox>
+            </div>
+
+            <!-- Champ de saisie pour filtrer par code partenaire -->
+            <div class="slds-col slds-size_1-of-2 slds-p-left_small">
+                <lightning-input
+                    label="Filtrer par Code Partenaire"
+                    value={partnerCode}
+                    placeholder="Entrez le code partenaire"
+                    onchange={handlePartnerCodeChange}
+                  >
+                </lightning-input>
+            </div>
+            
+        </div>
+        <template if:true={isLoading}>
+            <div class="exampleHolder">
+                <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+            </div>
+        </template>
+        <template if:false={isLoading}>
+        <!-- Tableau des données -->
+        <lightning-datatable
+            key-field="Id"
+            data={filteredRecords}
+            columns={columns}
+            sorted-by={sortedBy}
+            sorted-direction={sortedDirection}
+            onsort={handleSort}>
+        </lightning-datatable>
+   
+        <!-- Message d'erreur -->
+        <template if:true={error}>
+            <div class="slds-text-color_error">
+                {error}
+            </div>
+        </template>
+     </template>
+    </div>
+</template>

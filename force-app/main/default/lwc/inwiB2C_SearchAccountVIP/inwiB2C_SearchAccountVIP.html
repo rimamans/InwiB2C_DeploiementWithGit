@@ -1,0 +1,141 @@
+<template>
+    
+  <h3 class="slds-p-bottom--small slds-text-heading--small slds-truncate " style="width:100%" >
+                 
+    <div class="slds-grid slds-wrap" style="width:100%">
+            <template if:true={allaccountvip}  > 
+                <div class="wraperClass " style="width:100%">
+
+                    <table style="width:100%" class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered">
+                        <thead>
+                            <tr class="">
+    
+                              
+                              <th class="" scope="col">
+                                <div class="slds-truncate" title="Nom">Nom</div>
+                              </th>
+                              <th class="" scope="col">
+                                <div class="slds-truncate" title="Prénom">Prénom</div>
+                              </th>
+                              <th class="" scope="col">
+                                <div class="slds-truncate" title="CIN">CIN   </div>
+                              </th>
+                              <th class="" scope="col">
+                                <div class="slds-truncate" title="CIN">MDN   </div>
+                              </th>
+                              <th class="" scope="col">
+                                  <div class="slds-truncate" title="Email">Contact Num   </div>
+                                </th>
+                              
+                              <th class="" scope="col">
+                                <div class="slds-truncate" title="Type">Type  </div>
+                              </th>
+         
+                              <th class="" scope="col">
+                                  <div class="slds-truncate" title="Action">Action</div>
+                                </th>  
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <template for:each={allaccountvip} for:item="ligne" >
+                                <tr key ={ligne.IdCase} >
+                                    <td class="slds-cell-wrap" > <div class="slds-line-clamp">****</div> </td>
+                                    <td class="slds-cell-wrap" > <div class="slds-line-clamp">****</div> </td>
+                                    <td class="slds-cell-wrap" > <div class="slds-line-clamp">****</div> </td>
+                                    <td class="slds-cell-wrap" > <div class="slds-line-clamp">****</div> </td>
+                                    <td class="slds-cell-wrap" > <div class="slds-line-clamp">****</div> </td>
+                                    
+                                    <td class="slds-cell-wrap" > <div class="slds-line-clamp">{ligne.Type}</div> </td>
+                                    <td class="slds-cell-wrap" ><div class="slds-line-clamp"><lightning-button label="Selectionner"  onclick={handleCaseSelection} 
+                                         id={ligne.AccountId} name={ligne} ></lightning-button></div>
+                                    </td>
+                                </tr>
+                            </template>
+                          
+                            </tbody>
+                      </table>
+
+                </div>
+            </template>
+            
+        </div>
+
+
+
+
+        <div class="slds-grid slds-wrap" style="width:100%">
+
+
+
+    <template if:true={allsubvip}  >
+
+              <div class="wraperClass ">
+                  <table class="sty-table-case slds-table slds-table_bordered slds-table_fixed-layout">
+                      <thead>
+                        <tr class="">
+
+                          
+                          <th class="" scope="col">
+                            <div class="slds-truncate" title="Nom">Nom</div>
+                          </th>
+                          <th class="" scope="col">
+                            <div class="slds-truncate" title="Prénom">Prénom</div>
+                          </th>
+                          <th class="" scope="col">
+                            <div class="slds-truncate" title="CIN">CIN</div>
+                          </th>
+                          <th class="" scope="col">
+                            <div class="slds-truncate" title="CIN">MDN</div>
+                          </th>
+                          <th class="" scope="col">
+                              <div class="slds-truncate" title="Email">Contact Num</div>
+                            </th>
+                          
+                          <th class="" scope="col">
+                            <div class="slds-truncate" title="Type">Type</div>
+                          </th>
+     
+                          <th class="" scope="col">
+                              <div class="slds-truncate" title="Action">Action</div>
+                            </th>  
+                        </tr>
+                      </thead>
+                      <tbody>
+                      <template for:each={allsubvip} for:item="ligneSub" >
+                          <tr key ={ligneSub.IdCase} >
+                              <td class="slds-cell-wrap" > <div class="slds-line-clamp">*</div> </td>
+                              <td class="slds-cell-wrap" > <div class="slds-line-clamp">*</div> </td>
+                              <td class="slds-cell-wrap" > <div class="slds-line-clamp">*</div> </td>
+                              <td class="slds-cell-wrap" > <div class="slds-line-clamp">*</div> </td>
+
+                              <td class="slds-cell-wrap" > <div class="slds-line-clamp">*</div> </td>
+                              <td class="slds-cell-wrap" > <div class="slds-line-clamp">{ligneSub.Type}</div> </td>
+                              <td class="slds-cell-wrap" ><div class="slds-line-clamp"><lightning-button label="Selectionner"  onclick={handleCaseSelection} 
+                                   id={ligneSub.AccountId} name={ligneSub} ></lightning-button></div>
+                              </td>
+                          </tr>
+                      </template>
+                    
+                      </tbody>
+                    </table>
+
+              </div>
+
+
+          </template>
+
+</div>
+        
+
+
+
+
+
+
+
+
+      
+
+
+ </h3>
+</template>

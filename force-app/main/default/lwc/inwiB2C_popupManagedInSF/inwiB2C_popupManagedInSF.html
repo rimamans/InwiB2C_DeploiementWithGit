@@ -1,0 +1,41 @@
+<template>
+
+
+    <template if:true={alert} >   
+      <div class="slds-notify slds-notify_alert slds-alert_warning2" role="alert">
+      <span class="slds-icon_container slds-icon-utility-warning slds-m-right_x-small" title="Description of icon when needed">
+        <svg class="slds-icon slds-icon_x-small" aria-hidden="true">
+          <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#warning"></use>
+        </svg>
+      </span> 
+        <p>  <b>  Souscription gérée dans Salesforce, pour tout acte de gestion merci de le faire dans le CRM Salesforce.    </b>  </p>
+        </div>
+      </template>
+
+
+      
+      <template if:false={alert} >  
+        <template if:true={isStatutNull}>
+          <div class="slds-notify slds-notify_alert slds-alert_warning" role="alert">
+          <span class="slds-icon_container slds-icon-utility-warning slds-m-right_x-small" title="Description of icon when needed">
+            <svg class="slds-icon slds-icon_x-small" aria-hidden="true">
+              <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#warning"></use>
+            </svg>
+          </span> 
+          <p>  <b>      Souscription non gérée dans Salesforce, pour tout acte de gestion merci de le faire dans le CRM Peoplesoft.    </b>  </p>
+          </div>
+        </template>
+        <template if:false={isStatutNull}>
+          <div class="slds-notify slds-notify_alert slds-alert_warning" role="alert">
+          <span class="slds-icon_container slds-icon-utility-warning slds-m-right_x-small" title="Description of icon when needed">
+            <svg class="slds-icon slds-icon_x-small" aria-hidden="true">
+              <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#warning"></use>
+            </svg>
+          </span> 
+          <p>  <b>      La souscription a subit un upgrade FTTH. Vous ne pouvez pas effectuer d’acte de gestion dessus jusqu’au prochain cycle    </b>  </p>
+          </div>
+        </template>
+      </template>
+
+
+</template>

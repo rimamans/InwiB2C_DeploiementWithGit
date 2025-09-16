@@ -1,0 +1,16 @@
+<template>
+    <div class="slds-m-around_x-small">
+        <template lwc:if={showButton}>
+            <div class="slds-grid slds-gutters">
+                <lightning-button variant="brand-outline" label="Générer RIO" title="Générer RIO" onclick={GenerateRIO}>
+                </lightning-button>
+            </div>
+        </template>
+
+        <br>
+        <template if:true={__infoLoaded}>
+                {RIO}
+            <br>
+        </template>
+    </div>
+</template>

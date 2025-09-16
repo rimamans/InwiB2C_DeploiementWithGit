@@ -1,0 +1,30 @@
+<apex:page standardController="InwiB2C_Demande_de_migration__c" lightningStylesheets="true">
+    <apex:form >
+        <div style="height:auto">
+            <apex:pageBlock mode="edit">
+                <apex:pageBlockSection columns="2">
+                    <apex:outputField value="{!InwiB2C_Demande_de_migration__c.Name}" label="Numéro de la demande de migration" />
+                    <apex:outputField value="{!InwiB2C_Demande_de_migration__c.InwiB2C_Client__c}" label="Compte" />
+                    <apex:outputField value="{!InwiB2C_Demande_de_migration__c.InwiB2C_Partenaire__c}" label="Partenaire" />
+                    <apex:outputField value="{!InwiB2C_Demande_de_migration__c.InwiB2C_Compte_de_facturation__c}" label="Compte de facturation" />
+                    <apex:outputField value="{!InwiB2C_Demande_de_migration__c.InwiB2C_Souscription__c}" label="Souscription"/>
+                    <apex:outputField value="{!InwiB2C_Demande_de_migration__c.InwiB2C_Nouvelle_Subscription__c}" label="Nouvelle souscription" />
+                    <apex:outputField value="{!InwiB2C_Demande_de_migration__c.InwiB2C_Offre__c}" label="Offre" />
+                    <apex:outputField value="{!InwiB2C_Demande_de_migration__c.InwiB2C_Nouvel_offre__c}" label="Nouvel offre" />
+                    <apex:outputField value="{!InwiB2C_Demande_de_migration__c.InwiB2C_Profil__c}" label="Profil" />
+                    <apex:outputField value="{!InwiB2C_Demande_de_migration__c.InwiB2C_Nouveau_Profil__c}" label="Nouveau Profil"/>
+                    <apex:outputField value="{!InwiB2C_Demande_de_migration__c.InwiB2C_Statut__c}" label="Statut" />
+                    <apex:outputField value="{!InwiB2C_Demande_de_migration__c.InwiB2C_Motif_annulation__c}" label="Motif d'annulation" />
+                    <apex:outputField value="{!InwiB2C_Demande_de_migration__c.InwiB2C_Canal__c}" label="Canal" />
+                    <apex:outputField value="{!InwiB2C_Demande_de_migration__c.InwiB2C_Mode_de_paiement__c}" label="Mode de paiement" />
+                    <apex:outputField value="{!InwiB2C_Demande_de_migration__c.InwiB2C_Code_transaction_factures__c}" label="Code transaction des factures"/>
+                    <apex:outputField value="{!InwiB2C_Demande_de_migration__c.InwiB2C_Code_transaction_frais__c}" label="Code transaction des frais" />
+                    <apex:outputField value="{!InwiB2C_Demande_de_migration__c.CreatedById}" label="Créé par" />
+                    <apex:outputField value="{!InwiB2C_Demande_de_migration__c.CreatedDate}" label="Crée"/>
+                        
+
+               </apex:pageBlockSection>
+            </apex:pageBlock>
+        </div>
+    </apex:form>
+</apex:page>

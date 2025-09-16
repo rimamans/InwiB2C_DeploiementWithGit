@@ -1,0 +1,271 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 04-25-2022
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+    <!-- Modal/Popup Box LWC body starts here -->
+    <strong class="slds-align_absolute-center" style="height:5rem">Nouveau compte de facturation</strong>
+    <div style="border-style: solid; border-color: #92107F; padding: 10px; border-radius: 10px;">
+        <div>
+            <div class="slds-grid slds-wrap slds-grid_vertical-stretch">
+                <lightning-radio-group
+    name="radioGroup"
+    label="Choix d'adresse"
+    options={options}
+    value={optionadresse}
+    onchange={handleChange1}
+    style="padding: 10px;">
+</lightning-radio-group>
+
+                <br />
+                <br />
+            </div>
+            <template if:true={fieldVisible}>
+                
+                <strong class="slds-align_absolute-center" style="height:5rem"> Nouvelle adresse de facturation</strong>
+                <br />
+                <div class="slds-grid slds-wrap">
+           <!--         <div class="slds-col slds-size_6-of-12"> -->
+                        <lightning-combobox placeholder="Pays" onchange={ChangePays} data-theid="Pays" label="Pays"
+                            required value={valuePays} class="slds-col slds-size_1-of-2 elementMargin2"
+                            style="padding: 10px;"  options={PaysValues}>
+                        </lightning-combobox>
+        <!--            </div> -->
+                    <!-- <template if:true={showother}>
+                        <p><strong>Région: </strong>{RegionName}</p>
+                    </template> -->
+                <!-- <div class="slds-grid slds-wrap slds-grid_vertical-stretch">-->
+                    <lightning-combobox style="padding: 10px;" placeholder="sélectionnez une ville"
+                        onchange={ChangeVille} data-theid="Ville" value={v} label="Ville" required
+                        class="slds-col slds-size_1-of-2 elementMargin2" options={VilleValues}>
+                    </lightning-combobox>
+                    <lightning-input type="text" style="padding: 10px;" disabled data-theid="Region" label="Region"
+                        value={r} placeholder="sélectionnez une region"
+                        class="slds-col slds-size_1-of-2 elementMargin2">
+                    </lightning-input>
+                    <template if:false={isToSpecify}>
+                        <lightning-combobox style="padding: 10px;" placeholder="sélectionnez une quartier"
+                            onchange={ChangeQuartier} data-theid="Quartier" value={q} label="Quartier"
+                            class="slds-col slds-size_1-of-2 elementMargin2" options={QuartierValues}>
+                        </lightning-combobox>
+                    </template>
+                    <template if:true={isToSpecify}>
+                        <lightning-input style="padding: 10px;" type="text" onchange={ChangePrecisionQuartier}
+                            data-theid="PrecisionQuartier" label="Précision Quartier" placeholder="Précisez le quartier"
+                            value={pq} class="slds-col slds-size_1-of-2 elementMargin2">
+                        </lightning-input>
+                    </template>
+            <!--      </div>-->
+                <template if:true={showother}>
+                 <!--   <div class="slds-grid slds-wrap slds-grid_vertical-stretch">-->
+                        <lightning-input style="padding: 10px;" type="text" label="Code Postal" value={codepostal}
+                            name="codepostal" placeholder="Saisir code postal"
+                            class="slds-col slds-size_1-of-2 elementMargin2" onchange={handleChangeInput}>
+                        </lightning-input>
+                        <lightning-input style="padding: 10px;" type="text" label="Complément d'adresse"
+                            value={complementaddress} name="complementaddress" placeholder="Saisir Complément d'adresse"
+                            class="slds-col slds-size_1-of-2 elementMargin2" onchange={handleChangeInput}>
+                        </lightning-input>
+                <!--    </div>-->
+                </template>
+            </div>
+            </template>
+
+
+
+
+            <template if:false={isAddressClientValid}>
+                
+                <strong class="slds-align_absolute-center" style="height:5rem"> Nouvelle adresse de facturation</strong>
+                <br />
+                <div class="slds-grid slds-wrap">
+           <!--         <div class="slds-col slds-size_6-of-12"> -->
+                        <lightning-combobox placeholder="Pays" onchange={ChangePays} data-theid="Pays" label="Pays"
+                            required value={valuePays} class="slds-col slds-size_1-of-2 elementMargin2"
+                            style="padding: 10px;"  options={PaysValues}>
+                        </lightning-combobox>
+        <!--            </div> -->
+                    <!-- <template if:true={showother}>
+                        <p><strong>Région: </strong>{RegionName}</p>
+                    </template> -->
+                <!-- <div class="slds-grid slds-wrap slds-grid_vertical-stretch">-->
+                    <lightning-combobox style="padding: 10px;" placeholder="sélectionnez une ville"
+                        onchange={ChangeVille} data-theid="Ville" value={v} label="Ville" required
+                        class="slds-col slds-size_1-of-2 elementMargin2" options={VilleValues}>
+                    </lightning-combobox>
+                    <lightning-input type="text" style="padding: 10px;" disabled data-theid="Region" label="Region"
+                        value={r} placeholder="sélectionnez une region"
+                        class="slds-col slds-size_1-of-2 elementMargin2">
+                    </lightning-input>
+                    <template if:false={isToSpecify}>
+                        <lightning-combobox style="padding: 10px;" placeholder="sélectionnez une quartier"
+                            onchange={ChangeQuartier} data-theid="Quartier" value={q} label="Quartier"
+                            class="slds-col slds-size_1-of-2 elementMargin2" options={QuartierValues}>
+                        </lightning-combobox>
+                    </template>
+                    <template if:true={isToSpecify}>
+                        <lightning-input style="padding: 10px;" type="text" onchange={ChangePrecisionQuartier}
+                            data-theid="PrecisionQuartier" label="Précision Quartier" placeholder="Précisez le quartier"
+                            value={pq} class="slds-col slds-size_1-of-2 elementMargin2">
+                        </lightning-input>
+                    </template>
+            <!--      </div>-->
+                <template if:true={showother}>
+                 <!--   <div class="slds-grid slds-wrap slds-grid_vertical-stretch">-->
+                        <lightning-input style="padding: 10px;" type="text" label="Code Postal" value={codepostal}
+                            name="codepostal" placeholder="Saisir code postal"
+                            class="slds-col slds-size_1-of-2 elementMargin2" onchange={handleChangeInput}>
+                        </lightning-input>
+                        <lightning-input style="padding: 10px;" type="text" label="Complément d'adresse"
+                            value={complementaddress} name="complementaddress" placeholder="Saisir Complément d'adresse"
+                            class="slds-col slds-size_1-of-2 elementMargin2" onchange={handleChangeInput}>
+                        </lightning-input>
+                <!--    </div>-->
+                </template>
+            </div>
+            </template>
+            <template if:false={isAddressClientValid}>
+            <div class="slds-grid slds-wrap slds-grid_vertical-stretch">
+                <lightning-input style="padding: 10px;" class="slds-col slds-size_1-of-2 elementMargin2"
+                    label="Nom du compte" name="nomducompte" data-theid="accoutName" required value={nomducompte}
+                    onchange={handleChangeInput}></lightning-input>
+                <template if:true={__isdisplayed}>
+                    <lightning-combobox style="padding: 10px;" class="slds-col slds-size_1-of-2 elementMargin2"
+                        placeholder="Mode de paiement" data-theid="ModePaiement" label="Mode de paiement"
+                        options={ModePaiementPicklistvaluesCameleon} value={modeSelected} onchange={handleChangeCombo}>
+                    </lightning-combobox>
+                </template>
+                <template if:false={__isdisplayed}>
+                <lightning-combobox style="padding: 10px;" class="slds-col slds-size_1-of-2 elementMargin2"
+                    placeholder="Mode de paiement" data-theid="ModePaiement" label="Mode de paiement"
+                    options={ModePaiementPicklistvalues} value={modeSelected} onchange={handleChangeCombo}>
+                </lightning-combobox>
+            </template>
+
+         </div>
+        </template>
+
+
+        <template if:true={isAddressClientValid}>
+            <div class="slds-grid slds-wrap slds-grid_vertical-stretch">
+                <lightning-input style="padding: 10px;" class="slds-col slds-size_1-of-2 elementMargin2"
+                    label="Nom du compte" name="nomducompte" data-theid="accoutName" required value={nomducompte}
+                    onchange={handleChangeInput}></lightning-input>
+                <template if:true={__isdisplayed}>
+                    <lightning-combobox style="padding: 10px;" class="slds-col slds-size_1-of-2 elementMargin2"
+                        placeholder="Mode de paiement" data-theid="ModePaiement" label="Mode de paiement"
+                        options={ModePaiementPicklistvaluesCameleon} value={modeSelected} onchange={handleChangeCombo}>
+                    </lightning-combobox>
+                </template>
+                <template if:false={__isdisplayed}>
+                <lightning-combobox style="padding: 10px;" class="slds-col slds-size_1-of-2 elementMargin2"
+                    placeholder="Mode de paiement" data-theid="ModePaiement" label="Mode de paiement"
+                    options={ModePaiementPicklistvalues} value={modeSelected} onchange={handleChangeCombo}>
+                </lightning-combobox>
+            </template>
+
+         </div>
+        </template>
+
+            <br />
+        </div>
+        <template if:true={picklistVisible}>
+            <strong class="slds-align_absolute-center" style="height:5rem"> Prélèvement Bancaire: Information du
+                RIB</strong>
+            <div class="slds-grid slds-wrap slds-grid_vertical-stretch">
+                <lightning-input style="padding: 10px;" class="slds-col slds-size_1-of-2 elementMargin2"
+                    label="Intitulé du compte" name="IntitCompte" data-theid="IntitCompte" required value={IntitCompte}
+                    onchange={handleChangeInput}></lightning-input>
+                <lightning-input style="padding: 10px;" class="slds-col slds-size_1-of-2 elementMargin2"
+                    label="Code de la banque" type="text" name="Codebanque" data-theid="Codebanque" required
+                    value={Codebanque} pattern="[0-9][0-9][0-9]" onchange={handleChangeInput}
+                    message-when-pattern-mismatch="Code banque doit contenir que 3 Chiffres"></lightning-input>
+                <lightning-input style="padding: 10px;" class="slds-col slds-size_1-of-2 elementMargin2"
+                    label="Code guichet" pattern="[0-9][0-9][0-9]" type="text" name="Codeguichet"
+                    data-theid="Codeguichet" required value={Codeguichet} onchange={handleChangeInput}
+                    message-when-pattern-mismatch="Code guichet doit contenir que 3 Chiffres"></lightning-input>
+                <lightning-input style="padding: 10px;" class="slds-col slds-size_1-of-2 elementMargin2"
+                    label="Numéro de compte" type="text" name="ComptebanqueNum" data-theid="ComptebanqueNum" required
+                    value={ComptebanqueNum} onchange={handleChangeInput}></lightning-input>
+                <lightning-input style="padding: 10px;" class="slds-col slds-size_1-of-2 elementMargin2" label="Clé"
+                    name="CleCompte" pattern="[0-9][0-9]" type="number" data-theid="CleCompte" required
+                    value={CleCompte} onchange={handleChangeInput}
+                    message-when-pattern-mismatch="La clé  doit contenir que 2 Chiffres">
+                </lightning-input>
+                <lightning-input disabled="true" type="text" style="padding: 10px;"
+                    class="slds-col slds-size_1-of-2 elementMargin2" label="Nom de la banque" name="NomBanque"
+                    data-theid="NomBanque" value={NomBanque} onchange={handleChangeInput}></lightning-input>
+                <lightning-input style="padding: 10px;" class="slds-col slds-size_1-of-2 elementMargin2"
+                    label="Nom de l'agence" name="Nomagence" data-theid="Nomagence" required value={Nomagence}
+                    onchange={handleChangeInput}></lightning-input>
+            </div>
+        </template>
+    </div>
+    <template if:true={haserror}>
+        <p style="color: red">{errormessage}</p>
+    </template>
+    <div style="float: right ;padding:20px;">
+        <template if:true={isFromChangementTitulaire}>
+            <lightning-button style="margin-right: 5px; " variant="brand" label="Annuler" onclick={handleCancel}>
+            </lightning-button>
+        </template>
+       <!-- chb  ano B-15948 <template if:false={isFromChangementTitulaire}>
+            <lightning-button variant="brand" label="Précédent" onclick={gotopreviousStep} style="margin-right: 5px; ">
+            </lightning-button>
+        </template>-->
+        <lightning-button variant="brand" label="Suivant" disabled={saving} onclick={createAccount}> </lightning-button>
+    </div>
+    <template if:true={isModalOpen}>
+        <!-- Modal/Popup Box LWC starts here -->
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+            aria-describedby="modal-content-id-2" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <!-- Modal/Popup Box LWC header here -->
+                <header class="slds-modal__header">
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Confirmation
+                    </h2>
+                    <p style="color: red;">
+                        {messageblacklist}
+                    </p>
+                </header>
+                <!-- Modal/Popup Box LWC body starts here -->
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-2">
+                    <p><strong>Nom du compte: </strong>{nomducompte}</p>
+                    <template if:false={picklistVisible}>
+                        <p><strong>Mode de paiement: </strong>{modeSelected}</p>
+                    </template>
+                    <template if:true={picklistVisible}>
+                        <p><strong>Mode de paiement: </strong>{modeSelected}</p>
+                        <p><strong>Intitulé du compte: </strong>{IntitCompte}</p>
+                        <p><strong>Code banque: </strong>{Codebanque}</p>
+                        <p><strong>Code guichet: </strong>{Codeguichet}</p>
+                        <p><strong>Numéro de compte: </strong>{ComptebanqueNum}</p>
+                        <p><strong>Clé: </strong>{CleCompte}</p>
+                        <p><strong>Nom de la banque: </strong>{NomBanque}</p>
+                        <p><strong>Nom de l’agence: </strong>{Nomagence}</p>
+                    </template>
+                    <template if:false={fieldVisible}>
+                        <p><strong>Addresse de facturation: </strong>{addressclient}</p>
+                    </template>
+                    <template if:true={fieldVisible}>
+                        <p><strong>Pays: </strong>{PaysName}</p>
+                        <template if:true={showother}>
+                            <p><strong>Région: </strong>{RegionName}</p>
+                            <p><strong>Ville: </strong>{VilleName}</p>
+                        </template>
+                    </template>
+                </div>
+                <!-- Modal/Popup Box LWC footer starts here -->
+                <footer class="slds-modal__footer">
+                    <button class="slds-button slds-button_neutral" onclick={closeModal} title="Cancel">Annuler</button>
+                    <button class="slds-button slds-button_brand" onclick={createAccount} disabled={disableButton}
+                        title="OK">Confirmer</button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>

@@ -1,0 +1,269 @@
+<template> 
+    <div style="border-style: solid; border-color: #92107F; padding: 10px; border-radius: 6px;">
+
+<!--
+        <div class="slds-grid">
+            <div class="slds-col slds-size_1-of-2">
+                <lightning-input type="text"  label="N°Order"  value={__demande.InwiB2C_DEGROUPAGE_NUM__c} class="slds-border_bottom" readonly="true"></lightning-input> 
+            </div>&ensp;
+            <div class="slds-col slds-size_1-of-2 "> 
+                <div class="slds-border_bottom">
+                    <label for="prestation1" class="slds-form-element__legend slds-form-element__label">Type de préstation</label><br>
+                <lightning-input type="text" id="prestation1"  variant="label-hidden" value={__displayinfo.typePrestationLabel} readonly="true"></lightning-input>
+                 </div>
+          </div>
+        </div>
+-->
+    <div class="slds-grid">
+        <div class="slds-col slds-size_1-of-2">
+            <div class="slds-border_bottom">
+            <lightning-input type="text"  label="N° Ordre" id="NOrder" value={__demande.InwiB2C_ORDER_DEGROUPAGE_NUM__c} readonly="true"></lightning-input> 
+        </div></div>&ensp;
+        <div class="slds-col slds-size_1-of-2 "> 
+            <div class="slds-border_bottom">
+            <lightning-input type="text"  id="Numero" value={__demande.InwiB2C_SEQ_NUM__c} label="Numéro" readonly="true" ></lightning-input>
+             </div></div>
+      </div>
+
+      <div class="slds-grid">
+            <div class="slds-col slds-size_1-of-2 "> 
+                <div class="slds-border_bottom">
+                    <lightning-input type="text" label="Numéro de désignation" id="nd"  value={__displayinfo.nd} readonly="true"></lightning-input> 
+                </div>
+            </div>&ensp;
+            <div class="slds-col slds-size_1-of-2 "> 
+                <div class="slds-border_bottom">
+                <lightning-input type="text" label="Numéro d'identification" value={__demande.InwiB2C_Nationalid__c} readonly="true"></lightning-input>                 
+            </div></div>
+        </div>
+
+      <div class="slds-grid">
+        <div class="slds-col slds-size_1-of-2">
+            <div class="slds-border_bottom">
+                <label for="CompteLabel">Client</label><br><br>
+                <lightning-formatted-url value={urlCompte} label={nomClient} target="_blank" id="CompteLabel"></lightning-formatted-url>
+            </div>
+        </div>&ensp;
+        <div class="slds-col slds-size_1-of-2"> 
+            <div class="slds-border_bottom">
+                <label for="SiteLabel">Site</label><br><br>
+                    <lightning-formatted-url value={urlSite} label={nomSite} target="_blank" id="SiteLabel" ></lightning-formatted-url>
+                
+            </div>
+        </div>
+      </div><br>
+
+      <div class="slds-grid">
+        <div class="slds-col slds-size_1-of-2">
+            <div class="slds-border_bottom">
+                <lightning-input type="text" label="Motif IAM du rejet" id="motif" value={__demande.InwiB2C_Motif__c} readonly="true">
+                </lightning-input>                    
+            </div>
+            </div>&ensp;
+            <div class="slds-col slds-size_1-of-2 "> 
+                <div class="slds-border_bottom">
+                <lightning-input type="text" id="prestation"  label="Type de préstation" value={__displayinfo.typePrestationLabel} readonly="true"></lightning-input>
+            </div>
+        </div>
+        </div>
+
+      <template if:true={__canceldirect}>
+        <div class="slds-grid">
+            <div class="slds-col slds-size_1-of-2">
+                <lightning-combobox data-id="statutDemande" id="statutDem" label="Statut de la demande" placeholder="Selectionner un statut" value={statutValue} onchange={handleSelection} options={selection} readonly={modify} required={requiredStatut}></lightning-combobox> 
+            </div>
+            &ensp;
+            <div class="slds-col slds-size_1-of-2"> 
+                <lightning-combobox data-id="MotifAnnValue" id="ann"  label="Motif d'annulation"
+                placeholder="Selectionner un statut" options={motifAnnulationPicklist} value={__demande.InwiB2C_MotifAnnulation__c} readonly={motifAnn} required={requiredMotifAnn}  ></lightning-combobox>
+            </div>
+          </div>
+      </template>
+      <template if:false={__canceldirect}>
+        <div class="slds-grid">
+            <div class="slds-col slds-size_1-of-2">
+                <div class="slds-border_bottom">
+                <lightning-input type="text" id="statutDem2" label="Statut de la demande" value={__displayinfo.statutDegLabel} readonly="true">
+            </lightning-input>
+            </div></div>&ensp;
+            <div class="slds-col slds-size_1-of-2"> 
+                <div class="slds-border_bottom">
+                <lightning-input type="text" id="ann2" label="Motif d'annulation" value={__displayinfo.motifAnnulLabel} readonly="true">
+            </lightning-input>
+            </div></div>
+          </div>
+      </template>
+
+      <div class="slds-grid">
+        <div class="slds-col slds-size_1-of-2">
+            <div class="slds-border_bottom"> 
+            <lightning-input type="text" id="origine" label="Origine de la demande" value={__demande.InwiB2C_OrigineDemande__c} readonly="true">
+        </lightning-input>
+        </div></div>&ensp;
+        <div class="slds-col slds-size_1-of-2"> 
+            <div class="slds-border_bottom">
+            <lightning-input type="text" id="typeDem" label="Type de la demande" value={__displayinfo.TypeCommLabel} readonly="true">
+        </lightning-input>
+        </div></div>
+      </div>
+
+      <div class="slds-grid">
+        <div class="slds-col slds-size_1-of-2">
+            <div class="slds-border_bottom">
+            <lightning-input type="text" id="statutLigne" label="Statut de la ligne" value={__displayinfo.statutLigneLabel} readonly="true">
+        </lightning-input>
+        </div></div>&ensp;
+        <div class="slds-col slds-size_1-of-2"> 
+            <div class="slds-border_bottom">
+            <lightning-input type="text" label="Statut de dégroupage IAM" id="statutDegiam" value={__demande.InwiB2C_Date_de_mise_en_service__c} readonly="true">
+        </lightning-input> 
+        </div></div>
+      </div>
+
+      <div class="slds-grid">
+        <div class="slds-col slds-size_1-of-2">
+            <div class="slds-border_bottom">
+            <lightning-input type="text" id="createdDate" label="Date de création" value={__demande.InwiB2C_dateOrdre__c} readonly="true">
+        </lightning-input>
+        </div></div>&ensp;
+        <div class="slds-col slds-size_1-of-2"> 
+            <div class="slds-border_bottom">
+            <lightning-input type="text" label="Date de mise en service" id="mesDate" value={__demande.InwiB2C_Date_de_mise_en_service__c} readonly="true">
+        </lightning-input> 
+        </div></div>
+      </div>
+
+      <div class="slds-grid">
+        <div class="slds-col slds-size_1-of-2">
+            <div class="slds-border_bottom">
+            <lightning-input type="text" id="techno" label="Technologie de dégroupage" value={__displayinfo.techLabel} readonly="true">
+        </lightning-input>
+        </div></div>&ensp;
+        <div class="slds-col slds-size_1-of-2"> 
+            <div class="slds-border_bottom">
+            <lightning-input type="text" label="Nouvelle technologie" id="newtech" value={__demande.InwiB2C_NouvelleTechnologie__c} readonly="true">
+        </lightning-input> 
+        </div></div>
+      </div>
+
+      <div class="slds-grid">
+        <div class="slds-col slds-size_1-of-2">
+            <div class="slds-border_bottom">
+            <lightning-input type="text" id="routage" label="Code routage" value={__demande.InwiB2C_codeRoutage__c} readonly="true">
+        </lightning-input>
+        </div></div>&ensp;
+        <div class="slds-col slds-size_1-of-2"> 
+            <div class="slds-border_bottom">
+            <lightning-input type="text" label="Port DSLAM" id="port" value={__demande.InwiB2C_Dslamport__c} readonly="true">
+        </lightning-input> 
+        </div></div>
+      </div>
+<br>
+      <div class="slds-grid">
+        <div class="slds-col slds-size_1-of-2">
+            <lightning-textarea name="Adresse site" value={__demande.InwiB2C_ADRESSE__c} readonly="true" id="addSite" label="Adresse"></lightning-textarea>
+        </div>&ensp;
+        <div class="slds-col slds-size_1-of-2">
+            <lightning-textarea name="Adresse" value={__demande.InwiB2C_AdresseIAMProposee__c} readonly="true" id="add" label="Adresse IAM proposée"></lightning-textarea>
+        </div>
+      </div>
+
+      <div class="slds-grid">
+        <div class="slds-col slds-size_1-of-2"> 
+            <div class="slds-border_bottom">
+                <br><label for="agence">Agence</label><br><br>
+                <lightning-formatted-url value={urlAgence} label={__displayinfo.nomAgence} target="_blank" id="agence" ></lightning-formatted-url>
+        </div></div>&ensp;
+        <div class="slds-col slds-size_1-of-2"> 
+            <div class="slds-border_bottom">
+                <br><label for="orderLabel">Commande</label><br><br>
+                <lightning-formatted-url value={urlOrder} label={__displayinfo.orderNumber} target="_blank" id="orderLabel" ></lightning-formatted-url>
+        </div></div>
+      </div>
+
+      <div class="slds-grid">
+        <div class="slds-col slds-size_1-of-2">
+            <div class="slds-border_bottom">
+            <lightning-input type="text" id="err" label="Détail erreur" value={__demande.InwiB2C_DetailErreur__c} readonly="true">
+        </lightning-input>
+        </div></div>&ensp;
+        <div class="slds-col slds-size_1-of-2"> 
+            <div class="slds-border_bottom">
+            <lightning-input type="text" label="Avec installation à domicile" id="instal" value={__demande.InwiB2C_AvecInstallationDomicile__c} readonly="true">
+        </lightning-input> 
+        </div></div>
+      </div>
+
+      <div class="slds-grid">
+        <div class="slds-col slds-size_1-of-2">
+            <div class="slds-border_bottom">
+            <lightning-input type="text" id="contact" label="Numéro de contact" value={__demande.InwiB2C_numeroContact__c} readonly="true">
+        </lightning-input>
+        </div></div>&ensp;
+        <div class="slds-col slds-size_1-of-2">
+            <div class="slds-border_bottom">
+            <lightning-input type="text" id="desc" label="Description" value={__demande.InwiB2C_Description__c} readonly="true">
+        </lightning-input>
+        </div></div>
+      </div>
+
+      <div class="slds-grid">
+        <div class="slds-col slds-size_1-of-2">
+            <div class="slds-border_bottom">
+            <lightning-input type="text" id="relance" label="Nombre Relance" value={__demande.InwiB2C_Compteur_relance__c} readonly="true">
+        </lightning-input>
+        </div></div>&ensp;
+        <div class="slds-col slds-size_1-of-2">
+            <div class="slds-border_bottom">
+            <lightning-input type="text" id="recyclage" label="Nombre Recyclage" value={__demande.InwiB2C_Compteur_recyclage__c} readonly="true">
+        </lightning-input>
+        </div></div>
+      </div>
+
+      <div class="slds-grid">
+        <div class="slds-col slds-size_1-of-2">
+            <div class="slds-border_bottom">
+            <lightning-textarea name="Commentaire" value={__demande.InwiB2C_Commentaire__c} readonly="true" id="comment" label="Commentaire"></lightning-textarea>
+        </div></div>
+        
+      </div>
+
+      <div class="slds-grid">
+        <div class="slds-col slds-size_1-of-2">
+            <div>
+                <div class="slds-col slds-size_1-of-2"> 
+                    <div class="slds-border_bottom">
+                        <label for="CreatedByLabel">Crée par</label><br><br>
+                        <lightning-formatted-url value={urlCreatedBy} label={createdByName} target="_blank" id="CreatedByLabel" ></lightning-formatted-url>
+                    </div>
+                </div>
+            </div>
+        </div>&ensp;
+        <div class="slds-col slds-size_1-of-2 "> 
+            <div class="slds-border_bottom">
+                <label for="ModifiedByLabel" >Modifié par</label><br><br>
+                <lightning-formatted-url value={urlModifiedBy} label={lastModifiedName} target="_blank" id="ModifiedByLabel" ></lightning-formatted-url>
+            </div>
+        </div>
+      </div>
+
+      </div>
+
+
+      <br/> 
+      
+    <div class="slds-col slds-text-align_right">
+        
+        <template if:true={__canceldirect}>
+            <lightning-button variant="brand" label={boutonLabel} onclick={modifyDemande} class="slds-float_right" style="padding: 10px;"></lightning-button>
+          </template>
+          
+<!--
+          <template if:true={__showrecyclage}>
+            <lightning-button variant="brand" label="Suivant" onclick={next} class="slds-float_right" style="padding: 10px;"></lightning-button>
+          </template>
+-->
+
+        <lightning-button variant="brand" label="Précédent" onclick={previous} class="slds-float_right" style="padding: 10px;"></lightning-button>
+    </div>
+</template>

@@ -1,0 +1,63 @@
+<template>
+    <div class="slds-p-bottom--small">
+        <div class="slds-m-bottom_xx-large " style="overflow-x:auto;">
+            <template if:true={allrequests} > 
+                <div class="wraperClass ">
+
+                    <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered">
+                        <thead>
+                          <tr class="slds-line-height_reset">
+                            <th class="" scope="col">
+                              <div class="slds-truncate" title="NumLigne">N° de la ligne</div>
+                            </th>
+                            <th class="" scope="col">
+                              <div class="slds-truncate" title="StatutLigne">Statut de la ligne</div>
+                            </th>
+                            <th class="" scope="col">
+                              <div class="slds-truncate" title="ForfaitLigne">Forfait de la ligne</div>
+                            </th>
+                            <th class="" scope="col">
+                              <div class="slds-truncate" title="NDemande">N° de la demande</div>
+                            </th>
+                            <th class="" scope="col">
+                              <div class="slds-truncate" title="DateDemande">Date de la demande</div>
+                            </th>
+                            <th class="" scope="col">
+                              <div class="slds-truncate" title="StatusDemande">Statut de la demande</div>
+                            </th>
+                            <th class="" scope="col">
+                              <div class="slds-truncate" title="StatusRetention">Statut Rétention</div>
+                            </th>
+                            <th class="" scope="col">
+                              <div class="slds-truncate" title="Canal">Canal de la demande</div>
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        <template for:each={allrequests} for:item="request" >
+                            <tr key ={request.Id} >
+                                <td>{selectedsubscriptionmdn}</td>
+                                <td>{selectedsubstatus}</td>
+                                <td>{selectedsubscriptionprofile}</td>
+                                <td>{request.name}</td>
+                                <td>{request.date}</td>
+                                <td>{request.StatutResil}</td>
+                                <td>{request.StatutRetention}</td>
+                                <td>{request.canal}</td>
+                            </tr>
+                        </template>
+ 
+                      
+                        </tbody>
+                      </table>
+
+                </div>
+            </template>
+
+        </div>
+        
+        
+      
+    </div>
+    
+</template>

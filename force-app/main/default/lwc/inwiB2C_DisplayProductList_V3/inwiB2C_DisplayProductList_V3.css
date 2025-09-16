@@ -1,0 +1,64 @@
+.cardCover{
+
+border-radius: 3px;
+margin-bottom: 15px;
+margin-right: 15px;
+}
+
+.containerCard{
+    width: 31%;
+    cursor: pointer;
+
+    margin: 5px;
+    padding: 5px;
+
+    border: 0px solid #1C6EA4;
+    border-radius: 10px 10px 0px 0px;
+
+    -webkit-box-shadow: 0px 0px 11px -1px rgba(0,0,0,0.34); 
+    box-shadow: 0px 0px 11px -1px rgba(0,0,0,0.34);    
+
+    background: rgba(0, 0, 0, 0) linear-gradient(90deg, rgb(113, 27, 113) 0%, rgb(175, 63, 190) 100%) repeat scroll 0% 0%;
+    display: table-cell;
+vertical-align: bottom;
+}
+
+
+.titleSection{
+    text-align: center;
+    font-size: 20px;
+    color: #fff;
+}
+
+
+.bodySection{
+    text-align: center;
+  
+}
+
+
+.footerSection{
+    font-size: 20px;
+    text-align: center;
+
+
+}
+
+
+
+.imageBody{
+    width: 400px;
+   border: 0px solid #000;
+   cursor: pointer;
+
+}
+
+.descriptionBody{
+    font-size: 12px;
+}
+
+.tdspacing{
+    border: 0px solid #000;
+    vertical-align:bottom;
+    text-align:center;
+}

@@ -1,0 +1,348 @@
+<template>
+    
+    <div style="border-style: solid; border-color: #92107F; padding: 10px; border-radius: 10px;">
+        
+        
+            <div class="slds-grid slds-wrap slds-grid_vertical-stretch">
+                <div class="slds-grid slds-wrap" style="color: red">
+                    Adresse client
+                </div>
+            </div>
+    
+        <div class="slds-grid slds-wrap">
+            <lightning-input style="padding: 10px;" type="text" label="Nom de site" value={nomsite}
+            name="nomsite" placeholder="Saisir le nom"  disabled={disabledFieldsOnUpdate} required 
+            class="slds-col slds-size_1-of-2 elementMargin2" onchange={handleChangeInput}>
+            </lightning-input> 
+            
+            <lightning-combobox placeholder="Pays" onchange={ChangePays} data-theid="Pays" label="Pays" required
+            value={valuePays} class="slds-col slds-size_1-of-2 elementMargin2"  options={PaysValues} disabled=""  style="padding: 10px;"  > 
+        </lightning-combobox>
+           
+    
+    <!-- 
+        <div class="slds-col slds-size_6-of-12">     </div>
+    </div> <div class="slds-grid slds-wrap slds-grid_vertical-stretch">-->
+    
+    <lightning-combobox placeholder="sélectionnez une ville" onchange={ChangeVille} data-theid="Ville" value={v}
+    label="Ville" required class="slds-col slds-size_1-of-2 elementMargin2" options={VilleValues}  disabled={disabledFieldsOnUpdate}  style="padding: 10px;" >
+    </lightning-combobox>
+    
+    <lightning-input  type="text" data-theid="Region" label="Region" value={r} required onchange={ChangeRegion} 
+    placeholder="sélectionnez une région" class="slds-col slds-size_1-of-2 elementMargin2" disabled=""  options={RegionValues}  style="padding: 10px;">
+</lightning-input>
+
+    <template if:false={isToSpecify}>
+        <lightning-combobox placeholder="sélectionnez une quartier" onchange={ChangeQuartier} data-theid="Quartier" required  style="padding: 10px;" 
+            value={q} label="Quartier" class="slds-col slds-size_1-of-2 elementMargin2"   disabled={disabledFieldsOnUpdate} options={QuartierValues} >
+        </lightning-combobox>
+    </template>
+
+    <template if:true={isToSpecify}>
+        <lightning-input type="text" onchange={ChangePrecisionQuartier} data-theid="PrecisionQuartier"
+            label="Précision Quartier" placeholder="Précisez le quartier"  value={pq}  disabled={disabledFieldsOnUpdate} required style="padding: 10px;" 
+            class="slds-col slds-size_1-of-2 elementMargin2" >
+        </lightning-input>
+    </template>
+   
+<!--</div>-->
+<template if:true={showother}>
+   <!-- <div class="slds-grid slds-wrap slds-grid_vertical-stretch">-->
+              
+    <lightning-input style="padding: 10px;"   type="number" label="Code Postal" value={codepostal} name="codepostal"
+    placeholder="Saisir code postal" pattern="[0-9]{5,5}" maxlength="5" minlength="5"  disabled={disabledFieldsOnUpdate}  message-when-pattern-mismatch="Code postal doit contenir que 5 Chiffres" class="slds-col slds-size_1-of-2 elementMargin2"
+    onchange={handleChangeInput}>
+</lightning-input>
+<lightning-input style="padding: 10px;"  type="text" label="Complément d'adresse" value={complementaddress}
+    name="complementaddress" placeholder="Saisir Complément d'adresse" pattern="[A-Za-z0-9,–'’\-]{1,}" message-when-pattern-mismatch="Champ saisi incorrect"
+    class="slds-col slds-size_1-of-2 elementMargin2" required onchange={handleChangeInput}  disabled={disabledFieldsOnUpdate}  onkeydown={handleKeyDown}>
+</lightning-input>
+</template></div>
+<template if:false={showBlocEligibilite}>
+<div class="slds-grid slds-grid_align-end">
+    <lightning-button label="Enregistrer l'adresse" variant="brand" onclick={updateAccount} class="slds-float_right"
+        style="padding: 10px; margin-top: 40px;"></lightning-button>
+</div>
+</template>
+</div>
+  <br>
+  <!--deuxieme bloc-->
+  <template if:true={showBlocEligibilite}>
+  <template if:false={isInfrastructureInwi}> 
+  <div style="border-style: solid; border-color: #92107F; padding: 10px; border-radius: 10px;">
+  
+    <div class="slds-grid slds-wrap slds-grid_vertical-stretch">
+        <div class="slds-grid slds-wrap" style="color: red">
+            Adresse d’installation
+        </div>
+    </div>
+  
+<!-- <template  if:true={isInfrastructureOrange}>
+    <div class="slds-grid slds-wrap slds-grid_vertical-stretch">
+        <div class="slds-grid slds-wrap" style="color: red">
+            Eligibilité Orange
+        </div>
+    </div>
+</template>  Y-MH supprimer le nom de l'operateur sur l'ecrant SITE B-26424  -->
+  
+  <!-- cas IAM Afficher les 9 champs adresse -->
+  <template if:true={isInfrastructureIAM}>
+    <!--province -->
+    <div class="slds-grid slds-wrap slds-gutters">
+        <div class="slds-col slds-size_1-of-2">
+            <lightning-input style="padding: 10px;" type="text" label="Province" value={Province}
+            name="batiment" placeholder="Province" 
+            onchange={handleinputIAM} disabled="" >
+            </lightning-input> 
+        </div>
+        <!--<div class="slds-col slds-size_1-of-2">
+            <lightning-input style="padding: 10px;" type="text" label="Commune" value={Commune}
+            name="Commune" placeholder="Commune"  disabled=""
+            onchange={handleinputIAM}>
+            </lightning-input> 
+        </div> -->
+        <div class="slds-col slds-size_1-of-2">
+            <lightning-input style="padding: 10px;" type="text" label="Quartier" value={Quartier}
+            name="Quartier" placeholder="Quartier" 
+            onchange={handleinputIAM} disabled="" >
+            </lightning-input> 
+        </div>
+    </div>
+<!--Quartier, Voie  -->
+    <div class="slds-grid slds-wrap slds-gutters">
+        
+        <div class="slds-col slds-size_1-of-2">
+            <lightning-input style="padding: 10px;" type="text" label="Voie" value={Voie}
+            name="Voie" placeholder="Voie"   disabled=""
+            onchange={handleinputIAM}>
+            </lightning-input> 
+        </div> 
+
+        <div class="slds-col slds-size_1-of-2">
+            <lightning-input style="padding: 10px;" type="text" label="Numéro de la voie" value={NumVoie}
+            name="Numéro de la voie" placeholder="Numéro de la voie"   disabled=""
+            onchange={handleinputIAM}>
+            </lightning-input> 
+        </div>
+    </div>
+   
+    <!--Numéro de la voie et batiment   -->
+    <div class="slds-grid slds-wrap slds-gutters">
+    
+        <div class="slds-col slds-size_1-of-2">
+            <lightning-input style="padding: 10px;" type="text" label="Batiment" value={batiment}
+            name="batiment" placeholder="Saisir le batiment" 
+            onchange={handleinputIAM} maxlength="5" message-when-pattern-mismatch="Batiment doit contenir que 5 Chiffres">
+            </lightning-input> 
+        </div>
+        <div class="slds-col slds-size_1-of-2">
+            <lightning-input style="padding: 10px;" type="text" label="Escalier" value={escalier}
+            name="escalier" placeholder="Saisir l'Escalier" 
+            onchange={handleinputIAM} maxlength="3" message-when-pattern-mismatch="Escalier doit contenir que 3 Chiffres">
+            </lightning-input> 
+        </div>
+    
+    </div>
+
+    <!--  escalier et etage -->
+    <div class="slds-grid slds-wrap slds-gutters">
+    
+        <div class="slds-col slds-size_1-of-2">
+            <lightning-input style="padding: 10px;" type="text" label="Etage" value={etage}
+            name="etage" placeholder="Saisir l'Etage" 
+            onchange={handleinputIAM} maxlength="2" message-when-pattern-mismatch="Etage doit contenir que 2 Chiffres">
+            </lightning-input> 
+        </div>
+        <div class="slds-col slds-size_1-of-2">
+            <lightning-input style="padding: 10px;" type="text" label="Porte" value={porte}
+            name="porte" placeholder="Saisir la Porte" 
+            onchange={handleinputIAM} maxlength="5" message-when-pattern-mismatch="Porte doit contenir que 5 Chiffres">
+            </lightning-input> 
+        </div>
+
+    </div>
+     <!--porte -->
+     
+</template>
+
+<!-- cas commun pour IAM ET ORANGE -->
+<template if:false={isInfrastructureInwi}> 
+    <!-- Type d'accès Internet et Statut de la ligne -->
+    <div class="slds-grid slds-wrap slds-gutters">
+
+        <!-- Y_MH B-30206 begin  -->
+        <!-- <div class="slds-col slds-size_1-of-2">
+            <lightning-combobox
+                style="padding: 10px;"
+                name="typeAccesInternet"
+                label="Type d’accès Internet"
+                value={typeAccesInternet}
+                placeholder="Sélectionner le type d’accès"
+                options={typeAccesOptions}
+                onchange={handleTypeAccesChange}
+                required
+                disabled="" >
+            </lightning-combobox>
+        </div> -->
+         <!-- Y_MH B-30206 end  -->
+
+        <!-- Y_MH 12/05/2025 B-28635 BEGIN
+         <div class="slds-col slds-size_1-of-2">
+            <lightning-input style="padding: 10px;" type="text" label="Statut de la ligne"
+            value={statutLigne} name="statutLigne"  disabled></lightning-input> 
+        </div>
+        Y_MH 12/05/2025 B-28635 END --> 
+    </div>
+
+    <!-- Portabilité et Identifiant de la ligne -->
+    <div class="slds-grid slds-wrap slds-gutters">
+         <!-- Y_MH B-30206 begin  -->
+        <!-- <div class="slds-col slds-size_1-of-2">
+            <lightning-combobox
+                style="padding: 10px;"
+                name="portabilite"
+                label="Portabilité"
+                value={portabilite}
+                placeholder="Sélectionner la portabilité"
+                options={portabiliteOptions}
+                onchange={handlePortabiliteChange}
+                required>
+            </lightning-combobox>
+        </div> -->
+         <!-- Y_MH B-30206 end  -->
+          
+        <template if:true={ShowTypeIdentifiant}> <!-- // Y-MH begin  B-26441  -->
+        <div class="slds-col slds-size_1-of-2">
+            <lightning-combobox
+                style="padding: 10px;"
+                name="identifiantLigne"
+                label="Identifiant de la ligne"
+                value={typeIdentifiant}
+                placeholder="Sélectionner l’identifiant"
+                options={identifiantLigneOptions}
+                onchange={handleTypeIdentifiantChange}
+                required>
+            </lightning-combobox>
+        </div>
+    </template><!-- // Y-MH end  B-26441  -->
+
+    </div>
+    <!-- // Y-MH begin   B-2780  -->
+    <template if:true={showNDInput}>
+        <div class="slds-col slds-size_1-of-2">
+            <lightning-input
+                style="padding: 10px;"
+                type="text"
+                label={ndLabel}
+                value={ndIAM}
+                name="ndIAM"
+                placeholder="Renseigner le ND "
+                onchange={handleinputIAM}
+                required
+                maxlength="10"  minlength="10"  pattern="^(05|08)[0-9]{0,9}$" 
+                message-when-pattern-mismatch="numero de designation doit être au format 05XXXXXXXXX ou 08XXXXXXXXX">
+            </lightning-input>
+        </div>
+         <!-- // Y-MH end   B-2780  -->
+       
+        <template if:true={displayNDIAMchoice}>
+        <lightning-button variant="brand" label="Valider le numéro de désignation"
+        title="Selection MDN" onclick={checkNDIAM}
+        class="slds-m-left_x-large slds-m-top_x-large"></lightning-button>
+       </template>
+    </template>
+        <!-- // Y-MH begin   B-2780  -->
+    <template if:false={displayNDIAMchoice}>
+        <div class="slds-col slds-size_1-of-2">
+            <lightning-input
+                style="padding: 10px;"
+                type="text"
+                label={ndLabel}
+                value={ndIAM}
+                name="ndIAM"
+                placeholder="Renseigner le ND "
+                onchange={handleinputIAM}
+                required
+                disabled=""
+                maxlength="10"  minlength="10" >
+            </lightning-input>
+        </div>
+        
+    </template>
+     <!-- // Y-MH end   B-2780  -->
+
+    
+    <template if:true={showInputLogin}>
+        <div class="slds-col slds-size_1-of-2">
+            <lightning-input
+                style="padding: 10px;"
+                type="text"
+                label="Login"
+                value={Login}
+                name="Login"
+                placeholder="Renseigner le Login"
+                onchange={handleinputIAM}
+                required
+                maxlength="10"  minlength="10" >
+            </lightning-input>
+        </div>
+    </template>
+    <template if:true={disablelogin}>
+        <div class="slds-col slds-size_1-of-2">
+            <lightning-input
+                style="padding: 10px;"
+                type="text"
+                label="Login"
+                value={Login}
+                name="Login"
+                placeholder="Renseigner le Login"
+                onchange={handleinputIAM}
+                required
+                disabled=""
+                maxlength="10"  minlength="10" >
+            </lightning-input>
+        </div>
+    </template>
+    <template if:true={displayMDNChoice}>
+        <template if:true={showBoxNum}>
+                     <!-- // Y-MH begin   B-27806  -->
+            <lightning-input type="text" label={mdnLabel} value={mdnFilter} onchange={handleMdnFilterChange} 
+            
+        class="slds-size_1-of-2"></lightning-input>
+                 <!-- // Y-MH end   B-27806 -->
+
+    <br>
+        <lightning-button variant="brand" label="Recherche" title="recherche ND" onclick={getMdnList}
+        class="slds-m-left_x-large slds-m-top_x-large"></lightning-button>
+
+    <template if:true={records}>
+        <lightning-combobox name="progress" label="Liste ND" value={selectedmdn}
+            placeholder="Select MDN" options={records} onchange={handleMdnSelection}
+            class="slds-size_1-of-2"></lightning-combobox>
+
+        <template if:true={__selectedmdnListItem}>
+            <br>
+
+            <lightning-button variant="brand" label="Sélectionner le numéro de désignation"
+                title="Selection MDN" onclick={checkND}
+                class="slds-m-left_x-large slds-m-top_x-large"></lightning-button>
+        </template>
+    </template>
+    </template>
+</template>
+<template if:false={displayMDNChoice}>
+<!-- // Y-MH begin   B-27806  -->
+    <lightning-input type="text" label={mdnLabel} value={numND} class="slds-size_1-of-2"
+    disabled="" ></lightning-input>
+    <!-- // Y-MH end   B-27806  -->
+</template>
+<!--</template>-->
+</template>
+</div>
+</template>
+</template>
+<div class="slds-grid slds-grid_align-end">
+    <lightning-button label="Suivant" variant="brand" onclick={updateSF} class="slds-float_right"
+        style="padding: 10px; margin-top: 40px;"></lightning-button>
+</div>
+</template>

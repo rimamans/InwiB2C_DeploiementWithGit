@@ -1,0 +1,43 @@
+/*Added BY AAR 20/10/2020  */
+
+.wraperClass{
+    border: 1px solid #5A245A;
+}
+
+.sty-table-case{
+    table-layout: fixed;
+    width: 100%;  
+    zoom: 0.8; 
+    
+
+}
+
+.my-card-case {
+
+    margin: 2px;
+    border-radius: 4px 4px 4px 4px;
+    -webkit-border-radius: 4px 4px 4px 4px;
+    -moz-border-radius: 4px 4px 4px 4px;
+    border: 1px solid grey;
+}
+
+.nocard-case {
+    margin: 10px;
+    padding: 10px;
+    border-radius: 4px 4px 4px 4px;
+    -webkit-border-radius: 4px 4px 4px 4px;
+    -moz-border-radius: 4px 4px 4px 4px;
+    border: 1px solid grey;
+}
+
+
+.inside-table-case{
+    
+    white-space: normal;
+    border: 0px solid #000;
+    margin: 5px 5px 5px 30px;
+}
+
+
+
+/*END OF AAR's ADDITION  13/10/2020 */

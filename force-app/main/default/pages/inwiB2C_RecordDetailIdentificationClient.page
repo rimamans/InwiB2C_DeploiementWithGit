@@ -1,0 +1,38 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 10-11-2022
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<apex:page standardController="InwiB2C_Demande_IdentificationClient__c"  tabStyle="InwiB2C_Demande_IdentificationClient__c"  lightningStylesheets="true">
+    <apex:form >
+        <div style="height:auto">
+            <apex:pageBlock mode="maindetail">
+               <apex:pageBlockSection title="Informations d'une demande d'identification Client" >
+                    <apex:outputField value="{!InwiB2C_Demande_IdentificationClient__c.Name}" label="Numéro de la demande" /> 
+                    <apex:outputField value="{!InwiB2C_Demande_IdentificationClient__c.inwiB2C_Type_Identification__c}" label="Type Identification" /> 
+                    <apex:outputField value="{!InwiB2C_Demande_IdentificationClient__c.InwiB2C_Statut__c}" label="Statut de la demande" /> 
+                    <apex:outputField value="{!InwiB2C_Demande_IdentificationClient__c.InwiB2C_AccountId__c}" label="Client" /> 
+                    <apex:outputField value="{!InwiB2C_Demande_IdentificationClient__c.InwiB2C_Contact__c}" label="Contact" /> 
+                    <apex:outputField value="{!InwiB2C_Demande_IdentificationClient__c.InwiB2C_Canal__c}" label="Canal d'identification" /> 
+                    <apex:outputField value="{!InwiB2C_Demande_IdentificationClient__c.CreatedById}" label="Partenaire" /> 
+                    <apex:outputField value="{!InwiB2C_Demande_IdentificationClient__c.InwiB2C_Subscription__c}" label="Souscription" /> 
+                    <apex:outputField value="{!InwiB2C_Demande_IdentificationClient__c.CreatedDate}" label="Date de creation" /> 
+                    
+                </apex:pageBlockSection>
+
+               
+         
+      
+                
+          
+                
+           
+               
+                
+     
+            </apex:pageBlock>    
+        </div>  
+    </apex:form>
+</apex:page>

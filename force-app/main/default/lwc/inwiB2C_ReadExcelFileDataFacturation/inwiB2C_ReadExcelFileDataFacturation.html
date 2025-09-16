@@ -1,0 +1,47 @@
+<template>
+    <lightning-card>
+        <div if:false={isLoaded}>
+            <div if:true={valError} style="color: red;">
+                {valError}
+            </div>
+            <template if:true={isFileUploadHidden}>
+            <div class="slds-col slds-size_3-of-4" style="margin-left: 3%">
+                <lightning-file-upload accept={acceptedCSVFormats} onuploadfinished={uploadFileHandler} required>
+                </lightning-file-upload>
+            </div>
+            </template>
+            <div if:true={error}>
+                {error}
+            </div><br />
+            <b><div if:true={filename} class="slds-col slds-size_2-of-3" style="margin-left: 3%; color: black;">
+              le Fichier {filename} a été chargé avec succès.
+
+            </div></b>
+
+
+            <lightning-combobox name="progress" label="Origine :" value={value} placeholder="Selectionner une origine"
+                options={optionsOrigine} onchange={handleChangeOrigine} required></lightning-combobox>
+
+            <template if:true={isActionHidden}>
+                <lightning-combobox name="progress" label="Action :" value={value} placeholder="Selectionner une action"
+                    options={optionsAction} onchange={handleChangeAction} required></lightning-combobox>
+            </template>
+            <template if:true={isMotifHidden}>
+                <lightning-combobox name="progress" label="Motif :" value={value} placeholder="Selectionner un motif"
+                    options={optionsMotif} onchange={handleChangeMotif} required></lightning-combobox>
+                <br>
+            </template>
+            <br>
+            <lightning-button variant="brand" label="Suivant" title="Suivant" onclick={handleSave}
+                style="position: absolute;right: 15px;" class="" hidden ={IsButtonHidden}>
+            </lightning-button>
+
+            <br>
+
+        </div>
+        <div if:true={isLoaded} class="slds-is-relative">
+            <lightning-spinner alternative-text="Loading...">
+            </lightning-spinner>
+        </div>
+    </lightning-card>
+</template>

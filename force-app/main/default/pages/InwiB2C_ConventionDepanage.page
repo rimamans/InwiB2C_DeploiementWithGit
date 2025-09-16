@@ -1,0 +1,139 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 03-16-2023
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<apex:page renderAs="pdf" controller="InwiB2C_GetDoc_PackDepanageDone" applyHtmlTag="false" showHeader="false">
+
+    <head>
+        <style>
+            body {
+                font-family: 'Arial Unicode MS';
+                font-size: 12px;
+
+            }
+
+            @page {
+                size: A4;
+                margin: 0px
+            }
+        </style>
+    </head>
+
+    <body>
+        
+     
+        <div style="{!IF((output['TypeDoc'] == 'DocDepannage' ),'display:block','display:none')}">
+            <div style="{!IF((output['TypeDoc'] == 'DocDepannage' && output['OldOrderProductType'] == 'FTTH'),'display:block','display:none')}">
+                <img style="width:100%;" src="{!$Resource.InwiB2C_Pack_Depanage1}" />
+            </div> 
+    
+           <div style="{!IF((output['TypeDoc']== 'DocDepannage' && output['OldOrderProductType'] == 'ADSL'),'display:block','display:none')}">
+           <img style="width:100%;" src="{!$Resource.InwiB2C_Pack_Depanage_ADSL}" />
+           </div> 
+                <p style="position: absolute;top: 193px;left: 250px;font-size: 12px">{!IF(contains(keys,'OrderNumber'),output['OrderNumber'], '')}</p>
+                <p style="position: absolute;top: 220px;left: 250px;font-size: 12px">{!IF(contains(keys,'AccountNumber'),output['AccountNumber'], '')}</p>
+                <p style="position: absolute;top: 243px;left: 210px;font-size: 12px">{!IF(contains(keys,'Today'),output['Today'], '')}</p>
+                <p style="position: absolute;top: 304px;left: 190px;font-size: 12px">{!IF(contains(keys,'LastName'),output['LastName'], '')}</p>
+                <p style="position: absolute;top: 328px;left: 200px;font-size: 12px">{!IF(contains(keys,'FirstName'),output['FirstName'], '')}</p>
+                <p style="position: absolute;top: 350px;left: 210px;font-size: 12px">{!IF(contains(keys,'CodePostale'),output['CodePostale'], '')}</p>
+                <p style="position: absolute;top: 350px;left: 415px;font-size: 12px">{!IF(contains(keys,'Ville'),output['Ville'], '')}</p>
+                <p style="position: absolute;top: 350px;left: 587px;font-size: 12px">{!IF(contains(keys,'Pays'),output['Pays'], '')}</p>
+                <p style="position: absolute;top: 375px;left: 295px;font-size: 12px">{!IF(contains(keys,'Phone'),output['Phone'], '')}</p>
+                <p style="position: absolute;top: 400px;left: 290px;font-size: 12px">{!IF(contains(keys,'TypePieceCIN'),output['TypePieceCIN'], '')}</p>
+                <p style="position: absolute;top: 400px;left: 390px;font-size: 12px">{!IF(contains(keys,'TypePieceSejour'),output['TypePieceSejour'], '')}</p>
+                <p style="position: absolute;top: 400px;left: 467px;font-size: 12px">{!IF(contains(keys,'TypePiecePasseport'),output['TypePiecePasseport'], '')}</p>
+
+                <p style="position: absolute;top: 435px;left: 327px;font-size: 12px">{!IF(contains(keys,'CIN'),output['CIN'], '')}</p>
+                <p style="position: absolute;top: 459px;left: 250px;font-size: 12px">{!IF(contains(keys,'Email'),output['Email'], '')}</p>
+
+
+
+                <p style="position: absolute;top: 518px;left: 253px;font-size: 12px">{!IF(contains(keys,'NumLigneFtth'),output['NumLigneFtth'], '')}</p>
+                <p style="position: absolute;top: 545px;left: 253px;font-size: 12px">{!IF(contains(keys,'OldContractNumber'),output['OldContractNumber'], '')}</p>
+
+
+                <p style="position: absolute;top: 603px;left: 300px;font-size: 12px">{!IF(contains(keys,'MSISDN'),output['MSISDN'], '')}</p>
+                <p style="position: absolute;top: 627px;left: 250px;font-size: 12px">{!IF(contains(keys,'IMEI'),output['IMEI'], '')}</p>
+                <p style="position: absolute;top: 649px;left: 250px;font-size: 12px">{!IF(contains(keys,'ICC'),output['ICC'], '')}</p>
+                <p style="position: absolute;top: 669px;left: 250px;font-size: 12px">{!IF(contains(keys,'ModePaiement'),output['ModePaiement'], '')}</p>
+                <p style="position: absolute;top: 669px;left: 590px;font-size: 12px">{!IF(contains(keys,'CodeTransaction'),output['CodeTransaction'], '')}</p>
+                <p style="position: absolute;top: 689px;left: 320px;font-size: 12px">{!IF(contains(keys,'FMD'),output['FMD'], '')}</p>
+
+            
+                <p style="position: absolute;top: 750px;left: 220px;font-size: 12px">{!IF(contains(keys,'Distri'),output['Distri'], '')}</p>
+                <p style="position: absolute;top: 770px;left: 220px;font-size: 12px">{!IF(contains(keys,'Partenaire'),output['Partenaire'], '')}</p>
+                <p style="position: absolute;top: 793px;left: 220px;font-size: 12px">{!IF(contains(keys,'vendeur'),output['vendeur'], '')}</p>
+
+            
+        
+
+        </div>
+
+
+  <div style="{!IF((output['TypeDoc'] == 'DocDone' ),'display:block','display:none')}">
+
+    
+       <div style="{!IF((output['TypeDoc'] == 'DocDone' && output['OldOrderProductType'] == 'FTTH' ),'display:block','display:none')}">
+        <img style="width:100%;" src="{!$Resource.InwiB2C_Pack_Done1}" />
+       </div>
+
+        <div style="{!IF((output['TypeDoc'] == 'DocDone' && output['OldOrderProductType'] == 'ADSL' ),'display:block','display:none')}">
+         <img style="width:100%;" src="{!$Resource.InwiB2C_Pack_Day1_ADSL}" />
+       </div>
+       
+                <p style="position: absolute;top: 193px;left: 250px;font-size: 12px">{!IF(contains(keys,'OrderNumber'),output['OrderNumber'], '')}</p>
+                <p style="position: absolute;top: 220px;left: 250px;font-size: 12px">{!IF(contains(keys,'AccountNumber'),output['AccountNumber'], '')}</p>
+                <p style="position: absolute;top: 243px;left: 210px;font-size: 12px">{!IF(contains(keys,'Today'),output['Today'], '')}</p>
+                <p style="position: absolute;top: 304px;left: 190px;font-size: 12px">{!IF(contains(keys,'LastName'),output['LastName'], '')}</p>
+                <p style="position: absolute;top: 328px;left: 200px;font-size: 12px">{!IF(contains(keys,'FirstName'),output['FirstName'], '')}</p>
+                <p style="position: absolute;top: 350px;left: 210px;font-size: 12px">{!IF(contains(keys,'CodePostale'),output['CodePostale'], '')}</p>
+                <p style="position: absolute;top: 350px;left: 415px;font-size: 12px">{!IF(contains(keys,'Ville'),output['Ville'], '')}</p>
+                <p style="position: absolute;top: 350px;left: 587px;font-size: 12px">{!IF(contains(keys,'Pays'),output['Pays'], '')}</p>
+                <p style="position: absolute;top: 375px;left: 295px;font-size: 12px">{!IF(contains(keys,'Phone'),output['Phone'], '')}</p>
+                <p style="position: absolute;top: 400px;left: 290px;font-size: 12px">{!IF(contains(keys,'TypePieceCIN'),output['TypePieceCIN'], '')}</p>
+                <p style="position: absolute;top: 400px;left: 390px;font-size: 12px">{!IF(contains(keys,'TypePieceSejour'),output['TypePieceSejour'], '')}</p>
+                <p style="position: absolute;top: 400px;left: 467px;font-size: 12px">{!IF(contains(keys,'TypePiecePasseport'),output['TypePiecePasseport'], '')}</p>
+
+                <p style="position: absolute;top: 435px;left: 327px;font-size: 12px">{!IF(contains(keys,'CIN'),output['CIN'], '')}</p>
+                <p style="position: absolute;top: 459px;left: 250px;font-size: 12px">{!IF(contains(keys,'Email'),output['Email'], '')}</p>
+
+
+
+                <p style="position: absolute;top: 518px;left: 283px;font-size: 12px">{!IF(contains(keys,'MSISDNFix'),output['MSISDNFix'], '')}</p>
+                <p style="position: absolute;top: 545px;left: 280px;font-size: 12px">{!IF(contains(keys,'OldContractNumber'),output['OldContractNumber'], '')}</p>
+
+
+                <p style="position: absolute;top: 605px;left: 310px;font-size: 12px">{!IF(contains(keys,'IMEI'),output['IMEI'], '')}</p>
+                <p style="position: absolute;top: 629px;left: 310px;font-size: 12px">{!IF(contains(keys,'ICC'),output['ICC'], '')}</p>
+                <p style="position: absolute;top: 649px;left: 310px;font-size: 12px">{!IF(contains(keys,'DureeEngagDone'),output['DureeEngagDone'], '')}</p>
+
+                <p style="position: absolute;top: 669px;left: 320px;font-size: 12px">{!IF(contains(keys,'ModePaiement'),output['ModePaiement'], '')}</p>
+                <p style="position: absolute;top: 669px;left: 590px;font-size: 12px">{!IF(contains(keys,'CodeTransaction'),output['CodeTransaction'], '')}</p>
+                <p style="position: absolute;top: 689px;left: 320px;font-size: 12px">{!IF(contains(keys,'FMD'),output['FMD'], '')}</p>
+
+            
+                <p style="position: absolute;top: 750px;left: 320px;font-size: 12px">{!IF(contains(keys,'Distri'),output['Distri'], '')}</p>
+                <p style="position: absolute;top: 770px;left: 320px;font-size: 12px">{!IF(contains(keys,'Partenaire'),output['Partenaire'], '')}</p>
+                <p style="position: absolute;top: 793px;left: 320px;font-size: 12px">{!IF(contains(keys,'vendeur'),output['vendeur'], '')}</p>
+
+            
+   
+        </div>
+
+            <div style="{!IF((output['TypeDoc'] == 'DocDepannage' && output['OldOrderProductType'] == 'FTTH' ),'display:block','display:none')}">
+                <img style="width:100%;" src="{!$Resource.InwiB2C_Pack_Depanage2}" />
+            </div>
+            <div style="{!IF((output['TypeDoc'] == 'DocDepannage' && output['OldOrderProductType'] == 'ADSL' ),'display:block','display:none')}">
+                <img style="width:100%;" src="{!$Resource.InwiB2C_Pack_Depanage_CGV_ADSL}" />
+            </div>
+             <div style="{!IF((output['TypeDoc'] == 'DocDone' && output['OldOrderProductType'] == 'FTTH' ),'display:block','display:none')}">
+                <img style="width:100%;" src="{!$Resource.InwiB2C_Pack_Done2}" />
+            </div>
+             <div style="{!IF((output['TypeDoc'] == 'DocDone' && output['OldOrderProductType'] == 'ADSL' ),'display:block','display:none')}">
+                <img style="width:100%;" src="{!$Resource.InwiB2C_Pack_Day1_CGV_ADSL}" />
+            </div>
+    </body>
+</apex:page>

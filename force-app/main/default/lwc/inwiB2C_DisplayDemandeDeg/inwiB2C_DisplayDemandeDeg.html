@@ -1,0 +1,122 @@
+<template>
+  <!--
+    <template if:false={isDemandesEmpty}>
+        <div>
+            <lightning-datatable
+                    key-field="id"
+                    hide-checkbox-column="true"
+                    columns={columns}
+                    data={__records}
+                    onrowaction={handlesClick}>
+            </lightning-datatable>
+        </div>
+    </template>
+
+    <template if:true={isDemandesEmpty}>
+        <br><br>
+        <br><br>
+    
+    
+        <div style="text-align: center;"> Aucun résultat trouvé </div>
+    
+        <br><br>
+        <br><br>
+    </template>
+-->
+<template if:false={isDemandesEmpty}>
+<div class="wraperClass ">
+    <div class="slds-scrollable_x" style="width:100%;">
+      <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+        <thead>
+          <tr class="slds-line-height_reset">
+            <th class="" scope="col">
+            <div class="slds-truncate" title="Opportunity Name">N° Ordre</div>
+            </th>
+            <th class="" scope="col">
+              <div class="slds-truncate" title="Account Name">Numéro</div>
+            </th>
+            <th class="" scope="col">
+              <div class="slds-truncate" title="Close Date">Type de commande</div>
+            </th>
+            <th class="" scope="col">
+              <div class="slds-truncate" title="Stage">Nom</div>
+            </th>
+            <th class="" scope="col">
+              <div class="slds-truncate" title="Confidence">Prénom</div>
+            </th>
+            <th class="" scope="col">
+              <div class="slds-truncate" title="Amount">Nd</div>
+            </th>
+            <th class="" scope="col">
+              <div class="slds-truncate" title="Contact">N° identification</div>
+            </th>
+            <th class="" scope="col">
+              <div class="slds-truncate" title="Contact">Date de création</div>
+            </th>
+            <th class="" scope="col">
+              <div class="slds-truncate" title="Contact">Porté</div>
+            </th>
+            <th class="" scope="col">
+              <div class="slds-truncate" title="Contact">Statut de la demande</div>
+            </th>
+            <th class="" scope="col">
+              <div class="slds-truncate" title="Contact">Numéro de contact</div>
+            </th>
+            <th class="" scope="col">
+              <div class="slds-truncate" title="Contact">Motif de rejet</div>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <template for:each={__records} for:item="ligne" >
+            <tr key ={ligne.Id} >
+                <td class="slds-truncate" > {ligne.InwiB2C_ORDER_DEGROUPAGE_NUM__c} </td>
+                <td class="slds-truncate" > {ligne.InwiB2C_SEQ_NUM__c} </td>
+                <td class="slds-truncate" > {ligne.InwiB2C_typeCommande__c} </td>
+                <td class="slds-truncate" > {ligne.InwiB2C_LastName__c} </td>
+                <td class="slds-truncate" > {ligne.InwiB2C_FirstName__c} </td>
+                <td class="slds-truncate" > {ligne.InwiB2C_NumeroDesignation__c} </td>
+
+                <td class="slds-truncate" > {ligne.InwiB2C_Nationalid__c} </td>
+                <td class="slds-truncate" > {ligne.CreatedDate} </td>
+                <td class="slds-truncate" > {ligne.InwiB2C_portabilite__c} </td>
+                <td class="slds-truncate" > {ligne.InwiB2C_Statutdegroupage__c} </td>
+                <td class="slds-truncate" > {ligne.InwiB2C_numeroContact__c} </td>
+                <td class="slds-truncate" > {ligne.InwiB2C_Motif__c} </td>
+                <td class="slds-truncate" ><lightning-button label="Voir"  onclick={handlesClick} 
+                  data-name="view" name={ligne} variant="brand"></lightning-button>
+                </td>
+                <td class="slds-truncate" ><lightning-button label="Annuler"  onclick={handlesClick} 
+                  data-name="Cancel" name={ligne} variant="brand" disabled={ligne.DisableAnnuler}></lightning-button>
+                </td>
+                <td class="slds-truncate" ><lightning-button label="Recycler"  onclick={handlesClick} 
+                  data-name="Recycle" name={ligne} variant="brand" disabled={ligne.DisableRecycler}></lightning-button>
+                </td>
+                <td class="slds-truncate" ><lightning-button label="Relancer"  onclick={handlesClick} 
+                  data-name="relance" name={ligne} variant="brand" disabled={ligne.DisableRelancer}></lightning-button>
+                </td>
+                <td class="slds-truncate"><lightning-button label="Changement technologie"  onclick={handlesClick} 
+                  data-name="techno" name={ligne} variant="brand" disabled={ligne.DisableChgmt}></lightning-button>
+                </td>
+                
+
+
+            </tr>
+        </template>
+        </tbody>
+      </table>
+    </div>
+</div>
+</template>
+<template if:true={isDemandesEmpty}>
+    <br><br>
+    <br><br>
+
+
+    <div style="text-align: center;"> Aucun résultat trouvé </div>
+
+    <br><br>
+    <br><br>
+</template>
+
+</template>

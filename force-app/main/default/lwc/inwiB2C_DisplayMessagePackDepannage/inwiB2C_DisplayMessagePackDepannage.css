@@ -1,0 +1,34 @@
+.slds-notify
+{
+    background-color: #87CEEB;	 
+    text-align: center;
+    font-style: bold;
+
+    
+  }
+
+
+  .slds-notify_alert
+{
+    background-color: #87CEEB;
+    text-align: center;
+    font-style: bold;
+
+	 
+
+  }
+
+
+
+  .slds-alert_warning
+{
+    background-color: #87CEEB;	
+    text-align: center;
+    font-style: bold;
+
+
+  }
+
+  .bold-text {
+  font-weight: bold;
+}

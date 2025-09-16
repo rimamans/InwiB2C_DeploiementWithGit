@@ -1,0 +1,60 @@
+<!-- appointmentScheduler.html -->
+<template>
+    <lightning-card title="Réservation de Rendez vous">
+        <template lwc:if={isloading}>
+            <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+        </template>
+        <template lwc:else>
+            <div class="slds-m-around_medium">
+                <template if:true={groupedSlots.length}>
+                    <div class="slds-grid slds-gutters slds-wrap">
+                        <template for:each={groupedSlots} for:item="day">
+                            <div key={day.date} class="slds-box date small-slds-size_1-of-2 medium-slds-size_1-of-3 large-slds-size_1-of-5 max-large-slds-size_1-of-5 slds-text-align_center slds-col" data-date={day.date}>
+                                <div class="datedivs">
+                                    <span class="slds-text-heading_small">{day.dayOfWeek}</span><br/>
+                                    <span class="slds-text-heading_small">{day.formatDate}</span>
+                                </div>
+                                <div class="datedivs">
+                                    <template for:each={day.slots} for:item="slot">
+                                        <div key={slot.id} class={slot.class} onclick={handleSlotClick} data-date={day.date} data-slotid={slot.id} data-slot={slot.slot}>
+                                            <p class="slotName">{slot.slotName}</p>
+                                            <p class="slotHour">{slot.slotHour}</p>
+                                        </div>
+                                    </template>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </template>
+                <template if:false={groupedSlots.length}>
+                    No available slots.
+                </template>
+                <div class="slds-m-around_medium slds-col slds-size_1-of-1 slds-align_absolute-center">
+                        <div class="slds-grid">
+                            <div class="slds-col">
+                                <button class="slds-button slds-button_icon" onclick={handlePrevButtonClick} >
+                                    <lightning-icon icon-name="utility:chevronleft" size="small"></lightning-icon>
+                                </button>
+                            </div>
+                            <div class="slds-col">{currentPage}</div>
+                            <div class="slds-col">
+                                <button class="slds-button slds-button_icon" onclick={handleNextButtonClick}>
+                                    <lightning-icon icon-name="utility:chevronright" size="small"></lightning-icon>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                
+                <div class="slds-grid slds-gutters slds-float_right slds-m-top_medium">
+                    <div class="slds-col">
+                        <lightning-button label="Precedent" class="slds-float_right" onclick={handlePreviousStep}></lightning-button>
+                    </div>
+                    <div class="slds-col">
+                <lightning-button label="Enregister" class="slds-float_right" variant="brand"  disabled={disableSave} onclick={handleNextStep}></lightning-button>
+                    </div>
+                    
+                </div>
+            </div>
+        </template>
+    </lightning-card>
+</template>

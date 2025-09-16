@@ -1,0 +1,22 @@
+<template>
+    <div class="slds-grid slds-wrap slds-grid_vertical-stretch">
+        <lightning-input type="text" onchange={handleCINChange} data-theid="CIN"  
+            label="CIN" value={cin}
+            class="slds-col slds-size_1-of-1 elementMargin1">
+        </lightning-input>
+    </div>
+
+    <div class="slds-grid slds-wrap slds-grid_vertical-stretch">
+        <lightning-input type="number" onchange={handleContactChange} data-theid="ContactNumber"  
+            label="Numéro de contact" value={contactNumber}
+            
+            class="slds-col slds-size_1-of-1 elementMargin1">
+        </lightning-input>
+    </div>
+
+    <br>
+    <lightning-button variant="brand" label="Recherche" data-theid="searche" 
+        title="Recherche" onclick={handleSearch} 
+        class="slds-m-left_x-small" style="display:none">
+    </lightning-button>
+</template>

@@ -1,0 +1,55 @@
+<template>
+    <div class="slds-grid slds-wrap slds-grid_vertical-stretch">
+        <lightning-combobox placeholder="Pays" onchange={ChangePays} data-theid="Pays" label="Pays" required
+            value={valuePays} class="slds-col slds-size_1-of-2 elementMargin2" options={PaysValues} 
+            disabled={valuePays}>
+        </lightning-combobox>
+
+        <!-- Add countryCode field here 
+        <lightning-input type="text"  data-theid="countryCode" label="Code du pays" required value={cc}
+        placeholder="Enter Code du pays" class="slds-col slds-size_1-of-2 elementMargin2" disabled={cc}>
+        </lightning-input>-->
+
+        <!-- Add Ville2 field here -->
+        <template if:true={isToSpecify}>
+        <lightning-input type="text" data-theid="Ville" label="Ville" required value={vv}
+            placeholder="Enter Ville" class="slds-col slds-size_1-of-2 elementMargin2" disabled={vv}>
+        </lightning-input>
+    </template>
+
+
+    <template if:false={isToSpecify}>
+        <lightning-combobox placeholder="sélectionnez une ville" onchange={ChangeVille} data-theid="Ville" value={v}
+            label="Ville" required class="slds-col slds-size_1-of-2 elementMargin2" options={VilleValues} disabled={v}>
+        </lightning-combobox>
+    </template>
+
+        <lightning-input type="text"  data-theid="Region" label="Région"   value={r} 
+            placeholder="sélectionnez une Région" class="slds-col slds-size_1-of-2 elementMargin2" disabled={r}>
+        </lightning-input>
+          <!--<template if:false={isToSpecify}>
+            <lightning-combobox placeholder="sélectionnez une Quartier" onchange={ChangeQuartier} data-theid="Quartier"
+                value={q} label="Quartier"  class="slds-col slds-size_1-of-2 elementMargin2" options={QuartierValues} >
+            </lightning-combobox>
+        </template> -->
+
+        <!-- Add address2 field here -->
+        <lightning-input type="text" onchange={handleAddress2Change} data-theid="Address2"
+            label="Complement d'adresse"  placeholder="Complement d'adresse" value={address2}
+            class="slds-col slds-size_1-of-2 elementMargin2" disabled={address2}>
+        </lightning-input>
+   
+        
+
+        
+    </div>
+
+    <div class="slds-grid slds-wrap slds-grid_vertical-stretch">
+       
+            <lightning-input type="text" onchange={ChangePrecisionQuartier} data-theid="PrecisionQuartier"
+                label="Quartier"  placeholder="sélectionnez une Quartier" value={pq}
+                class="slds-col slds-size_1-of-2 elementMargin2" disabled={pq}>
+            </lightning-input>
+        
+    </div>
+</template>

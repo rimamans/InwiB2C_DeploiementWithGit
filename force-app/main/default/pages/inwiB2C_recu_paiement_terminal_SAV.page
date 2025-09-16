@@ -1,0 +1,60 @@
+<apex:page sidebar="false" renderAs="pdf" controller="InwiB2C_RecuPaiementSAV" showHeader="false" applyBodyTag="false">
+   <head>
+        <style>
+            body {
+                font-family: 'Arial Unicode MS';
+                font-size: 12px;
+
+            }
+
+            @page {
+                size: A4;
+                margin: 0px
+            }
+        </style>
+    </head>
+
+    <body>
+        <div>
+            <img style="width: 100%; height: 100%" src="{!$Resource.recu_paiement_SAV}" />
+            <p style="position: absolute;top: 198px;left: 189px;font-size: 12px">{!IF(contains(keys,'date'),output['date'], '')}</p>
+            <p style="position: absolute;top: 219px;left: 165px;font-size: 12px">{!IF(contains(keys,'date'),output['date'], '')}</p>
+
+            <p style="position: absolute;top: 198px;left: 521px;font-size: 12px">{!IF(contains(keys,'pdv'),output['pdv'], '')}</p>
+            <p style="position: absolute;top: 219px;left: 478px;font-size: 12px">{!IF(contains(keys,'code_agent'),output['code_agent'], '')}</p>
+
+
+            <p style="position: absolute;top: 256px;left: 155px;font-size: 12px">{!IF(contains(keys,'referencepaiement'),output['referencepaiement'], '')}</p>
+            <p style="position: absolute;top: 277px;left: 217px;font-size: 12px">{!IF(contains(keys,'codetransaction'),output['codetransaction'], '')}</p>
+
+
+            <p style="position: absolute;top: 333px;left: 169px;font-size: 12px">{!IF(contains(keys,'Montanttotal'),output['Montanttotal'], '')}</p>
+            <p style="position: absolute;top: 354px;left: 172px;font-size: 12px">{!IF(contains(keys,'modepaiement'),output['modepaiement'], '')}</p>
+
+            
+            <p style="position: absolute;top: 331px;left: 540px;font-size: 12px">{!IF(contains(keys,'firstname'),output['firstname'], '')}</p>
+            <p style="position: absolute;top: 352px;left: 492px;font-size: 12px">{!IF(contains(keys,'lastname'),output['lastname'], '')}</p>
+            <p style="position: absolute;top: 373px;left: 471px;font-size: 12px">{!IF(contains(keys,'cin'),output['cin'], '')}</p>
+            <p style="position: absolute;top: 394px;left: 559px;font-size: 12px">{!IF(contains(keys,'ordernumber'),output['ordernumber'], '')}</p>
+            
+            <p style="position: absolute;top: 455px;left: 97px;font-size: 12px">{!IF(contains(keys,'articledefectueux'),output['articledefectueux'], '')}</p>
+            <p style="position: absolute;top: 455px;left: 298px;font-size: 12px">{!IF(contains(keys,'numseriedefecteux'),output['numseriedefecteux'], '')}</p>
+            <p style="position: absolute;top: 455px;left: 456px;font-size: 12px">{!IF(contains(keys,'quantity'),output['quantity'], '')}</p>
+            <p style="position: absolute;top: 455px;left: 540px;font-size: 12px">{!IF(contains(keys,'forfait'),output['forfait'], '')}</p>
+            
+            <p style="position: absolute;top: 505px;left: 97px;font-size: 12px">{!IF(contains(keys,'articleremplacement'),output['articleremplacement'], '')}</p>
+            <p style="position: absolute;top: 505px;left: 298px;font-size: 12px">{!IF(contains(keys,'numserieartremplace'),output['numserieartremplace'], '')}</p>
+            <p style="position: absolute;top: 505px;left: 456px;font-size: 12px">{!IF(contains(keys,'quantity'),output['quantity'], '')}</p>
+            <p style="position: absolute;top: 505px;left: 540px;font-size: 12px">{!IF(contains(keys,'forfait'),output['forfait'], '')}</p>
+            
+            <p style="position: absolute;top: 816px;left: 178px;font-size: 12px">{!IF(contains(keys,'pdv'),output['pdv'], '')}</p>
+            <p style="position: absolute;top: 834px;left: 132px;font-size: 12px">{!IF(contains(keys,'code_agent'),output['code_agent'], '')}</p>
+            <p style="position: absolute;top: 853px;left: 239px;font-size: 12px">{!IF(contains(keys,'cin'),output['cin'], '')}</p>
+            <p style="position: absolute;top: 871px;left: 188px;font-size: 12px">{!IF(contains(keys,'date'),output['date'], '')}</p>
+            <p style="position: absolute;top: 889px;left: 167px;font-size: 12px">{!IF(contains(keys,'date'),output['date'], '')}</p>
+            <p style="position: absolute;top: 907px;left: 158px;font-size: 12px">{!IF(contains(keys,'codetransaction'),output['codetransaction'], '')}</p>
+            <p style="position: absolute;top: 926px;left: 168px;font-size: 12px">{!IF(contains(keys,'Montanttotal'),output['Montanttotal'], '')}</p>
+            
+        </div>
+    </body>
+</apex:page>

@@ -1,0 +1,3 @@
+let definition = 
+                {"GlobalKey__c":"InwiB2C_LinkExterneCommunity/RMA/1/1630838972703","dataSource":{"type":null,"value":{}},"enableLwc":false,"filter":{},"states":[{"conditions":{"group":[{"field":"$scope.data.status","operator":"===","type":"system","value":"'active'"}]},"customLwc":true,"customLwcRepeat":true,"definedActions":{"actions":[]},"fields":[],"isSmartAction":false,"lwc":{"DeveloperName":"inwiB2C_LinkCommunity","Id":"0Rb25000000AJGeCAO","MasterLabel":"List Link Community","name":"inwiB2C_LinkCommunity"},"name":"Active","smartAction":{}}],"title":"LinkCommunity"}; 
+            export default definition

@@ -1,0 +1,19 @@
+<template>
+
+
+    <template if:true={attributeCategory}>
+    
+            <template for:each={attributeCategory.productAttributes.records} for:item="attributes" >
+                <span key ={attributes.attributeId} >
+
+
+                    <c-inwi-b2-c_-display-attribute attribute={attributes} onattributevaluechange={hanldeAttributeValueChange}  showservice={__showservice} > </c-inwi-b2-c_-display-attribute>
+
+                </span>
+            </template>
+
+
+
+    </template>
+    
+</template>

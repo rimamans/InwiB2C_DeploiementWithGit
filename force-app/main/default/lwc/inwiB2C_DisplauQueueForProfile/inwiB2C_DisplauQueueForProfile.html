@@ -1,0 +1,15 @@
+<template>
+
+    <lightning-card title= "Sélectionner une File d'attente">
+
+        <lightning-radio-group name="QueuesList"
+                                label="Liste des files d'attente:"
+                                options={options}
+                                onchange={ChangeQueueEvent}
+                                value={value}
+                                type="radio"></lightning-radio-group>
+          
+    
+    </lightning-card>
+    
+</template>

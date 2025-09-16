@@ -1,0 +1,17 @@
+.payedinvoices {
+	color: green;
+    font-weight: bolder;
+
+}
+.unpayedinvoices{
+	color: red;
+    font-weight: bolder;
+}
+
+.pay{
+    background-color: rgba(128, 128, 128, 0.137);
+}
+.th{
+    background-color:rgb(149, 45, 152);
+    color:white;
+}

@@ -1,0 +1,89 @@
+/**
+ * @description       : 
+ * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+ * @group             : 
+ * @last modified on  : 08-28-2025
+ * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+**/
+@isTest
+ 
+ public  class InwiB2C_RattrapageArticlesCommandeTest {
+    @isTest(SeeAllData=true)
+     public static void InwiB2C_RattrapageArticlesCommandeTest() {
+        InwiB2C_RattrapageArticlesCommande cls = new InwiB2C_RattrapageArticlesCommande();
+
+        Account testAccount = new Account();
+        testAccount.Name='Test Account';
+        insert testAccount;
+
+        Product2 prod = new Product2(Name = 'Forfait 1H + 2Go + Illimité RS + inwi', 
+        Family = 'Mobile',
+        ProductCode='INWIB2C_OFFERING_49DH_ILLIMITE_RS'
+      );
+          insert prod;
+          Product2 prodSIm = new Product2(Name = 'SIM', 
+          Family = 'None',
+          ProductCode='INWIB2C_MOB02_OFFERING_SIM'
+        );
+            insert prodSIm;
+            Product2 prodTerl = new Product2(Name = 'Terminal', 
+            Family = 'None',
+            ProductCode='INWIB2C_MOB02_OFFERING_TERMINAL'
+          );
+              insert prodTerl;
+            Id pricebookId = Test.getStandardPricebookId();
+        
+          PricebookEntry standardPrice = new PricebookEntry(
+           Pricebook2Id = pricebookId, Product2Id = prod.Id,
+           UnitPrice = 49, IsActive = true);
+             insert standardPrice;
+             Pricebook2 customPB = new Pricebook2(Name='Custom Pricebook', isActive=true);
+              insert customPB;
+
+                 PricebookEntry customPrice = new PricebookEntry(
+                  Pricebook2Id = customPB.Id, Product2Id = prod.Id,
+                  UnitPrice = 12000, IsActive = true);
+                 insert customPrice;
+               order neworder = new Order (Pricebook2Id = customPB.Id, inwiB2C_Statut__c ='inwiB2C_EnCours',  inwib2c_TypeDeLaCommande__c = 'inwiB2C_Acquisition',	
+                        inwiB2C_Canal__c='inwiB2C_Eshop',EffectiveDate = Date.today().addDays(-1), Status = 'Draft',inwib2c_ModeDeLivraison__c='inwiB2C_Domicile', AccountId =testAccount.Id);
+                insert neworder;
+
+                String JsonAttr = '{"INWIB2C_ACAT_MOBILE":[{"$$AttributeDefinitionStart$$":null,"objectid__c":"01t3L000002nAKbQAM","attributeid__c":"a0X3L000000yvRHUAY","attributecategoryid__c":"a0W3L000001fDsnUAE","categorycode__c":"INWIB2C_ACAT_MOBILE","categoryname__c":"Mobile","attributeuniquecode__c":"INWIB2C_ATT_RT_FilteredByOffer","attributeconfigurable__c":true,"attributedisplaysequence__c":"23","attributefilterable__c":false,"attributecloneable__c":true,"isactive__c":true,"attributedisplayname__c":"FilteredByOffer","displaysequence__c":"null","categorydisplaysequence__c":10,"customconfiguitemplate__c":null,"formatmask__c":null,"hasrule__c":false,"isconfigurable__c":true,"ishidden__c":false,"valueinnumber__c":null,"objecttype__c":"Product2","querycode__c":null,"isreadonly__c":false,"isnottranslatable__c":false,"isquerydriven__c":false,"querylabel__c":null,"id":"a0U3L000000aSi2UAE","isrequired__c":false,"rulemessage__c":null,"uidisplaytype__c":null,"value__c":null,"valuedatatype__c":"Checkbox","valuedescription__c":null,"attributegrouptype__c":null,"attributeRunTimeInfo":{"dataType":"Checkbox","default":false,"value":false},"$$AttributeDefinitionEnd$$":null},{"$$AttributeDefinitionStart$$":null,"objectid__c":"01t3L000002nAKbQAM","attributeid__c":"a0X3L000000yvSNUAY","attributecategoryid__c":"a0W3L000001fDsnUAE","categorycode__c":"INWIB2C_ACAT_MOBILE","categoryname__c":"Mobile","attributeuniquecode__c":"INWIB2C_ATT_RT_SerialType","attributeconfigurable__c":true,"attributedisplaysequence__c":"13","attributefilterable__c":false,"attributecloneable__c":true,"isactive__c":true,"attributedisplayname__c":"SerialType","displaysequence__c":"null","categorydisplaysequence__c":10,"customconfiguitemplate__c":null,"formatmask__c":null,"hasrule__c":false,"isconfigurable__c":true,"ishidden__c":false,"valueinnumber__c":null,"objecttype__c":"Product2","querycode__c":null,"isreadonly__c":false,"isnottranslatable__c":false,"isquerydriven__c":false,"querylabel__c":null,"id":"a0U3L000000aSi8UAE","isrequired__c":false,"rulemessage__c":null,"uidisplaytype__c":"Dropdown","value__c":"IMEI","valuedatatype__c":"Picklist","valuedescription__c":null,"attributegrouptype__c":null,"attributeRunTimeInfo":{"dataType":"Picklist","uiDisplayType":"Dropdown","default":[{"displayText":"IMEI","id":"4709e2ed-41df-1e43-dccd-94ddc0391c0e","sequence":20,"value":"IMEI"}],"values":[{"displayText":"ICCID","id":"436f94d1-bb4e-b36c-1676-6a43ee16be1c","sequence":10,"value":"ICCID"},{"displayText":"IMEI","id":"4709e2ed-41df-1e43-dccd-94ddc0391c0e","sequence":20,"value":"IMEI"},{"displayText":"ESN","id":"e7b65f72-4b89-d814-bc34-65311118b361","sequence":30,"value":"ESN"}],"selectedItem":{"displayText":"IMEI","id":"4709e2ed-41df-1e43-dccd-94ddc0391c0e","sequence":20,"value":"IMEI"}},"$$AttributeDefinitionEnd$$":null},{"$$AttributeDefinitionStart$$":null,"objectid__c":"01t3L000002nAKbQAM","attributeid__c":"a0X3L000000yvSOUAY","attributecategoryid__c":"a0W3L000001fDsnUAE","categorycode__c":"INWIB2C_ACAT_MOBILE","categoryname__c":"Mobile","attributeuniquecode__c":"INWIB2C_ATT_RT_ShowPrice","attributeconfigurable__c":true,"attributedisplaysequence__c":"1","attributefilterable__c":false,"attributecloneable__c":true,"isactive__c":true,"attributedisplayname__c":"ShowPrice","displaysequence__c":"null","categorydisplaysequence__c":10,"customconfiguitemplate__c":null,"formatmask__c":null,"hasrule__c":false,"isconfigurable__c":true,"ishidden__c":false,"valueinnumber__c":null,"objecttype__c":"Product2","querycode__c":null,"isreadonly__c":false,"isnottranslatable__c":false,"isquerydriven__c":false,"querylabel__c":null,"id":"a0U3L000000aSi9UAE","isrequired__c":false,"rulemessage__c":null,"uidisplaytype__c":null,"value__c":null,"valuedatatype__c":"Checkbox","valuedescription__c":null,"attributegrouptype__c":null,"attributeRunTimeInfo":{"dataType":"Checkbox","default":false,"value":false},"$$AttributeDefinitionEnd$$":null},{"$$AttributeDefinitionStart$$":null,"objectid__c":"01t3L000002nAKbQAM","attributeid__c":"a0X3L000000yvSPUAY","attributecategoryid__c":"a0W3L000001fDsnUAE","categorycode__c":"INWIB2C_ACAT_MOBILE","categoryname__c":"Mobile","attributeuniquecode__c":"INWIB2C_ATT_RT_StockValidated","attributeconfigurable__c":true,"attributedisplaysequence__c":"15","attributefilterable__c":false,"attributecloneable__c":true,"isactive__c":true,"attributedisplayname__c":"StockValidated","displaysequence__c":"null","categorydisplaysequence__c":10,"customconfiguitemplate__c":null,"formatmask__c":null,"hasrule__c":false,"isconfigurable__c":false,"ishidden__c":false,"valueinnumber__c":null,"objecttype__c":"Product2","querycode__c":null,"isreadonly__c":false,"isnottranslatable__c":false,"isquerydriven__c":false,"querylabel__c":null,"id":"a0U3L000000aSiAUAU","isrequired__c":false,"rulemessage__c":null,"uidisplaytype__c":"Text","value__c":null,"valuedatatype__c":"Text","valuedescription__c":null,"attributegrouptype__c":null,"attributeRunTimeInfo":{"dataType":"Text","uiDisplayType":"Text","value":null},"$$AttributeDefinitionEnd$$":null},{"$$AttributeDefinitionStart$$":null,"objectid__c":"01t3L000002nAKbQAM","attributeid__c":"a0X3L000000yvSYUAY","attributecategoryid__c":"a0W3L000001fDsnUAE","categorycode__c":"INWIB2C_ACAT_MOBILE","categoryname__c":"Mobile","attributeuniquecode__c":"INWIB2C_ATT_RT_Technology","attributeconfigurable__c":true,"attributedisplaysequence__c":"22","attributefilterable__c":false,"attributecloneable__c":true,"isactive__c":true,"attributedisplayname__c":"Technology","displaysequence__c":"null","categorydisplaysequence__c":10,"customconfiguitemplate__c":null,"formatmask__c":null,"hasrule__c":false,"isconfigurable__c":false,"ishidden__c":false,"valueinnumber__c":null,"objecttype__c":"Product2","querycode__c":null,"isreadonly__c":false,"isnottranslatable__c":false,"isquerydriven__c":false,"querylabel__c":null,"id":"a0U3L000000aSiBUAU","isrequired__c":false,"rulemessage__c":null,"uidisplaytype__c":"Text","value__c":"GSM","valuedatatype__c":"Text","valuedescription__c":null,"attributegrouptype__c":null,"attributeRunTimeInfo":{"dataType":"Text","uiDisplayType":"Text","default":"GSM","value":"GSM"},"$$AttributeDefinitionEnd$$":null},{"$$AttributeDefinitionStart$$":null,"objectid__c":"01t3L000002nAKbQAM","attributeid__c":"a0X3L000000yvRQUAY","attributecategoryid__c":"a0W3L000001fDsnUAE","categorycode__c":"INWIB2C_ACAT_MOBILE","categoryname__c":"Mobile","attributeuniquecode__c":"INWIB2C_ATT_RT_MODELE","attributeconfigurable__c":true,"attributedisplaysequence__c":"55","attributefilterable__c":true,"attributecloneable__c":true,"isactive__c":true,"attributedisplayname__c":"Modèle","displaysequence__c":"10","categorydisplaysequence__c":10,"customconfiguitemplate__c":null,"formatmask__c":null,"hasrule__c":false,"isconfigurable__c":true,"ishidden__c":false,"valueinnumber__c":null,"objecttype__c":"vlocity_cmt__ObjectClass__c","querycode__c":null,"isreadonly__c":false,"isnottranslatable__c":false,"isquerydriven__c":false,"querylabel__c":null,"id":"a0U3L000000aSi7UAE","isrequired__c":false,"rulemessage__c":null,"uidisplaytype__c":"Text","value__c":null,"valuedatatype__c":"Text","valuedescription__c":null,"attributegrouptype__c":null,"attributeRunTimeInfo":{"dataType":"Text","uiDisplayType":"Text","value":"0081231113"},"$$AttributeDefinitionEnd$$":null},{"$$AttributeDefinitionStart$$":null,"objectid__c":"01t3L000002nAKbQAM","attributeid__c":"a0X3L000000yvShUAI","attributecategoryid__c":"a0W3L000001fDsnUAE","categorycode__c":"INWIB2C_ACAT_MOBILE","categoryname__c":"Mobile","attributeuniquecode__c":"INWIB2C_OFFERING_MARQUE","attributeconfigurable__c":true,"attributedisplaysequence__c":"50","attributefilterable__c":true,"attributecloneable__c":true,"isactive__c":true,"attributedisplayname__c":"Marque","displaysequence__c":"10","categorydisplaysequence__c":10,"customconfiguitemplate__c":null,"formatmask__c":null,"hasrule__c":false,"isconfigurable__c":true,"ishidden__c":false,"valueinnumber__c":null,"objecttype__c":"vlocity_cmt__ObjectClass__c","querycode__c":null,"isreadonly__c":false,"isnottranslatable__c":false,"isquerydriven__c":false,"querylabel__c":null,"id":"a0U3L000000aSi5UAE","isrequired__c":false,"rulemessage__c":null,"uidisplaytype__c":"Text","value__c":null,"valuedatatype__c":"Text","valuedescription__c":null,"attributegrouptype__c":null,"attributeRunTimeInfo":{"dataType":"Text","uiDisplayType":"Text","value":null},"$$AttributeDefinitionEnd$$":null},{"$$AttributeDefinitionStart$$":null,"objectid__c":"01t3L000002nAKbQAM","attributeid__c":"a0X3L000000yvPuUAI","attributecategoryid__c":"a0W3L000001fDsnUAE","categorycode__c":"INWIB2C_ACAT_MOBILE","categoryname__c":"Mobile","attributeuniquecode__c":"INWIB2C_ATT_DC_MODELELABEL","attributeconfigurable__c":true,"attributedisplaysequence__c":"1","attributefilterable__c":false,"attributecloneable__c":true,"isactive__c":false,"attributedisplayname__c":"Modèle Label","displaysequence__c":"null","categorydisplaysequence__c":10,"customconfiguitemplate__c":null,"formatmask__c":null,"hasrule__c":false,"isconfigurable__c":false,"ishidden__c":false,"valueinnumber__c":null,"objecttype__c":"Product2","querycode__c":null,"isreadonly__c":false,"isnottranslatable__c":false,"isquerydriven__c":false,"querylabel__c":null,"id":"a0U3L000000aSi6UAE","isrequired__c":false,"rulemessage__c":null,"uidisplaytype__c":"Text","value__c":null,"valuedatatype__c":"Text","valuedescription__c":null,"attributegrouptype__c":null,"attributeRunTimeInfo":{"dataType":"Text","uiDisplayType":"Text","value":"Router Alcatel"},"$$AttributeDefinitionEnd$$":null},{"$$AttributeDefinitionStart$$":null,"objectid__c":"01t3L000002nAKbQAM","attributeid__c":"a0X3L000000yvRMUAY","attributecategoryid__c":"a0W3L000001fDsnUAE","categorycode__c":"INWIB2C_ACAT_MOBILE","categoryname__c":"Mobile","attributeuniquecode__c":"INWIB2C_ATT_RT_IMEI","attributeconfigurable__c":true,"attributedisplaysequence__c":"40","attributefilterable__c":true,"attributecloneable__c":true,"isactive__c":true,"attributedisplayname__c":"IMEI/ESN","displaysequence__c":"10","categorydisplaysequence__c":10,"customconfiguitemplate__c":null,"formatmask__c":null,"hasrule__c":false,"isconfigurable__c":true,"ishidden__c":false,"valueinnumber__c":null,"objecttype__c":"vlocity_cmt__ObjectClass__c","querycode__c":null,"isreadonly__c":false,"isnottranslatable__c":false,"isquerydriven__c":false,"querylabel__c":null,"id":"a0U3L000000aSi3UAE","isrequired__c":true,"rulemessage__c":null,"uidisplaytype__c":"Text","value__c":null,"valuedatatype__c":"Text","valuedescription__c":null,"attributegrouptype__c":null,"attributeRunTimeInfo":{"dataType":"Text","uiDisplayType":"Text","value":"312312312344"},"$$AttributeDefinitionEnd$$":null},{"$$AttributeDefinitionStart$$":null,"objectid__c":"01t3L000002nAKbQAM","attributeid__c":"a0X3L000000yvRPUAY","attributecategoryid__c":"a0W3L000001fDsnUAE","categorycode__c":"INWIB2C_ACAT_MOBILE","categoryname__c":"Mobile","attributeuniquecode__c":"INWIB2C_ATT_RT_MARQUELABEL","attributeconfigurable__c":true,"attributedisplaysequence__c":"10","attributefilterable__c":false,"attributecloneable__c":true,"isactive__c":true,"attributedisplayname__c":"Marque Label","displaysequence__c":"null","categorydisplaysequence__c":10,"customconfiguitemplate__c":null,"formatmask__c":null,"hasrule__c":false,"isconfigurable__c":false,"ishidden__c":false,"valueinnumber__c":null,"objecttype__c":"Product2","querycode__c":null,"isreadonly__c":false,"isnottranslatable__c":false,"isquerydriven__c":false,"querylabel__c":null,"id":"a0U3L000000aSi4UAE","isrequired__c":false,"rulemessage__c":null,"uidisplaytype__c":"Text","value__c":null,"valuedatatype__c":"Text","valuedescription__c":null,"attributegrouptype__c":null,"attributeRunTimeInfo":{"dataType":"Text","uiDisplayType":"Text","value":null},"$$AttributeDefinitionEnd$$":null}]}';
+
+        
+              OrderItem newOrderitem = new OrderItem(Product2Id = prod.Id, vlocity_cmt__JSONAttribute__c = JsonAttr, PriceBookEntryId=customPrice.Id, OrderId=neworder.Id, Quantity=1, UnitPrice=standardPrice.UnitPrice, ServiceDate=Date.Today());
+                   insert newOrderitem;
+                   OrderItem newOrderitemSIM = new OrderItem(Product2Id = prodSIm.Id, vlocity_cmt__JSONAttribute__c = JsonAttr, PriceBookEntryId=customPrice.Id, OrderId=neworder.Id, Quantity=1, UnitPrice=customPrice.UnitPrice, ServiceDate=Date.Today());
+                   insert newOrderitemSIM;
+                   OrderItem newOrderitemTer = new OrderItem(Product2Id = prodTerl.Id, vlocity_cmt__JSONAttribute__c = JsonAttr, PriceBookEntryId=customPrice.Id, OrderId=neworder.Id, Quantity=1, UnitPrice=customPrice.UnitPrice, ServiceDate=Date.Today());
+                   insert newOrderitemTer;
+
+                   InwiB2C_LoadArticle__c newaloadarticle = new InwiB2C_LoadArticle__c(InwiB2C_CodeArticle__c='600001090',InwiB2C_Updated__c='false',InwiB2C_Imsi__c='Y35642',InwiB2C_ki__c='95746735',InwiB2C_Numero_de_Ligne__c='212790945115',InwiB2C_OcsId__c='5UI46357',InwiB2C_ProfilId__c='8134567',InwiB2C_Puk__c='4576859',InwiB2C_SerialNumber__c='8765465785797483',InwiB2C_Order__c=neworder.Id);
+                  
+
+
+                  //  String input = '{"CSLoadArticlesOrder":{"orderid":"' + neworder.Id + '","Articles":[{"codeArticle":"100002327","serialnumber":"5765465785797483","mdn":"","puk":"","ki":"","imsi":"","ocsid":"","profilid":""},{"codeArticle":"100002396","serialnumber":"6765465785797483","mdn":"","puk":"","ki":"","imsi":"","ocsid":"","profilid":""},{"codeArticle":"100002321","serialnumber":"7765465785797483","mdn":"","puk":"","ki":"","imsi":"","ocsid":"","profilid":""},{"codeArticle":"600001090","serialnumber":"8765465785797483","mdn":"212790945115","puk":"84576859","ki":"85746735","imsi":"8Y35642","ocsid":"8UI46357","profilid":"8134567"},{"codeArticle":"000019847","serialnumber":"9765465785797483","mdn":"212790945115","puk":"94576859","ki":"95746735","imsi":"9Y35642","ocsid":"9UI46357","profilid":"8134567"}]},"CSOperationInfo":{"channel":"FE","user":"Amine Bouremma TEST","uuid":"8dc318d1-1343-413d-833c-bcf67f9d6ce4"}}';
+                  String input = '{"bodyInput":{"channel":"FE","user":"Amine Bouremma TEST","uuid":"8dc318d1-1343-413d-833c-bcf67f9d6ce4"},"orderId":"' + neworder.Id + '"}';
+
+
+        Map<String,Object> bodyjson =  (Map<String, Object>)JSON.deserializeUntyped(input);
+           
+        Map<String, Object> inputMap = new Map<String, Object>();       
+
+
+       
+        Map<String, Object> options = new Map<String, Object>();
+        Map<String, Object> outMap = new Map<String, Object>();
+        
+       
+        Test.startTest();
+    
+        boolean result = cls.invokeMethod('RattrapageArticlesOrder', bodyjson, outMap, options);
+        Test.stopTest();       
+       
+    
+  
+    }
+
+
+}

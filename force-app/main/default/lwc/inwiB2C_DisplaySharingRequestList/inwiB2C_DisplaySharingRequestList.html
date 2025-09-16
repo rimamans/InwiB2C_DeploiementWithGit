@@ -1,0 +1,24 @@
+<template>
+    <template if:false={islistEmpty}>
+        <div>
+            <lightning-datatable
+                    key-field="id"
+                    hide-checkbox-column="true"
+                    columns={columns}
+                    data={__records}
+                    onrowaction={handlesClick}
+                    sort-by={sortBy}
+                    sorted-direction={sortedDirection}
+                    onsort={handleSort}>
+            </lightning-datatable>
+        </div>
+    </template>
+
+    <template if:true={islistEmpty}>
+        <br><br>
+        <br><br>
+        <div style="text-align: center;"> Aucun résultat trouvé </div>
+        <br><br>
+        <br><br>
+    </template>
+</template>

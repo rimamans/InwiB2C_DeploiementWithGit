@@ -1,0 +1,14 @@
+<template>
+    <template if:true={data.length}>
+        <lightning-datatable
+            key-field="Id"
+            data={data}
+            columns={columns}>
+        </lightning-datatable>
+    </template>
+    <template if:false={data.length}>
+        <p class="slds-text-align_center" style="margin-top: 1rem;">
+            Aucune donnée n'a été trouvée pour ce Document Id.
+        </p>
+    </template>
+</template>

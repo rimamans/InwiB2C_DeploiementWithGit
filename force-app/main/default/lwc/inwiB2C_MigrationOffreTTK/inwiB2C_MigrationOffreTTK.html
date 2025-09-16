@@ -1,0 +1,20 @@
+<template>
+
+    <br>
+
+    <lightning-radio-group name="Veuillez Séléctionner un seul choix : "
+    class="radioid"
+    onchange={ChangeMenuEvent}
+    label="Choix du type d’actions"
+    options={options}
+    value={value}
+    type="radio"></lightning-radio-group>
+
+    <br>
+ 
+    <template if:true={Changed}>
+        <lightning-button label="Suivant"  onclick={handleSave}></lightning-button>
+    </template>
+  
+
+</template>

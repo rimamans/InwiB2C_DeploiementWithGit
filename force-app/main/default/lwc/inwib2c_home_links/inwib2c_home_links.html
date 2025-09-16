@@ -1,0 +1,146 @@
+<template>
+    <template if:true={eligibility}>
+        <div class="via-slds riders-list-canvas container-table-canvas">
+            <div class="slds-card slds-p-around--small">
+                <h3 class="slds-p-bottom--small slds-text-heading--small slds-truncate titleLinkModif">
+                    <b>Parcours</b>
+                </h3>
+                <br>
+    
+                <lightning-tile label="Lettrage - Transfert Solde" onclick={handleOpen} type="media">
+                    <lightning-icon slot="media" icon-name="standard:product_transfer"></lightning-icon>
+                </lightning-tile>
+                <br>
+    
+                <lightning-tile label="SMO Massifs" onclick={handleOpenLink} type="media">
+                    <lightning-icon slot="media" icon-name="standard:file"></lightning-icon>
+                </lightning-tile>
+                <br>
+
+                
+    
+                <!-- <lightning-tile label="Gestion de retours" onclick={handleOpenLinkretour} type="media">
+                    <lightning-icon slot="media" icon-name="standard:file"></lightning-icon>
+                </lightning-tile>-->
+
+                <lightning-tile label="Demande de dégroupage" onclick={handleOpenLinkDegroupage} type="media">
+                    <lightning-icon slot="media" icon-name="standard:address"></lightning-icon>
+                </lightning-tile>
+                <br>
+
+                <!--VULA ILA 09/11/25 Start-->
+                <lightning-tile label="Demande de partage" onclick={handleOpenLinkVula} type="media">
+                    <lightning-icon slot="media" icon-name="standard:address"></lightning-icon>
+                </lightning-tile>
+                <!--VULA ILA 09/11/25 End--> 
+
+                <!--VULA CH-Y 05/03/25 Start-->
+                <lightning-tile label="Acquisition Ftth Vula Televente" onclick={handleOpenLinkAcquisitionVula} type="media">
+                    <lightning-icon slot="media" icon-name="standard:address"></lightning-icon>
+                </lightning-tile>
+                <!--VULA CH-Y 05/03/25 End--> 
+
+                <br>
+                <!--B-21535 ILA 28/10/24 Start-->
+                <template if:true={eligibilityCT}>
+                <!--B-21535 ILA 28/10/24 End-->
+                <lightning-tile label="Changement de technologie en masse" onclick={handleOpenLinkUTMasse} type="media">
+                    <lightning-icon slot="media" icon-name="standard:address"></lightning-icon>
+                </lightning-tile>
+            </template>
+
+             <!--B-22735 ILA 04/12/24 START-->
+                <template if:true={eligibilityMasse}>
+                    <!--B-22735 ILA 04/12/24End-->
+                        <lightning-tile label="Chargement en masse des fiches AM" onclick={handleOpenLinkUTMasseAM} type="media">
+                            <lightning-icon slot="media" icon-name="standard:address"></lightning-icon>
+                        </lightning-tile>
+                    </template>
+
+
+                    <!--MC-MGEN3601-FMD FTTH Complément R-SL begin -->
+          
+                    <template if:true={eligibilityRecyclage}>
+                      <lightning-tile label="Demande recyclage ftth" onclick={handleRecyclageFTTH} type="media">
+                          <lightning-icon slot="media" icon-name="standard:address"></lightning-icon>
+                      </lightning-tile>
+                    </template>
+                     <!--MC-MGEN3601-FMD FTTH Complément R-SL end 11/02/2025 -->
+
+                     <!-- CHB VULA FTTH COMPLEMENT 06/03/2025-->
+                     <lightning-tile label="Recherche adresse introuvable" onclick={handleOpenLinkRechercheAdresseIntrouvable} type="media">
+                        <lightning-icon slot="media" icon-name="standard:address"></lightning-icon>
+                    </lightning-tile>
+                    <br>
+                     <!-- CHB VULA FTTH COMPLEMENT 06/03/2025-->
+            </div>
+        </div>
+       </template> 
+       <template if:false={eligibility}>
+        <div class="via-slds riders-list-canvas container-table-canvas">
+            <div class="slds-card slds-p-around--small">
+                <h3 class="slds-p-bottom--small slds-text-heading--small slds-truncate titleLinkModif">
+                    <b>Parcours</b>
+                </h3>
+                <br>
+    
+                <lightning-tile label="Lettrage - Transfert Solde" onclick={handleOpen} type="media">
+                    <lightning-icon slot="media" icon-name="standard:product_transfer"></lightning-icon>
+                </lightning-tile>
+                <br>
+    
+                <lightning-tile label="SMO Massifs" onclick={handleOpenLink} type="media">
+                    <lightning-icon slot="media" icon-name="standard:file"></lightning-icon>
+                </lightning-tile>
+                <br>
+
+                <lightning-tile label="Demande de dégroupage" onclick={handleOpenLinkDegroupage} type="media">
+                    <lightning-icon slot="media" icon-name="standard:address"></lightning-icon>
+                </lightning-tile>
+
+                <br>
+
+                <!--VULA ILA 09/11/25 Start-->
+                <lightning-tile label="Demande de partage" onclick={handleOpenLinkVula} type="media">
+                    <lightning-icon slot="media" icon-name="standard:address"></lightning-icon>
+                </lightning-tile>
+
+                <br>
+                <!--VULA ILA 09/11/25 End-->
+
+                <!--VULA CH-Y 05/03/25 Start-->
+                <lightning-tile label="Acquisition Ftth Vula Televente" onclick={handleOpenLinkAcquisitionVula} type="media">
+                    <lightning-icon slot="media" icon-name="standard:address"></lightning-icon>
+                </lightning-tile>
+
+                <br>
+                <!--VULA CH-Y 05/03/25 End--> 
+
+                <!--B-21535 ILA 28/10/24 Start-->
+                <template if:true={eligibilityCT}>
+                <!--B-21535 ILA 28/10/24 End-->
+                <lightning-tile label="Changement de technologie en masse" onclick={handleOpenLinkUTMasse} type="media">
+                    <lightning-icon slot="media" icon-name="standard:address"></lightning-icon>
+                </lightning-tile>
+                </template>
+                    <!--B-22735 ILA 04/12/24 START-->
+                <template if:true={eligibilityMasse}>
+                    <!--B-22735 ILA 04/12/24End-->
+                    <lightning-tile label="Chargement en masse des fiches AM" onclick={handleOpenLinkUTMasseAM} type="media">
+                        <lightning-icon slot="media" icon-name="standard:address"></lightning-icon>
+                    </lightning-tile>
+                    </template>
+
+                      <!--MC-MGEN3601-FMD FTTH Complément R-SL begin -->
+                      <template if:true={eligibilityRecyclage}>
+                        <lightning-tile label="Demande recyclage ftth" onclick={handleRecyclageFTTH} type="media">
+                            <lightning-icon slot="media" icon-name="standard:address"></lightning-icon>
+                        </lightning-tile>
+                      </template>
+                     <!--MC-MGEN3601-FMD FTTH Complément R-SL end 11/02/2025 -->
+            </div>
+        </div>
+
+       </template> 
+    
+</template>

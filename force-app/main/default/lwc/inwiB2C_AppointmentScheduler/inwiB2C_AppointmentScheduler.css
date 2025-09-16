@@ -1,0 +1,83 @@
+.date {
+    min-height: 10rem;
+    min-width: 10rem;
+    max-width: max-content;
+    margin: 0.25rem  0.1rem;
+    padding: 0rem!important;
+ 
+   /* background: rgba(237, 234, 234, 0.204);
+     border-radius: 0.5rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10.6px);
+    -webkit-backdrop-filter: blur(10.6px); */
+    border-color: transparent;
+  
+    
+}
+
+.datedivs{
+   /*  background: rgba(232, 230, 230, 0.318); */
+    border-radius: 0.2rem;
+    /* border-color: grey; */
+    padding: 0.35rem;
+    margin: 0.2rem 0;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10.6px);
+    -webkit-backdrop-filter: blur(10.6px);
+}
+
+
+.dateSlot {
+    /* border: 0.2rem solid #f1f1f2; */
+     border-radius: 0.1rem; 
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+    /* text-align: center; */
+    cursor: pointer;
+   /*  border-left-color: #862A88;
+    border-left-width: 0.25rem; */
+    min-height: 4rem;
+    background-color: #f8f8f885;
+    /* border-top-right-radius: 0.3rem;
+    border-bottom-right-radius: 0.3rem; */
+    
+}
+
+.dateSlot.selected {
+    background-color: #862A88;
+    color: white;
+    border-radius: 0.3rem ;
+}
+
+.dateSlot.inactive {
+    background-color: rgb(181, 178, 178);
+    color: white;
+    cursor: not-allowed;
+    border-left-color:transparent;
+    border-left-width: 0;
+    border-radius: 0.3rem ;
+    
+}
+
+.slotName{
+    /* background-color: #862A88;
+    color: white;
+    padding: 2px;
+    width: 100%;
+    float: left;
+    border-radius: 0.2rem; */
+}
+
+.dateSlot.inactive > .slotName{
+   /*  background-color: transparent; */
+}
+
+.slotHour{
+ float: right;
+ margin: 0.2rem;
+ padding: 0.2rem;
+}
+
+.THIS lightning-icon.paginateIcon > lightning-primitive-icon > svg{
+    fill: #a846a9!important;
+}

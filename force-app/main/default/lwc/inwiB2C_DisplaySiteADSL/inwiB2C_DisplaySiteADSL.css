@@ -1,0 +1,21 @@
+/*Added BY CHB 27/02/2023  */
+.THIS .tab-style thead th span {
+    background-color: #16325c !important;
+    color: white;
+    margin-left: 8px;
+}
+
+.wraperClass{
+    border: 1px solid #5A245A;
+}
+
+.tab-style{
+    zoom : 90%;
+}
+.scaled-down button {
+    transform: scale(0.75);
+}
+:host{
+    --lwc-colorBackgroundRowSelected: rgb(223, 203, 219);
+}
+/*END OF CHB's ADDITION    27/02/2023 */

@@ -1,0 +1,19 @@
+<template>
+    <div style="height: 80px;">
+        <!-- K-KA 14/05/25 B-28661  début--> 
+        <br>
+        <h1 
+            class="slds-p-around_xxx-small  slds-m-top_medium" 
+            style="background-color: #f3f3f3; border-radius: 5px 5px 0 0; margin-top: 2px"
+        >
+        <strong>Demande de partage FTTH({data.length})</strong></h1>
+        
+        <lightning-datatable
+                key-field="Id"
+                data={data}
+                columns={columns}
+                hide-checkbox-column="true">
+        </lightning-datatable>
+    </div>
+     <!-- K-KA 14/05/25 Fin--> 
+</template>

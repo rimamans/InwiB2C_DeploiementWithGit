@@ -1,0 +1,19 @@
+<template>
+    <lightning-card title="Localiser une adresse sur la carte">
+        <div class="slds-p-around_medium">
+            <lightning-input
+                label="Entrez une adresse"
+                placeholder="Rue, Ville, Code postal"
+                onchange={handleAddressChange}>
+            </lightning-input>
+        </div>
+
+        <div class="slds-p-around_medium">
+            <lightning-map
+                map-markers={mapMarkers}
+                zoom-level="12"
+                markers-title="Position trouvée">
+            </lightning-map>
+        </div>
+    </lightning-card>
+</template>

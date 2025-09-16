@@ -1,0 +1,25 @@
+<template>
+    <div class="slds-grid slds-grid_align-spread slds-p-around_medium">
+       
+        
+        <template if:true={showButtonNext}>
+            <span>Le batch {documentid} est en cours d'exécution.</span>
+            <lightning-button 
+                label="Suivant" 
+                variant="brand" 
+                onclick={next} 
+                class="slds-button slds-button_brand">
+            </lightning-button>
+        </template>
+        
+        <template if:false={showButtonNext}>
+            <span>Fin d'execution de batch.</span>
+            <lightning-button 
+                label="Actualiser" 
+                variant="brand" 
+                onclick={actualise} 
+                class="slds-button slds-button_brand">
+            </lightning-button>
+        </template>
+    </div>
+</template>

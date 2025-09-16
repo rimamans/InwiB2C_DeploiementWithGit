@@ -1,0 +1,76 @@
+<template>
+    <div class="wraperClass">
+        <div style="margin-bottom: 30px">
+            <p><strong>Montant: </strong> {__montant}</p>
+        </div>
+    </div>
+    <div class="wraperClass">
+        <table class="sty-table-case slds-table slds-table_bordered slds-table_fixed-layout">
+            <thead>
+                <tr class="">
+                    <th class="" scope="col">
+                        #
+                    </th>
+                    <th class="" scope="col">
+                        N° Compte
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Nom">Nom</div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Prenom">Prenom</div>
+                    </th>
+                    <th class="" scope="col">
+                        Montant à Versé
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <template for:each={__data} for:item="item">
+                    <tr key={item.index}>
+                        <td class="slds-cell-wrap">
+                            {item.ligneNumber}
+                        </td>
+                        <td class="slds-cell-wrap">
+                            {item.AccountNumber}
+                        </td>
+                        <td style="white-space:normal;">{item.LastName}</td>
+                        <td style="white-space:normal;">{item.FirstName}</td>
+                        <td>
+                            <lightning-input type="number" onchange={handleChangeMontant} style="width: 60px"
+                                name={item.index} value={item.montantVerse}></lightning-input>
+                        </td>
+                    </tr>
+                </template>
+
+            </tbody>
+        </table>
+    </div>
+    <template if:true={showErrors}>
+        <div class="wraperClass" style="margin-top: 20px;">
+            <strong style="color: red;">Erreurs</strong>
+            <ol class="slds-m-around_medium">
+                <template for:each={__dataErrors} for:item="item">
+                    <li key={item}>
+                        {item}
+                    </li>
+                </template>
+            </ol>
+        </div>
+    </template>
+    <div class="slds-grid slds-gutters" style="margin-top: 25px;">
+        <div class="slds-size_2-of-3">
+
+        </div>
+        <div class="slds-size_1-of-3">
+            <div style="float: right;">
+                <lightning-button variant="brand" label="Suivant" disabled={__saving} title="Suivant"
+                    onclick={handleValidate} class="slds-m-left_x-small"></lightning-button>
+            </div>
+
+        </div>
+
+    </div>
+
+
+</template>

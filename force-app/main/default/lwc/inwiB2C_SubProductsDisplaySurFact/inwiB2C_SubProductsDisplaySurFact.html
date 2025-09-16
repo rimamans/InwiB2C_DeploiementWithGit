@@ -1,0 +1,35 @@
+<template>
+    <div class="via-slds riders-list-canvas container-table-canvas" >
+      <div class="slds-card slds-p-around--small np-card">
+          
+          <div style="font-size: 20px;">
+              <h1 class="slds-p-bottom--small slds-truncate "  >
+                  <b >Liste des services pass et sous produit IN:</b>
+              </h1>
+          </div>
+          <div class="slds-p-bottom--small" >
+              <div class="slds-m-bottom_xx-large " >
+                  <div  if:true={allsubproductsnumber}>                    
+                      <lightning-datatable
+                          class="style-table" 
+                          key-field="Id"
+                          columns={columns}
+                          data={allsubproducts} 
+                          onrowaction={handleactionsubproducts}
+                          hide-checkbox-column= true
+                          sorted-direction={sortDirection}
+                          sorted-by={sortBy}
+                          onsort={handleSortdata}>
+                      </lightning-datatable>
+                  </div>
+              </div>
+              <div if:false={allsubproductsnumber}  >   
+                <div  class="nocard slds-col slds-size--1-of-1 slds-text-align_center ">
+                    Cette ligne ne possède pas de Pass,ni de sous produit IN.
+                </div>
+            </div>
+              
+          </div>
+      </div>
+  </div>
+  </template>

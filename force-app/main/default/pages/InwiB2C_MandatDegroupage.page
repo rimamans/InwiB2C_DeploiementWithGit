@@ -1,0 +1,64 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 08-28-2024
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<apex:page sidebar="false" renderAs="pdf" controller="InwiB2C_DocAdslController" showHeader="false" applyBodyTag="false">
+
+    <head>
+        <style>
+            body {
+                font-family: 'Arial Unicode MS';
+                font-size: 12px;
+            }
+
+            @page: first {
+                size: A4;
+                margin-top: 0px margin-right:0px;
+                margin-left: 0px;
+                margin-bottom: 0cm;
+            }
+
+            @page {
+                size: A4;
+                margin-top: 0px;
+                margin-right: 0px;
+                margin-left: 0px;
+                margin-bottom: 0cm;
+            }
+        </style>
+
+    </head>
+
+    <body>
+    
+        <apex:repeat value="{!loopList}" var="loopItem" id="theRepeat">
+            <apex:variable value="{!IF(loopItem > 1,7, 0)}" var="added" />
+                
+            <div style="page-break-after:auto;">         
+            <img style="width:100%;" src="{!$Resource.InwiB2C_MandatDegroupageCompresser}" />
+
+                <div style="position: absolute;top: {! 132 + (loopItem *2241)}px;left: 27%;max-width: 450px;">{!IF(contains(keys,'FullName'),output['FullName'], '')}</div>
+                <div style="position: absolute;top: {! 153  + (loopItem *2241)}px;left: 27%;max-width: 450px;">{!IF(contains(keys,'TypePieceIdentite'),output['TypePieceIdentite'], '')}</div>
+                <div style="position: absolute;top: {! 175 + (loopItem *2240)}px;left: 40%; max-width: 450px;">{!IF(contains(keys,'CIN'),output['CIN'], '')}</div>
+                <div style="position: absolute;top: {! 197 + (loopItem *2240)}px;left: 20%;max-width: 450px;">{!IF(contains(keys,'AdresseMail'),output['AdresseMail'], '')}</div>
+                <div style="position: absolute;top: {! 246 + (loopItem *2241)}px;left: 42%;max-width: 450px;">{!IF(contains(keys,'NumeroDesignation'),output['NumeroDesignation'], '')}</div>
+                <div style="position: absolute;top: {! 280 + (loopItem *2240)}px;left: 42%;max-width: 450px;">{!IF(contains(keys,'AdressMandatDgroupage'),output['AdressMandatDgroupage'], '')}</div>
+
+                <!-- <div style="position: absolute;top: {! 278 + (loopItem *2241)}px;left: 39%;max-width: 450px;">{!IF(contains(keys,'Operateur'),output['Operateur'], '')}</div> -->
+                <div style="position: absolute;top: {! 745 + (loopItem *2240)}px;left: 40%;max-width: 450px;">{!IF(contains(keys,'CreateDate'),output['CreateDate'], '')}</div>
+ 
+
+            </div> 
+
+            <!-- CGV  -->
+             <div>
+                <img style="width:100%;" src="{!$Resource.inwiB2C_CGV_Contrat_ADSL_Compresser}" />
+            </div>
+            </apex:repeat>
+    </body>
+
+
+</apex:page>

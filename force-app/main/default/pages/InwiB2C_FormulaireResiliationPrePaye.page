@@ -1,0 +1,50 @@
+<apex:page sidebar="false" renderAs="pdf" controller="InwiB2C_ResiliationPrePaye_Controller" showHeader="false" applyBodyTag="false">
+
+    <head>
+        <style>
+            body {
+                font-family: 'Arial Unicode MS';
+                font-size: 12px;
+            }
+
+            @page: first {
+                size: A4;
+                margin-top: 0px margin-right:0px;
+                margin-left: 0px;
+                margin-bottom: 0cm;
+            }
+
+            @page {
+                size: A4;
+                margin-top: 0px;
+                margin-right: 0px;
+                margin-left: 0px;
+                margin-bottom: 0cm;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div style="page-break-after:avoid ; height: 1100px ">
+            <img style="width:100%;" src="{!$Resource.InwiB2C_TemplateDemandeDeResiliationPrePaid}" />
+            <!--  -->
+                <p style="position: absolute;top:228px;left: 150px;font-size: 14px">{!lastname}</p>
+                <p style="position: absolute;top:248px;left: 165px;font-size: 14px">{!firstname}</p>
+                <p style="position: absolute;top:265px;left: 210px;font-size: 14px">{!IF(typeidentite = "Carte d'Identité Nationale",'X','')} </p>
+                <p style="position: absolute;top:265px;left: 280px;font-size: 14px">{!IF(typeidentite = "Carte de séjour",'X','')} </p>
+                <p style="position: absolute;top:265px;left: 415px;font-size: 14px">{!IF(typeidentite = "Passeport",'X','')} </p>
+                <p style="position: absolute;top:285px;left: 235px;font-size: 14px">{!numPieceIdentite}</p> 
+                <p style="position: absolute;top:300px;left: 235px;font-size: 14px">{!numligne}</p>  
+                <p style="position: absolute;top:320px;left: 280px;font-size: 14px">{!numligne}</p>
+                <p style="position: absolute;top:340px;left: 150px;font-size: 14px">{!email}</p>  
+                <p style="position: absolute;top:375px;left: 145px;font-size: 14px">{!offre}</p>                                 
+                <p style="position: absolute;top:395px;left: 395px;font-size: 14px">{!numcontact}</p>
+                <p style="position: absolute;top:858px;left: 156px;font-size: 14px">{!datedesignature}</p>
+                                                    
+
+        </div>
+
+    </body>
+
+
+</apex:page>

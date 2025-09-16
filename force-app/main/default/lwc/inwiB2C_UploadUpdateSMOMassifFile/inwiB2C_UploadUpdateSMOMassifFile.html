@@ -1,0 +1,62 @@
+<template>
+    <lightning-tabset>
+        <lightning-tab label="Upload">
+            <lightning-card>
+                <div class="slds-grid slds-wrap">
+                    <lightning-radio-group name="radioGroup" label="Choix de type chargement" options={optionChargement} type="radio"
+                        value={typeChargement} onchange={handleChangeTypeChargement} style="padding: 10px;" disabled={disableChoice}>
+                    </lightning-radio-group>
+                </div>
+                <template if:true={isFileUploadHidden}>
+                <div class="slds-col slds-size_3-of-4" style="margin-left: 3%">
+                    <lightning-file-upload accept={acceptedCSVFormats} onuploadfinished={uploadFileHandler} required></lightning-file-upload>
+                </div>
+                </template>
+                <div if:true={error}>
+                    {error}
+                </div><br />
+                <b><div if:true={filename} class="slds-col slds-size_2-of-3" style="margin-left: 3%; color: black;">
+                  le Fichier {filename} a été chargé avec succès.
+    
+                </div></b>
+                <div if:true={filename} >
+            <lightning-combobox name="progress" label="Origine :" value={value} placeholder="Selectionner une origine"
+            options={optionsOrigine} onchange={handleChangeOrigine} required></lightning-combobox>
+
+            <template if:true={isActionHidden}>
+                <lightning-combobox name="progress" label="Action :" value={value} placeholder="Selectionner une action"
+                    options={optionsAction} onchange={handleChangeAction} required></lightning-combobox>
+            </template>
+            <template if:true={isMotifHidden}>
+                <lightning-combobox name="progress" label="Motif :" value={value} placeholder="Selectionner un motif"
+                    options={optionsMotif} onchange={handleChangeMotif} required></lightning-combobox>
+                <br>
+            </template>
+            <br>
+            <lightning-button variant="brand" label="Enregistrer" title="Enregistrer" onclick={handleSave}
+                style="position: absolute;right: 15px;" class="" hidden ={IsButtonHidden}>
+            </lightning-button>
+        </div>
+            <br>
+            </lightning-card>
+           
+        </lightning-tab>
+
+        <lightning-tab label="Historique" title="Historique">
+            <div style="height: 100%" >
+                <lightning-datatable
+                        key-field="id"
+                        hide-checkbox-column="true"
+                        columns={columns}
+                        data={dataTable}
+                        onrowaction={handlesClick}>
+                </lightning-datatable>
+            </div>
+            <div class="slds-m-around_medium">
+                <p class="slds-align_absolute-center"> page {page} de {totalPage}</p>
+                <c-inwi-b2-c_-child-paginator onprevious={prevHandler} onnext={nextHandler}></c-inwi-b2-c_-child-paginator>
+            </div>
+        </lightning-tab>
+
+    </lightning-tabset>
+</template>

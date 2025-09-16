@@ -1,0 +1,55 @@
+<apex:page standardController="INWIB2C_DEMANDE_DEGROUPAGE__c" lightningStylesheets="true">
+    <apex:form >
+        <div style="height:auto">
+            <apex:pageBlock mode="edit">
+                <apex:pageBlockSection columns="2">
+                    <apex:outputField value="{!INWIB2C_DEMANDE_DEGROUPAGE__c.InwiB2C_ORDER_DEGROUPAGE_NUM__c}" label="N° Ordre" />
+                    <apex:outputField value="{!INWIB2C_DEMANDE_DEGROUPAGE__c.InwiB2C_SEQ_NUM__c}" label="Numéro" />
+                    <apex:outputField value="{!INWIB2C_DEMANDE_DEGROUPAGE__c.InwiB2C_NumeroDesignation__c}" label="Numéro désignation" />
+                    <apex:outputField value="{!INWIB2C_DEMANDE_DEGROUPAGE__c.InwiB2C_ndOperateur__c}" label="Numéro désignation Opérateur" />
+                   <apex:outputField value="{!INWIB2C_DEMANDE_DEGROUPAGE__c.InwiB2C_Statutdegroupage__c}" label="Statut de la demande" />
+                    <apex:outputField value="{!INWIB2C_DEMANDE_DEGROUPAGE__c.InwiB2C_StatutLigneIam__c}" label="Statut ligne à dégrouper" />
+                    <apex:outputField value="{!INWIB2C_DEMANDE_DEGROUPAGE__c.InwiB2C_FirstName__c}" label="Prénom" />
+                    <apex:outputField value="{!INWIB2C_DEMANDE_DEGROUPAGE__c.InwiB2C_LastName__c}" label="Nom" />                  
+                    <apex:outputField value="{!INWIB2C_DEMANDE_DEGROUPAGE__c.InwiB2C_Account__c}" label="Account" />
+                    <apex:outputField value="{!INWIB2C_DEMANDE_DEGROUPAGE__c.InwiB2C_Site__c}" label="Site" />
+                    <apex:outputField value="{!INWIB2C_DEMANDE_DEGROUPAGE__c.InwiB2C_CLIENT_TYPE__c}" label="Type client" />
+                    <apex:outputField value="{!INWIB2C_DEMANDE_DEGROUPAGE__c.InwiB2C_categorieClient__c}" label="categorie Client" />
+                   <apex:outputField value="{!INWIB2C_DEMANDE_DEGROUPAGE__c.InwiB2C_Nationalid__c}" label="Numéro carte d'identité" />
+                    <apex:outputField value="{!INWIB2C_DEMANDE_DEGROUPAGE__c.InwiB2C_numeroContact__c}" label="Numéro Contact" />
+                    <apex:outputField value="{!INWIB2C_DEMANDE_DEGROUPAGE__c.InwiB2C_Order__c}" label="Commande" />
+                    <apex:outputField value="{!INWIB2C_DEMANDE_DEGROUPAGE__c.InwiB2C_typeCommande__c}" label="Type de la commande" />
+                    <apex:outputField value="{!INWIB2C_DEMANDE_DEGROUPAGE__c.CreatedDate}" label="Date de création" />
+                    <apex:outputField value="{!INWIB2C_DEMANDE_DEGROUPAGE__c.InwiB2C_Date_de_mise_en_service__c}" label="Date de mise en service" />
+                    <apex:outputField value="{!INWIB2C_DEMANDE_DEGROUPAGE__c.InwiB2C_rendezvous__c}" label="Rendez vous" />
+                    <apex:outputField value="{!INWIB2C_DEMANDE_DEGROUPAGE__c.InwiB2C_PartenaireCode__c}" label="Code partenaire" />
+                    <apex:outputField value="{!INWIB2C_DEMANDE_DEGROUPAGE__c.InwiB2C_StatutDegroupageIAM__c}" label="Statut de dégroupage IAM" />
+                   <apex:outputField value="{!INWIB2C_DEMANDE_DEGROUPAGE__c.InwiB2C_Dslamport__c}" label="Port DSLAM" />
+                    <apex:outputField value="{!INWIB2C_DEMANDE_DEGROUPAGE__c.InwiB2C_codeRoutage__c}" label="Code de routage" />
+                    <apex:outputField value="{!INWIB2C_DEMANDE_DEGROUPAGE__c.InwiB2C_portabilite__c}" label="Portabilité" />
+                    <apex:outputField value="{!INWIB2C_DEMANDE_DEGROUPAGE__c.InwiB2C_OrigineDemande__c}" label="Orgine de la demande" />
+                    <apex:outputField value="{!INWIB2C_DEMANDE_DEGROUPAGE__c.InwiB2C_Technologie__c}" label="Technologie" />
+                    <apex:outputField value="{!INWIB2C_DEMANDE_DEGROUPAGE__c.InwiB2C_NouvelleTechnologie__c}" label="Nouvelle Technologie" />
+                    <apex:outputField value="{!INWIB2C_DEMANDE_DEGROUPAGE__c.InwiB2C_positionReglette__c}" label="position Reglette" />
+                    <apex:outputField value="{!INWIB2C_DEMANDE_DEGROUPAGE__c.InwiB2C_qualiteService__c}" label="Qualité Service" />
+                   <apex:outputField value="{!INWIB2C_DEMANDE_DEGROUPAGE__c.InwiB2C_Debit__c}" label="Débit" />
+                    <apex:outputField value="{!INWIB2C_DEMANDE_DEGROUPAGE__c.InwiB2C_typePrestation__c}" label="Type de la prestation" />
+                    <apex:outputField value="{!INWIB2C_DEMANDE_DEGROUPAGE__c.InwiB2C_Motif__c}" label="Motif" />
+                    <apex:outputField value="{!INWIB2C_DEMANDE_DEGROUPAGE__c.InwiB2C_MotifAnnulation__c}" label="Motif d'annulation" />
+                    <apex:outputField value="{!INWIB2C_DEMANDE_DEGROUPAGE__c.InwiB2C_ACTION__c}" label="Action" />
+                    <apex:outputField value="{!INWIB2C_DEMANDE_DEGROUPAGE__c.InwiB2C_AvecInstallationDomicile__c}" label="Avec installation à domicile" />
+                    <apex:outputField value="{!INWIB2C_DEMANDE_DEGROUPAGE__c.InwiB2C_Commentaire__c}" label="Commentaire" />
+                    <apex:outputField value="{!INWIB2C_DEMANDE_DEGROUPAGE__c.InwiB2C_DetailErreur__c}" label="Détail erreur" />
+                   <apex:outputField value="{!INWIB2C_DEMANDE_DEGROUPAGE__c.InwiB2C_ADRESSE__c}" label="Adresse" />
+                    <apex:outputField value="{!INWIB2C_DEMANDE_DEGROUPAGE__c.InwiB2C_AdresseIAMProposee__c}" label="Adresse IAM Proposée" />
+                    <apex:outputField value="{!INWIB2C_DEMANDE_DEGROUPAGE__c.InwiB2C_Compteur_relance__c}" label="Nombre Relance" />
+                    <apex:outputField value="{!INWIB2C_DEMANDE_DEGROUPAGE__c.InwiB2C_Compteur_recyclage__c}" label="Nombre Recyclage" />
+                    <apex:outputField value="{!INWIB2C_DEMANDE_DEGROUPAGE__c.inwiB2C_retour_annulation_IAM__c}" label="Retour Annulation Iam" />
+                    <apex:outputField value="{!INWIB2C_DEMANDE_DEGROUPAGE__c.InwiB2C_Agence__c}" label="Agence" />
+					<apex:outputField value="{!INWIB2C_DEMANDE_DEGROUPAGE__c.InwiB2C_rendezvous__c}" label="Rendez-Vous" />
+
+               </apex:pageBlockSection>
+            </apex:pageBlock>
+        </div>
+    </apex:form>
+</apex:page>

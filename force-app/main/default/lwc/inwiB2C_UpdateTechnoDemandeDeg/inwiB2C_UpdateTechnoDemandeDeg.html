@@ -1,0 +1,57 @@
+<template>
+    <template if:false={__demande.chgmtLigneActiveOK}>
+        <br><br>
+        <br><br>
+        <div style="text-align: center;color: red">{__demande.msgLigneInactive}</div>
+        <br><br>
+        <br><br>
+        <div class="slds-col slds-text-align_right">
+            <lightning-button variant="brand" label="Précédent" onclick={previous} class="slds-float_right" style="padding: 10px;"></lightning-button>
+        </div>
+    </template>
+    <template if:true={__demande.chgmtLigneActiveOK}>
+
+    <template if:false={__demande.chgmtOK}>
+        <br><br>
+        <br><br>
+        <div style="text-align: center;color: red">  Une demande de changement de technologie est en cours d'exécution sur cette ligne</div>
+        <br><br>
+        <br><br>
+        <div class="slds-col slds-text-align_right">
+            <lightning-button variant="brand" label="Précédent" onclick={previous} class="slds-float_right" style="padding: 10px;"></lightning-button>
+        </div>
+    </template>
+
+    <template if:true={__demande.chgmtOK}>
+    <div style="border-style: solid; border-color: #92107F; padding: 10px; border-radius: 10px;">
+        <!-- <div class="slds-grid slds-wrap slds-grid_vertical-stretch">-->
+            <!--<div class="slds-text-heading_medium">Informations demande dégroupage</div><br>-->
+            <div class="slds-grid">
+                <div class="slds-col slds-size_1-of-2">
+                    <div class="slds-border_bottom">
+                    <lightning-input type="text" data-id="nd" label="Numéro de désignation" value={nd} readonly="true"></lightning-input> 
+                </div></div>
+              </div>
+              <br>
+              <div class="slds-grid">
+                <div class="slds-col slds-size_1-of-2">
+                    <div class="slds-border_bottom">
+                    <lightning-input type="text"  label="Technologie actuelle" data-id="techno" value={__demande.InwiB2C_Technologie__c} readonly="true"></lightning-input> 
+                </div></div>
+              </div>
+              <br>
+              <div class="slds-grid">
+                <div class="slds-col slds-size_1-of-2">
+                    <div class="slds-border_bottom">
+                    <lightning-input type="text"  label="Nouvelle technologie" data-id="newTechno" value={newTechno} readonly="true"></lightning-input>  
+                    </div></div>
+              </div>
+              <br>
+ </div>
+ <div class="slds-col slds-text-align_right">
+    <lightning-button variant="brand" label="Valider" onclick={submit} class="slds-float_right" style="padding: 10px;"></lightning-button>
+    <lightning-button variant="brand" label="Annuler" onclick={cancel} class="slds-float_right" style="padding: 10px;"></lightning-button>
+</div>
+</template>
+</template>
+</template>

@@ -1,0 +1,38 @@
+<template>
+    <div class="via-slds riders-list-canvas container-table-canvas">
+        <div class="slds-card slds-p-around--small">
+            <h3 class="slds-p-bottom--small slds-text-heading--small slds-truncate titleLinkModif">
+                <b>Boite à outils</b>
+            </h3>
+            <br>
+            
+            <lightning-tile  label="E-learning" onclick={viewPower}  type="media">
+                
+                <lightning-icon slot="media" icon-name="standard:hierarchy"></lightning-icon>
+
+            </lightning-tile>
+
+           
+            <lightning-tile  label="SAP" onclick={viewPower2}  type="media">
+                
+                <lightning-icon slot="media" icon-name="standard:hierarchy"></lightning-icon>
+
+            </lightning-tile>
+
+            <!-- sob 6/11/2025 MGEN3729 start-->
+            <lightning-tile label="Affichage des Demandes Address IAM" onclick={handleOpenLinkDisplayAddressIAM} type="media">
+                <lightning-icon slot="media" icon-name="standard:address"></lightning-icon>
+            </lightning-tile>
+            <!-- sob 6/11/2025 MGEN3729 end-->
+
+
+            <!-- Y_MH MGEN3725-Controle eligibilité adresse 5G start-->
+            <lightning-tile label=" Eligibilité d’adresse 5G" onclick={handleOpenLinkEligibiliteidar5g} type="media">
+                <lightning-icon slot="media" icon-name="standard:address"></lightning-icon>
+            </lightning-tile>
+            <!-- Y_MH MGEN3725-Controle eligibilité adresse 5G end-->
+          
+
+        </div>
+    </div>
+</template>

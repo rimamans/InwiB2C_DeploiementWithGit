@@ -1,0 +1,160 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 02-24-2025
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+
+    <template if:true={item}>
+
+        <template if:true={isAcquisition}>
+
+           
+
+            <template if:true={hasAttributes}>
+
+                <lightning-card  title={cardTitle}>
+
+                        <template if:true={isSim}>
+                        <template if:false={shouldHideSimComponent}>
+
+                            <c-inwi-b2-c_sim-entry item={item} typeparcour={__typeparcour} oncustomitemattributesvaluechange={hanldeCustomItemAttributesValueChange} oncustomitemvalidationerror={handlecustomitemvalidationerror} > </c-inwi-b2-c_sim-entry>
+                        </template>
+                        </template>
+
+                        <template if:true={isMDN}>
+                            <c-inwi-b2-c_-mdn-research item={item} typeparcour={__typeparcour} oncustomitemattributesvaluechange={hanldeCustomItemAttributesValueChange} oncustomitemvalidationerror={handlecustomitemvalidationerror}> </c-inwi-b2-c_-mdn-research>
+                        </template>
+
+                        <template if:true={isTerm}>
+                            <c-inwi-b2-c_-terminal-selection-v3 item={item} typeparcour={__typeparcour} disabledinputimei={__disabledinputimei} paiement={__paiement} isaccessoire={__isaccessoire} typecanal={__typecanal} modelivraison={__modelivraison} nameagencelivraison={__nameagencelivraison} codeagencelivraison={__codeagencelivraison} selectedmodel={__selectedmodel} reprisesuitelivraison={__reprisesuitelivraison} oncustomitemattributesvaluechange={hanldeCustomItemAttributesValueChange} oncustomitemattributeswithoutimei={handlecustomItemAttributesWithoutImei} oncustomitemvalidationerror={handlecustomitemvalidationerror}> </c-inwi-b2-c_-terminal-selection-v3>
+                        </template>
+
+                        
+
+                        <template if:true={isStandardItem}>
+                            <c-inwi-b2-c_-display-attribute-categories attribute-categories={item.attributeCategories} onattributecategoriesvaluechange={hanldeAttributeCategroriesValueChange} showservice={__showservice}> </c-inwi-b2-c_-display-attribute-categories>
+                        
+                        </template>
+
+                </lightning-card>
+
+            </template>
+
+            <template if:true={isStandardItem}>
+
+                <c-inwi-b2-c_-display-line-item-attributes line-items={item.lineItems} typeparcour={__typeparcour} disabledinputimei={__disabledinputimei}  paiement={__paiement} typecanal={__typecanal} modelivraison={__modelivraison}  showservice={__showservice} haspermissionsetlastmile={__haspermissionsetlastmile}  valeurpreordersap={__valeurpreordersap} nameagencelivraison={__nameagencelivraison} codeagencelivraison={__codeagencelivraison} selectedmodel={__selectedmodel} action-type={actionType} reprisesuitelivraison={__reprisesuitelivraison} onlineitemstemattributesvaluechange={hanldeLineItemAttributesValueChange}  onlineitemstemattributesvaluechangewithoutimei={hanldeLineItemAttributesValueChangeWithoutimei} onlineitemattributesvalidationerror={handlelineitemattributesvalidationerror}> </c-inwi-b2-c_-display-line-item-attributes>
+    
+            </template>
+
+        </template>
+
+        
+            
+
+       
+        <template if:true={isModifNumber}>
+            <template if:true={isMDN}>
+
+                <c-inwi-b2-c_-mdn-modification item={item} user-profile={userProfile} segment-offer={segmentOffer} oncustomitemattributesvaluechange={hanldeCustomItemAttributesValueChange} oncustomitemvalidationerror={handlecustomitemvalidationerror}> </c-inwi-b2-c_-mdn-modification>
+
+            </template>
+            <!--template if:true={isChTerm}>
+
+                <c-inwi-b2-c_-modification-terminal item={item} oncustomitemattributesvaluechange={hanldeCustomItemAttributesValueChange} oncustomitemvalidationerror={handlecustomitemvalidationerror} > </c-inwi-b2-c_-modification-terminal>
+
+            </template-->
+
+            <template if:true={isStandardItem}>
+
+                <c-inwi-b2-c_-display-line-item-attributes line-items={item.lineItems} showservice={__showservice}  user-profile={userProfile} segment-offer={segmentOffer} action-type={actionType} onlineitemstemattributesvaluechange={hanldeLineItemAttributesValueChange} onlineitemattributesvalidationerror={handlelineitemattributesvalidationerror}> </c-inwi-b2-c_-display-line-item-attributes>
+    
+            </template>
+
+        </template>
+        <template if:true={isSMOTerm}>
+           
+            <template if:true={isChTerm}>
+
+                <c-inwi-b2-c_-modification-terminal item={item} type-terminal={typeTerminal}  action-type={actionType} oncustomitemattributesvaluechange={hanldeCustomItemAttributesValueChange} oncustomitemvalidationerror={handlecustomitemvalidationerror} oncustomitemattribvaluechangewithnext={handlecustomitemattribvaluechangewithnext}> </c-inwi-b2-c_-modification-terminal>
+
+            </template>
+            
+
+            <template if:true={isStandardItem}>
+
+                <c-inwi-b2-c_-display-line-item-attributes line-items={item.lineItems} showservice={__showservice} action-type={actionType} onlineitemstemattributesvaluechange={hanldeLineItemAttributesValueChange} onlineitemattributesvalidationerror={handlelineitemattributesvalidationerror} oncustomitemattribvaluechangewithnext={handlecustomitemattribvaluechangewithnext}> </c-inwi-b2-c_-display-line-item-attributes>
+    
+            </template>
+
+        </template>
+
+
+        <template if:true={isAcquisitionSuspension}>
+            
+
+                <c-inwi-b2-c_-suspension-rehab item={item} user-profile={userProfile} segment-offer={segmentOffer} productoffer={productoffer} allowsusproaming={__allowsusproaming} passfraude={__passfraude} oncustomitemattributesvaluechange={hanldeCustomItemAttributesValueChange}  oncustomitemattribvaluechangewithnext={handlecustomitemattribvaluechangewithnext}> </c-inwi-b2-c_-suspension-rehab>
+
+            
+
+        </template>
+        <template if:true={isRehabilitation}>
+
+            
+            <c-inwi-b2-c_-rehabilitation-component item={item}  user-profile={userProfile} allowrehabroaming={__allowrehabroaming} allowrehabappintern={__allowrehabappintern} productoffer={productoffer} oncustomitemattributesvaluechange={hanldeCustomItemAttributesValueChange}  oncustomitemattribvaluechangewithnext={handlecustomitemattribvaluechangewithnext}> </c-inwi-b2-c_-rehabilitation-component>
+
+        
+
+        </template>
+        
+       
+        <template if:true={isSMOSim}>
+         
+            <template if:true={isStandardItem}>
+                <c-inwi-b2-c_-display-line-item-attributes line-items={item.lineItems} showservice={__showservice} action-type={actionType}
+                    onlineitemstemattributesvaluechange={hanldeLineItemAttributesValueChange} oncustomitemattribvaluechangewithnext={handlecustomitemattribvaluechangewithnext}
+                    onlineitemattributesvalidationerror={handlelineitemattributesvalidationerror}>
+                </c-inwi-b2-c_-display-line-item-attributes>
+            </template>
+            <template if:true={isSim}>
+                <lightning-card title="">
+                    <c-inwi-b2-c_-modification-sim item={item} oncustomitemattributesvaluechange={hanldeCustomItemAttributesValueChange} oncustomitemattribvaluechangewithnext={handlecustomitemattribvaluechangewithnext}
+                        oncustomitemvalidationerror={handlecustomitemvalidationerror}> </c-inwi-b2-c_-modification-sim>
+                </lightning-card>
+            </template>
+        </template>
+
+        
+
+        <template if:true={isChangeOption}>
+            
+            <template if:true={hasAttributes}>
+
+                <template if:true={isServRoam}>
+                    <lightning-card  title={item.Name}>
+
+                            
+                                <c-inwi-b2-c_-display-attribute-categories attribute-categories={item.attributeCategories} showservice={__showservice} onattributecategoriesvaluechange={hanldeAttributeCategroriesValueChange}> </c-inwi-b2-c_-display-attribute-categories>
+                            
+                            
+
+                    </lightning-card>
+                </template>
+
+            </template>
+
+            <template if:true={isStandardItem}>
+
+                <c-inwi-b2-c_-display-line-item-attributes line-items={item.lineItems} showservice={__showservice} action-type={actionType} onlineitemstemattributesvaluechange={hanldeLineItemAttributesValueChange} onlineitemattributesvalidationerror={handlelineitemattributesvalidationerror}> </c-inwi-b2-c_-display-line-item-attributes>
+    
+            </template>
+
+             
+
+        </template>
+
+    </template>
+    
+</template>

@@ -1,0 +1,39 @@
+/*Added BY AAR 13/10/2020  */
+.THIS .tab-style thead th span {
+    background-color: #16325c !important;
+    color: white;
+    margin-left: 8px;
+}
+
+.wraperClass{
+    border: 1px solid #5A245A;
+}
+
+.tab-style{
+    zoom : 90%;
+}
+
+.TextChangeDateSuccess{
+    background-color: cadetblue;
+    padding: 8px;
+    color:black;
+    font-size: 15px;
+    font-weight:bold;
+  }
+
+  .TextChangeDateError{
+    background-color:indianred;
+    padding: 8px;
+    color:black;
+    font-size: 15px;
+    font-weight:bold;
+  }
+
+  .ChangeDateButton {
+    transition-duration: 0.4s;
+    color:#FFFFFF;
+    background-color:#862A88;
+    font-weight:bold;
+  }
+
+/*END OF AAR's ADDITION  13/10/2020 */

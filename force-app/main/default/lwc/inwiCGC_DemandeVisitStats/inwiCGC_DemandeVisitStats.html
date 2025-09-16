@@ -1,0 +1,19 @@
+<template>
+    <lightning-card title="User Hierarchy">
+        <lightning-combobox
+            name="demandeDeVisites"
+            label="Demande de Visites"
+            value={selectedDemandeDeVisite}
+            placeholder="Select a Demande de Visite"
+            options={demandeDeVisiteOptions}
+            onchange={handleDemandeDeVisiteChange}>
+        </lightning-combobox>
+        <lightning-datatable 
+            key-field="Id"
+            data={userData}
+            columns={columns}
+            onrowaction={handleRowAction}
+            hide-checkbox-column="true">
+        </lightning-datatable>
+    </lightning-card>
+</template>

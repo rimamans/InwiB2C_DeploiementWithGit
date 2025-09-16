@@ -1,0 +1,54 @@
+<template>
+
+    <template if:true={DocumentList}>
+        <template for:each={DocumentList} for:item="doc">
+
+            <template if:false={doc.uploaded}>
+
+                <div key={doc.docTypeId} class="slds-p-around_medium lgc-bg">
+                    <lightning-input type="File" accept="image/png, .pdf" name={doc} data-idofupload={doc.docTypeId}
+                        onchange={handleUploadFinished} label={doc.docTypeLabel} required={doc.mandatory}>
+                    </lightning-input>
+                </div>
+            </template>
+        </template>
+    </template>
+
+    <template if:true={uplodedDocumentList.length}>
+        <br><br>
+        <lightning-datatable key-field="Id" columns={columnsFilesDisplay} data={uplodedDocumentList}
+            hide-checkbox-column onrowaction={handleRowAction}>
+        </lightning-datatable>
+    </template>
+
+    <template if:true={isModalOpen}>
+        <!-- Modal/Popup Box LWC starts here -->
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+            aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <!-- Modal/Popup Box LWC header here -->
+
+                <!-- Modal/Popup Box LWC body starts here -->
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <div class="wraperClass ">
+
+                        <div style="text-align:center">Veuillez attendre quelques instants</div>
+                        <div class="demo-only" style="height:6rem;position:relative">
+                            <div class="slds-spinner_container">
+                                <div role="status" class="slds-spinner slds-spinner_medium slds-spinner_brand">
+                                    <span class="slds-assistive-text">Loading</span>
+                                    <div class="slds-spinner__dot-a"></div>
+                                    <div class="slds-spinner__dot-b"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+
+</template>

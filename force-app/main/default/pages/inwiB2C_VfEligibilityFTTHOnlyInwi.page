@@ -1,0 +1,336 @@
+<apex:page showHeader="false">
+     <style>
+  
+      body {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+          overflow: hidden;
+      }
+
+      .search-container {
+          display: flex;
+          justify-content: center;
+          padding-bottom: 20px;
+          width: 100%;
+      }
+
+      .address-input {
+          flex: 1;
+          height: 15px;
+          padding: 12px;
+          font-size: 14px;
+          border-radius: 5px;
+          margin-right: 10px;
+      }
+
+      .search-button {
+        font-size: 12px;
+        padding: 12px 20px;
+        border-radius: 5px;
+        background-color: #7c0774;
+        color: #7c0774;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        display: inline-block;
+        min-width: 120px; 
+        text-align: center;
+      }
+
+      .map-container {
+          width: 100%;
+          height: calc(100vh - 80px); 
+      }
+
+      #map {
+          width: 100%;
+          height: 100%;
+      }
+
+      .submit-btn{
+        background: #7c0774;
+        color:white;
+        border: none;
+        cursor: pointer;
+        padding: 5px 7px;
+
+      }
+
+      .info{
+        color: black;
+        font-size: 15px;
+        font-family: "Montserrat, sans-serif"
+      }
+  </style>
+
+
+  <div class="search-container">
+      <input id="autocompleteInput" class="address-input" type="text" placeholder="Saisissez votre adresse" />
+      <button class="search-button" onclick="geocodeAddress()">Rechercher</button>
+  </div>
+
+  <div class="map-container">
+      <div id="map"></div>
+  </div>
+    
+  
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA4SGWfgmIN4KpNzkfR8dYm97bLYs892Bs&region=MA&libraries=places">
+    </script>
+    
+    <script>
+        var url = window.location.href;
+        var lexOrigin;
+        console.log("url récupéré", url);
+        if (url.includes("site")) {
+            lexOrigin = "https://inwi-b2c--devevol.sandbox.my.site.com"
+        } else {
+            lexOrigin = "https://inwi-b2c--devevol.sandbox.lightning.force.com"
+        }
+        console.log("lexOrigin", lexOrigin);
+        let map;
+        let marker;
+        let mapReady = false;
+        let overlay;
+        let markers = [];
+
+        function initMap() {
+            const center = { lat: 33.9993473, lng: -6.84985153 };
+            const mapOptions = {
+                center: center,
+                zoom: 18,
+                mapTypeId: 'hybrid'
+            };
+
+            map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+            marker = new google.maps.Marker({
+                position: center,
+                map: map,
+                title: "Avenue Fal Ould Oumeir"
+            });
+
+            mapReady = true;
+            updateOverlay();
+            initializeAutocomplete()
+
+            map.addListener('idle', () => {
+                const center = map.getCenter();
+                const latitudeC = center.lat();
+                const longitudeC = center.lng();
+                console.log('Central GPS Coordinates:', latitudeC, longitudeC, true);
+                sendCentralGPSLWC(latitudeC, longitudeC);
+                updateOverlay();
+            });
+
+            map.addListener("zoom_changed", () => {
+                const center = map.getCenter();
+                const latitudeC = center.lat();
+                const longitudeC = center.lng();
+                console.log("Zoom Changed - Center Coordinates:", latitudeC, longitudeC, true);
+                sendCentralGPSLWC(latitudeC, longitudeC);
+                updateOverlay();
+            });
+        }
+
+        function sendCentralGPSLWC(latitudeC, longitudeC) {
+            const triggerCheckEligibility = true;
+            const payload = { latitudeC, longitudeC, triggerCheckEligibility };
+            const message = {
+                name: "VFtoLWC",
+                payload: payload
+            };
+            parent.postMessage(message, lexOrigin);
+        }
+
+        function updateMarker(latitude, longitude) {
+            const newPosition = { lat: latitude, lng: longitude };
+
+            if (marker) {
+                marker.setPosition(newPosition);
+                map.setCenter(newPosition);
+                map.setZoom(19);
+                console.log(`Marker updated to: Latitude ${latitude}, Longitude ${longitude}`);
+            } else {
+                console.error("Error: Marker not initialized.");
+            }
+        }
+
+        window.addEventListener("message", (event) => {
+            if (event.origin !== lexOrigin) {
+                console.error("Error: Origin not compatible.");
+                return;
+            }
+
+        function clearMarkers() {
+            markers.forEach((marker) => marker.setMap(null)); 
+            markers.length = 0;
+        }
+
+            const data = event.data;
+            console.log("Received Data:", data);
+            
+            let activeInfoWindow = null;
+
+        if (data.mapData) {
+            clearMarkers(); 
+            const mapping = data.mapData;
+            if (Array.isArray(mapping) && mapping.length > 0) {
+                console.log("INWI_VF: Coordonnées GPS des adresses eligibles:", mapping);
+                mapping.forEach((dataPoint) => {
+                    const latitude = parseFloat(dataPoint.latitude);
+                    const longitude = parseFloat(dataPoint.longitude);
+                    console.log(`Latitude: ${dataPoint.latitude}, Longitude: ${dataPoint.longitude}`);
+                    console.log(`Titre: ${dataPoint.title}`);
+                    
+                const latMarker = parseFloat(dataPoint.latitude);
+                const longMarker = parseFloat(dataPoint.longitude);
+                const title = dataPoint.title;
+                const address = dataPoint.address;
+                const plateId = dataPoint.plateId;
+                const building = dataPoint.building;
+                const street = dataPoint.street;
+                const city = dataPoint.city;
+                const provider = dataPoint.provider;
+                const status = dataPoint.status;
+
+                const greenIcon = {
+                    url: "http://maps.google.com/mapfiles/ms/icons/green-dot.png",
+                    scaledSize: new google.maps.Size(42, 42),
+                    origin: new google.maps.Point(0, 0),
+                    anchor: new google.maps.Point(16, 32)
+                };
+
+
+                const marker = new google.maps.Marker({
+                    position: { lat: latMarker, lng: longMarker },
+                    map: map,
+                    title: title,
+                    icon: greenIcon,
+                });
+
+                markers.push(marker);
+
+                const infoWindowContent = `
+                    <div class="info">
+                        <h4>${title}</h4>
+                        <p>Plaque: ${plateId}</p>
+                        <p>Fournisseur: ${provider} </p>
+                        <p>Statut: ${status} </p>
+                        <p>Latitude: ${latMarker} </p>
+                        <p>Longitude: ${longMarker} </p>
+                        <button type="submit" class="submit-btn" onclick="parent.postMessage({ action: 'redirect' }, '*')">Confirmer</button>
+                    </div>
+                `;
+                const infoWindow = new google.maps.InfoWindow({
+                    content: infoWindowContent
+                });
+
+
+                marker.addListener("click", () => {
+                if (activeInfoWindow) {
+                    activeInfoWindow.close();
+                }
+                infoWindow.open(map, marker);
+                activeInfoWindow = infoWindow;
+                
+                const payload = {
+                latitude: latMarker,
+                longitude: longMarker,
+                plateId: plateId,
+                street: street,
+                city: city,
+                building: building,
+                provider: provider,
+                status: status
+            };
+            
+
+            console.log("Marker INWI selected :", payload);
+
+            const message = {
+                name: "CreateServiceAccountInwi",
+                payload: payload
+            };
+
+            parent.postMessage(message, lexOrigin);
+        });
+    });
+}  else {
+                    console.error("Error: Invalid inwiMap data.");
+                }
+            } else {
+                console.error("Error: Unknown data format.");
+            }
+        });
+
+        function updateOverlay() {
+            const center = map.getCenter();
+            const bounds = map.getBounds();
+            const newImage = createOverlayImage();
+
+            if (overlay) {
+                overlay.setMap(null);
+            }
+
+            overlay = new google.maps.GroundOverlay(newImage, bounds);
+            overlay.setMap(map);
+        }
+
+        function createOverlayImage() {
+            const canvas = document.createElement("canvas");
+            const ctx = canvas.getContext("2d");
+            const size = 500;
+
+            canvas.width = size;
+            canvas.height = size;
+
+            ctx.fillStyle = "rgba(0, 0, 0, 0.7)";
+            ctx.fillRect(0, 0, size, size);
+
+            const radius = size / 4;
+            ctx.globalCompositeOperation = "destination-out";
+            ctx.beginPath();
+            ctx.arc(size / 2, size / 2, radius, 0, 2 * Math.PI);
+            ctx.fill();
+
+            return canvas.toDataURL();
+        }
+         function initializeAutocomplete() {
+        const input = document.getElementById("autocompleteInput");
+        autocomplete = new google.maps.places.Autocomplete(input, { types: ["geocode"] });
+
+        autocomplete.addListener("place_changed", function () {
+          const place = autocomplete.getPlace();
+          if (place.geometry && place.geometry.location) {
+            input.value = place.formatted_address;
+          }
+        });
+      }
+
+      function geocodeAddress() {
+        const address = document.getElementById("autocompleteInput").value;
+        if (!address) {
+          alert("Veuillez saisir une adresse !");
+          return;
+        }
+        window.parent.postMessage({ searchCompleted: true }, "*");
+
+
+        const geocoder = new google.maps.Geocoder();
+        geocoder.geocode({ address: address }, function (results, status) {
+          if (status === "OK") {
+            const location = results[0].geometry.location;
+            map.setCenter(location);
+            map.setZoom(18);
+
+            marker.setPosition(location);
+            marker.setVisible(true);
+          } else {
+            alert("Impossible de trouver l'adresse : " + status);
+          }
+        });
+      }
+    
+        window.onload = initMap;
+    </script>
+</apex:page>

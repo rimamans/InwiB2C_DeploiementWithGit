@@ -1,0 +1,35 @@
+<template>
+    <div class="via-slds riders-list-canvas container-table-canvas" >
+        <div class="slds-card slds-p-around--small np-card">
+            
+            <div class={titleStyle}>
+                
+                <h3 class="slds-p-bottom--small slds-text-heading--small slds-truncate " >
+                    <b>aaaa</b>
+                </h3>
+            </div>
+
+           
+           <div class="slds-p-bottom--small">
+                <div class="slds-m-bottom_xx-large overflowVisible ">
+                    <div if:true={_records}>                    
+                        <div class="wraperClass ">
+                            <lightning-datatable
+                                class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered" 
+
+                                key-field="Id"
+                                columns={columns}
+                                data={_records} 
+                                draft-values={draftValues}
+                                onrowaction={handleRowAction}
+                                hide-checkbox-column= true>
+                            </lightning-datatable>
+                        </div>
+                    </div>
+            </div>
+                
+            </div>
+        </div>
+    </div>
+    
+</template>

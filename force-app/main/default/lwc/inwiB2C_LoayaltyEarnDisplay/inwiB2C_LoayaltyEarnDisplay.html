@@ -1,0 +1,48 @@
+<template >
+    <div class="via-slds riders-list-canvas container-table-canvas" if:true={records}>
+        <div class="slds-card slds-p-around--small np-card">
+
+            <div class={titleStyle}>
+                
+                <h3 class="slds-p-bottom--small slds-text-heading--small slds-truncate " >
+                   
+                    <div class="slds-grid slds-wrap slds-size_1-of-1 slds-p-left_medium">
+                        <div class="slds-p-right_small slds-m-bottom_xx-small slds-show_inline-block slds-size_12-of-12 slds-medium-size_4-of-12">
+                            <lightning-input 
+                                type="number" 
+                                name="Total" 
+                                label="Total Points Gagnés" 
+                                value={records.quantity} 
+                                disabled >
+                            </lightning-input>
+                        </div>
+
+                    </div>
+                </h3>
+            </div>
+            
+
+           <div class="slds-p-bottom--small">
+                <div class="slds-m-bottom_xx-large overflowVisible ">
+                    <div >                    
+                        <div class="wraperClass ">
+                            <lightning-datatable
+                                class="tab-style slds-table slds-table_bordered slds-table_col-bordered" 
+                                key-field="Id"
+                                columns={columns}
+                                data={loyaltyTransaction} 
+                                draft-values={draftValues}
+                                onrowaction={handleRowAction}
+                                hide-checkbox-column= true>
+                            </lightning-datatable>
+                        </div>
+                    </div>
+            </div>
+                
+            </div>
+        </div>
+
+    </div>
+
+
+</template>

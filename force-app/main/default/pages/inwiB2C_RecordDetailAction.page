@@ -1,0 +1,164 @@
+<apex:page standardController="INWIB2C_HIST_ACTION_LINE__c"  tabStyle="INWIB2C_HIST_ACTION_LINE__c"  lightningStylesheets="true">
+    <apex:form >
+        <div style="height:auto">
+            <apex:pageBlock mode="edit">
+               <apex:pageBlockSection title="E-Recharge "  rendered="{!INWIB2C_HIST_ACTION_LINE__c.inwiB2C_TypeAction__c == 'InwiB2C_RechargeEtoile' || INWIB2C_HIST_ACTION_LINE__c.inwiB2C_TypeAction__c == 'inwiB2C_RechargeManuelle'}">
+                   
+                   <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.Name}" label="Numéro de l’action" /> 
+                   <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.inwiB2C_Action__c}" label="Action" /> 
+                   <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.inwiB2C_TypeAction__c}" label="Type d’action" /> 
+                     <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.inwiB2C_TypeAction__c}" label="Type de la recharge" /> 
+                     <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.inwiB2C_TypeModification__c}" label="Type de Modification" /> 
+
+                     <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.inwiB2C_STATUT__c}" label="Statut" /> 
+                     <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.inwiB2C_Montant__c}" label="Montant de la recharge" /> 
+                     <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.InwiB2C_Mode_de_paiement__c}" label="Mode de paiement" /> 
+                     <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.inwiB2C_Transaction_Id__c}" label="Référence de paiement" /> 
+                     <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.inwib2c_Partenaire__c}" label="Partenaire" /> 
+                     <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.CreatedById}" label="Agent" /> 
+                     <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.inwiB2C_SubscriptionId__c}" label="Souscription" /> 
+                     <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.InwiB2C_Compte_Client__c}" label="Client" /> 
+
+                </apex:pageBlockSection>
+                
+           <apex:pageBlockSection title="Produit libre charge unique "  rendered="{!INWIB2C_HIST_ACTION_LINE__c.inwiB2C_TypeAction__c == 'InwiB2C_ProduitLibre'}">
+                  
+                   <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.Name}" label="Numéro de l’action" /> 
+                   <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.inwiB2C_Action__c}" label="Action" /> 
+                   <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.inwiB2C_TypeAction__c}" label="Type d’action" /> 
+                     <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.inwiB2C_TypeAction__c}" label="Type de la recharge" />
+                     <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.inwiB2C_TypeModification__c}" label="Type de Modification" /> 
+ 
+                     <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.inwiB2C_STATUT__c}" label="Statut" /> 
+                     <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.inwiB2C_Free_Amount__c}" label="Montant" /> 
+                     <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.inwiB2C_SubscriptionId__c}" label="Souscription" /> 
+                     <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.InwiB2C_Compte_Client__c}" label="Client" /> 
+                </apex:pageBlockSection>
+                       
+                
+             <apex:pageBlockSection title="Paiement de facture "  rendered="{!INWIB2C_HIST_ACTION_LINE__c.inwiB2C_TypeAction__c == 'inwiB2C_PaiementFacture'}">                  
+                   <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.inwiB2C_Action__c}" label="Action" /> 
+                   <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.inwiB2C_TypeAction__c}" label="Type d’action" /> 
+                   <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.inwiB2C_TypeModification__c}" label="Type de Modification" /> 
+
+                    <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.inwiB2C_Montant__c}" label="Montant" /> 
+                    <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.inwiB2C_Invoice_Id__c}" label="Numéros des facture payées" /> 
+                    <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.inwiB2C_Transaction_Id__c}" label="Numéro de transaction PayX" /> 
+                    <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.CreatedDate}" label="Date de transaction PayX" />
+                    <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.InwiB2C_Mode_de_paiement__c}" label="Mode de paiement" /> 
+                    <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.inwiB2C_STATUT__c}" label="Statut" />      
+                     <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.inwiB2C_Canal__c}" label="Canal" />           
+     
+                     <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.inwib2c_Partenaire__c}" label="Partenaire" /> 
+                     <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.CreatedById}" label="Agent" /> 
+                     <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.InwiB2C_Compte_Client__c}" label="Client" />
+                     <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.InwiB2C_Compte_Facturation__c}" label="Compte Facturation" /> 
+
+                </apex:pageBlockSection>
+                
+                
+                
+                <apex:pageBlockSection title="Paiement en avance "  rendered="{!INWIB2C_HIST_ACTION_LINE__c.inwiB2C_TypeAction__c == 'inwiB2C_PaiementEnAvance'}">                  
+                   <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.inwiB2C_Action__c}" label="Action" /> 
+                   <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.inwiB2C_TypeAction__c}" label="Type d’action" /> 
+                    <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.inwiB2C_Free_Amount__c}" label="Montant Libre" /> 
+                    <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.inwiB2C_Invoice_Id__c}" label="Numéros des facture payées" /> 
+                    <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.inwiB2C_Transaction_Id__c}" label="Numéro de transaction PayX" /> 
+                    <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.CreatedDate}" label="Date de transaction PayX" /> 
+                    <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.inwiB2C_STATUT__c}" label="Statut" />           
+                     <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.inwib2c_Partenaire__c}" label="Partenaire" /> 
+                     <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.CreatedById}" label="Agent" /> 
+                     <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.InwiB2C_Compte_Client__c}" label="Client" />
+                     <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.InwiB2C_Compte_Facturation__c}" label="Compte Facturation" /> 
+                </apex:pageBlockSection>
+                
+                
+                 <apex:pageBlockSection title="Data partagée "  rendered="{!INWIB2C_HIST_ACTION_LINE__c.inwiB2C_TypeAction__c == 'InwiB2C_Ajout_de_ligne_satellite' || INWIB2C_HIST_ACTION_LINE__c.inwiB2C_TypeAction__c == 'InwiB2C_Modification_de_ligne_satellite' || INWIB2C_HIST_ACTION_LINE__c.inwiB2C_TypeAction__c == 'InwiB2C_Suppression_de_ligne_satellite'}">                  
+                   <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.inwiB2C_Action__c}" label="Action" /> 
+                   <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.inwiB2C_TypeAction__c}" label="Type d’action" /> 
+                     <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.inwiB2C_STATUT__c}" label="Statut" /> 
+                      <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.CreatedDate}" label="Date de l’opération" /> 
+                      <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.inwib2c_Partenaire__c}" label="Partenaire" /> 
+                       <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.inwiB2C_Canal__c}" label="Canal" /> 
+                       <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.CreatedById}" label="Agent" /> 
+                      <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.inwiB2C_SubscriptionId__c}" label="Souscription" /> 
+                     <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.InwiB2C_Compte_Client__c}" label="Client" />
+                </apex:pageBlockSection>
+
+                <apex:pageBlockSection title="Recharge Pass "  rendered="{!INWIB2C_HIST_ACTION_LINE__c.inwiB2C_TypeAction__c=='InwiB2C_ServicesPassetsousproduitIN'}">
+                   
+                  <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.Name}" label="Numéro de l’action" /> 
+                  <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.inwiB2C_TypeAction__c}" label="Type d’action" /> 
+                  <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.inwiB2C_TypeAction__c}" label="Type de la recharge" />
+                  <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.inwiB2C_TypeModification__c}" label="Type de modification" /> 
+
+                  <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.inwiB2C_Sous_Produit_IN_Id__c}" label="Sous produit Code" />  
+                  <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.inwiB2C_Canal__c}" label="Canal" /> 
+                  <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.inwiB2C_STATUT__c}" label="Statut" /> 
+                  <!--27/02/2025 OGH Begin-->
+                  <apex:outputPanel rendered="{!INWIB2C_HIST_ACTION_LINE__c.inwiB2C_ERRORCODE__c == 'The subscription on bill fee exceeds the configured quota in the current bill cycle.'}">
+                   <apex:outputLabel value="Code d'erreur" /> 
+                   <apex:outputText value="Le client a dépassé le quota, merci de vérifier côté réseau IN" />
+                  </apex:outputPanel>
+
+                  <apex:outputPanel rendered="{!INWIB2C_HIST_ACTION_LINE__c.inwiB2C_ERRORCODE__c != 'The subscription on bill fee exceeds the configured quota in the current bill cycle.'}">
+                    <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.inwiB2C_ERRORCODE__c}" label="Code d'erreur" />
+                  </apex:outputPanel>
+                <!--27/02/2025 OGH End-->  
+                  
+                  <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.CreatedById}" label="Agent" /> 
+                  <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.inwiB2C_SubscriptionId__c}" label="Souscription" /> 
+               
+               </apex:pageBlockSection>
+                
+                
+                
+                
+                <apex:pageBlockSection title="Suspension et réhabilitation de facturation"  rendered="{!INWIB2C_HIST_ACTION_LINE__c.inwiB2C_TypeAction__c == 'InwiB2C_Suspension_de_facturation' || INWIB2C_HIST_ACTION_LINE__c.inwiB2C_TypeAction__c == 'InwiB2C_Réhabilitation_de_facturation'}">                  
+                   <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.inwiB2C_TypeAction__c}" label="Action" /> 
+                   <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.inwiB2C_TypeAction__c}" label="Type d’action" /> 
+                     <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.inwiB2C_STATUT__c}" label="Statut" /> 
+                      <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.CreatedDate}" label="Date effective du cycle d’application" /> 
+                      <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.inwiB2C_SubscriptionId__c}" label="Souscription" /> 
+                     <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.InwiB2C_Compte_Client__c}" label="Client" />
+                     <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.inwiB2C_Canal__c}" label="Canal" /> 
+                     <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.inwib2c_Partenaire__c}" label="Partenaire" /> 
+                     <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.CreatedById}" label="Agent" /> 
+                     <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.CreatedDate}" label="Date de l’opération" /> 
+                </apex:pageBlockSection>
+
+                <apex:pageBlockSection title="Communication code RIO " rendered="{!INWIB2C_HIST_ACTION_LINE__c.inwiB2C_TypeAction__c == 'inwiB2C_CommunicationCodeRIO'}">
+                
+                  <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.Name}" label="Numéro de l’action" />
+                  <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.inwiB2C_TypeAction__c}" label="Type d’action" />
+                  <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.inwiB2C_STATUT__c}" label="Statut" />
+                  <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.inwiB2C_Mdn__c}" label="N° de contact" />
+                  <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.inwiB2C_Canal__c}" label="Canal" />
+                  <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.inwiB2C_ERRORCODE__c}" label="Signalétique" />
+                  <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.CreatedDate}" label="Date et heure de création" />
+                  <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.CreatedById}" label="Agent" />
+                  <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.inwiB2C_SubscriptionId__c}" label="Souscription" />
+                  <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.InwiB2C_Compte_Client__c}" label="Client" />
+                
+                </apex:pageBlockSection>
+                
+                <!--CHB 28/06/2024 MGEN3537SF Gestion identité lignes acteur Marche begin -->
+                <apex:pageBlockSection title="Qualification contrat" rendered="{!INWIB2C_HIST_ACTION_LINE__c.inwiB2C_TypeAction__c == 'InwiB2C_Qualification_Contrat'}">
+                  <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.Name}" label="N° de qualification du contrat" />
+                  <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.inwiB2C_TypeAction__c}" label="Type d’action" />
+                  <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.inwiB2C_SubscriptionId__c}" label="Souscription" />
+                  <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.inwiB2C_Contract__c}" label="Contrat" />
+                  <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.inwiB2C_SubscriptionId__r.InwiB2C_Canal__c}" label="Canal de la souscription" />
+                  <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.inwiB2C_Contract__r.inwib2c_Identification__c}" label="Identification" />
+                  <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.inwiB2C_Contract__r.inwib2c_Qualification__c}" label="Qualification" />
+                  <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.CreatedById}" label="Créateur" />
+                  <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.CreatedDate}" label="Date et heure de création" />
+                  <apex:outputField value="{!INWIB2C_HIST_ACTION_LINE__c.InwiB2C_OTP__r.InwiB2C_Otp__c}" label="Code OTP" />
+                </apex:pageBlockSection>
+                   <!--CHB 28/06/2024 MGEN3537SF Gestion identité lignes acteur Marche begin -->
+           
+            </apex:pageBlock>    
+
+        </div>  
+    </apex:form>
+</apex:page>

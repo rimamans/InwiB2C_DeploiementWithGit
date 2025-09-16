@@ -1,0 +1,3 @@
+let definition = 
+                {"GlobalKey__c":"inwiB2C_SubscriptionBalance/LDA/1/1604760622579","dataSource":{"type":null},"enableLwc":true,"filter":{},"states":[{"conditions":{"group":[{"field":"$scope.data.status","operator":"===","type":"system","value":"'active'"}]},"customLwc":true,"customLwcAttributes":[{"name":"records","val":"$scope.records"}],"customLwcRepeat":false,"definedActions":{"actions":[]},"fields":[],"isSmartAction":false,"lwc":{"DeveloperName":"inwiB2C_BalanceDisplay","Id":"0Rb2z0000008RU4CAM","MasterLabel":"Inwi Balances","name":"inwiB2C_BalanceDisplay"},"name":"Active","smartAction":{}}],"title":"Balances Ligne"}; 
+            export default definition

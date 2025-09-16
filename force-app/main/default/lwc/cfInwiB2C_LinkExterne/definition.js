@@ -1,0 +1,3 @@
+let definition = 
+                {"GlobalKey__c":"InwiB2C_LinkExterne/RMA/1/1621593575124","dataSource":{"type":null,"value":{}},"enableLwc":true,"filter":{},"states":[{"blankCardState":false,"conditions":{"group":[{"field":"$scope.data.status","operator":"===","type":"system","value":"'active'"}]},"definedActions":{"actions":[]},"disableAddCondition":false,"editMode":false,"fields":[],"filter":"$scope.data.status === 'active'","isSmartAction":false,"lwc":{"DeveloperName":"inwiB2C_Link","Id":"0Rb250000009vU3CAI","MasterLabel":"List Link","name":"inwiB2C_Link"},"name":"Boite à outil","sObjectType":"Account","smartAction":{}}],"title":"Link"}; 
+            export default definition

@@ -1,0 +1,39 @@
+<apex:page renderAs="pdf" controller="InwiB2C_FormRemb" applyHtmlTag="false" showHeader="false">
+
+    <head>
+        <style>
+            body {
+                font-family: 'Arial Unicode MS';
+                font-size: 12px;
+
+            }
+
+            @page {
+                size: A4;
+                margin: 0px
+            }
+        </style>
+    </head>
+
+    <body>
+        <div>
+            <img style="width: 100%; height: 100%" src="{!$Resource.InwiB2C_FormulairedeRemboursement}" />
+            
+            
+            <p style="position: absolute;top: 205px;left: 310px;font-size: 12px">{!IF(contains(keys,'name'),output['name'], '')}</p>
+            <p style="position: absolute;top: 258px;left: 210px;font-size: 12px">{!IF(contains(keys,'Adressclient'),output['Adressclient'], '')}</p>
+            <p style="position: absolute;top: 310px;left: 330px;font-size: 12px">{!IF(contains(keys,'cin'),output['cin'], '')}</p>
+            <p style="position: absolute;top: 360px;left: 370px;font-size: 12px">{!IF(contains(keys,'OrderNumber'),output['OrderNumber'], '')}</p>
+            <p style="position: absolute;top: 381px;left: 185px;font-size: 12px">{!IF(contains(keys,'Offre'),output['Offre'], '')}</p>
+            <p style="position: absolute;top: 437px;left: 510px;font-size: 14px">{!IF(contains(keys,'MontantFMD'),output['MontantFMD'], '')}</p>
+            <p style="position: absolute;top: 520px;left: 300px;font-size: 12px">{!IF(contains(keys,'NomArticle'),output['NomArticle'], '')}</p>
+            <p style="position: absolute;top: 520px;left: 200px;font-size: 12px">{!IF(contains(keys,'CodeArticle'),output['CodeArticle'], '')}</p>
+            <p style="position: absolute;top: 683px;left: 190px;font-size: 12px">{!IF(contains(keys,'today'),output['today'], '')}</p>
+
+           
+
+
+    
+        </div>
+    </body>
+</apex:page>

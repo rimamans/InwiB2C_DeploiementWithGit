@@ -1,0 +1,158 @@
+<template>
+    <div class="slds-grid slds-gutters">
+        <div class="slds-size_1-of-3">
+            <lightning-combobox name="selectedModePaiement" label="Mode de paiement " value={selectedModePaiement}
+                placeholder="Veuillez sélectionner un mode de paiement" options={modesPaiement}
+                onchange={handleSelectModePaiement}></lightning-combobox>
+        </div>
+    </div>
+
+    <template if:true={isEspece}>
+        <div class="slds-grid slds-gutters">
+            <div class="slds-size_1-of-2">
+                <lightning-input type="number" label="Montant" name="montant" value={montant} onchange={handleChange}
+                    placeholder="Veuillez saisir le montant">
+                </lightning-input>
+            </div>
+        </div>
+    </template>
+
+    <template if:true={isTpe}>
+        <div class="slds-grid slds-gutters">
+            <div class="slds-size_1-of-2">
+                <lightning-input type="text" label="Référence de paiement" name="referencePaiement"
+                    value={referencePaiement} onchange={handleChange}
+                    placeholder="Veuillez saisir la référence de paiement">
+                </lightning-input>
+            </div>
+            <div class="slds-size_1-of-2 slds-m-left_x-small">
+                <lightning-input type="number" label="Montant" name="montant" value={montant} onchange={handleChange}
+                    placeholder="Veuillez saisir le montant">
+                </lightning-input>
+            </div>
+
+        </div>
+    </template>
+
+    <template if:true={isVignette}>
+        <div class="slds-grid slds-gutters">
+            <div class="slds-size_1-of-2">
+                <lightning-input type="text" label="Numéro du bon" name="referencePaiement" value={referencePaiement}
+                    onchange={handleChange} placeholder="Veuillez saisir le numéro du bon">
+                </lightning-input>
+            </div>
+            <div class="slds-size_1-of-2 slds-m-left_x-small">
+                <lightning-input type="number" label="Montant" name="montant" value={montant} onchange={handleChange}
+                    placeholder="Veuillez saisir le montant">
+                </lightning-input>
+            </div>
+        </div>
+        <div class="slds-grid slds-gutters">
+            <div class="slds-size_1-of-2">
+                <lightning-input type="date" date-style="short" label="Date du bon" name="dateBon" value={dateBon}
+                    onchange={handleChange} placeholder="Veuillez saisir la date du bon">
+                </lightning-input>
+            </div>
+            <div class="slds-size_1-of-2 slds-m-left_x-small">
+                <lightning-input type="date" date-style="short" label="Date de validité" name="datevaliditeBon"
+                    value={datevaliditeBon} onchange={handleChange} placeholder="Veuillez saisir la date de validifté">
+                </lightning-input>
+            </div>
+
+        </div>
+    </template>
+
+    <template if:true={isVirementOrCheque}>
+        <div class="slds-grid slds-gutters">
+            <div class="slds-size_1-of-3">
+                <lightning-input type="text" label="Code Banque" name="codeBanque" value={codeBanque}
+                    onchange={handleChange} placeholder="Veuillez saisir le code banque">
+                </lightning-input>
+            </div>
+            <div class="slds-size_1-of-3 slds-m-left_x-small">
+                <lightning-input type="text" label="Code Agence" name="codeAgence" value={codeAgence}
+                    onchange={handleChange} placeholder="Veuillez saisir le code d'agence">
+                </lightning-input>
+            </div>
+            <div class="slds-size_1-of-3 slds-m-left_x-small">
+                <lightning-input type="text" label="Numéro de compte" name="numeroCompte" value={numeroCompte}
+                    onchange={handleChange} placeholder="Veuillez saisir le numéro de compte">
+                </lightning-input>
+            </div>
+        </div>
+        <div class="slds-grid slds-gutters">
+            <div class="slds-size_1-of-3">
+                <lightning-input type="text" label="Clé" name="cle" value={cle} onchange={handleChange}
+                    placeholder="Veuillez saisir la clé">
+                </lightning-input>
+            </div>
+            <div class="slds-size_2-of-3 slds-m-left_x-small">
+                <lightning-input type="text" label="Nom de la banque" name="nomBanque" value={nomBanque} disabled>
+                </lightning-input>
+            </div>
+        </div>
+        <template if:true={isVirement}>
+            <div class="slds-grid slds-gutters">
+                <div class="slds-size_1-of-3">
+                    <lightning-input type="text" label="Numéro de virement" name="referencePaiement"
+                        value={referencePaiement} onchange={handleChange}
+                        placeholder="Veuillez saisir le numéro de virement">
+                    </lightning-input>
+                </div>
+                <div class="slds-size_1-of-3 slds-m-left_x-small">
+                    <lightning-input type="number" label="Montant" name="montant" value={montant}
+                        onchange={handleChange} placeholder="Veuillez saisir le montant">
+                    </lightning-input>
+                </div>
+                <div class="slds-size_1-of-3 slds-m-left_x-small">
+                    <lightning-input type="date" date-style="short" label="Date du virement" name="dateBon"
+                        value={dateBon} onchange={handleChange} placeholder="Veuillez saisir la date du virement">
+                    </lightning-input>
+                </div>
+            </div>
+        </template>
+        <template if:true={isCheque}>
+            <div class="slds-grid slds-gutters">
+                <div class="slds-size_1-of-3">
+                    <lightning-input type="text" label="Numéro du chéque" name="referencePaiement"
+                        value={referencePaiement} onchange={handleChange}
+                        placeholder="Veuillez saisir le numéro du chéque">
+                    </lightning-input>
+                </div>
+                <div class="slds-size_1-of-3 slds-m-left_x-small">
+                    <lightning-input type="number" label="Montant" name="montant" value={montant}
+                        onchange={handleChange} placeholder="Veuillez saisir le montant">
+                    </lightning-input>
+                </div>
+                <div class="slds-size_1-of-3 slds-m-left_x-small">
+                    <lightning-input type="date" date-style="short" label="Date du chéque" name="dateBon"
+                        value={dateBon} onchange={handleChange} placeholder="Veuillez saisir la date du chéque">
+                    </lightning-input>
+                </div>
+            </div>
+        </template>
+
+
+
+    </template>
+    <div class="slds-grid slds-gutters" style="margin-top: 25px;">
+        <div class="slds-size_1-of-4">
+            <div style="float: left;">
+                <lightning-button  label="Précédent" title="Précédent" onclick={handleBack}
+                    disabled={__saving} class="slds-m-left_x-small"></lightning-button>
+            </div>
+        </div>
+        <div class="slds-size_2-of-4">
+            <p style="color: red">{message}</p>
+        </div>
+        <div class="slds-size_1-of-4">
+            <div style="float: right;">
+                <lightning-button variant="brand" disabled={__saving} label="Suivant" title="Suivant"
+                    onclick={handleValidate} class="slds-m-left_x-small"></lightning-button>
+            </div>
+
+        </div>
+
+    </div>
+
+</template>

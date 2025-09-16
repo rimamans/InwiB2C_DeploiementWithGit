@@ -1,0 +1,76 @@
+<template>
+
+    <div class="slds-grid slds-wrap slds-grid_vertical-stretch">
+
+        <lightning-combobox placeholder="Pays" onchange={ChangePays} data-theid="Pays" label="Pays" required
+            value={valuePays} class="slds-col slds-size_1-of-2 elementMargin2" options={PaysValues} >
+        </lightning-combobox> </div>
+        <!--
+        <lightning-combobox placeholder="sélectionnez un pays" onchange={ChangeRegion} data-theid="Region"
+            label="Region" required class="slds-col slds-size_1-of-2 elementMargin2" options={RegionValues}>
+        </lightning-combobox>
+-->  <!-- <div class="slds-grid slds-wrap slds-grid_vertical-stretch">
+        <lightning-input type="text"  data-theid="Region" label="Region" value={r} required
+            placeholder="sélectionnez une Region" class="slds-col slds-size_1-of-2 elementMargin2">
+        </lightning-input>
+
+        <lightning-input type="text"  data-theid="SousRegion" onchange={ChangeSousRegion} label="Sous Region" value={sr} required
+        placeholder="sélectionnez une sous-région" class="slds-col slds-size_1-of-2 elementMargin2">
+    </lightning-input>
+
+    </div>
+
+
+    <div class="slds-grid slds-wrap slds-grid_vertical-stretch">
+
+        
+
+        <lightning-input type="text" onchange={ChangeVille} data-theid="Ville" required
+                label="Ville/Douar" placeholder="sélectionnez une ville ou Douar" value={v}
+                class="slds-col slds-size_1-of-2 elementMargin2" >
+            </lightning-input>
+
+       
+            <lightning-input type="text" onchange={ChangePrecisionQuartier} data-theid="PrecisionQuartier" required
+                label="Précision Quartier" placeholder="Précisez le quartier" value={pq}
+                class="slds-col slds-size_1-of-2 elementMargin2" >
+            </lightning-input>
+
+       
+
+
+    </div>
+
+-->
+
+
+
+    <!--
+    
+    <lightning-record-form
+
+    object-api-name="InwiB2C_Address__c"
+        fields={selectedFields}
+        columns="2" >
+        
+    </lightning-record-form>
+
+
+
+    <h2 class="slds-text-heading_medium slds-m-bottom_medium">
+        INFORMATIONS ADRESSES
+    </h2>
+
+    <lightning-record-edit-form density="comfy" object-api-name="InwiB2C_Address__c" record-id="a5t25000000CjwIAAS">
+        <lightning-messages> </lightning-messages>
+
+        <lightning-input-field field-name="inwiB2C_Ville__c" data-theid="v" onchange={addToSave}>
+        </lightning-input-field>
+
+        <lightning-input-field field-name="InwiB2C_Quartier__c" data-theid="q" onchange={addToSave}>
+        </lightning-input-field>
+
+    </lightning-record-edit-form>
+-->
+
+</template>

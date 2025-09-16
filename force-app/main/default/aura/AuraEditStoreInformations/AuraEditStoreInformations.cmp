@@ -1,0 +1,3 @@
+<aura:component controller="inwiB2C_EditRetail_Informations" implements="force:lightningQuickAction,force:hasRecordId,lightning:actionOverride,force:appHostable">  
+    <c:inwiB2C_EditRetailStore recordId2="{!v.recordId}" ></c:inwiB2C_EditRetailStore>
+</aura:component>

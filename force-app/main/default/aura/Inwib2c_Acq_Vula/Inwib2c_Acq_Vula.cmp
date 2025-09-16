@@ -1,0 +1,7 @@
+<aura:component>
+    
+<!-- Ajout d'un bouton pour rediriger vers la page Visualforce -->
+<lightning:button label="Accéder à la Visualforce Page"
+ onclick="{!c.redirectToVFPage}" variant="brand" />
+
+</aura:component>

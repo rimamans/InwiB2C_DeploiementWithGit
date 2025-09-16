@@ -1,0 +1,46 @@
+<template>
+
+    <template if:true={products}  >
+
+        <div class="wraperClass ">
+            <table class="sty-table-case slds-table slds-table_bordered slds-table_fixed-layout">
+                <thead>
+                  <tr class="">
+
+                    
+                    <th class="" scope="col">
+                      <div class="slds-truncate" title="Produit">Produit</div>
+                    </th>
+                    <th class="" scope="col">
+                      <div class="slds-truncate" title="oneTime">Prix unitaire</div>
+                    </th>
+                    <th class="" scope="col">
+                      <div class="slds-truncate" title="recurring">prix récurrent</div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Selection">Selection</div>
+                      </th>  
+                  </tr>
+                </thead>
+                <tbody>
+                <template for:each={productList} for:item="product" >
+                    <tr key ={product.Id.value} >
+                        <td class="slds-cell-wrap" > <div class="slds-line-clamp">{product.Name.value}</div> </td>
+                        <td class="slds-cell-wrap" > <div class="slds-line-clamp">{product.UnitPrice.value} {product.CurrencyIsoCode}</div> </td>
+                        <td class="slds-cell-wrap" > <div class="slds-line-clamp">{product.vlocity_cmt__RecurringPrice__c.value} {product.CurrencyIsoCode}</div> </td>
+
+                        <td class="slds-cell-wrap" ><div class="slds-line-clamp"><lightning-button label="Selectionner"  onclick={handleProductSelection} 
+                             id={product.Id.value} name={product} ></lightning-button></div>
+                        </td>
+                    </tr>
+                </template>
+              
+                </tbody>
+              </table>
+
+        </div>
+
+
+    </template>
+    
+</template>

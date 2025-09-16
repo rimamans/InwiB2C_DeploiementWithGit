@@ -1,0 +1,11 @@
+<template>
+    <lightning-card title="User Hierarchy">
+        <lightning-datatable 
+            key-field="Id"
+            data={userData}
+            columns={columns}
+            onrowaction={handleRowAction}
+            hide-checkbox-column="true">
+        </lightning-datatable>
+    </lightning-card>
+</template>

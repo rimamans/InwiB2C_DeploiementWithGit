@@ -1,0 +1,46 @@
+<template>
+    <div class="via-slds riders-list-canvas container-table-canvas" if:true={records}>
+        <div class="slds-card slds-p-around--small np-card">
+            
+
+            <div class="slds-p-bottom--small">
+                <div class="slds-m-bottom_xx-large overflowVisible ">
+                    <div>
+                        <div class="wraperClass ">
+
+
+
+                            <lightning-combobox placeholder="Choisir une option" onchange={updateSearch}
+                                label="Filtre par prix" options={picklistvalues} data-dataname="picklistvalues"
+                                value={search}>
+                            </lightning-combobox>
+
+
+
+                            <template if:false={isPropertiesEmpty}>
+
+                                <!--class="tab-style slds-table slds-table_bordered slds-table_col-bordered" -->
+
+                                <lightning-datatable
+                                    class="tab-style slds-table slds-table_bordered slds-table_col-bordered"
+                                    key-field="index" columns={columns} data={stockeddata}
+                                    hide-checkbox-column=true show-row-number-column="true">
+                                </lightning-datatable>
+
+                            </template>
+                        </div>
+                        <template if:true={isPropertiesEmpty}>
+
+
+                        </template>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+</template>

@@ -1,0 +1,60 @@
+<template>
+    <lightning-tabset>
+        <lightning-tab label="Upload">
+            <div class="slds-col slds-size_3-of-4" style="margin-left: 3%;">
+                <lightning-file-upload 
+                    accept={acceptedCSVFormats} 
+                    onuploadfinished={uploadFileHandler} 
+                    required>
+                </lightning-file-upload>
+            </div>
+            
+            <template if:true={error}>
+                <div style="margin-left: 3%;">
+                    {error}
+                </div>
+            </template>
+            
+            <br />
+            
+            <template if:true={filename}>
+                <b>
+                    <div class="slds-col slds-size_2-of-3" style="margin-left: 3%; color: black;">
+                        Le fichier {filename} a été chargé avec succès.
+                    </div>
+                </b>
+            </template>
+            
+            <template if:true={filename}>
+                <lightning-button 
+                    variant="brand" 
+                    label="Enregistrer" 
+                    title="Enregistrer" 
+                    onclick={handlerSave}
+                    style="position: absolute; right: 15px;" 
+                    class="" 
+                    hidden={IsButtonHidden}>
+                </lightning-button>
+            </template>
+        </lightning-tab>
+
+        <lightning-tab label="Historique" title="Historique">
+            <template if:true={noHistoryMessage}>
+                <p class="slds-align_absolute-center" style="margin-top: 1rem;">{noHistoryMessage}</p>
+            </template>
+            <template if:false={noHistoryMessage}>
+                <lightning-datatable
+                    key-field="id"
+                    hide-checkbox-column="true"
+                    columns={columns}
+                    data={dataTable}
+                    onrowaction={handlesClick}>
+                </lightning-datatable>
+                <div class="slds-m-around_medium">
+                    <p class="slds-align_absolute-center">Page {page} de {totalPage}</p>
+                    <c-inwi-b2-c_-child-paginator onprevious={prevHandler} onnext={nextHandler}></c-inwi-b2-c_-child-paginator>
+                </div>
+            </template>            
+        </lightning-tab>
+    </lightning-tabset>
+</template>

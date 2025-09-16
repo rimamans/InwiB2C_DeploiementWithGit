@@ -1,0 +1,85 @@
+<template>
+    <div class="full-screen-container">
+        <header class="full-screen-header">
+            <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Créer un retail store</h2>
+        </header>
+        <div class="full-screen-content slds-p-around_medium">
+            <div class="slds-grid slds-grid_vertical modal-body">
+                <div class="slds-col">
+                    <lightning-input type="checkbox" label="Dealer" onchange={handleIsDealerChange}> </lightning-input>
+                </div>
+                <div class="slds-col slds-col"><br />
+                    <lightning-input type="text" label="Prénom" onchange={handleFirstNameChange} required="true"> </lightning-input>
+                </div>
+                <div class="slds-col">
+                    <lightning-input type="text" label="Nom" onchange={handleLastNameChange} required="true"> </lightning-input>
+                </div>
+                <div class="slds-col">
+                    <lightning-input type="text" label="Nom de l'Acteur Marché" onchange={handleAccountNameChange}></lightning-input>
+                </div>
+                <div class="slds-col">
+                    <lightning-input type="tel" label="MDN Dealer" onchange={handleMdnDealerChange} data-theid="Tel" required={isDealer}></lightning-input>
+                </div>
+                <div class="slds-col">
+                    <lightning-input type="tel" label="MDN Dealer 2" onchange={handleMdnDealer2Change} data-theid="Tel"></lightning-input>
+                </div>
+                <div class="slds-col">
+                    <lightning-input type="tel" label="Numéro de contact 1" onchange={handleContactNumber1Change}></lightning-input>
+                </div>
+                <div class="slds-col">
+                    <lightning-input type="tel" label="Numéro WhatsApp" onchange={handleContactNumber2Change}></lightning-input>
+                </div>
+                <lightning-combobox label="Région" options={regionOptions} onchange={handleRegionChange} required="true"></lightning-combobox>
+                <lightning-combobox label="Route" options={localisationOptions} onchange={handleLocalisationChange} required="true"></lightning-combobox>
+                <lightning-input type="checkbox" label="Dealer Identifier" onchange={handleDealerIdentifierChange} checked={isDealerIdentifier}></lightning-input>
+                <lightning-input type="checkbox" label="App Mobile Installée" onchange={handleDistributeurAppMobileChange} checked={isDistributeurAppMobile}></lightning-input>
+                <lightning-combobox label="Circuit" options={circuitOptions} onchange={handleCircuitChange} placeholder="Veuillez sélectionner une localisation" required="true"></lightning-combobox>
+            </div>
+            <lightning-record-edit-form record-id={recordId} object-api-name="RetailStore">
+                <div class="slds-grid slds-grid_vertical">
+                    <div class="slds-col">
+                        <lightning-input-field field-name="inwiCGC_TypeActivite__c" onchange={handleActivityTypeChange} variant="label-stacked" required="true"></lightning-input-field>
+                    </div>
+                </div>
+            </lightning-record-edit-form>
+            <lightning-record-edit-form record-id={recordId} object-api-name="RetailStore">
+                <div class="slds-grid slds-grid_vertical">
+                    <div class="slds-col">
+                        <lightning-input-field field-name="inwib2c_Segment__c" onchange={handleSegmentChange} variant="label-stacked" required={isDealer}></lightning-input-field>
+                    </div>
+                </div>
+            </lightning-record-edit-form>
+            <lightning-record-edit-form record-id={recordId} object-api-name="RetailStore">
+                <lightning-input-field field-name="inwiCGC_Distributeur__c" onchange={handleDisChange} variant="label-stacked" required="true"></lightning-input-field>
+            </lightning-record-edit-form>
+            <lightning-file-upload label="Photo du Magasin" name="retailStorePhoto" accept=".jpg,.png,.jpeg" record-id={recordId} onuploadfinished={handleFileUploadFinished}></lightning-file-upload>
+            <lightning-button label="Preview Photo" onclick={openModal} class="slds-m-top_small"></lightning-button>
+            <template if:true={isModalOpen}>
+                <div class="photo-preview-container">
+                    <header class="photo-preview-header">
+                        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeModal}>
+                            <lightning-icon icon-name="utility:close" alternative-text="close" size="small"></lightning-icon>
+                        </button>
+                    </header>
+                    <div class="photo-preview-content">
+                        <template if:true={imageUrl}>
+                            <img src={imageUrl} alt="Photo du Magasin" style="width: 100%; max-width: 400px;" />
+                        </template>
+                        <template if:false={imageUrl}>
+                            <p>No image available for preview.</p>
+                        </template>
+                    </div>
+                </div>
+            </template>
+        </div>
+        <footer class="full-screen-footer slds-p-around_medium">
+            <button class="slds-button slds-button_neutral" onclick={handleCancel}>Annuler</button>
+            <button class="slds-button slds-button_brand" onclick={handleSave}>Sauvegarder et Dupliquer la visite</button>
+        </footer>
+        <div class="spinner">
+            <template if:true={isLoading}>
+                <lightning-spinner alternative-text="Loading" variant="brand" size="large"></lightning-spinner>
+            </template>
+        </div>
+    </div>
+</template>

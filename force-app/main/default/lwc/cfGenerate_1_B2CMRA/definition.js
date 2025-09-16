@@ -1,0 +1,3 @@
+let definition = 
+                {"states":[{"fields":[],"conditions":{"group":[{"field":"$scope.data.status","operator":"===","value":"'active'","type":"system"}]},"definedActions":{"actions":[]},"name":"Active","lwc":{"MasterLabel":"generateduplicata","DeveloperName":"inwiB2C_GenerateContractDealerButton","Id":"0RbAd000000fMCfKAM","name":"inwiB2C_GenerateContractDealerButton","NamespacePrefix":""},"isSmartAction":false,"smartAction":{},"customLwc":true,"customLwcRepeat":false,"flyoutAttributes":[],"customLwcAttributes":[{"name":"mdn","val":"['subId']"}]}],"filter":{},"dataSource":{"type":null,"value":{}},"enableLwc":true,"GlobalKey__c":"generate/B2CMRA/1/1737631671921"}; 
+            export default definition

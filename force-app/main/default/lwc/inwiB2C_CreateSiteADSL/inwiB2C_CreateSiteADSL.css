@@ -1,0 +1,96 @@
+/*Added BY CHB 27/02/2023  */
+.required-indicator {
+  color: red; /* Change color to suit your design */
+  /*margin-left: 0.1rem; *//* Adjust spacing as needed */
+}
+.input-label {
+  margin-right: 0.1rem; /* Adjust margin as needed */
+}
+.input-container {
+  display: flex;
+  align-items: center;
+}
+.tableCss table>thead .slds-th__action{
+	background-color: #f1a43a;
+} 
+
+.tableCss table>thead .slds-th__action:focus, .tableCss table> .slds-th__action:hover, .tableCss table>.slds-is-resizable .slds-th__action:focus, .tableCss table> .slds-is-resizable .tableCss table>.slds-th__action:focus:hover{
+	background-color:#f1a43a;
+}
+
+.datatable-CellColor{
+  color:#fff;
+  background-color:#007893;
+}
+
+.datatable-CellColor:hover{
+  color:#fff!important;;
+  background-color:#39c9e9!important;
+}
+
+.tableCss .slds-icon-utility-up svg {
+  fill: rgb(52,168,83);
+}
+
+.tableCss .slds-icon-utility-down svg {
+  fill: rgb(239 65 70);
+}
+.wraperClass{
+    border: 1px solid #5A245A;
+}
+
+
+.my-card {
+    margin: 2px;
+    border-radius: 4px 4px 4px 4px;
+    -webkit-border-radius: 4px 4px 4px 4px;
+    -moz-border-radius: 4px 4px 4px 4px;
+    border: 1px solid grey;
+}
+
+.nocard {
+    margin: 10px;
+    padding: 10px;
+    border-radius: 4px 4px 4px 4px;
+    -webkit-border-radius: 4px 4px 4px 4px;
+    -moz-border-radius: 4px 4px 4px 4px;
+    border: 1px solid grey;
+}
+
+
+.inside-table{
+    padding: 5px 5px 5px 30px;
+    border: 0px solid #000;
+    margin: 5px 5px 5px 30px;
+}
+
+
+.THIS .tab-style thead th span {
+  background-color: #16325c !important;
+  color: white;
+  margin-left: 8px;
+}
+
+.wraperClass{
+  border: 1px solid #5A245A;
+}
+
+.tab-style{
+  zoom : 90%;
+}
+.scaled-down button {
+  transform: scale(0.75);
+}
+
+.span {
+ /* float: right;*/
+ content: '\1F50D';
+cursor: pointer; 
+
+}
+.container {
+  display: table;
+  width: 100%
+}
+.flex { display : flex }
+/*END OF CHB's ADDITION    27/02/2023 */

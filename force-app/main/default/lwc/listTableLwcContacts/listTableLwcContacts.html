@@ -1,0 +1,105 @@
+<template>
+    <div class="via-slds riders-list-canvas container-table-canvas" >
+        <div class="slds-card slds-p-around--small np-card">
+            <h3 class="slds-p-bottom--small slds-text-heading--small slds-truncate" style="background-color:rgb(250, 248, 250); 
+            color: rgb(2, 2, 2)">
+                <b>{state.title}</b>
+            </h3>
+            <div class="slds-m-bottom_xx-small overflowVisible">
+                <div class="slds-p-bottom--small slds-grid">
+                    <div class="slds-col slds-size--1-of-2 slds-form-element">
+                        
+                    </div>
+                    <div class="slds-col slds-size--1-of-2 slds-align-bottom">
+                        <c-add-lwc if:true={session.add} object-type={state.sObjectType}></c-add-lwc>
+
+                    </div> 
+                </div>
+                <div class="slds-m-bottom_xx-small overflowVisible slds-truncate" style="height: 85px;">
+                    <table  class="slds-table slds-table_cell-buffer slds-table_bordered via-slds-table-pinned-header slds-table_fixed-layout">
+                        <thead>
+                            <tr class="slds-text-heading--label">
+                                <th key={field.name}
+                                    class="slds-is-sortable"
+                                    for:each={state.fields}
+                                    for:item="field"
+                                    for:index="index"
+                                    data-id={field.name}
+                                    onclick={sort}
+                                    title={field.label}>
+                                    <div class="slds-truncate" >{field.label}
+                                        <div class="slds-icon_container">
+                                            <svg class="slds-icon slds-icon-text-default slds-is-sortable__icon slds-icon--x-small" aria-hidden="true" id="sorticon" focusable="false">
+                                                <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg?cache=9.31.2-1#arrowdown"></use>
+                                            </svg>                                    
+                                        </div>
+                                    </div>
+                                </th>
+                                <th if:true={actions} class="" scope="col" style="width:3.25rem">
+                                    <div class="slds-truncate slds-assistive-text" title="Custom action">Custom action</div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr key={elem.Id}
+                                class="via-field slds-tile slds-p-bottom--medium"
+                                for:each={currentPageData}
+                                for:item="elem"
+                                for:index="index">
+                                <td key={field.name}
+                                    class="via-field slds-tile slds-p-bottom--medium"
+                                    for:each={state.fields}
+                                    for:item="field"
+                                    for:index="index">
+                                    <c-cell-table-lwc object-type={state.sObjectType} field={field} element={elem} index={index} view-details={session.viewDetails} islist-table-niv="true"></c-cell-table-lwc>
+                                </td>
+                                <td if:true={actions}
+                                    class="via-field slds-tile slds-p-bottom--medium"
+                                    style="overflow: visible;" >
+                                  
+                                        <!--<lightning-button-menu alternative-text="Show menu">
+                                            <lightning-menu-item key={action.id} 
+                                                                 for:each={actions} 
+                                                                 for:item="action" 
+                                                                 value={action.id}
+                                                                 label={action.displayName} 
+                                                                 icon-name={action.iconName}>
+                                            </lightning-menu-item>
+                                        </lightning-button-menu>-->
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+             
+                <div class="slds-grid">
+                    <div class="slds-col">
+                        <label class="slds-form-element__label">Page {page} sur {numberOfPages}</label>
+                        <!--div class="slds-form-element__control">
+                            <div class="slds-select_container">
+                                <select class="slds-select" onchange={changePerpage}>
+                                    <option value="5">5</option>
+                                    <option value="10">10</option>
+                                    <option value="15">15</option>
+                                </select>
+                            </div>
+                        </div-->
+                    </div>
+                    <div class="slds-col">
+                        <lightning-button-group class="slds-form-element slds-button-group slds-float--right size-xxx-small">
+                            <template if:true={hasPrev}>
+                                <lightning-button  label="Prev" onclick ={onPrev}></lightning-button>    
+                            </template>
+                            <template for:each={pagesList} for:item= "pageNumber">
+                                <lightning-button data-id={pageNumber} key={pageNumber} label={pageNumber} onclick={onPageClick}></lightning-button>
+                            </template>
+                            <template if:true={hasNext}>
+                                <lightning-button label="Next" onclick={onNext}></lightning-button>
+                            </template>
+                        </lightning-button-group>
+                    </div> 
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

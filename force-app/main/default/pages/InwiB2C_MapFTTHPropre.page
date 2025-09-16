@@ -1,0 +1,129 @@
+<apex:page >
+    <style>
+  
+      body {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+          overflow: hidden;
+      }
+
+      .search-container {
+          display: flex;
+          justify-content: center;
+          padding-bottom: 20px;
+          width: 100%;
+      }
+
+      .address-input {
+          flex: 1;
+          height: 15px;
+          padding: 12px;
+          font-size: 14px;
+          border-radius: 5px;
+          margin-right: 10px;
+      }
+
+      .search-button {
+        font-size: 12px;
+        padding: 12px 20px;
+        border-radius: 5px;
+        background-color: #7c0774;
+        color: #7c0774;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        display: inline-block;
+        min-width: 120px; 
+        text-align: center;
+      }
+
+      .map-container {
+          width: 100%;
+          height: calc(100vh - 80px); 
+      }
+
+      #map {
+          width: 100%;
+          height: 100%;
+      }
+
+      .submit-btn{
+        background: #7c0774;
+        color:white;
+        border: none;
+        cursor: pointer;
+        padding: 5px 7px;
+
+      }
+
+      .info{
+        color: black;
+        font-size: 15px;
+        font-family: "Montserrat, sans-serif"
+      }
+    </style>
+
+    <div class="map-container">
+      <div id="map"></div>
+    </div>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA4SGWfgmIN4KpNzkfR8dYm97bLYs892Bs&region=MA&libraries=places"></script>
+
+    <script>
+        var url = window.location.href;
+        var lexOrigin;
+        console.log("url récupéré", url);
+        if (url.includes("site")) {
+            lexOrigin = "https://inwi-b2c--devevol.sandbox.my.site.com"
+        } else {
+            lexOrigin = "https://inwi-b2c--devevol.sandbox.lightning.force.com"
+        }
+        console.log("lexOrigin", lexOrigin);
+        let map;
+        let marker;
+        let mapReady = false;
+        let overlay;
+        let markers = [];
+
+        function initMap() {
+            const center = {  lat: 34.00991880793285 , lng:-6.852754747760015 };
+            const mapOptions = {
+                center: center,
+                zoom: 18,
+                mapTypeId: 'hybrid'
+            };
+
+            map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+            marker = new google.maps.Marker({
+                position: center,
+                map: map,
+                title: "Rabat"
+            });
+
+            mapReady = true;
+            updateOverlay();
+            initializeAutocomplete()
+
+            map.addListener('idle', () => {
+                const center = map.getCenter();
+                const latitudeC = center.lat();
+                const longitudeC = center.lng();
+                console.log('Central GPS Coordinates:', latitudeC, longitudeC);
+                sendCentralGPSLWC(latitudeC, longitudeC);
+                updateOverlay();
+            });
+
+            map.addListener("zoom_changed", () => {
+                const center = map.getCenter();
+                const latitudeC = center.lat();
+                const longitudeC = center.lng();
+                console.log("Zoom Changed - Center Coordinates:", latitudeC, longitudeC);
+                sendCentralGPSLWC(latitudeC, longitudeC);
+                updateOverlay();
+            });
+        }
+    
+        window.onload = initMap;
+    </script>
+</apex:page>

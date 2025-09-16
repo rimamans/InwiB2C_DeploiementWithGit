@@ -1,0 +1,42 @@
+<template>
+    <div class="slds-p-bottom--small">
+        <div class="slds-m-bottom_xx-large overflowVisible ">
+        </br>
+        </br>
+        <h2 class="header">Informations de la méthode de déblocage</h2>
+        <br>
+        <br>
+        <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered">
+          <thead>
+            <tr class="slds-line-height_reset">
+              <th class="StatusStyle" scope="col">
+                <div class="slds-truncate" title="Statut de la recharge">Statut Recharge</div>
+              </th>
+              <th class="DateStyle" scope="col">
+                <div class="slds-truncate" title="Date de Blocage"> Date de Blocage </div>
+              </th>
+              <th class="CounterStyle" scope="col">
+                <div class="slds-truncate" title="Compteur de déblocage">Compteur de déblocage</div>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+
+              <tr >
+
+                  <td>{rechargestatus} </td>
+                  <td>{datelock}</td>
+                  <td>{blockcounter}</td>
+              </tr>
+
+          </tbody>
+        </table>
+        <br/>
+        <br/>
+        <template if:true={isCounter3} >   
+          <span class="TextUnblockError">       La ligne est bloquée. veuillez vérifier si le client possède une Scratch Card valide.      </span>
+        </template>
+
+        </div>
+    </div>
+</template>

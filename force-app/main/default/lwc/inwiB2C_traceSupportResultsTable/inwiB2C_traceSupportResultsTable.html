@@ -1,0 +1,92 @@
+<template>
+    <lightning-card>
+        <div class="slds-p-around_medium">
+
+            <lightning-input 
+                name="logincdc" 
+                label="Login SF CDC" 
+                value={logincdc} 
+                placeholder="Entrer le login SF CDC" 
+                onchange={handleLoginChange}>
+            </lightning-input>
+
+
+
+            <lightning-input type="date" label="Date d’envoi" value={dateenvoie} onchange={handleDateEnvoiChange}></lightning-input>
+
+            <lightning-input type="date" label="Date de réception" value={datereception} onchange={handleDateReceptionChange}></lightning-input>
+
+            <div class="slds-form-element">
+                <label class="slds-form-element__label" for="province">Province/ville</label>
+                <div class="slds-form-element__control">
+                    <div class="slds-combobox_container">
+                        <div 
+                            class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click"
+                            aria-expanded="true"
+                            aria-haspopup="listbox"
+                            role="combobox"
+                        >
+                            <lightning-input 
+                                type="search"
+                                id="province"
+                                value={labelProvince}
+                                placeholder="Entrer une province/ville"
+                                onchange={handleProvinceSearchChange}
+                                onclick={GetProvince}
+                                class="slds-combobox__input"
+                            ></lightning-input>
+
+                            <template if:true={showOptions}>
+                                <ul 
+                                    class="slds-dropdown slds-dropdown_length-5 slds-dropdown_fluid custom-dropdown"
+                                    role="listbox"
+                                    style="display: block;"
+                                >
+                                    <template for:each={filteredProvinceVilleOptions} for:item="option">
+                                        <li 
+                                            key={option.value} 
+                                            role="option" 
+                                            class="slds-listbox__item"
+                                            data-value={option.value}
+                                            onclick={handleProvinceSelect}
+                                        >
+                                            <div class="slds-media slds-listbox__option slds-listbox__option_plain">
+                                                <span class="slds-media__body">{option.label}</span>
+                                            </div>
+                                        </li>
+                                    </template>
+                                </ul>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+            <lightning-button label="Rechercher" onclick={fetchTraceSupportData} class="slds-m-top_small"></lightning-button>
+
+        </div>
+        <template if:true={isLoading}>
+            <lightning-spinner alternative-text="Loading..." size="medium"></lightning-spinner>
+        </template>
+
+        <template if:true={records}>
+            <template if:true={records.length}>
+                <lightning-datatable
+                    key-field="Id"
+                    data={records}
+                    columns={columns}
+                    hide-checkbox-column="true"
+                ></lightning-datatable>
+            </template>
+            <template if:false={records.length}>
+                <div class="slds-p-around_medium">
+                    <p>Aucune données trouvé.</p>
+                </div>
+            </template>
+        </template>
+    </lightning-card>
+</template>

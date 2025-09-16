@@ -1,0 +1,55 @@
+<template>
+    <div class="custom-form-container">
+        <h1 class="form-title">Create User D2D</h1>
+        <div class="separator"></div>
+
+        <div class="custom-grid">
+            <div class="custom-grid-item custom-type-user">
+                <div class="slds-form slds-form_stacked">
+                    <div class="slds-form-element slds-size_1-of-1">
+                        <div class="slds-form-element__control">
+                            <c-type-user ref="typeUserComponent" ontypechange={handleTypeChange} required="true"></c-type-user>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="custom-grid-item custom-distributeur">
+                <div class="slds-form slds-form_stacked">
+                    <div class="slds-form-element slds-size_1-of-1">
+                        <div class="slds-form-element__control">
+                            <c-distributeur ref="distributeurComponent" class="custom-component" onlookupupdate={lookupUpdatehandler} required="true"></c-distributeur>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="custom-grid-item custom-agence">
+                <div class="slds-form slds-form_stacked">
+                    <div class="slds-form-element slds-size_1-of-1">
+                        <div class="slds-form-element__control">
+                            <c-agence ref="agenceComponent" class="custom-component" selected-type={selectedType} distributor-id={distributorId} onlookupupdate={lookupUpdatehandlerAgence} required="true"></c-agence>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="custom-grid-item custom-contact-user">
+                <c-information-contact-user 
+                    selected-type={selectedType}
+                    onnomupdate={handleNomUpdate}
+                    onprenomupdate={handlePrenomUpdate}
+                    onciviliteupdate={handleCiviliteUpdate}
+                    onemailupdate={handleEmailUpdate}
+                    onusernameupdate={handleUsernameUpdate}
+                    onproduitupdate={handleProduitUpdate}
+                    required="true"
+                    ref="contactUserComponent">
+                </c-information-contact-user>
+            </div>
+        </div>
+        
+        <footer class="footer sticky-buttons">
+            <lightning-button label="Cancel" onclick={handleCancel} variant="neutral" selected-type={selectedType}></lightning-button>
+            <lightning-button label="Save and New" onclick={handleSaveAndNew} selected-type={selectedType} variant="brand"></lightning-button>
+            <lightning-button label="Save" onclick={handleSave} selected-type={selectedType} variant="brand"></lightning-button>
+        </footer>
+    </div>
+</template>

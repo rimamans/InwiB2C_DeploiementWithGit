@@ -1,0 +1,95 @@
+<template>
+    <div class="slds-p-bottom--small">
+        <div class="slds-m-bottom_xx-large overflowVisible ">        
+            <template if:true={alloffers}  > 
+                <div class="wraperClass ">
+                    <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered">
+                        <thead>
+                          <tr class="slds-line-height_reset">
+                            <th class="" scope="col">
+                                <div class="slds-truncate" title="radios">Choix</div>
+                            </th>  
+                            <th class="" scope="col">
+                              <div class="slds-truncate" title="Offers">Offre de rétention</div>
+                            </th>    
+                            <th class="" scope="col">
+                              <div class="slds-truncate" title="OffersDesc">Description</div>
+                            </th>                         
+                          </tr>
+                        </thead>
+                        <tbody>
+                        <template for:each={allnontextoffers} for:item="offer">
+                            <tr key ={offer.Name}>
+                                <td><input type="radio" name="NonTextOfferRecords" onchange={handleSelectedOffer}
+                                  id = {offer.Name}  
+                                  data-ofrid={offer.Name}                             
+                                  data-parcours={offer.LibOffre}
+                                  data-pass={offer.PassEligible}
+                                  data-typeparcours={offer.TypeParcours}
+                                  data-active={offer.IsActive}/></td>
+                                <td>{offer.LibOffre}</td>
+                                <td>{offer.Desc}</td>
+                            </tr>
+                        </template>  
+                        <template for:each={alltextoffers} for:item="textoffer">
+                          <tr key ={textoffer.Name}>
+                              <td></td>
+                              <td>{textoffer.LibOffre}</td>
+                              <td>{textoffer.Desc}</td>
+                          </tr>
+                      </template>                    
+                        </tbody>
+                      </table>
+
+                </div>
+                <br />
+                <!--<div  if:false={alloffers.offretextexist} class="slds-p-bottom--small">
+                  <div class="slds-m-bottom_xx-large overflowVisible ">
+                        
+
+                    <lightning-button variant="brand" label="Appliquer l'offre" title="Apply" 
+                    onclick={handleNext} class="slds-m-left_x-large slds-m-top_x-large">
+                    </lightning-button>
+                
+                  </div>
+                </div> -->                    
+                <div class ="slds-p-right_small slds-m-bottom_xx-small slds-show_inline-block slds-size_12-of-12 slds-medium-size_6-of-12">
+                  <lightning-combobox 
+                  name="Status" label="Statut Rétention" value={value}  placeholder="" options={options} onchange={handleChange} required></lightning-combobox>  
+                </div>
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <div class="slds-grid slds-wrap slds-grid_align-end omniscript-button-position">
+          
+                  <lightning-button style="margin:6px;" variant="brand" label="Précédent" title="Précédent" onclick={gotopreviousStep}
+                  class=""></lightning-button>
+               
+                  <div if:false={alloffers.offretextexist}>
+                    <lightning-button variant="brand" label="Appliquer l'offre" title="Apply" 
+                    onclick={handleNext} style="float:right; margin:6px;" class="">
+                    </lightning-button>
+                  </div>
+                  <div if:true={alloffers.offretextexist}>
+                    <lightning-button variant="brand" label="Terminer" title="Terminer" 
+                    onclick={gotoendStep} style="float:right; margin:6px;" class="">
+                    </lightning-button>
+                  </div>
+                         
+                </div>         
+            </template>
+			
+			<br />
+		
+
+		
+ 
+        </div>
+    </div>
+
+  
+    
+</template>

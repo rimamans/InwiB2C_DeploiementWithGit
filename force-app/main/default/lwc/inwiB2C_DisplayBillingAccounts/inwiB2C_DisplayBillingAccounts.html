@@ -1,0 +1,103 @@
+<template>
+    <div class="slds-p-bottom--small">
+        <div class="slds-m-bottom_xx-large overflowVisible ">
+            <template if:true={records}>
+                <template if:true={isLoading}>
+                    <div class="wraperClass">
+                        <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+                    </div>
+                </template>
+
+                <template if:false={isLoading}>
+                    <div class="wraperClass" style="overflow-x: scroll;max-width:100%">
+                        <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered">
+                            <thead>
+                                <tr class="slds-line-height_reset">
+                                    <th class="" scope="col">
+                                        <div class="slds-truncate" title="radios"></div>
+                                    </th>
+                                     <th class="" scope="col">
+                                        <div class="slds-truncate" title="NUM">N° de CF</div>
+                                    </th>
+                                    <th class="" scope="col">
+                                        <div class="slds-truncate" title="MDN">MDN</div>
+                                    </th>
+                                    <th class="" scope="col">
+                                        <div class="slds-truncate" title="Offre">Offre</div>
+                                    </th>
+                                    <th class="" scope="col">
+                                        <div class="slds-cell-wrap" title="Statut de la souscription">Statut de la souscription</div>
+                                    </th>
+                                    <th class="" scope="col">
+                                        <div class="slds-truncate" title="Nom">Nom</div>
+                                    </th>
+                                    <th class="" scope="col">
+                                        <div class="slds-truncate" title="Prenom">Prenom</div>
+                                    </th>
+                                    <th class="" scope="col">
+                                        <div class="slds-truncate" title="Prenom">CIN</div>
+                                    </th>
+                                    <!-- <th class="slds-truncate_container_25" scope="col">
+                                        <div class="slds-truncate" title="Adresse">Adresse</div>
+                                    </th> -->
+                                    <th class="" scope="col">
+                                        <div class="slds-truncate" title="Modedepaiement" style="white-space:normal;">
+                                            Mode
+                                            de paiement</div>
+                                    </th>
+                                    <th class="" scope="col">
+                                        <div class="slds-truncate" title="Cyclefact" style="white-space:normal;">Cycle
+                                            de
+                                            facturation</div>
+                                    </th>
+                                    <th class="" scope="col">
+                                        <div class="slds-truncate" title="freeAmount">Montant libre</div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <template for:each={__data} for:item="acc">
+                                    <tr key={acc.Id}>
+                                        
+                                        <td><input type="radio" name="BillingAccountsRecords"
+                                                onclick={handleSelectedAccounts} id={acc.Id} data-idacc={acc.Id}
+                                                checked />
+                                        </td>
+                                        <td style="white-space:normal;">{acc.AccountNumber}</a></td>
+                                          <td>
+                                        <template  for:each={acc.Subs} for:item="sub">  
+                                            <p key={sub.MDN} >{sub.MDN}</p> 
+                                        </template> 
+                                        </td>
+
+                                        <td>
+                                        <template  for:each={acc.Subs} for:item="sub">  
+                                            <p class="col-text" key={sub.MDN} >{sub.Offer}</p> 
+                                        </template> 
+                                        </td>
+
+                                        <td>
+                                        <template  for:each={acc.Subs} for:item="sub">  
+                                            <p class="col-text" key={sub.MDN} >{sub.Statut}</p> 
+                                        </template> 
+                                        </td> 
+
+                                        
+                                        <td style="white-space:normal;">{acc.LastName}</td>
+                                        <td style="white-space:normal;">{acc.FirstName}</td>
+                                        <td style="white-space:normal;">{acc.CIN}</td>
+                                        <!-- <td style="white-space:normal;">{acc.BillingAddress}</td> -->
+                                        <td style="white-space:normal;">{acc.ModeDePaiement}</td>
+                                        <td>{acc.CycleDeFacturation}</td>
+                                        <td>{acc.MontantLibre}</td>
+                                    </tr>
+                                </template>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </template>
+            </template>
+        </div>
+    </div>
+</template>

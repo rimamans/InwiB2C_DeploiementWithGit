@@ -1,0 +1,23 @@
+<template>
+
+
+            <lightning-textarea name="comment" label="Ajoutez votre commentaire" 
+            placeholder="Votre commentaire..."
+            onchange={handleTextareaUpdate} 
+            ></lightning-textarea>
+
+            <br/>
+            
+            <div class="slds-float_right">
+                <lightning-button variant="brand" label="Ajouter un commentaire" title="Ajouter le commentaire" 
+                onclick={handleAddComment} class="slds-m-left_x-small" disabled={isActive}></lightning-button>
+
+                <lightning-button variant="brand" label="Précédent" title="Précédent" 
+                onclick={previous} class="slds-m-left_x-small"></lightning-button>
+
+
+                <lightning-button variant="brand" label="Ouvrir la requête" title="Ouvrir la requête" 
+                onclick={goToRecord} class="slds-m-left_x-small" ></lightning-button>
+
+            </div>
+</template>

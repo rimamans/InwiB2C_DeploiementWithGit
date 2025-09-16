@@ -1,0 +1,23 @@
+<template>
+    <!-- <template if:true = {isdisplay}> -->
+        <div class="slds-scrollable slds-m-around_medium">
+            <lightning-datatable
+            class="tab-style slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered"
+            key-field="woid" columns={workordercolumns} data={wodata}
+            hide-checkbox-column=true show-row-number-column="false">
+        </lightning-datatable>
+        <br>
+        <br>
+        <lightning-datatable
+            class="tab-style slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered"
+            key-field="toid" columns={taskordercolumns} data={dataStocks}
+            hide-checkbox-column=true show-row-number-column="false">
+        </lightning-datatable>
+     </div>
+    <!-- </template> -->
+    <!-- <template if:false = {isdisplay}>
+        <div class="slds-m-around_medium">
+            <p>Ce message s'affiche lorsque typeoffre n'est pas 'fthh'.</p>
+        </div>
+    </template> -->
+</template>

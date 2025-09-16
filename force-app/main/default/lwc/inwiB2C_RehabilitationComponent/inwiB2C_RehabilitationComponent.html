@@ -1,0 +1,20 @@
+<template>
+
+    <lightning-combobox
+                class="slds-size_1-of-2"
+                name="rehabType"
+                label="Type de réhabilitation"
+                value={rehabType}
+                options={options}
+                disabled={editFraude}
+                required="true" 
+                onchange={handleChangeDropDown}
+                style="width:400px;">
+    </lightning-combobox>
+
+    <div style="float: right; margin-top: 10px;">
+        <lightning-button variant="brand" label="Réhabiliter"  onclick={handleSave} class="slds-var-m-left_x-small" style="width: 112px;" >
+        </lightning-button> 
+    </div>
+    <!--button class="slds-button slds-button_brand" title="Soumettre" type="button" onclick={handleSave} style="width: 112px;">Soumettre</button-->
+</template>

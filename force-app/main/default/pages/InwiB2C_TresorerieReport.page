@@ -1,0 +1,5 @@
+<apex:page >
+    <script>
+        window.top.location.href = '/Tresorerie/s/00OAd000003xsyjMAA/00OAd000003xsyjMAA/inwib2cdemandefmseshop?queryScope=userFolders';
+    </script>
+</apex:page>

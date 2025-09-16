@@ -1,0 +1,18 @@
+public class inwib2cSMOSwapSimEsimCheckout {
+    @future(callout = true)
+    public static void inwib2cSMOSwapSimEsimCheckout(String input){
+         Map<String, Object> data = (Map<String, Object>)JSON.deserializeUntyped(input);
+        Map<String, Object> output = (Map<String, Object>)(vlocity_cmt.IntegrationProcedureService.runIntegrationService('inwib2c_CheckoutSmoSwapSimEsim', data, null));
+         Map<String, Object> log_input = new Map<String, Object>();
+        log_input.put('input', input);
+        log_input.put('output', String.valueOf(json.serialize(output)));
+        String status = '0';
+        if (output.get('reference') != null){
+            status = '1';
+        }
+        log_input.put('status', status);
+       log_input.put('type', 'SMOSwapEsim');
+        Map<String, Object> output_log = (Map<String, Object>)(vlocity_cmt.IntegrationProcedureService.runIntegrationService('inwib2c_SynchroLog', log_input, null));
+
+    }
+}
