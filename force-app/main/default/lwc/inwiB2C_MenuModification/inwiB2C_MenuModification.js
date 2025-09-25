@@ -26,7 +26,7 @@ export default class InwiB2C_MenuModification extends OmniscriptBaseMixin(Lightn
   _ns = getNamespaceDotNotation();
 
   renderedCallback() {
-    //this.value = undefined;
+  
   }
 
   connectedCallback() {
